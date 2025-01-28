@@ -1,3 +1,21 @@
 {
-    "MODEL_NAME": ""
+    "MODELS": {
+        "SUMMARIZATION": {
+            "NAME": "facebook/bart-large-cnn",
+            "TOKENIZER": "facebook/bart-large-cnn"
+        },
+        "DOCS_QA": {
+            "NAME": "impira/layoutlm-document-qa",
+            "TOKENIZER": "impira/layoutlm-document-qa"
+        }
+    },
+    "DOCUMENTS_DIR": "./documents",
+    "CHROMA_COLLECTION": {
+        "NAME": "actionable-stix",
+        "DIR": "./chroma"
+    },
+    "DOCUMENT_SEARCH": {
+        "k": 5,
+        "THRESHOLD": 0.5
+    }
 }
