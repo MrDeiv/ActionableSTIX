@@ -1,14 +1,15 @@
 from langchain_community.vectorstores import Chroma
-from langchain_community.chat_models import ChatOllama
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain_ollama import ChatOllama
+from langchain_ollama import OllamaEmbeddings
 from langchain.schema.output_parser import StrOutputParser
 from langchain_community.document_loaders import PyPDFLoader, CSVLoader, TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema.runnable import RunnablePassthrough
 from langchain.prompts import PromptTemplate
-from langchain.vectorstores.utils import filter_complex_metadata
+from langchain_community.vectorstores.utils import filter_complex_metadata
 import os
 from tqdm import tqdm
+import chromadb
 
 class DocumentParser:
     """
@@ -32,14 +33,23 @@ class DocumentParser:
             Answer: [/INST]
             """
         )
+
+        # initialize the vector store
+        if len(os.listdir("vector_store")) > 0:
+            client = chromadb.PersistentClient("vector_store")
+        else:
+            client = None
+
         self.vector_store = Chroma(
+            collection_name="vector_store",
             persist_directory= "vector_store",
+            client=client,
             embedding_function= OllamaEmbeddings(
                 model=model,
-                
             ),
         )
-        self.vector_store.persist()
+
+        #self.vector_store.persist()
         self.score_threshold = score_threshold
 
     def ingest(self, directory: str):
@@ -96,7 +106,7 @@ class DocumentParser:
                       | self.model
                       | StrOutputParser())
         
-        self.vector_store.persist()
+        #self.vector_store.persist()
 
     def ask(self, query: str):
         if not self.chain:

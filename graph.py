@@ -11,7 +11,6 @@ g = Network(
     directed=True,
     notebook=False,
     bgcolor="white",
-    heading="Malware",
     select_menu=True)
 
 # add nodes

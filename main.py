@@ -1,6 +1,7 @@
 from src.DocumentParser import DocumentParser
 from src.STIXParser import STIXParser
 from src.extract_iocs import extract_iocs
+from src.group_attack_patterns import group_attack_patterns
 import os
 import warnings
 import json
@@ -8,38 +9,15 @@ import uuid
 import ast
 from tqdm import tqdm
 import dotenv
+import time
 
 MODEL = "RAG_llama3.1:8b"
 FILES_DIR = "documents"
 STIX_DIR = "sample_stix"
 STIX_FILE = "goofy-guineapig-stix.json"
 
-def group_attack_patterns(tactics, attack_patterns):
-    """
-    Group attack patterns by MITRE tactic
-    """
-    attack = {}
-
-    for tactic in tactics:
-        attack[tactic] = []
-
-        for ap in attack_patterns:
-            if ap['kill_chain_phases'][0]['phase_name'] == tactic:
-                attack[tactic].append({
-                    "name": ap['name'],
-                    "description": ap['description'],
-                    #"external_references": ap['external_references'] if 'external_references' in ap else None,
-                    "x_mitre_detection": ap['x_mitre_detection'] if 'x_mitre_detection' in ap else None,
-                    "x_mitre_platforms": ap['x_mitre_platforms'] if 'x_mitre_platforms' in ap else None,
-                    "x_mitre_permissions_required": ap['x_mitre_permissions_required'] if 'x_mitre_permissions_required' in ap else None,
-                    "x_mitre_data_sources": ap['x_mitre_data_sources'] if 'x_mitre_data_sources' in ap else None,
-                    "x_mitre_defense_bypassed": ap['x_mitre_defense_bypassed'] if 'x_mitre_defense_bypassed' in ap else None,
-                })
-
-    attack = {k: v for k, v in attack.items() if v}
-    return attack
-
 if __name__ == "__main__":
+    tic = time.time()
     stix_parser = STIXParser()
     agent = DocumentParser(model=MODEL)
     attack_steps = {} # this will contain the attack graph
@@ -58,6 +36,7 @@ if __name__ == "__main__":
     stix_parser.parse(os.path.join(STIX_DIR, STIX_FILE))
     attack_patterns = stix_parser.extract_attack_patterns()
     malware_patterns = stix_parser.extract_malware()
+    indicators_patterns = stix_parser.extract_indicators()
 
     # load MITRE tactics
     tactics = json.loads(open("mitre-tactics.json").read())
@@ -65,8 +44,6 @@ if __name__ == "__main__":
 
     # Save attack dictionary to JSON
     json.dump(attack, open('attack.json', 'w'))
-
-    #draw_graph(attack)
 
     """
     RAG ENRICHMENT & GRAPH GENERATION
@@ -104,7 +81,7 @@ if __name__ == "__main__":
 
         # ask for a title
         query = f"""
-        Given the state's description {attack_steps[state_id]["state"]}, generate a brief title for the state.
+        Given the state's description {attack_steps[state_id]["state"]}, generate a brief but exhaustive title for the state.
         Do not insert any markdown or formatting.
         """
         response = agent.ask(query)
@@ -123,7 +100,9 @@ if __name__ == "__main__":
             The summary should be a short but complete text. Regarding the summary, you can use the information in the description field of the attack pattern, but you must
             provide a summary that is based on the information in the documents. The summary must be precise and fit the content of the documents.
             In this summary, correlate those information with the indicators, possibly defining their meaning and origin.
-            You must insert only indicators existing in the documents. Write them in a unique text paragraph.
+            You must insert only indicators existing in the documents.
+            Each indicator must be separated by a | character. If no indicators are present, write "no indicators found".
+            each indicator must be a complete sentence where there is the ioc and the context in which it is found.
             """
             response = agent.ask(query)
             try:
@@ -139,3 +118,7 @@ if __name__ == "__main__":
 
         with open("attack_steps.json", "w") as f:
             json.dump(attack_steps, f)
+
+    progress.close()
+    toc = time.time()
+    print(f"Script completed in {toc-tic} seconds")

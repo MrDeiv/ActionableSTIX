@@ -17,3 +17,7 @@ class STIXParser:
     def extract_malware(self):
         malware = [obj for obj in self.objects if obj['type'] == 'malware']
         return malware
+    
+    def extract_indicators(self):
+        indicators = [obj for obj in self.objects if obj['type'] == 'indicator']
+        return indicators

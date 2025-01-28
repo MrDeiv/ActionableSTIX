@@ -6,3 +6,5 @@ pypdf
 fastembed
 chromadb
 pyvis
+langchain_ollama
+langchain_chroma
