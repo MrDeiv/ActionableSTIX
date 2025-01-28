@@ -1,0 +1,8 @@
+tqdm
+stix2
+langchain
+langchain_community
+pypdf
+fastembed
+chromadb
+pyvis

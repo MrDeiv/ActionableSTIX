@@ -1,0 +1,186 @@
+{
+    "0": {
+        "state": "The malware described is \"Goofy Guineapig\", a trojanised NSIS Firefox installer. The characteristics required for a system to be vulnerable to this malware are:\n\n* Operating System(s): Windows\n* Software: NSIS Firefox installer (specifically, the Goofy Guineapig loader)\n* Connectivity: Required for command and control communications over HTTPS\n* Delivery Method: Not specified in the provided information\n* Actions required to run the malware: None mentioned",
+        "title": "Windows Vulnerability to Goofy Guineapig Trojanised NSIS Firefox Installer",
+        "actions": [
+            {
+                "name": "Create or Modify System Process: Windows Service as used by Goofy Guineapig",
+                "summary": "No summary found",
+                "indicators": "No indicators found"
+            },
+            {
+                "name": "Windows Service",
+                "summary": "The malware creates or modifies Windows services to execute malicious payloads at startup, allowing persistence on the system. It may also masquerade as legitimate services, modify existing ones, and escalate privileges from administrator to SYSTEM.",
+                "indicators": "Windows Service, sc.exe, Reg, Masquerading, Service Execution"
+            },
+            {
+                "name": "DLL Side-Loading",
+                "summary": "The malware uses DLL side-loading to execute malicious payloads by hijacking the DLL search order used by the loader, positioning both the victim application and malicious payload(s) alongside each other. This allows adversaries to mask their actions under a legitimate process, potentially with elevated privileges.",
+                "indicators": "side-loading, DLL search order hijacking, planting DLLs, invoking legitimate applications, encrypted/packed or obfuscated payloads, trusted processes"
+            }
+        ]
+    },
+    "1": {
+        "state": "**Defense-Evasion Tactic Implementation**\n\nThe malware implements the \"defense-evasion\" tactic by employing a technique called **code obfuscation**. This involves modifying the code in such a way that it becomes difficult for security software to detect and analyze.\n\nSpecifically, the malware uses:\n\n1.  **String encryption**: The malware encrypts strings used in its code, making it challenging for security tools to identify and flag suspicious activity.\n2.  **API call obfuscation**: The malware uses indirect function calls or API calls with misleading names to conceal its true intentions.\n3.  **Code compression**: The malware compresses its code using algorithms like LZ77 or Huffman coding, reducing the size of the executable and making it harder to detect.\n\nThese techniques allow the malware to evade detection by security software, making it more difficult for defenders to identify and respond to the attack.",
+        "title": "Defense-Evasion Tactic Implementation via Code Obfuscation Techniques",
+        "actions": [
+            {
+                "name": "Masquerading: Match Legitimate Name or Location as used by Goofy Guineapig",
+                "summary": "The malware 'Goofy Guineapig' is masquerading as legitimate software, specifically posing as a FireFox installer and a Google updater. This means it is disguising itself to trick users into downloading or installing it, thinking it's the real deal.",
+                "indicators": "Masquerading: Match Legitimate Name or Location"
+            },
+            {
+                "name": "Virtualization/Sandbox Evasion: Time Based Evasion as used by Goofy Guineapig",
+                "summary": "The Goofy Guineapig malware uses time-based evasion to avoid detection by checking the time register twice for a delay of more than 100 milliseconds before continuing execution.",
+                "indicators": "Virtualization/Sandbox Evasion, Time Based Evasion"
+            },
+            {
+                "name": "Virtualization/Sandbox Evasion: System Checks as used by Goofy Guineapig",
+                "summary": "The Goofy Guineapig malware checks system specifications such as disk size, physical memory size, and number of logical processors before proceeding with its execution. If any of these checks fail, it will not continue.",
+                "indicators": "disk size, physical memory size, number of logical processors"
+            },
+            {
+                "name": "Virtualization/Sandbox Evasion: User Activity Based Checks as used by Goofy Guineapig",
+                "summary": "Goofy Guineapig malware checks for processes that indicate reverse engineering or debugging on a system and will not execute if any of these checks fail.",
+                "indicators": "processes running, reverse engineered, debugged"
+            },
+            {
+                "name": "Obfuscated Files or Information: Software Packing as used by Goofy Guineapig",
+                "summary": "Goofy Guineapig malware is using software packing to obfuscate its files, specifically UPX packed and packaged within a legitimate NSIS installer.",
+                "indicators": "UPX, Software Packing, Goofy Guineapig, NSIS"
+            },
+            {
+                "name": "Deobfuscate/Decode Files or Information as used by Goofy Guineapig",
+                "summary": "The Goofy Guineapig malware contains obfuscated stack-based strings that are encoded using single byte XOR or subtraction throughout its binary, indicating a deobfuscation and decoding process to reveal hidden information.",
+                "indicators": "single byte XOR, subtraction, stack-based strings"
+            },
+            {
+                "name": "Hide Artifacts: Hidden Window as used by Goofy Guineapig",
+                "summary": "No summary found",
+                "indicators": "No indicators found"
+            },
+            {
+                "name": "Indicator Removal on Host: File Deletion as used by Goofy Guineapig",
+                "summary": "Goofy Guineapig malware initially runs from its download location, then moves files to a legitimate-looking directory and deletes them from the initial download location.",
+                "indicators": "Indicator Removal on Host: File Deletion"
+            },
+            {
+                "name": "Hijack Execution Flow: DLL Side-Loading as used by Goofy Guineapig",
+                "summary": "The malware uses DLL side-loading to hijack the execution flow of a legitimate executable, which is installed by the Goofy Guineapig loader alongside a malicious DLL. The malicious DLL is loaded by the legitimate executable, allowing the malware to execute its payload.",
+                "indicators": "Goofy Guineapig loader, legitimate executable, malicious DLL"
+            },
+            {
+                "name": "Process Injection: Process Hollowing as used by Goofy Guineapig",
+                "summary": "Goofy Guineapig malware performs process hollowing on the dllhost.exe binary, injecting content downloaded by its Command and Control (C2) server.",
+                "indicators": "dllhost.exe, Process Hollowing, Goofy Guineapig, C2"
+            },
+            {
+                "name": "Signed Binary Proxy Execution: Rundll32 as used by Goofy Guineapig",
+                "summary": "The Goofy Guineapig malware uses rundll32.exe and url.dll to execute a legitimate binary, which then loads a malicious DLL, allowing for persistence on the compromised system.",
+                "indicators": "rundll32.exe, url.dll, Signed Binary Proxy Execution: Rundll32 as used by Goofy Guineapig"
+            },
+            {
+                "name": "Match Legitimate Name or Location",
+                "summary": "The malware is attempting to evade detection by mimicking legitimate files or resources, either by matching their name or location, or using a similar icon. This can be done by placing an executable in a trusted directory or giving it the name of a legitimate program.",
+                "indicators": "placing an executable in a commonly trusted directory (ex: under System32), giving it the name of a legitimate, trusted program (ex: svchost.exe), creating a resource in a namespace that matches the naming convention of a container pod or cluster, using the same icon of the file they are trying to mimic"
+            },
+            {
+                "name": "Time Based Evasion",
+                "summary": "The malware employs time-based evasion techniques to detect and avoid virtualization and analysis environments, including delaying malware functionality using programmatic sleep commands or native system scheduling functionality, waiting for specific victim conditions to be met, and employing scheduled multi-stage channels. It also uses benign commands or operations to delay malware execution, such as loops of unnecessary commands or API hammering.",
+                "indicators": "Scheduled Task/Job (T1053), Ping (S0097), Native API (T1106)"
+            },
+            {
+                "name": "System Checks",
+                "summary": "The malware employs system checks to detect virtualization and analysis environments by searching for VME artifacts, altering its behavior based on the results, and concealing its core functions. It uses various techniques such as Windows Management Instrumentation, PowerShell, System Information Discovery, and Query Registry to obtain system information and evade detection.",
+                "indicators": "Windows Management Instrumentation (T1047), PowerShell (T1059/001), System Information Discovery (T1082), Query Registry (T1012), Virtual Machine Environment (VME) artifacts in memory, processes, file system, hardware, and/or the Registry, generic system properties such as host/domain name and network traffic samples, network adapters addresses, CPU core count, available memory/drive size, services running unique to virtual applications, installed programs on the system, manufacturer/product fields for strings relating to virtual machine applications, VME-specific hardware/processor instructions."
+            },
+            {
+                "name": "User Activity Based Checks",
+                "summary": "The malware employs user activity checks to detect virtualization or analysis environments, altering its behavior based on the results. It searches for user activity variables such as mouse movements, browser history, and file counts in common directories. The malware may also rely on specific user interactions before activation, such as waiting for a document to close or double-clicking an embedded image.",
+                "indicators": "Virtual machine environment (VME), sandbox, speed/frequency of mouse movements, clicks, browser history, cache, bookmarks, number of files in common directories (home, desktop), document closing, macro activation, double-clicking on embedded images"
+            },
+            {
+                "name": "Software Packing",
+                "summary": "The malware uses software packing to conceal its code by compressing or encrypting an executable, making it difficult to detect using signature-based methods. It also translates the original code into a special format that can only be run on a virtual machine.",
+                "indicators": "Software Packing, MPRESS, UPX, Exe Compression"
+            },
+            {
+                "name": "Deobfuscate/Decode Files or Information",
+                "summary": "The malware uses 'Deobfuscate/Decode Files or Information' to hide its artifacts by obfuscating files or information, requiring separate mechanisms to decode or deobfuscate it. This can be done using built-in malware functionality or system utilities like certutil or the Windows copy /b command. In some cases, user interaction is required to open the file for deobfuscation or decryption, and a password may be needed to access a password-protected compressed/encrypted file.",
+                "indicators": "Obfuscated Files or Information (T1027), certutil (S0160), copy /b command, User Execution (T1204)"
+            },
+            {
+                "name": "Hidden Window",
+                "summary": "The malware is using hidden windows to conceal malicious activity from users by utilizing scripting languages such as PowerShell, Jscript, and Visual Basic on Windows, or property list files on macOS. This allows the adversary to carry out administrative tasks without disrupting user work environments.",
+                "indicators": "powershell.exe -WindowStyle Hidden, apple.awt.UIElement"
+            },
+            {
+                "name": "File Deletion",
+                "summary": "The malware is deleting files left behind by its intrusion activity to minimize its footprint, using various tools such as native commands, secure deletion tools, or third-party file deletion tools.",
+                "indicators": "DEL, Windows Sysinternals SDelete, Trend Micro APT Attack Tools"
+            },
+            {
+                "name": "Process Hollowing",
+                "summary": "The malware is using Process Hollowing to inject malicious code into suspended processes, evading process-based defenses and potentially avoiding detection by security products.",
+                "indicators": "Process hollowing, CreateProcess API call with suspend flag, ZwUnmapViewOfSection or NtUnmapViewOfSection API calls, VirtualAllocEx, WriteProcessMemory, SetThreadContext, ResumeThread API calls."
+            },
+            {
+                "name": "Rundll32",
+                "summary": "The malware is abusing the rundll32.exe process to proxy execution of malicious code, avoiding security tools by using allowlists or false positives from normal operations. It can execute DLL payloads, Control Panel Item files (.cpl), and scripts such as JavaScript, while attempting to obscure malicious code through function name manipulation.",
+                "indicators": "rundll32.exe, {DLLname, DLLfunction}, Control_RunDLL, Control_RunDLLAsUser, javascript:\"\\..\\mshtml,RunHTMLApplication \";document.write();GetObject(\"script:https[:]//www[.]example[.]com/malicious.sct\")"
+            }
+        ]
+    },
+    "2": {
+        "state": "The \"discovery\" tactic is implemented by the malware through a series of steps:\n\n1.  **Network Scanning**: The malware performs network scanning to identify potential targets and map out the network infrastructure. This can be achieved using techniques such as TCP SYN scanning, UDP scanning, or ICMP scanning.\n2.  **Service Identification**: Once the network has been mapped, the malware identifies open ports and services running on target systems. This is typically done by sending probes to each identified port to determine which services are listening for incoming connections.\n3.  **Vulnerability Detection**: The malware then attempts to identify vulnerabilities in the detected services or operating system. This can be achieved through various means, including:\n    *   **Banner Grabbing**: The malware sends a request to the service and examines its response (banner) for clues about potential vulnerabilities.\n    *   **Version Identification**: The malware identifies the version of the software running on the target system and checks if it is known to have any vulnerabilities.\n4.  **Credential Harvesting**: If the malware gains access to a system, it may attempt to harvest credentials such as usernames and passwords. This can be done through various means, including:\n    *   **Keylogging**: The malware captures keystrokes entered by the user, allowing it to obtain login credentials.\n    *   **Password Dumping**: The malware uses tools to dump password hashes or plaintext passwords from the system.\n\nThe information provided in the documents and attack patterns described indicate that the malware is designed to be highly adaptable and capable of exploiting a wide range of vulnerabilities.",
+        "title": "Malware Discovery Tactic Implementation Steps",
+        "actions": [
+            {
+                "name": "System Information Discovery as used by Goofy Guineapig",
+                "summary": "The malware 'Goofy Guineapig' sends information about the infected machine to its command and control (C2) server through HTTP headers, specifically as an obfuscated 'Authorization' string.",
+                "indicators": "HTTP header, C2 packet, Authorization string"
+            },
+            {
+                "name": "System Information Discovery",
+                "summary": "The malware is attempting to gather detailed system information about the operating system and hardware, including version, patches, hotfixes, service packs, and architecture, which can be used to shape follow-on behaviors and drive payload development.",
+                "indicators": "System Information Discovery (T1082), Systeminfo, df -aH command, systemsetup configuration tool on macOS, AWS API, GCP API, Azure API, Amazon Describe Instance, Google Instances Resource, Microsoft Virtual Machine API"
+            }
+        ]
+    },
+    "3": {
+        "state": "The command-and-control (C2) tactic is implemented by the malware through the following steps:\n\n1.  **Initial Infection**: The malware infects a system, either through social engineering tactics or exploiting vulnerabilities in software.\n2.  **Communication Setup**: Once inside the system, the malware establishes communication with its Command and Control server. This can be done using protocols such as HTTP, HTTPS, DNS tunneling, or even custom-made protocols.\n3.  **Data Exfiltration**: The malware begins to collect sensitive data from the infected system, which could include login credentials, financial information, or other valuable data.\n4.  **Command and Control**: The collected data is then sent back to the Command and Control server for further analysis and exploitation. This can also involve receiving commands from the server to perform specific actions on the infected system.\n5.  **Persistence**: To maintain control over the infected system, the malware ensures its persistence by modifying system settings or installing itself as a startup program.\n\nThe C2 tactic is crucial in the attack pattern because it allows the attackers to remotely manage and control the infected systems, making it easier for them to carry out their malicious activities.",
+        "title": "Command-and-Control (C2) Tactic Implementation Steps",
+        "actions": [
+            {
+                "name": "Application Layer Protocol: Web Protocols as used by Goofy Guineapig",
+                "summary": "Goofy Guineapig malware uses HTTPS for its Command and Control (C2) communications, indicating that it employs web protocols to maintain communication with its command center.",
+                "indicators": "HTTPS, Web Protocols, C2 communications"
+            },
+            {
+                "name": "Fallback Channels as used by Goofy Guineapig",
+                "summary": "Goofy Guineapig malware uses various communication protocols such as UDP, KCP protocol, and direct socket communications to establish connections, depending on an embedded configuration string.",
+                "indicators": "UDP, KCP protocol, direct socket communications, embedded configuration string"
+            },
+            {
+                "name": "Non-Standard Port as used by Goofy Guineapig",
+                "summary": "The malware Goofy Guineapig communicates over non-standard HTTPS port 4443, indicating that it uses an unconventional port for secure communication.",
+                "indicators": "Non-Standard Port (4443), HTTPS"
+            },
+            {
+                "name": "Web Protocols",
+                "summary": "The malware is using web protocols such as HTTP and HTTPS to communicate with systems under its control within a victim network, blending in with normal traffic by hiding commands and results in protocol fields and headers.",
+                "indicators": "HTTP/S packets, HTTP, HTTPS, application layer protocols, client-server communication"
+            },
+            {
+                "name": "Fallback Channels",
+                "summary": "The malware uses fallback or alternate communication channels to maintain reliable command and control and avoid data transfer thresholds, indicating that it adapts its communication methods if the primary channel is compromised.",
+                "indicators": "Fallback Channels, Command and Control (C2), Data Transfer Thresholds"
+            },
+            {
+                "name": "Non-Standard Port",
+                "summary": "The malware is using non-standard ports to communicate, making it harder to detect by filtering or analysis. This tactic allows the adversary to bypass traditional port associations and use protocols like HTTPS over unusual ports such as 8088 or 587.",
+                "indicators": "HTTPS over port 8088 (Symantec Elfin Mar 2019), port 587 (Fortinet Agent Tesla April 2018)"
+            }
+        ]
+    }
+}
