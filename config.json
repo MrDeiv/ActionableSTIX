@@ -1,14 +1,6 @@
 {
-    "MODELS": {
-        "SUMMARIZATION": {
-            "NAME": "facebook/bart-large-cnn",
-            "TOKENIZER": "facebook/bart-large-cnn"
-        },
-        "DOCS_QA": {
-            "NAME": "impira/layoutlm-document-qa",
-            "TOKENIZER": "impira/layoutlm-document-qa"
-        }
-    },
+    "STIX_FILE": "sample_stix/goofy-guineapig-stix.json",
+    "MODEL_NAME": "RAG_llama3.1:8b",
     "DOCUMENTS_DIR": "./documents",
     "CHROMA_COLLECTION": {
         "NAME": "actionable-stix",

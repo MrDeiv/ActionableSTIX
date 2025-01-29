@@ -1,10 +1,9 @@
-chromadb
+faiss-cpu
 torch
 numpy
 pypdf
-
 langchain
-langchain_chroma
 langchain_huggingface
 langchain_experimental
-
+langchain_ollama
+stix2

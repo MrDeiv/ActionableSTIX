@@ -1,62 +1,115 @@
-import os
 import time
 import json
-import torch
-import logging
-from transformers import AutoTokenizer, AutoModelForDocumentQuestionAnswering, pipeline
+
+from tqdm import tqdm
 
 from src.DocumentStore import DocumentStore
+from src.ChatModel import ChatModel
+from src.STIXParser import STIXParser
+from src.group_attack_patterns import group_attack_patterns
 
-CUDA = "cuda"
-CPU = "cpu"
 CONFIG_FILE = "config.json"
 UPDATE_EMBEDDINGS = False
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
 
     # tic
     tic = time.time()
-    logging.info(f"Time Start: {tic:.2f} s")
+    print("Starting...")
+
+    # final result
+    output = {}
     
     # load config
-    device = torch.device(CUDA if torch.cuda.is_available() else CPU)
     config = json.loads(open(CONFIG_FILE).read())
+
+    """
+    +----------------------------+
+    |                            |
+    |  STIX pre-processing       |
+    |                            |
+    +----------------------------+
+    """
+
+    # load original stix
+    stix_parser = STIXParser()
+    
+    stix_parser.parse(config['STIX_FILE'])
+    attack_patterns = stix_parser.extract_attack_patterns()
+    malware_patterns = stix_parser.extract_malware()
+    indicators_patterns = stix_parser.extract_indicators()
+
+    # load MITRE tactics
+    mitre_tactics = json.loads(open("mitre-tactics.json").read())
+
+    # group attack patterns by tactic
+    # now each tactic has a list of attack patterns associated with it
+    grouped_patterns = group_attack_patterns(mitre_tactics, attack_patterns)
+
+    """
+    +----------------------------+                                                                   
+    |                            |                                                                   
+    |  Vectorize documents       |                                                                   
+    |                            |                                                                   
+    +----------------------------+
+    """
 
     # set up document store
     ds = DocumentStore(
-        model_name=config["MODELS"]['SUMMARIZATION']['NAME'],
+        model=config["MODEL_NAME"],
         collection_name=config["CHROMA_COLLECTION"]['NAME'],
         persist_directory=config["CHROMA_COLLECTION"]['DIR']
     )
 
-    # ingest documents if necessary
-    if UPDATE_EMBEDDINGS:
-        ds.ingest(config["DOCUMENTS_DIR"])
+    # ingest documents: chunk and embeds into vector store
+    ds.ingest_directory(config['DOCUMENTS_DIR'])
 
-    # query the document store
-    query = "What is the name of the malware?"
-    relevant_docs = ds.vector_db.similarity_search_with_relevance_scores(
-        query=query,
-        k=config["DOCUMENT_SEARCH"]["k"],
-        score_threshold=config["DOCUMENT_SEARCH"]["THRESHOLD"]
+    """
+    +----------------------------+
+    |                            |
+    |  Chat Model                |
+    |                            |
+    +----------------------------+
+    """
+
+    # set up chat model
+    chat = ChatModel(
+        model_name=config["MODEL_NAME"],
+        retriever=ds.retriever # retriever from document store
     )
 
-    
-    tokenizer = AutoTokenizer.from_pretrained(config["MODELS"]["DOCUMENT_QA"]["TOKENIZER"])
-    model = AutoModelForDocumentQuestionAnswering.from_pretrained(config["MODELS"]["DOCUMENT_QA"]["NAME"])
-    doc_qa = pipeline(
-        model=model,
-        tokenizer=tokenizer,
-        device=device,
-        framework="pt")
+    """
+    +----------------------------+
+    |                            |
+    |  Build Actionable STIX     |
+    |                            |
+    +----------------------------+
+    """
 
-    # query the document store
-    response = doc_qa(
-        question=query, 
-        context=context,
-        handle_impossible_answer = True)
-    print(response)
+    progress = tqdm(total=len(mitre_tactics), desc="Defining Actionable STIX")
+    for state_id, mitre_tactic in enumerate(mitre_tactics):
+        progress.update(1)
+        output[state_id] = {}
+
+        if state_id == 0:
+            query = """
+                Provide a summary about the characteristics required by a system to be vulnerable to the malware described.
+                Avoid adding information that is not present in the documents.
+                The summary must contain:
+                - the operating system(s) that are vulnerable to the malware
+                - the software that is vulnerable to the malware
+                - if connectivity is required
+                - how the malware is delivered
+                - the actions required to run the malware. For instance, if the malware is delivered via email, the user must open the attachment.
+                No introduction to the answer is required.
+                """+f"""
+                The malware described is "{malware_patterns}".
+                """
+            response = chat.invoke(query)
+            output[state_id]['summary'] = response
+        
+    # save output
+    json.dump(output, open('out/output.json', 'w'))
 
     # toc
     toc = time.time()
