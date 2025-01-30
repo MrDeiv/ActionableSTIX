@@ -7,3 +7,5 @@ langchain_huggingface
 langchain_experimental
 langchain_ollama
 stix2
+hnswlib
+lancedb
