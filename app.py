@@ -86,8 +86,20 @@ if __name__ == "__main__":
     +----------------------------+
     """
 
-    progress = tqdm(total=len(mitre_tactics), desc="Defining Actionable STIX")
-    for state_id, mitre_tactic in enumerate(mitre_tactics):
+    progress = tqdm(total=len(malware_patterns), desc="Ingesting Malwares")
+    for malware in malware_patterns:
+        progress.update(1)
+        ds.ingest_text_no_split(f"The malware is {malware['name']}. {malware['description']}")
+    progress.close()
+
+    progress = tqdm(total=len(indicators_patterns), desc="Ingesting Indicators")
+    for indicator in indicators_patterns:
+        progress.update(1)
+        ds.ingest_text_no_split(f"{indicator['name']}. {indicator['description']}")
+    progress.close()
+
+    progress = tqdm(total=len(grouped_patterns.keys()), desc="Defining Actionable STIX")
+    for state_id, mitre_tactic in enumerate(grouped_patterns.keys()):
         progress.update(1)
         output[state_id] = {}
 
@@ -102,12 +114,18 @@ if __name__ == "__main__":
                 - how the malware is delivered
                 - the actions required to run the malware. For instance, if the malware is delivered via email, the user must open the attachment.
                 No introduction to the answer is required.
-                """+f"""
-                The malware described is "{malware_patterns}".
                 """
-            response = chat.invoke(query)
-            output[state_id]['summary'] = response
-        
+        else:
+            query = f"""
+                Considering the actual attack tactic "{mitre_tactic}", provide how the tactic is implemented by the malware.
+                This state must take into account the information provided in the documents and the attack patterns already described.
+                Do not provide information that is not present in the documents.
+                Do not provide an introduction to the answer.
+                """
+        response = chat.invoke(query)
+        output[state_id]['summary'] = response
+
+    progress.close()
     # save output
     json.dump(output, open('out/output.json', 'w'))
 

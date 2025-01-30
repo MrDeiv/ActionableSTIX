@@ -16,6 +16,8 @@ class DocumentStore:
     """
     def __init__(self,
                 model:str,
+                chunk_size:int = 200,
+                chunk_overlap:int = 20,
                 collection_name:str = None,
                 persist_directory:str = None):
         self.collection_name = collection_name
@@ -38,6 +40,9 @@ class DocumentStore:
                 "score_threshold": 0.5,
             }
         )
+
+        self.chunk_size = chunk_size
+        self.chunk_overlap = chunk_overlap
 
     @property
     def embeddings(self):
@@ -64,7 +69,6 @@ class DocumentStore:
         progress = tqdm(total=len(os.listdir(directory)), desc="Ingesting documents")
         for root, dirs, files in os.walk(directory):
             for file in files:
-                print(f"Ingesting {file}")
                 progress.update(1)
                 self.ingest_document(os.path.join(root, file))
         progress.close()
@@ -82,6 +86,23 @@ class DocumentStore:
         
         self.vector_store.add_documents(chunks)
 
+    def ingest_text(self, text:str):
+        """
+        Ingest text into the vector database
+        """
+        chunks = RecursiveCharacterTextSplitter(
+            chunk_size=self.chunk_size, 
+            chunk_overlap=self.chunk_overlap,
+            length_function=len
+        ).split_text(text)
+        self.vector_store.add_texts(chunks)
+
+    def  ingest_text_no_split(self, text:str):
+        """
+        Ingest text into the vector database without splitting
+        """
+        self.vector_store.add_texts(text)
+
     def _get_processors(self, file:str):
         """
         Get the appropriate document loader and splitter for the file
@@ -92,8 +113,8 @@ class DocumentStore:
         
         if file.endswith(".txt"):
             return TextLoader(file), RecursiveCharacterTextSplitter(
-                chunk_size=100, 
-                chunk_overlap=20,
+                chunk_size=self.chunk_size, 
+                chunk_overlap=self.chunk_overlap,
                 length_function=len
             )
         

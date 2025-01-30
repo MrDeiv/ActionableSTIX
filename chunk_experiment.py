@@ -1,19 +1,54 @@
+"""
+This script evaluates the best chunk size for the document store
+"""
+
 from datasets import load_dataset
 from langchain_ollama import ChatOllama
 from langchain_ollama import OllamaEmbeddings
+from ragas.metrics import LLMContextRecall, Faithfulness, FactualCorrectness
+from ragas import evaluate, EvaluationDataset
+from ragas.metrics import ContextPrecision, ContextRecall
+from ragas.llms import LangchainLLMWrapper
 
-dataset = load_dataset("stepkurniawan/sustainability-methods-wiki", "50_QA")
+from src.DocumentStore import DocumentStore
+from src.ChatModel import ChatModel
 
 MODEL = "llama3.1:8b"
-ollama = ChatOllama(model=MODEL)
-embeddings = OllamaEmbeddings(model=MODEL)
+START = 100
+INCREMENT = 100
+MAX_CHUNK_SIZE = 2000
+
+d = load_dataset("stepkurniawan/sustainability-methods-wiki", "50_QA")
 
 # {'train': ['contexts', 'summary', 'question', 'ground_truths']}
+queries = d['train']['question']
+expected_responses = d['train']['ground_truths']
 
-sample_docs = [
-    "Albert Einstein proposed the theory of relativity, which transformed our understanding of time, space, and gravity.",
-    "Marie Curie was a physicist and chemist who conducted pioneering research on radioactivity and won two Nobel Prizes.",
-    "Isaac Newton formulated the laws of motion and universal gravitation, laying the foundation for classical mechanics.",
-    "Charles Darwin introduced the theory of evolution by natural selection in his book 'On the Origin of Species'.",
-    "Ada Lovelace is regarded as the first computer programmer for her work on Charles Babbage's early mechanical computer, the Analytical Engine."
-]
+dataset = []
+
+retriever = DocumentStore(model=MODEL).retriever
+qa_chain = ChatModel(model_name=MODEL, retriever=retriever)
+
+for query, reference in zip(queries, expected_responses):
+    relevant_docs = retriever.invoke(query)
+    response = qa_chain.invoke(query)
+    dataset.append(
+        {
+            "user_input": query,
+            "retrieved_contexts": [rdoc.page_content for rdoc in relevant_docs],
+            "response": response,
+            "reference": reference,
+        }
+    )
+
+evaluation_dataset = EvaluationDataset.from_list(dataset)
+
+evaluator_llm = LangchainLLMWrapper(
+    ChatOllama(model=MODEL)
+)
+
+result = evaluate(
+    dataset=evaluation_dataset,
+    metrics=[LLMContextRecall(), Faithfulness(), FactualCorrectness()],
+    llm=evaluator_llm,
+)
