@@ -1,7 +1,7 @@
 faiss-cpu
 torch
 numpy
-pypdf
+pymupdf
 langchain
 langchain_huggingface
 langchain_experimental
@@ -9,3 +9,10 @@ langchain_ollama
 stix2
 hnswlib
 lancedb
+datasets
+ragas
+chromadb
+rapidfuzz
+matplotlib
+unstructured
+nltk

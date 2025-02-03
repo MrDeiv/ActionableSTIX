@@ -1,12 +1,19 @@
-from langchain_ollama import OllamaEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain_community.document_loaders import TextLoader, CSVLoader, PyPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import TextLoader, PyMuPDFLoader
+from langchain_text_splitters import CharacterTextSplitter, RecursiveJsonSplitter
 import os
 from tqdm import tqdm
 import faiss
 from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_community.vectorstores import FAISS, DistanceStrategy
+from src.CustomCSVLoader import CustomCSVLoader
+from src.CustomYMLLoader import CustomYMLLoader
+from src.CustomJSONLoader import CustomJSONLoader
+from langchain_core.documents import Document
+from nltk.corpus import stopwords
+import nltk
+from nltk.stem import PorterStemmer
 
 class DocumentStore:
     """
@@ -15,34 +22,22 @@ class DocumentStore:
     This class wraps the Chroma vector store and provides a simple interface for ingesting documents
     """
     def __init__(self,
-                model:str,
                 chunk_size:int = 200,
                 chunk_overlap:int = 20,
+                k:int = 3,
                 collection_name:str = None,
                 persist_directory:str = None):
         self.collection_name = collection_name
         self.persist_directory = persist_directory
-
-        self.embeddings = OllamaEmbeddings(model=model)
-
-        self.index = faiss.IndexFlatL2(len(self.embeddings.embed_query("hello world")))
-        self.vector_store = FAISS(
-            embedding_function=self.embeddings,
-            index=self.index,
-            docstore=InMemoryDocstore(),
-            index_to_docstore_id = {}
-        )
-
-        self.retriever = self.vector_store.as_retriever(
-            search_type="similarity_score_threshold",
-            search_kwargs={
-                'k': 3,
-                "score_threshold": 0.5,
-            }
-        )
+        self.k = k
+        self.index = faiss.IndexFlatL2(768)
+        self.docstore = InMemoryDocstore()
+        self.embeddings = HuggingFaceEmbeddings()
 
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
+        self.vector_db = None
+        nltk.download('stopwords')
 
     @property
     def embeddings(self):
@@ -60,69 +55,126 @@ class DocumentStore:
     def vector_db(self, value):
         self._vector_db = value
     
-    def ingest_directory(self, directory:str):
+    def ingest(self, directory:str):
         """
         Ingests a directory of files into the vector database
         """
         assert os.path.isdir(directory), f"{directory} is not a directory"
 
+        documents:list[Document] = []
         progress = tqdm(total=len(os.listdir(directory)), desc="Ingesting documents")
         for root, dirs, files in os.walk(directory):
             for file in files:
                 progress.update(1)
-                self.ingest_document(os.path.join(root, file))
+                file_docs = self._create_documents(os.path.join(root, file)) 
+                for doc in file_docs:   
+                    documents.append(doc)
         progress.close()
 
-    def ingest_document(self, file:str):
+        self.vector_db:FAISS = FAISS(
+            embedding_function=self.embeddings,
+            index=self.index,
+            docstore=self.docstore,
+            index_to_docstore_id={}
+        ).from_documents(
+            documents,
+            embedding=self.embeddings)
+
+    
+    def search_mmr(self, query:str, k:int = 4, fetch_k:int = 20, lambda_mult:float = 0.5) -> list[Document]:
+        return self.vector_db.max_marginal_relevance_search(
+            query=query,
+            k=k,
+            fetch_k=fetch_k,
+            lambda_mult=lambda_mult)
+    
+    def _remove_stopwords(self, text:str) -> list[str]:
         """
-        Load file and ingest into vector database
+        Remove stopwords from a text
         """
-        loader, splitter = self._get_processors(file)
-        document = loader.load()
-        if splitter is not None:
-            chunks = splitter.split_documents(document)
-        else:
-            chunks = document
+        stop_words = set(stopwords.words('english'))
+        return [word for word in text.split() if word not in stop_words]
+    
+    def _stem_text(self, text:str) -> list[str]:
+        """
+        Stem text
+        """
+        pass
+    
+    def _normalize_text(self, text:str) -> str:
+        """
+        Normalize text
+        """
+
+        # remove stopwords
+        tokens = self._remove_stopwords(text)
+
+        # apply stemming
+        """ stemmer = PorterStemmer()
+        tokens = [stemmer.stem(token) for token in tokens] """
+
+        return " ".join(tokens)
+
+    def _csv_processor(self, file:str) -> list[Document]:
+        """
+        Process csv file
+        """
+        return CustomCSVLoader(file).load()
+    
+    def _json_processor(self, file:str) -> list[Document]:
+        """
+        Process json file
+        """
+        json = CustomJSONLoader(file).load()
+        chunks =  RecursiveJsonSplitter().split_json(json)
+        return [Document(page_content=str(chunk)) for chunk in chunks]
+    
+    def _yml_processor(self, file:str) -> list[Document]:
+        """
+        Process yml file
+        """
+        yml = CustomYMLLoader(file).load()
+        chunks = RecursiveJsonSplitter().split_json(yml)
+        return [Document(page_content=str(chunk)) for chunk in chunks]
+
+    def _txt_processor(self, file:str) -> list[Document]:
+        """
+        Process txt file
+        """
+        # remove stopwords
+        docs = TextLoader(file).load()
+        return [Document(self._normalize_text(doc.page_content)) for doc in docs]
+    
+    def _pdf_processor(self, file:str) -> list[Document]:
+        """
+        Process pdf file
+        """
+        pdf = PyMuPDFLoader(file).load()
+        chunks = SemanticChunker(embeddings=self.embeddings).split_documents(pdf)
+        return [Document(page_content=self._normalize_text(chunk.page_content)) for chunk in chunks]
+
+    def _create_documents(self, file:str):
+        """
+        Process a file creating documents
+        """
+
+        processors = {
+            ".csv": self._csv_processor,
+            ".json": self._json_processor,
+            ".yml": self._yml_processor,
+            ".txt": self._txt_processor,
+            ".pdf": self._pdf_processor
+        }
+    
+        ext = os.path.splitext(file)[-1]
+
+        if ext in processors:
+            return processors[ext](file)
         
-        self.vector_store.add_documents(chunks)
-
-    def ingest_text(self, text:str):
+        return self._txt_processor(file)
+    
+    def add_text(self, text:str):
         """
-        Ingest text into the vector database
+        Add text to the document store
         """
-        chunks = RecursiveCharacterTextSplitter(
-            chunk_size=self.chunk_size, 
-            chunk_overlap=self.chunk_overlap,
-            length_function=len
-        ).split_text(text)
-        self.vector_store.add_texts(chunks)
-
-    def  ingest_text_no_split(self, text:str):
-        """
-        Ingest text into the vector database without splitting
-        """
-        self.vector_store.add_texts(text)
-
-    def _get_processors(self, file:str):
-        """
-        Get the appropriate document loader and splitter for the file
-        """
-
-        if file.endswith(".csv"):
-            return CSVLoader(file), None
-        
-        if file.endswith(".txt"):
-            return TextLoader(file), RecursiveCharacterTextSplitter(
-                chunk_size=self.chunk_size, 
-                chunk_overlap=self.chunk_overlap,
-                length_function=len
-            )
-        
-        if file.endswith(".pdf"):
-            return PyPDFLoader(file), SemanticChunker(
-                embeddings=self.embeddings,
-                breakpoint_threshold_type="standard_deviation"
-            )
-        
-        return TextLoader(file), None
-
+        self.vector_db.add_texts([text])

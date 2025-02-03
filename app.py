@@ -1,15 +1,22 @@
 import time
 import json
-
 from tqdm import tqdm
-
 from src.DocumentStore import DocumentStore
-from src.ChatModel import ChatModel
 from src.STIXParser import STIXParser
 from src.group_attack_patterns import group_attack_patterns
+from langchain_core.documents import Document
+from src.QAModel import QAModel
+from src.SummarizationModel import SummarizationModel
+from src.TextGenerationModel import TextGenerationModel
+import os
 
 CONFIG_FILE = "config.json"
-UPDATE_EMBEDDINGS = False
+
+def build_context(documents:list[Document]) -> str:
+    context = ""
+    for doc in documents:
+        context += doc.page_content + "\n"
+    return context
 
 if __name__ == "__main__":
 
@@ -55,28 +62,23 @@ if __name__ == "__main__":
     """
 
     # set up document store
-    ds = DocumentStore(
-        model=config["MODEL_NAME"],
-        collection_name=config["CHROMA_COLLECTION"]['NAME'],
-        persist_directory=config["CHROMA_COLLECTION"]['DIR']
-    )
+    docstore = DocumentStore()
 
     # ingest documents: chunk and embeds into vector store
-    ds.ingest_directory(config['DOCUMENTS_DIR'])
+    docstore.ingest(config['DOCUMENTS_DIR'])
 
     """
     +----------------------------+
     |                            |
-    |  Chat Model                |
+    |  Chat Models               |
     |                            |
     +----------------------------+
     """
 
-    # set up chat model
-    chat = ChatModel(
-        model_name=config["MODEL_NAME"],
-        retriever=ds.retriever # retriever from document store
-    )
+    # set models
+    qa_model = QAModel(config['MODELS']['QA'])
+    summary_model = SummarizationModel(config['MODELS']['SUMMARIZATION'])
+    text_generation_model = TextGenerationModel(config['MODELS']['TEXT_GENERATION'])
 
     """
     +----------------------------+
@@ -89,13 +91,13 @@ if __name__ == "__main__":
     progress = tqdm(total=len(malware_patterns), desc="Ingesting Malwares")
     for malware in malware_patterns:
         progress.update(1)
-        ds.ingest_text_no_split(f"The malware is {malware['name']}. {malware['description']}")
+        docstore.add_text(stix_parser.stringify_object(malware))
     progress.close()
 
     progress = tqdm(total=len(indicators_patterns), desc="Ingesting Indicators")
     for indicator in indicators_patterns:
         progress.update(1)
-        ds.ingest_text_no_split(f"{indicator['name']}. {indicator['description']}")
+        docstore.add_text(stix_parser.stringify_object(indicator))
     progress.close()
 
     progress = tqdm(total=len(grouped_patterns.keys()), desc="Defining Actionable STIX")
@@ -104,32 +106,83 @@ if __name__ == "__main__":
         output[state_id] = {}
 
         if state_id == 0:
-            query = """
-                Provide a summary about the characteristics required by a system to be vulnerable to the malware described.
-                Avoid adding information that is not present in the documents.
-                The summary must contain:
-                - the operating system(s) that are vulnerable to the malware
-                - the software that is vulnerable to the malware
-                - if connectivity is required
-                - how the malware is delivered
-                - the actions required to run the malware. For instance, if the malware is delivered via email, the user must open the attachment.
-                No introduction to the answer is required.
-                """
+            # Malware name
+            question = "Given the context, which is the name given to the malware described in the documents?"
+            docs = docstore.search_mmr(question, k=config['k'], lambda_mult=config['LAMBDA'])
+            context = build_context(docs)
+            summary = summary_model.invoke(context)
+            malware_name = qa_model.invoke(question, summary)
+
+            # connectivity
+            question = "Given the context, must the machine be connected to internet to complete the malware attack?"
+            docs = docstore.search_mmr(question, k=config['k'], lambda_mult=config['LAMBDA'])
+            context = build_context(docs)
+            summary = summary_model.invoke(context)
+            connectivity = text_generation_model.invoke(question, summary)
+
+            # delivery
+            question = "Given the context, how the malware is delivered to the target machine?"
+            docs = docstore.search_mmr(question, k=config['k'], lambda_mult=config['LAMBDA'])
+            context = build_context(docs)
+            summary = summary_model.invoke(context)
+            delivery = text_generation_model.invoke(question, summary)
+
+            answer = {
+                "malware_name": malware_name,
+                "connectivity": connectivity,
+                "delivery": delivery
+            }
+            
         else:
+            continue
+        #response = chat.invoke(query)
+        output[state_id]['summary'] = answer
+
+        # enrich atatck patters
+        output[state_id]['actions'] = []
+        progress2 = tqdm(total=len(grouped_patterns.keys()), desc="Enriching Attack Patterns")
+        for ap in grouped_patterns[mitre_tactic]:
+            progress2.update(1)
+
+            # enrich attack pattern
             query = f"""
-                Considering the actual attack tactic "{mitre_tactic}", provide how the tactic is implemented by the malware.
-                This state must take into account the information provided in the documents and the attack patterns already described.
-                Do not provide information that is not present in the documents.
-                Do not provide an introduction to the answer.
-                """
-        response = chat.invoke(query)
-        output[state_id]['summary'] = response
+            Given the attack pattern's name: "{ap['name']}", and description: "{ap['description']}",
+            provide a more detailed description of the attack pattern, adding information gathered from the
+            documents.
+            Do not include the original description and name in the answer.
+            """
+            docs = docstore.search_mmr(query, k=config['k'], lambda_mult=config['LAMBDA'])
+            context = build_context(docs)
+            summary = summary_model.invoke(context)
+            detailed_description = text_generation_model.invoke(query, context)
+
+            # trying to extract IoCs
+            query = f"""
+            Given this description: "{ap['description']}", provide a list
+            of Indicators of Compromise (IoCs) that can be used to detect this attack pattern.
+            You must insert only the IoCs in the answer. Those IoCs must be extracted from the documents.
+            You must insert only technical indicators, such as IPs, URLs, hashes, etc.
+            """
+            docs = docstore.search_mmr(query, k=config['k'], lambda_mult=config['LAMBDA'])
+            context = build_context(docs)
+            iocs = text_generation_model.invoke(query, context)
+
+            output[state_id]['actions'].append({
+                "name": ap['name'],
+                "description": detailed_description,
+                "indicators": iocs
+            })
+
+        progress2.close()
+        break
 
     progress.close()
     # save output
-    json.dump(output, open('out/output.json', 'w'))
+    output_file = os.path.join(config['OUTPUT_DIR'], config['OUTPUT_FILE'])
+    json.dump(output, open(output_file, 'w'))
 
     # toc
     toc = time.time()
-    print(f"Time Elapsed: {toc - tic:.2f} s")
+    # to minutes
+    print(f"Time Elapsed: {(toc - tic)/60:.2f} min")
 

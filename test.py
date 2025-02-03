@@ -1,59 +1,77 @@
-import os
-import time
 import json
-from typing import List
-import torch
-import logging
-from transformers import AutoTokenizer, pipeline
-
-from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_experimental.text_splitter import SemanticChunker
-from langchain_huggingface import ChatHuggingFace
-from langchain.docstore.document import Document
-
-import faiss
-from langchain_community.docstore.in_memory import InMemoryDocstore
-from langchain_community.vectorstores import FAISS
-from langchain.schema.runnable import RunnablePassthrough
-
-import pandas as pd
-import json
-import base64
-import io
-
-from langchain_community.chat_models import ChatOllama
-from langchain_ollama import ChatOllama
-from langchain_ollama import OllamaEmbeddings
-from langchain.prompts import PromptTemplate
-from langchain.vectorstores.utils import filter_complex_metadata
-from langchain.schema.output_parser import StrOutputParser
-
+from src.STIXParser import STIXParser
+from src.group_attack_patterns import group_attack_patterns
 from src.DocumentStore import DocumentStore
+from langchain_core.documents import Document
+from src.QAModel import QAModel
+from src.SummarizationModel import SummarizationModel
+from src.TextGenerationModel import TextGenerationModel
+from tqdm import tqdm
 
-CUDA = "cuda"
-CPU = "cpu"
 CONFIG_FILE = "config.json"
-UPDATE_EMBEDDINGS = False
 
+def build_context(documents:list[Document]) -> str:
+    context = ""
+    for doc in documents:
+        context += doc.page_content + "\n"
+    return context
 
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+config = json.loads(open(CONFIG_FILE).read())
+stix_parser = STIXParser()
+stix_parser.parse(config['STIX_FILE'])
+attack_patterns = stix_parser.extract_attack_patterns()
+malware_patterns = stix_parser.extract_malware()
+indicators_patterns = stix_parser.extract_indicators()
 
-    # tic
-    tic = time.time()
-    logging.info(f"Time Start: {tic:.2f} s")
-    
-    # load config
-    device = torch.device(CUDA if torch.cuda.is_available() else CPU)
-    config = json.loads(open(CONFIG_FILE).read())
+mitre_tactics = json.loads(open("mitre-tactics.json").read())
+grouped_patterns = group_attack_patterns(mitre_tactics, attack_patterns)
 
-    file_to_load = "documents/21-00021921.pdf"
-    ds = DocumentStore()
-    
+docstore = DocumentStore()
 
+# ingest documents: chunk and embeds into vector store
+docstore.ingest(config['DOCUMENTS_DIR'])
 
-    # toc
-    toc = time.time()
-    print(f"Time Elapsed: {toc - tic:.2f} s")
+qa_model = QAModel(config['MODELS']['QA'])
+summary_model = SummarizationModel(config['MODELS']['SUMMARIZATION'])
+text_generation_model = TextGenerationModel(config['MODELS']['TEXT_GENERATION'])
 
+progress = tqdm(total=len(malware_patterns), desc="Ingesting Malwares")
+for malware in malware_patterns:
+    progress.update(1)
+    docstore.add_text(stix_parser.stringify_object(malware))
+progress.close()
+
+progress = tqdm(total=len(indicators_patterns), desc="Ingesting Indicators")
+for indicator in indicators_patterns:
+    progress.update(1)
+    docstore.add_text(stix_parser.stringify_object(indicator))
+progress.close()
+
+tactic = grouped_patterns['persistence']
+for attack_pattern in tactic:
+    ap_name = attack_pattern['name']
+    ap_description = attack_pattern['description']
+
+    query = f"""
+    Given the attack pattern's name: "{ap_name}", and description: "{ap_description}",
+    provide a more detailed description of the attack pattern, adding information gathered from the
+    documents.
+    Do not include the original description and name in the answer.
+    """
+    docs = docstore.search_mmr(query, k=config['k'], lambda_mult=config['LAMBDA'])
+    context = build_context(docs)
+    summary = summary_model.invoke(context)
+    answer = text_generation_model.invoke(query, context)
+
+    query = f"""
+    Given this description: "{ap_description}", provide a list
+    of Indicators of Compromise (IoCs) that can be used to detect this attack pattern.
+    You must insert only the IoCs in the answer. Those IoCs must be extracted from the documents.
+    You must insert only technical indicators, such as IPs, URLs, hashes, etc.
+    """
+    docs = docstore.search_mmr(query, k=config['k'], lambda_mult=config['LAMBDA'])
+    context = build_context(docs)
+    text_generation_model2 = TextGenerationModel(config['MODELS']['TEXT_GENERATION'], max_new_tokens=512)
+    answer = text_generation_model2.invoke(query, context)
+    print(answer)
+    exit()

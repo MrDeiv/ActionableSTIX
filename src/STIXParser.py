@@ -21,3 +21,13 @@ class STIXParser:
     def extract_indicators(self):
         indicators = [obj for obj in self.objects if obj['type'] == 'indicator']
         return indicators
+    
+    def stringify_object(self, obj):
+        """
+        Stringify object
+        """
+        text:str = ""
+        for key, value in obj.items():
+            text += f"{key}: {value}\n"
+        
+        return text
