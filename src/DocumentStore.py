@@ -99,7 +99,8 @@ class DocumentStore:
         """
         Stem text
         """
-        pass
+        stemmer = PorterStemmer()
+        return [stemmer.stem(token) for token in text.split()]
     
     def _normalize_text(self, text:str) -> str:
         """
@@ -110,8 +111,7 @@ class DocumentStore:
         tokens = self._remove_stopwords(text)
 
         # apply stemming
-        """ stemmer = PorterStemmer()
-        tokens = [stemmer.stem(token) for token in tokens] """
+        #tokens = self._stem_text(" ".join(tokens))
 
         return " ".join(tokens)
 

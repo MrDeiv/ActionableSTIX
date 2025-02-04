@@ -16,3 +16,6 @@ rapidfuzz
 matplotlib
 unstructured
 nltk
+evaluate
+rouge_score
+bert_score
