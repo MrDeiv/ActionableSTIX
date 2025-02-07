@@ -32,7 +32,7 @@ docstore = DocumentStore()
 docstore.ingest(config['DOCUMENTS_DIR'])
 
 qa_model = QAModel(config['MODELS']['QA'])
-summary_model = SummarizationModel(config['MODELS']['SUMMARIZATION'])
+summary_model = SummarizationModel('facebook/bart-large-cnn')
 text_generation_model = TextGenerationModel(config['MODELS']['TEXT_GENERATION'])
 
 progress = tqdm(total=len(malware_patterns), desc="Ingesting Malwares")
@@ -47,31 +47,14 @@ for indicator in indicators_patterns:
     docstore.add_text(stix_parser.stringify_object(indicator))
 progress.close()
 
-tactic = grouped_patterns['persistence']
-for attack_pattern in tactic:
-    ap_name = attack_pattern['name']
-    ap_description = attack_pattern['description']
+question = "Given the context, which is the name given to the malware described in the documents?"
+docs = docstore.search_mmr(question, k=config['k'], lambda_mult=config['LAMBDA'])
+context = build_context(docs)
+print(context)
+exit()
+summary = summary_model.invoke(context)
+malware_name = qa_model.invoke(question, summary)
 
-    query = f"""
-    Given the attack pattern's name: "{ap_name}", and description: "{ap_description}",
-    provide a more detailed description of the attack pattern, adding information gathered from the
-    documents.
-    Do not include the original description and name in the answer.
-    """
-    docs = docstore.search_mmr(query, k=config['k'], lambda_mult=config['LAMBDA'])
-    context = build_context(docs)
-    summary = summary_model.invoke(context)
-    answer = text_generation_model.invoke(query, context)
+print(summary)
+#print(f"Malware name: {malware_name}")
 
-    query = f"""
-    Given this description: "{ap_description}", provide a list
-    of Indicators of Compromise (IoCs) that can be used to detect this attack pattern.
-    You must insert only the IoCs in the answer. Those IoCs must be extracted from the documents.
-    You must insert only technical indicators, such as IPs, URLs, hashes, etc.
-    """
-    docs = docstore.search_mmr(query, k=config['k'], lambda_mult=config['LAMBDA'])
-    context = build_context(docs)
-    text_generation_model2 = TextGenerationModel(config['MODELS']['TEXT_GENERATION'], max_new_tokens=512)
-    answer = text_generation_model2.invoke(query, context)
-    print(answer)
-    exit()

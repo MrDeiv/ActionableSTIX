@@ -2,7 +2,7 @@ from src.Model import Model
 from transformers import (AutoModelForSeq2SeqLM, AutoTokenizer, SummarizationPipeline, pipeline)
 
 class SummarizationModel(Model):
-    def __init__(self, model:str, max_length:int=130, min_length:int=30, do_sample:bool=False):
+    def __init__(self, model:str, max_length:int=256, min_length:int=30, do_sample:bool=False):
         """
         Summarization model
         @param model: str - model name from Hugging Face
