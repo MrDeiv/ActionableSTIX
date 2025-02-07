@@ -1,124 +1,171 @@
-from src.DocumentParser import DocumentParser
-from src.STIXParser import STIXParser
-from src.extract_iocs import extract_iocs
-from src.group_attack_patterns import group_attack_patterns
-import os
-import warnings
 import json
-import uuid
-import ast
+import os
+
 from tqdm import tqdm
-import dotenv
-import time
+from src.QAModel import QAModel
+from src.SentimentAnalysisModel import SentimentAnalysisModel
+from src.SummarizationModel import SummarizationModel
+from src.TextGenerationModel import TextGenerationModel
+from src.build_context import build_context
+from src.group_attack_patterns import group_attack_patterns
+from src.DocumentFactory import DocumentFactory
+from src.DocumentStore import DocumentStore
+from src.STIXParser import STIXParser
+import re
+from langchain_core.documents import Document
 
-MODEL = "RAG_llama3.1:8b"
-FILES_DIR = "documents"
-STIX_DIR = "sample_stix"
-STIX_FILE = "goofy-guineapig-stix.json"
-
-if __name__ == "__main__":
-    tic = time.time()
-    stix_parser = STIXParser()
-    agent = DocumentParser(model=MODEL)
-    attack_steps = {} # this will contain the attack graph
-
+def get_hashes(indicators: list[dict]) -> list[str]:
     """
-    LLM RAG INITIALIZATION
+    Extracts the hashes from the indicators
     """
-    print("Starting the script\n============\n")
+    hashes:list[str] = []
     
-    # ingest documents
-    agent.ingest(FILES_DIR)
+    # filter the indicators that have pattern_type = stix
+    stix_indicators = list(filter(lambda x: x['pattern_type'] == 'stix', indicators))
+    for ioc in stix_indicators:
+        if "file:hashes" in ioc['pattern']:
+            h = re.search(r'[a-f0-9]{32,}', ioc['pattern']).group()
+            hashes.append(h)
+    return hashes
+
+CONFIG_FILE = "config.json"
+
+if __name__ == '__main__':
+    # load the configuration file
+    config = json.loads(open(CONFIG_FILE).read())
+
+    # this is the output variable (list of dictionaries)
+    out = []
 
     """
-    STIX PROCESSING
+    1. STIX Loading and Pre-processing
     """
-    stix_parser.parse(os.path.join(STIX_DIR, STIX_FILE))
+    # load the STIX file
+    stix_parser = STIXParser()
+    stix_parser.parse(config['STIX_FILE'])
+
+    # extract the attack patterns, malware, and indicators
     attack_patterns = stix_parser.extract_attack_patterns()
     malware_patterns = stix_parser.extract_malware()
     indicators_patterns = stix_parser.extract_indicators()
 
-    # load MITRE tactics
-    tactics = json.loads(open("mitre-tactics.json").read())
-    attack = group_attack_patterns(tactics, attack_patterns)
+    # group the attack patterns
+    mitre_tactics = json.loads(open("mitre-tactics.json").read())
+    grouped_patterns = group_attack_patterns(mitre_tactics, attack_patterns)
 
-    # Save attack dictionary to JSON
-    json.dump(attack, open('attack.json', 'w'))
+    # this are all the hashes mentioned in the malware's iocs, i.e., related files
+    hashes_from_indicators = get_hashes(indicators_patterns) 
+    
+    # ...
 
     """
-    RAG ENRICHMENT & GRAPH GENERATION
+    2. Documents Ingestion
     """
-    progress = tqdm(total=len(tactics), desc="Building the attack graph")
-    for state_id,tactic in enumerate(attack.keys()):
+    # load the documents
+    documents:list[Document] = []
+    documents_dir = "./documents/other" # other documents (not from anyrun or vt)
+
+    progress = tqdm(total=len(os.listdir(documents_dir)), desc="Ingesting Documents")
+    for file in os.listdir(documents_dir):
+        documents.extend(DocumentFactory.from_file(os.path.join(documents_dir, file)))
         progress.update(1)
-        attack_steps[state_id] = {}
-        # the graph starts with an initial state, then ech tactic is a state
-        if state_id == 0:
-            # initial state
-            query = """
-            Provide a summary about the characteristics required by a system to be vulnerable to the malware described.
-            Avoid adding information that is not present in the documents.
-            The summary must contain:
-            - the operating system(s) that are vulnerable to the malware
-            - the software that is vulnerable to the malware
-            - if connectivity is required
-            - how the malware is delivered
-            - the actions required to run the malware. For instance, if the malware is delivered via email, the user must open the attachment.
-            No introduction to the answer is required.
-            """+f"""
-            The malware described is "{malware_patterns}".
-            """
-        else:
-            # next states
-            query = f"""
-            Considering the actual attack tactic "{tactic}", provide how the tactic is implemented by the malware.
-            This state must take into account the information provided in the documents and the attack patterns already described.
-            Do not provide information that is not present in the documents.
-            Do not provide an introduction to the answer.
-            """
-        response = agent.ask(query)
-        attack_steps[state_id]["state"] = response
-
-        # ask for a title
-        query = f"""
-        Given the state's description {attack_steps[state_id]["state"]}, generate a brief but exhaustive title for the state.
-        Do not insert any markdown or formatting.
-        """
-        response = agent.ask(query)
-        attack_steps[state_id]["title"] = response
-
-        # ask for the actions required to move to the next state
-        attack_steps[state_id]["actions"] = []
-        for ap in attack[tactic]:
-            query = f"""
-            Considering the attack pattern with name "{ap['name']}" and description "{ap['description']}",
-            provide a brief summary of what the malware is doing. The format you must strictly follow is:"""+"""
-            {
-                "summary": "<brief summary>",
-                "indicators": "<indicators>"
-            }
-            The summary should be a short but complete text. Regarding the summary, you can use the information in the description field of the attack pattern, but you must
-            provide a summary that is based on the information in the documents. The summary must be precise and fit the content of the documents.
-            In this summary, correlate those information with the indicators, possibly defining their meaning and origin.
-            You must insert only indicators existing in the documents.
-            Each indicator must be separated by a | character. If no indicators are present, write "no indicators found".
-            each indicator must be a complete sentence where there is the ioc and the context in which it is found.
-            """
-            response = agent.ask(query)
-            try:
-                res = ast.literal_eval(response)
-            except:
-                res = {"summary": "No summary found", "indicators": "No indicators found"}
-
-            attack_steps[state_id]["actions"].append({
-                "name": ap['name'],
-                "summary": res['summary'],
-                "indicators": res['indicators']
-            })
-
-        with open("attack_steps.json", "w") as f:
-            json.dump(attack_steps, f)
-
     progress.close()
-    toc = time.time()
-    print(f"Script completed in {toc-tic} seconds")
+
+    """
+    3. Document Store Ingestion
+    """
+    docstore = DocumentStore()
+    docstore.ingest(documents)
+
+    """
+    4. Enrichment Process
+    """
+    # define models
+    qa_model = QAModel(config['MODELS']['QA'])
+    text_generation_model = TextGenerationModel(config['MODELS']['TEXT_GENERATION'])
+    summary_model = SummarizationModel(config['MODELS']['SUMMARIZATION'])
+    sentiment_model = SentimentAnalysisModel(config['MODELS']['TEXT_GENERATION'])
+
+    # connectivity requirements
+    question = "Given the context, must the machine be connected to internet to complete the malware attack?"
+    context = docstore.similarity_search(question, k=3, fetch_k=10)
+    context = build_context(context)
+
+    prompt_template = f"""
+    Given the following context, you must answer the question with considering only
+    the information provided in the context.
+    Do not add any consideration or information that is not present in the context.
+    Do not add ny introduction.
+    If the answer is not directly present in the context, you can infer it.
+    If you infer the answer, please provide the reasoning.
+    The context is as follows:
+    {context}
+    """
+    prompt = prompt_template.format(context=context)
+
+    connection_required_summary = text_generation_model.invoke(question, prompt)
+        
+    # map to True or False
+    query =f"""
+    Given the statement:
+    {connection_required_summary}
+
+    Map it to True or False. Do not add any additional information.
+    """
+    connectivity_required = sentiment_model.invoke(query)
+
+    # operating system requirements
+    question = """
+    Given the context, for which operating system is the malware designed?
+    Is it Windows, Linux, MacOS, or other?
+    """
+    context = docstore.similarity_search(question, k=3, fetch_k=10)
+    context = build_context(context)
+    prompt = prompt_template.format(context=context)
+    os_required_summary = text_generation_model.invoke(question, prompt)
+    operating_system = qa_model.invoke(question, os_required_summary)
+    
+    # vulnerable software requirements
+    question = """
+    Given the context, is the malware designed to exploit a specific software vulnerability?
+    If yes, which software is vulnerable?
+    Otherwise, is it designed to mimic a legitimate software?
+    If yes, which software is mimicked?
+    """
+    context = docstore.similarity_search(question, k=3, fetch_k=10)
+    context = build_context(context)
+    prompt = prompt_template.format(context=context)
+    vulnerable_software_summary = text_generation_model.invoke(question, prompt)
+    question = "Which is the vulnerable and&or mimicked software?"
+    software = qa_model.invoke(question, vulnerable_software_summary)
+
+    # user interaction requirements
+    question = """
+    Given the context, does the malware require user interaction to complete the attack?
+    """
+    context = docstore.similarity_search(question, k=3, fetch_k=10)
+    context = build_context(context)
+    prompt = prompt_template.format(context=context)
+    user_interaction_summary = text_generation_model.invoke(question, prompt)
+    print(user_interaction_summary)
+    exit()
+
+    stage = {}
+    stage['pre-conditions'] = {
+        "is_connectivity_required": {
+            "short": connectivity_required,
+            "summary": connection_required_summary
+        },
+        "os": {
+            "short": operating_system,
+            "summary": os_required_summary
+        },
+        "target_software": {
+            "short": software,
+            "summary": vulnerable_software_summary,
+        }  
+    }
+    
+    for group in grouped_patterns.keys():
+        stage['actions'] = []
+        exit()

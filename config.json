@@ -1,3 +1,13 @@
 {
-    
+    "STIX_FILE": "sample_stix/goofy-guineapig-stix.json",
+    "DOCUMENTS_DIR": "./documents",
+    "OUTPUT_DIR": "./out",
+    "OUTPUT_FILE": "output.json",
+    "MODELS": {
+        "SUMMARIZATION": "facebook/bart-large-cnn",
+        "QA": "deepset/roberta-base-squad2",
+        "TEXT_GENERATION": "microsoft/Phi-3.5-mini-instruct"
+    },
+    "k": 3,
+    "LAMBDA": 0.8
 }

@@ -1,6 +1,5 @@
-vector_store/
-models/
 lib/
 documents/
 .env
 */__pycache__/
+static/
