@@ -19,3 +19,9 @@ nltk
 evaluate
 rouge_score
 bert_score
+pypdf2
+mitreattack-python
+smolagents
+chonkie
+chonkie[semantic]
+

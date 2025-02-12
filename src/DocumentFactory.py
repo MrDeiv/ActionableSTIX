@@ -1,8 +1,7 @@
 from langchain_core.documents import Document
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_experimental.text_splitter import SemanticChunker
 from langchain_text_splitters import NLTKTextSplitter
-from langchain_community.document_loaders import TextLoader
+from langchain_community.document_loaders import TextLoader, UnstructuredHTMLLoader
 from langchain_text_splitters import CharacterTextSplitter, RecursiveJsonSplitter, RecursiveCharacterTextSplitter
 import os
 from src.CustomCSVLoader import CustomCSVLoader
@@ -13,6 +12,7 @@ import re
 import os
 import nltk
 from nltk.corpus import stopwords
+from chonkie import SemanticChunker
 
 nltk.download('stopwords')
 nltk.download('punkt_tab')
@@ -83,6 +83,20 @@ class DocumentFactory:
         yml = CustomYMLLoader(file).load()
         chunks = RecursiveJsonSplitter().create_documents([yml])
         return chunks
+    
+    @staticmethod
+    def from_html(file:str) -> list[Document]:
+        assert os.path.exists(file), f"File {file} not found"
+
+        html = open(file, encoding='utf-8').read()
+        chunker = SemanticChunker(
+            embedding_model="minishlab/potion-base-8M",  
+            threshold=0.5,                               
+            chunk_size=512,                              
+            min_sentences=1                              
+        )
+        chunks = chunker.chunk(html)
+        return [Document(page_content=str(chunk)) for chunk in chunks]
     
     @staticmethod
     def from_file(file:str) -> list[Document]:

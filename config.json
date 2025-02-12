@@ -1,5 +1,6 @@
 {
     "STIX_FILE": "sample_stix/goofy-guineapig-stix.json",
+    "ATT&CK_FILE": "mitre/enterprise-attack.json",
     "DOCUMENTS_DIR": "./documents",
     "OUTPUT_DIR": "./out",
     "OUTPUT_FILE": "output.json",

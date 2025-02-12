@@ -104,7 +104,7 @@ if __name__ == '__main__':
     prompt = prompt_template.format(context=context)
 
     connection_required_summary = text_generation_model.invoke(question, prompt)
-        
+
     # map to True or False
     query =f"""
     Given the statement:
@@ -113,6 +113,7 @@ if __name__ == '__main__':
     Map it to True or False. Do not add any additional information.
     """
     connectivity_required = sentiment_model.invoke(query)
+    print("[+] Connectivity Required:", connectivity_required)
 
     # operating system requirements
     question = """
@@ -124,6 +125,7 @@ if __name__ == '__main__':
     prompt = prompt_template.format(context=context)
     os_required_summary = text_generation_model.invoke(question, prompt)
     operating_system = qa_model.invoke(question, os_required_summary)
+    print("[+] Operating System:", operating_system)    
     
     # vulnerable software requirements
     question = """
@@ -136,19 +138,14 @@ if __name__ == '__main__':
     context = build_context(context)
     prompt = prompt_template.format(context=context)
     vulnerable_software_summary = text_generation_model.invoke(question, prompt)
-    question = "Which is the vulnerable and&or mimicked software?"
-    software = qa_model.invoke(question, vulnerable_software_summary)
-
-    # user interaction requirements
     question = """
-    Given the context, does the malware require user interaction to complete the attack?
+    Given the context, extract only the name of the software that is vulnerable or mimicked by the malware.
+    Do not add any additional information or text.
+    Provide the names as a comma-separated list.
     """
-    context = docstore.similarity_search(question, k=3, fetch_k=10)
-    context = build_context(context)
-    prompt = prompt_template.format(context=context)
-    user_interaction_summary = text_generation_model.invoke(question, prompt)
-    print(user_interaction_summary)
-    exit()
+    software = text_generation_model.invoke(question, vulnerable_software_summary)
+    
+    print("[+] Software:", software)
 
     stage = {}
     stage['pre-conditions'] = {
