@@ -113,7 +113,6 @@ if __name__ == '__main__':
     Map it to True or False. Do not add any additional information.
     """
     connectivity_required = sentiment_model.invoke(query)
-    print("[+] Connectivity Required:", connectivity_required)
 
     # operating system requirements
     question = """
@@ -125,7 +124,6 @@ if __name__ == '__main__':
     prompt = prompt_template.format(context=context)
     os_required_summary = text_generation_model.invoke(question, prompt)
     operating_system = qa_model.invoke(question, os_required_summary)
-    print("[+] Operating System:", operating_system)    
     
     # vulnerable software requirements
     question = """
@@ -144,8 +142,6 @@ if __name__ == '__main__':
     Provide the names as a comma-separated list.
     """
     software = text_generation_model.invoke(question, vulnerable_software_summary)
-    
-    print("[+] Software:", software)
 
     stage = {}
     stage['pre-conditions'] = {

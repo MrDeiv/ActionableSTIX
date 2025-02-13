@@ -17,11 +17,7 @@ from mitreattack.stix20 import MitreAttackData
 from sentence_transformers import SentenceTransformer
 import nltk
 from nltk.corpus import stopwords
-import numpy as np
-from smolagents import CodeAgent
 from src.agents.get_mitre_technique import get_mitre_technique
-from transformers import AutoModelForCausalLM
-from chonkie import SemanticChunker
 
 
 nltk.download('stopwords')
@@ -152,12 +148,6 @@ if __name__ == '__main__':
 
     
     anyrun_ioc = json.load(open(f"./documents/anyrun/{target_hash}_ioc.json", encoding='utf-8'))
-    chunker = SemanticChunker(
-        embedding_model="minishlab/potion-base-8M",  
-        threshold=0.5,                               
-        chunk_size=512,                              
-        min_sentences=1                              
-    )
 
     # load anyrun reports
     for file in os.listdir("./documents/anyrun"):
@@ -189,7 +179,7 @@ if __name__ == '__main__':
 
             # get the three most similar techniques
             techs = set()
-            while len(techs) < 5:
+            while len(techs) < config['SIMILAR_TECHNIQUES']:
                 max_similarity = max(similarities)
 
                 # get the index of the most similar technique
@@ -212,14 +202,6 @@ if __name__ == '__main__':
             """
             technique:str = mitre_model.invoke(question, "")
             mitre_id, mitre_name = technique.split(" - ")
-
-            # get the MITRE technique description
-            #res = agent.run(
-            #    f"""
-            #    You MUST gather information about the MITRE technique {mitre_id}.
-            #    To gather the knowledge, you can use the tool by providing the technique id.
-            #    """
-            #)
 
             mitre_description = get_mitre_technique(mitre_id)
 

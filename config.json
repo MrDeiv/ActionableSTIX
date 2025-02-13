@@ -10,5 +10,6 @@
         "TEXT_GENERATION": "microsoft/Phi-3.5-mini-instruct"
     },
     "k": 3,
-    "LAMBDA": 0.8
+    "LAMBDA": 0.8,
+    "SIMILAR_TECHNIQUES": 7
 }
