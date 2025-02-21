@@ -9,7 +9,7 @@ from src.TextGenerationModel import TextGenerationModel
 from src.build_context import build_context
 from src.group_attack_patterns import group_attack_patterns
 from src.DocumentFactory import DocumentFactory
-from src.DocumentStore import DocumentStore
+from src.stores.DocumentStore import DocumentStore
 from src.STIXParser import STIXParser
 import re
 from langchain_core.documents import Document

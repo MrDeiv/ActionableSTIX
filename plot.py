@@ -1,7 +1,7 @@
 import chromadb
 from sklearn.decomposition import PCA
 import plotly.express as px
-from src.DocumentStore import DocumentStore
+from src.stores.DocumentStore import DocumentStore
 import json
 import os
 

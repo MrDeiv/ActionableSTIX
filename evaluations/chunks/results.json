@@ -1,0 +1,46 @@
+{
+    "LC_RecursiveCharacterTextSplitter": {
+        "n_chunks": 155,
+        "time": 0.012109756469726562
+    },
+    "LC_CharacterTextSplitter": {
+        "n_chunks": 93,
+        "time": 0.006396055221557617
+    },
+    "LC_NLTKTextSplitter": {
+        "n_chunks": 145,
+        "time": 0.02924966812133789
+    },
+    "LC_SemanticChunker": {
+        "n_chunks": 21,
+        "time": 15.825762271881104
+    },
+    "CH_TokenChunker": {
+        "n_chunks": 21,
+        "time": 0.09510517120361328
+    },
+    "CH_WordChunker": {
+        "n_chunks": 21,
+        "time": 9.23720383644104
+    },
+    "CH_SentenceChunker": {
+        "n_chunks": 21,
+        "time": 12.3247389793396
+    },
+    "CH_RecursiveChunker": {
+        "n_chunks": 21,
+        "time": 11.451628923416138
+    },
+    "CH_SemanticChunker": {
+        "n_chunks": 21,
+        "time": 3.181777000427246
+    },
+    "CH_SDPMChunker": {
+        "n_chunks": 21,
+        "time": 3.089489221572876
+    },
+    "CH_LateChunker": {
+        "n_chunks": 21,
+        "time": 0.9961283206939697
+    }
+}

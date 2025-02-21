@@ -7,7 +7,9 @@
     "MODELS": {
         "SUMMARIZATION": "facebook/bart-large-cnn",
         "QA": "deepset/roberta-base-squad2",
-        "TEXT_GENERATION": "microsoft/Phi-3.5-mini-instruct"
+        "TEXT_GENERATION": "microsoft/Phi-3.5-mini-instruct",
+        "TEXT_GENERATION2": "meta-llama/Llama-3.1-8B",
+        "TEXT_GENERATION3": "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
     },
     "k": 3,
     "LAMBDA": 0.8,

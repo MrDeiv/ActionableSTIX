@@ -9,13 +9,17 @@ class TextGenerationModel(Model):
         @param model: str - model name from Hugging Face
         """
         self.model = AutoModelForCausalLM.from_pretrained(model, trust_remote_code=True)
-        self.tokenizer = AutoTokenizer.from_pretrained(model, trust_remote_code=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model, 
+            trust_remote_code=True)
+        #self.tokenizer.chat_template = "<prompt_template>"
         self.agent:TextGenerationPipeline = pipeline(
             "text-generation", 
             model=self.model, 
             tokenizer=self.tokenizer, 
             trust_remote_code=True,
-            do_sample=True)
+            do_sample=True,
+            device='cpu')
         self.max_new_tokens = max_new_tokens
         self.temperature = temperature
 

@@ -52,8 +52,8 @@ class DocumentFactory:
             text += page.extract_text()
 
         tokenizer = NLTKTextSplitter(
-            chunk_size=1000,
-            chunk_overlap=200,
+            chunk_size=400,
+            chunk_overlap=400*0.3,
         )
         texts = tokenizer.split_text(text)
         return [Document(page_content=doc) for doc in texts]

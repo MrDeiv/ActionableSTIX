@@ -3,8 +3,9 @@ import faiss
 from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
+from src.stores import Store
 
-class DocumentStore:
+class DocumentStore():
     """
     DocumentStore class
     ===================
@@ -56,7 +57,10 @@ class DocumentStore:
             documents,
             embedding=self.embeddings)
         
-        self.retriever = self.vector_db.as_retriever()
+        self.retriever = self.vector_db.as_retriever(
+            search_type="similarity",
+            k=self.k,
+        )
         
     def add_documents(self, documents:list[Document]) -> list[str]:
         return self.vector_db.add_documents(documents)
