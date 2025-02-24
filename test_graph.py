@@ -1,8 +1,6 @@
-from langchain.prompts import PromptTemplate
-from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer
-from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
+from langchain_ollama import ChatOllama
 
-MODEL = "microsoft/Phi-3.5-mini-instruct"
+MODEL = "google/flan-t5-base"
 
 if __name__ == "__main__":
 
@@ -13,20 +11,4 @@ if __name__ == "__main__":
     She was, in 1906, the first woman to become a professor at the University of Paris.
     """ 
 
-    prompt = """
-        Extract entities and their relationships from the following text in JSON format.
-
-        Text:
-        {text}
-        """.format(text=text)
-
-    model = AutoModelForCausalLM.from_pretrained(MODEL)
-    tokenizer = AutoTokenizer.from_pretrained(MODEL)
-    pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, device="cpu")
-
-    hfp = HuggingFacePipeline(pipeline=pipe, verbose=True)
-    chat = ChatHuggingFace(llm=hfp)
-    
-    response = chat.invoke(prompt)
-    print(response)
     
