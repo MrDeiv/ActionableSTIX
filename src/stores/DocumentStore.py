@@ -1,4 +1,5 @@
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_ollama import OllamaEmbeddings
 import faiss
 from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_community.vectorstores import FAISS
@@ -22,7 +23,7 @@ class DocumentStore():
         self.k = k
         self.index = faiss.IndexFlatL2(1024)
         self.docstore = InMemoryDocstore()
-        self.embeddings = HuggingFaceEmbeddings()
+        self.embeddings = OllamaEmbeddings(model="llama3.1:8b")
 
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap

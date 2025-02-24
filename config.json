@@ -12,6 +12,7 @@
         "TEXT_GENERATION3": "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
     },
     "k": 3,
+    "BM25_k": 5,
     "LAMBDA": 0.8,
     "SIMILAR_TECHNIQUES": 7
 }

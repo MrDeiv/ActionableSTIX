@@ -12,7 +12,6 @@ import re
 import os
 import nltk
 from nltk.corpus import stopwords
-from chonkie import SemanticChunker
 
 nltk.download('stopwords')
 nltk.download('punkt_tab')
@@ -33,13 +32,25 @@ class DocumentFactory:
         return cleaned_text
 
     @staticmethod
-    def from_text(file:str) -> list[Document]:
+    def from_text(text:str) -> list[Document]:
+        tokenizer = NLTKTextSplitter(
+            chunk_size=400,
+            chunk_overlap=400*0.3,
+        )
+        texts = tokenizer.split_text(text)
+        return [Document(page_content=doc) for doc in texts]
+    
+    @staticmethod
+    def from_text_file(file:str) -> list[Document]:
         assert os.path.exists(file), f"File {file} not found"
 
-        # load text
-        text_documents = TextLoader(file).load()
-        chunks = CharacterTextSplitter().split_documents(text_documents)
-        return chunks
+        text = open(file, encoding='utf-8').read()
+        tokenizer = NLTKTextSplitter(
+            chunk_size=400,
+            chunk_overlap=400*0.3,
+        )
+        texts = tokenizer.split_text(text)
+        return [Document(page_content=doc) for doc in texts]
     
     @staticmethod
     def from_pdf(file:str) -> list[Document]:
@@ -88,7 +99,7 @@ class DocumentFactory:
     def from_html(file:str) -> list[Document]:
         assert os.path.exists(file), f"File {file} not found"
 
-        html = open(file, encoding='utf-8').read()
+        """ html = open(file, encoding='utf-8').read()
         chunker = SemanticChunker(
             embedding_model="minishlab/potion-base-8M",  
             threshold=0.5,                               
@@ -96,7 +107,7 @@ class DocumentFactory:
             min_sentences=1                              
         )
         chunks = chunker.chunk(html)
-        return [Document(page_content=str(chunk)) for chunk in chunks]
+        return [Document(page_content=str(chunk)) for chunk in chunks] """
     
     @staticmethod
     def from_file(file:str) -> list[Document]:
@@ -108,7 +119,7 @@ class DocumentFactory:
             ".csv": DocumentFactory.from_csv,
             ".json": DocumentFactory.from_json,
             ".yml": DocumentFactory.from_yml,
-            ".txt": DocumentFactory.from_text,
+            ".txt": DocumentFactory.from_text_file,
             ".pdf": DocumentFactory.from_pdf
         }
     
