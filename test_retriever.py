@@ -12,9 +12,17 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_neo4j import GraphCypherQAChain, Neo4jGraph
 from langchain_experimental.graph_transformers import LLMGraphTransformer
 from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
+from langchain_groq import ChatGroq
 import os
 import dotenv
 import time
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords, wordnet
+import nltk
+from nltk import word_tokenize, pos_tag
+
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 dotenv.load_dotenv()
 
@@ -48,8 +56,8 @@ if __name__ == "__main__":
         weights=[0.4, 0.6]
     )
 
-    # model
-    llm = ChatOllama(model="llama3.1:8b", temperature=0, verbose=True)
+    # summary model
+    llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
 
     retriever_query = """
     You MUST describe how the malware works.
@@ -67,27 +75,11 @@ if __name__ == "__main__":
     DO NOT use any formatting.
     """
 
-    """ summary_llm = HuggingFacePipeline.from_model_id(
-        model_id="microsoft/Phi-3.5-mini-instruct",
-        task="text-generation",
-        pipeline_kwargs={"max_new_tokens": 4096}
-    )
-
-    summary_chat = ChatHuggingFace(llm=summary_llm) """
-
     prompt = ChatPromptTemplate.from_template(summary_query)
     summary_chain = create_stuff_documents_chain(llm, prompt)
-    out = summary_chain.invoke({
+    summary = summary_chain.invoke({
         "context": ensemble_retriever.invoke(retriever_query)
     })
-
-    # get only the assistant summary
-    limit = "<|assistant|>"
-    # get last index of limit
-    index = out.rfind(limit)
-    # get the assistant summary
-    summary = out[index + len(limit):].strip().replace("\n", " ")
-    print(summary)
 
     # Neo4j
     graph = Neo4jGraph(
@@ -97,19 +89,26 @@ if __name__ == "__main__":
     )
 
     # clean the graph
-    graph.query("MATCH (n) DETACH DELETE n")
+    #graph.query("MATCH (n) DETACH DELETE n")
 
     # set up the transformer
     llm_transformer = LLMGraphTransformer(
-        llm=llm, 
+        llm=ChatGroq(
+            model="llama-3.1-8b-instant",
+            temperature=0
+        ), 
         ignore_tool_usage=True)
     
-    out_docs = DocumentFactory.from_text(summary)
+    summary = " ".join([word for word in summary.split() if word not in stopwords.words('english')])
+    lemmatizer = WordNetLemmatizer()
+    summary = " ".join([lemmatizer.lemmatize(word) for word in word_tokenize(summary)])
+
+    print(summary)
     
     # convert the documents to graph documents
     print("Converting documents to graph documents")
     start = time.time()
-    graph_documents = llm_transformer.convert_to_graph_documents(out_docs)
+    graph_documents = llm_transformer.convert_to_graph_documents([Document(page_content=summary)])
     end = time.time()
 
     # add the graph documents to the graph
@@ -119,16 +118,18 @@ if __name__ == "__main__":
     end = time.time()
     print("Time taken", end - start, "seconds")
 
+
     chain = GraphCypherQAChain.from_llm(
-        ChatOllama(model="llama3.1:8b", temperature=0, verbose=True),
+        llm=ChatOllama(model="llama3.1:8b", temperature=0, verbose=True),
         graph = graph,
-        verbose = True,
+        verbose = False,
         allow_dangerous_requests=True,
         use_function_response=True,
     )
 
     query = """
-    Does the malware has connectivity requirements?
+    You MUST state if the malware is capable of communition with external server.
+    If the answer is not directly stated in the text, you MUST infer the answer.
     """
     response = chain.invoke({"query": query})['result']
 
