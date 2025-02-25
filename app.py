@@ -9,10 +9,13 @@ from sentence_transformers import SentenceTransformer
 from src.STIXParser import STIXParser
 from src.group_attack_patterns import group_attack_patterns
 
+from transformers import pipeline
+
 # LangGraph
 from langgraph.graph import StateGraph, START, END
 from src.agents.State import State
 from src.DocumentFactory import DocumentFactory
+from src.QAModel import QAModel
 
 # LangChain
 from langchain_community.retrievers import BM25Retriever
@@ -27,6 +30,7 @@ from langchain.schema import Document
 from langchain.output_parsers import BooleanOutputParser
 from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
+from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 
 from src.stores.DocumentStore import DocumentStore
 
@@ -61,9 +65,6 @@ async def main():
     config = json.load(open(CONFIG_FILE))
     output = [] # output variable
 
-    # execution graph
-    execution_graph = StateGraph(State)
-
     # load files into documents
     directory = os.path.join(config["DOCUMENTS_DIR"], "other")
     documents = []
@@ -95,61 +96,7 @@ async def main():
         weights=[0.4, 0.6]
     )
 
-    # Neo4j
-    neo4j_graph = Neo4jGraph(
-        url=os.getenv("NEO4J_URI"),
-        username=os.getenv("NEO4J_USER"),
-        password=os.getenv("NEO4J_PASSWORD"),
-    )
-    
-    neo4j_graph.query("MATCH (n) DETACH DELETE n")
-
-    """
-    Documents summarisation
-    """
-
-    summary_query = """
-    You MUST summarize this content: {context}
-
-    You MUST be precise describing the actions performed by the malware.
-    You MUST be precise.
-    You MUST use the malware as subject.
-    Do NOT add any introduction.
-    DO NOT insert any additional information.
-    DO NOT use lists.
-    DO NOT use any formatting.
-    """
-
-    retriever_query = """
-    You MUST describe how the malware works.
-    """
-
-    llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0) # summary model
-
-    # build summary
-    prompt = ChatPromptTemplate.from_template(summary_query)
-    summary_chain = create_stuff_documents_chain(llm, prompt)
-    summarized_overview = summary_chain.invoke({
-        "context": ensemble_retriever.invoke(retriever_query)
-    })
-
-    llm_transformer = LLMGraphTransformer(
-        llm=llm, 
-        ignore_tool_usage=True)
-    
-    # prepare to add the summarised overview to the graph
-    summary = " ".join([word for word in summarized_overview.split() if word not in stopwords.words('english')])
-    lemmatizer = WordNetLemmatizer()
-    summary = " ".join([lemmatizer.lemmatize(word) for word in word_tokenize(summary)])
-
-  
-    # convert the documents to graph documents and add them to the graph
-    print("Converting documents to graph documents")
-    start = time.time() 
-    graph_documents = await llm_transformer.aconvert_to_graph_documents([Document(page_content=summary)])
-    neo4j_graph.add_graph_documents(graph_documents)
-    end = time.time()
-    print("Time taken", end - start, "seconds")
+    llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
 
     """
     STIX Parsing
@@ -171,7 +118,7 @@ async def main():
 
     # this are all the hashes mentioned in the malware's iocs, i.e., related files
     hashes_from_indicators = get_hashes(indicators_patterns) 
-    print(hashes_from_indicators)
+    #print(hashes_from_indicators)
 
     """
     Start computing pre-conditions for initial state
@@ -182,13 +129,6 @@ async def main():
     You MUST state if the malware is capable of communition with external server.
     The context is: {context}
     """
-    neo4j_chain = GraphCypherQAChain.from_llm(
-        llm,
-        graph = neo4j_graph,
-        verbose = False,
-        allow_dangerous_requests=True,
-        use_function_response=True,
-    )
 
     ollama_llm = ChatOllama(model="llama3.1:8b", temperature=0, verbose=True)
 
@@ -284,6 +224,17 @@ async def main():
 
 
     mitre_techniques = json.loads(open("mitre/mitre-techniques.json").read())
+    qa_llm = QAModel(model=config['MODELS']['QA'])
+
+    query_refinement_template = """
+    Given this context: {context}.\nYou must state how the action: {action} is performed.
+    """
+
+    chain_refinement = RunnableSequence(
+        first=ChatPromptTemplate.from_template(query_refinement_template),
+        middle=[ollama_llm],
+        last=StrOutputParser()
+    )
 
     for tactic in grouped_patterns:
         interesting_techniques = mitre_techniques[tactic]['techniques']
@@ -304,7 +255,7 @@ async def main():
                 technique_vector = sentence_transformer.encode(technique_name + "\n" + technique_description)
 
                 similarity = sentence_transformer.similarity(action_vector, technique_vector)
-                if similarity > 0.4:
+                if similarity > 0.6:
                     action_mitre_technique_candidated.append(technique_name)
 
             query = """
@@ -315,18 +266,42 @@ async def main():
             and desscription: \n"""+action_description+""".
             You MUST fit the action with the most appropriate MITRE Technique, DO NOT add any additional information.
             You MUST select one choice, DO NOT infer the answer.
-            """
-            chain_technique = RunnableSequence(
-                first=ChatPromptTemplate.from_template(query),
-                middle=[llm],
-                last=StrOutputParser()
-            )
+            """.format(context=",".join(action_mitre_technique_candidated))
+
+            context = ",".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
+            action_technique_name = qa_llm.invoke(query, context)
+
+            try:
+                action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
+                action_technique_description = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['description']
+            except IndexError:
+                action_technique_id = "Not provided"
+                action_technique_description = "Not provided"
             
-            technique = chain_technique.invoke({"context": action_mitre_technique_candidated})
+            technique = {
+                "id": action_technique_id,
+                "name": action_technique_name.capitalize(),
+                "description": action_technique_description
+            }
+            
+            query_refinement = "Given this MITRE technique: {context}.\nYou must state how the action: {action}, fit the technique".format(context=action_technique_name, action=action_name)
+            docs = ensemble_retriever.invoke(query_refinement)
+            refined_description = chain_refinement.invoke({
+                "context": docs,
+                "action": action_name + " " + action_description
+            })
+
+            actions = {
+                "name": action_name,
+                "description": refined_description,
+                "MITRE technique": technique,
+                "indicators": []
+            }
+
+            state['actions'].append(actions)
 
             print("Action:", action_name)
-            print("Description:", action_description)
-            print("MITRE Technique:", technique)
+            print("ref. description:", refined_description)
             print("#"*10)
 
         output.append(state)

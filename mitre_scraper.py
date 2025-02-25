@@ -44,6 +44,7 @@ if __name__ == "__main__":
 
         techniques = []
         prev_id = ''
+        prev_name = ''
         for row in rows:
             technique = {}
 
@@ -52,12 +53,13 @@ if __name__ == "__main__":
 
             if technique["id"] == '':
                 technique["id"] = prev_id + cells[1].text.strip()
-                technique["name"] = cells[2].text.strip().lower().replace(" ", "-")
+                technique["name"] = prev_name +": "+ cells[2].text.strip().lower()
                 technique["description"] = cells[3].text.strip()
 
             else:
                 prev_id = technique["id"]
                 technique["name"] = cells[1].text.strip().lower()
+                prev_name = technique["name"]
                 technique["description"] = cells[2].text.strip()
 
             techniques.append(technique)
