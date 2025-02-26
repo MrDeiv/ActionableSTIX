@@ -209,7 +209,7 @@ async def main():
     ###################################################
 
     query = """
-    You MUST state which vulnerability the malware exploits.
+    You MUST state which software vulnerability the malware exploits.
     If the answer is not directly stated in the text, you MUST infer the answer.
     If the are no vulnerabilities exploited, you MUST determine if the malware disguises itself as a legitimate software.
     
@@ -222,7 +222,7 @@ async def main():
         last=StrOutputParser()
     )
 
-    retriever_query = "What vulnerability does the malware exploit? Does the malware disguise itself as a legitimate software?"
+    retriever_query = "Which software vulnerability does the malware exploit? Does the malware disguise itself as a legitimate software?"
     docs = ensemble_retriever.invoke(retriever_query)
     logger.info(f"Vulnerability computed using {len(docs)} documents. The documents are:\n{docs}")
     vuln_summary = await chain_vuln.ainvoke({"context": docs})
@@ -245,6 +245,7 @@ async def main():
 
     ###################################################
 
+    stop_words = set(stopwords.words('english'))
 
     mitre_techniques = json.loads(open("mitre/mitre-techniques.json").read())
     qa_llm = QAModel(model=config['MODELS']['QA'])
@@ -289,7 +290,11 @@ async def main():
             action_description = action['description']
 
             sentence_transformer = SentenceTransformer('all-MiniLM-L6-v2', token=os.getenv("HF_API_KEY"))
-            action_vector = sentence_transformer.encode(str(action_name + "\n" + action_description).lower())
+            
+            # remove stopwords
+            action_nlp = " ".join([word for word in word_tokenize(action_name + "\n" + action_description) if word.lower() not in stop_words])
+
+            action_vector = sentence_transformer.encode(action_nlp)
             
             logging.info(f"++ Embedding computed for: {action_name}. The vector has shape: {action_vector.shape}")
 
@@ -300,8 +305,9 @@ async def main():
                 for technique in interesting_techniques:
                     technique_name = technique['name']
                     technique_description = technique['description']
-
-                    technique_vector = sentence_transformer.encode(technique_name + "\n" + technique_description)
+                    
+                    technique_nlp = " ".join([word for word in word_tokenize(technique_name + "\n" + technique_description) if word.lower() not in stop_words])
+                    technique_vector = sentence_transformer.encode(technique_nlp)
 
                     similarity = sentence_transformer.similarity(action_vector, technique_vector)
                     if similarity > (config['SIMILARITY_TECHNIQUES'] - attempts * 0.1):
@@ -371,7 +377,7 @@ async def main():
                 "id": str(uuid.uuid4()),
                 "name": action_name,
                 "description": refined_description,
-                "MITRE technique": technique,
+                "mitre_technique": technique,
                 "indicators": []
             }
 
