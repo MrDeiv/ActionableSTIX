@@ -4,6 +4,7 @@
     "DOCUMENTS_DIR": "./documents",
     "OUTPUT_DIR": "./out",
     "OUTPUT_FILE": "output.json",
+    "LOGS_DIR": "./logs",
     "MODELS": {
         "SUMMARIZATION": "facebook/bart-large-cnn",
         "QA": "deepset/roberta-base-squad2",
