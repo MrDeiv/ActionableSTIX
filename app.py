@@ -10,11 +10,6 @@ from src.STIXParser import STIXParser
 from src.group_attack_patterns import group_attack_patterns
 import uuid
 
-from transformers import pipeline
-
-# LangGraph
-from langgraph.graph import StateGraph, START, END
-from src.agents.State import State
 from src.DocumentFactory import DocumentFactory
 from src.QAModel import QAModel
 from src.ListParser import ListParser
@@ -26,13 +21,9 @@ from langchain_core.runnables import RunnableLambda, RunnableParallel, RunnableS
 from langchain.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_ollama import ChatOllama
-from langchain_neo4j import GraphCypherQAChain, Neo4jGraph
-from langchain_experimental.graph_transformers import LLMGraphTransformer
-from langchain.schema import Document
-from langchain.output_parsers import BooleanOutputParser, ListOutputParser
+from langchain.output_parsers import BooleanOutputParser
 from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
-from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 
 from src.stores.DocumentStore import DocumentStore
 import logging.config
@@ -90,6 +81,7 @@ async def main():
     progress.close()
 
     print("Documents loaded:", len(documents))
+    logging.info(f"Documents loaded: {len(documents)}")
 
     """
     Docstore Setup
@@ -210,9 +202,10 @@ async def main():
 
     query = """
     You MUST state which software vulnerability the malware exploits.
-    If the answer is not directly stated in the text, you MUST infer the answer.
     If the are no vulnerabilities exploited, you MUST determine if the malware disguises itself as a legitimate software.
+    If the answer is not directly stated in the text, you MUST infer the answer.
     
+    The context is:
     {context}
     """
 
@@ -252,7 +245,11 @@ async def main():
 
     # refinement pipeline
     query_refinement_template = """
-    Given this context: {context}.\nYou must state how the action: {action} is performed.
+    Given this context:
+    {context}.
+    
+    You must state how the action is performed. The action is: 
+    {action} 
     """
     refinement_llm = ChatOllama(model="llama3.1:8b", num_predict=256, temperature=0)
     chain_refinement = RunnableSequence(
@@ -276,24 +273,23 @@ async def main():
     )
 
     for tactic in grouped_patterns:
-        # each iteration is an attack step
+        # each iteration is a milestone
 
         print("[+] Processing tactic:", tactic)
         logging.info(f"Processing step relative to tactic: {tactic}")
         interesting_techniques = mitre_techniques[tactic]['techniques']
 
-        state['actions'] = []
+        state['attack_steps'] = []
         for action in grouped_patterns[tactic]:
-            # each iteration is an action required to perform the attack step and move to the next one
+            # each iteration is an attack step
             action_name = action['name']
             logging.info(f"+ Processing action: {action_name}")
             action_description = action['description']
 
-            sentence_transformer = SentenceTransformer('all-MiniLM-L6-v2', token=os.getenv("HF_API_KEY"))
+            sentence_transformer = SentenceTransformer(config['MODELS']['SENTENCE_TRANSFORMER'], token=os.getenv("HF_API_KEY"))
             
             # remove stopwords
             action_nlp = " ".join([word for word in word_tokenize(action_name + "\n" + action_description) if word.lower() not in stop_words])
-
             action_vector = sentence_transformer.encode(action_nlp)
             
             logging.info(f"++ Embedding computed for: {action_name}. The vector has shape: {action_vector.shape}")
@@ -310,6 +306,7 @@ async def main():
                     technique_vector = sentence_transformer.encode(technique_nlp)
 
                     similarity = sentence_transformer.similarity(action_vector, technique_vector)
+                    logging.info(f"++ Similarity between [{action_name}] and [{technique_name}]: {similarity}")
                     if similarity > (config['SIMILARITY_TECHNIQUES'] - attempts * 0.1):
                         action_mitre_technique_candidated.append(technique_name)
                 attempts += 1
@@ -323,15 +320,17 @@ async def main():
             {context}
 
             You MUST select the most appropriate MITRE Technique for the action called: \n"""+action_name+"""
-            and desscription: \n"""+action_description+""".
+            and description: \n"""+action_description+""".
             You MUST fit the action with the most appropriate MITRE Technique, DO NOT add any additional information.
             You MUST select one choice, DO NOT infer the answer.
+            Each choice is in a different line, DO NOT truncate the choices.
             """.format(context=",".join(action_mitre_technique_candidated))
 
-            context = ",".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
+            context = "\n".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
             
             logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
             action_technique_name = qa_llm.invoke(query, context)
+            logging.info(f"++ Selected technique: {action_technique_name}")
 
             try:
                 action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
@@ -372,33 +371,59 @@ async def main():
                 "action": action_name + " " + action_description
             })
 
+            action['pre-conditions'] = []
+            query_preconditions = """
+            Given the following context: {context}.
+
+            You MUST determine the pre-conditions for the action: {action}.
+            You MUST provide a list of pre-conditions, DO NOT provide any additional information.
+            """.format(context=refined_description, action=action_name)
+
+            pre_conditions = chain_precond.invoke({"context": query_preconditions})
+            logging.info(f"++ Pre-conditions computed for action: {action_name}")
+
+            action['post-conditions'] = []
+            query_postconditions = """
+            Given the following context: 
+            {context}
+            
+            Suppose all the actions are performed in the same environment and succeed.
+            You MUST determine which traces are left behind by the actions. These traces must be permanent and visible.
+            You MUST provide a list of traces, DO NOT provide any additional information.
+            """.format(context=refined_description)
+
+            post_conditions = chain_precond.invoke({"context": query_postconditions})
+            logging.info(f"++ Post-conditions computed for action: {action_name}")
+
             # action
             actions = {
                 "id": str(uuid.uuid4()),
                 "name": action_name,
                 "description": refined_description,
                 "mitre_technique": technique,
+                "pre-conditions": pre_conditions,
+                "post-conditions": post_conditions,
                 "indicators": []
             }
 
             # add actions to the attack step
-            state['actions'].append(actions)
+            state['attack_steps'].append(actions)
 
         output.append(state)
 
         # next attack step
-        previous_actions = ("#"*10).join([f"{action['name']} - {action['description']}" for action in state['actions']])
+        """ previous_actions = ("#"*10).join([f"{action['name']} - {action['description']}" for action in state['actions']])
         
         logging.info(f"+ Computing pre-conditions for the next attack step using the following actions:\n{previous_actions}")
         
         pre_conditions = chain_precond.invoke({"context": previous_actions})
-        print("[+] Pre-conditions computed")
+        print("[+] Post-conditions computed") """
 
         state = {}
         state['id'] = str(uuid.uuid4())
-        state['pre-conditions'] = []
+        """ state['pre-conditions'] = []
         state['pre-conditions'].extend(pre_conditions)
-        state['actions'] = []
+        state['actions'] = [] """
 
     # save output
     logging.info("Saving output")

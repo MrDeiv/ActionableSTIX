@@ -2,7 +2,7 @@ import json
 from pyvis.network import Network
 
 if __name__ == '__main__':
-    result = json.load(open('out/output.json'))
+    result = json.load(open('demo/output.json'))
 
     # Create PyVis network
     net = Network(directed=True, notebook=True, height='100vh', width='100vw')
@@ -35,3 +35,4 @@ if __name__ == '__main__':
         
     # Save and display the network
     net.show('network.html', notebook=False)
+    net.save_graph
