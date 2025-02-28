@@ -8,4 +8,12 @@ class ListParser(ListOutputParser):
         if first:
             text = text[first.start():]
         
-        return text.split('\n')
+        lines = text.split('\n')
+        
+        list_elements = []
+        for line in lines:
+            if reg.search(line):
+                line_without_number = reg.sub('', line)
+                list_elements.append(line_without_number.strip())
+
+        return list_elements

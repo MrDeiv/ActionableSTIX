@@ -14,5 +14,6 @@
     "k": 3,
     "BM25_k": 5,
     "LAMBDA": 0.8,
-    "SIMILARITY_TECHNIQUES": 0.6
+    "SIMILARITY_TECHNIQUES": 0.6,
+    "N_TECHNIQUES": 5
 }

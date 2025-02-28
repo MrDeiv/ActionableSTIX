@@ -1,10 +1,12 @@
-import json, os, dotenv, time, asyncio, re, logging
+import json, os, dotenv, time, asyncio, re, logging, warnings
 from tqdm import tqdm
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk import word_tokenize
 from sentence_transformers import SentenceTransformer
+from bs4 import BeautifulSoup
+from markdown import markdown
 
 from src.STIXParser import STIXParser
 from src.group_attack_patterns import group_attack_patterns
@@ -27,6 +29,11 @@ from langchain_groq import ChatGroq
 
 from src.stores.DocumentStore import DocumentStore
 import logging.config
+
+def remove_markdown(text: str) -> str:
+    mk = markdown(text)
+    warnings.filterwarnings("ignore", category=UserWarning, module='bs4')
+    return ''.join(BeautifulSoup(mk, features="html.parser").findAll(text=True))
 
 logging.config.dictConfig({
     'version': 1,
@@ -151,7 +158,8 @@ async def main():
 
     logger.info(f"Connectivity computed using {len(docs)} documents. The documents are:\n{docs}")
 
-    connectivity_summary = await chain_summary.ainvoke({"context": docs})    
+    connectivity_summary = await chain_summary.ainvoke({"context": docs})
+    connectivity_summary = remove_markdown(connectivity_summary)    
 
     query = """
     Given the following context: {context}
@@ -187,6 +195,7 @@ async def main():
     docs = ensemble_retriever.invoke(retriever_query)
     logger.info(f"OS computed using {len(docs)} documents. The documents are:\n{docs}")
     os_summary = await chain_os.ainvoke({"context": docs})
+    os_summary = remove_markdown(os_summary)
 
     query = "Given the following context: {context} You MUST EXTRACT ONLY the operative system necessary to run the malware."
     chain = RunnableSequence(
@@ -219,6 +228,7 @@ async def main():
     docs = ensemble_retriever.invoke(retriever_query)
     logger.info(f"Vulnerability computed using {len(docs)} documents. The documents are:\n{docs}")
     vuln_summary = await chain_vuln.ainvoke({"context": docs})
+    vuln_summary = remove_markdown(vuln_summary)
     print("[+] Vulnerability computed")
 
     state['id'] = str(uuid.uuid4())
@@ -288,60 +298,66 @@ async def main():
 
             sentence_transformer = SentenceTransformer(config['MODELS']['SENTENCE_TRANSFORMER'], token=os.getenv("HF_API_KEY"))
             
-            # remove stopwords
-            action_nlp = " ".join([word for word in word_tokenize(action_name + "\n" + action_description) if word.lower() not in stop_words])
+            # prepare embedding
+            summary_text = f"{action_name}: {action_description}"
+            action_nlp = " ".join([word for word in word_tokenize(summary_text) if word.lower() not in stop_words])
             action_vector = sentence_transformer.encode(action_nlp)
             
             logging.info(f"++ Embedding computed for: {action_name}. The vector has shape: {action_vector.shape}")
 
             # find the most similar techniques
-            action_mitre_technique_candidated = []
-            attempts = 0
-            while len(action_mitre_technique_candidated) == 0 and attempts < 3:
-                for technique in interesting_techniques:
-                    technique_name = technique['name']
-                    technique_description = technique['description']
-                    
-                    technique_nlp = " ".join([word for word in word_tokenize(technique_name + "\n" + technique_description) if word.lower() not in stop_words])
-                    technique_vector = sentence_transformer.encode(technique_nlp)
+            scores = {}
+            # for each technique, compute the similarity with the action
+            # then select the N highest similarity scores
+            for technique in interesting_techniques:
+                technique_name = technique['name']
+                technique_description = technique['description']
+                
+                summary_tech = f"{technique_name}: {technique_description}"
+                technique_nlp = " ".join([word for word in word_tokenize(summary_tech) if word.lower() not in stop_words])
+                technique_vector = sentence_transformer.encode(technique_nlp)
 
-                    similarity = sentence_transformer.similarity(action_vector, technique_vector)
-                    logging.info(f"++ Similarity between [{action_name}] and [{technique_name}]: {similarity}")
-                    if similarity > (config['SIMILARITY_TECHNIQUES'] - attempts * 0.1):
-                        action_mitre_technique_candidated.append(technique_name)
-                attempts += 1
+                similarity = sentence_transformer.similarity(action_vector, technique_vector)
+                scores[technique_name] = similarity
+                logging.info(f"++ Similarity between [{action_name}] and [{technique_name}]: {similarity}")
+            
+            # sort the scores
+            scores = sorted(scores.items(), key=lambda item: item[1], reverse=True)[:config['N_TECHNIQUES']]
+            logger.info(f"++ Scores: {scores}")
+            # get the candidate techniques
+            action_mitre_technique_candidated = [score[0] for score in scores]
 
             assert len(action_mitre_technique_candidated) > 0, "No similar techniques found"
-            logging.info(f"++ Similar techniques found (in {attempts} attemps):\n{action_mitre_technique_candidated}")
+            #logging.info(f"++ Similar techniques found (in {attempts} attemps):\n{action_mitre_technique_candidated}")
+            logging.info(f"++ Similar techniques found:\n{action_mitre_technique_candidated}")
 
-            # given the set of most similar techniques, select the most appropriate one
+            # given the set of most similar techniques, select the most appropriate one using the QA model
+            context = "\n".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
             query = """
-            Given the following choices: 
-            {context}
-
-            You MUST select the most appropriate MITRE Technique for the action called: \n"""+action_name+"""
-            and description: \n"""+action_description+""".
+            You MUST select the most appropriate MITRE Technique for the action called: \n"""+action_name+"""\n
+            and description: \n"""+action_description+"""\n
             You MUST fit the action with the most appropriate MITRE Technique, DO NOT add any additional information.
             You MUST select one choice, DO NOT infer the answer.
-            Each choice is in a different line, DO NOT truncate the choices.
-            """.format(context=",".join(action_mitre_technique_candidated))
-
-            context = "\n".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
+            Each choice is separated by a new line, DO NOT truncate the choices.
+            """.format(context=context)
             
             logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
-            action_technique_name = qa_llm.invoke(query, context)
-            logging.info(f"++ Selected technique: {action_technique_name}")
+            action_technique_name = qa_llm.invoke(query, context).strip()
+            logging.info(f"++ QA selected technique: {action_technique_name}")
 
             try:
                 action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
                 action_technique_description = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['description']
             except IndexError:
+                # fallback
                 logging.warning(f"++ Technique not found: {action_technique_name} in {action_mitre_technique_candidated}. Trying to refine the answer.")
-                if ',' in action_technique_name:
-                    action_technique_name = action_technique_name.split(',')[0]
+                if '\n' in action_technique_name:
+                    action_technique_name = action_technique_name.split('\n')[0]
                     action_technique_id = list(filter(lambda x: x['name'] in action_technique_name, interesting_techniques))[0]['id']
                     action_technique_description = list(filter(lambda x: x['name'] in action_technique_name, interesting_techniques))[0]['description']
+                    logging.info(f"++ Technique found after refining: {action_technique_name}")
                 else:
+                    # worst case
                     action_technique_id = "Unknown"
                     action_technique_description = "Unknown"
                     print("[!] Technique not found:", action_technique_name, "in:", action_mitre_technique_candidated)
@@ -371,6 +387,7 @@ async def main():
                 "action": action_name + " " + action_description
             })
 
+            # pre-conditions
             action['pre-conditions'] = []
             query_preconditions = """
             Given the following context: {context}.
@@ -382,11 +399,12 @@ async def main():
             pre_conditions = chain_precond.invoke({"context": query_preconditions})
             logging.info(f"++ Pre-conditions computed for action: {action_name}")
 
+            # post-conditions
             action['post-conditions'] = []
             query_postconditions = """
             Given the following context: 
             {context}
-            
+
             Suppose all the actions are performed in the same environment and succeed.
             You MUST determine which traces are left behind by the actions. These traces must be permanent and visible.
             You MUST provide a list of traces, DO NOT provide any additional information.
@@ -396,6 +414,7 @@ async def main():
             logging.info(f"++ Post-conditions computed for action: {action_name}")
 
             # action
+            refined_description = remove_markdown(refined_description)
             actions = {
                 "id": str(uuid.uuid4()),
                 "name": action_name,
