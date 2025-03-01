@@ -11,9 +11,12 @@ class ListParser(ListOutputParser):
         lines = text.split('\n')
         
         list_elements = []
+        reg_number = re.compile(r'^\d+\.\s')
         for line in lines:
-            if reg.search(line):
-                line_without_number = reg.sub('', line)
+            if reg_number.search(line):
+                if line.startswith('.'):
+                    line = line[1:]
+                line_without_number = reg_number.sub('', line)
                 list_elements.append(line_without_number.strip())
 
         return list_elements

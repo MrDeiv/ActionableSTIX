@@ -33,7 +33,7 @@ import logging.config
 def remove_markdown(text: str) -> str:
     mk = markdown(text)
     warnings.filterwarnings("ignore", category=UserWarning, module='bs4')
-    return ''.join(BeautifulSoup(mk, features="html.parser").findAll(text=True))
+    return ''.join(BeautifulSoup(mk, features="html.parser").find_all(text=True))
 
 logging.config.dictConfig({
     'version': 1,
@@ -261,7 +261,8 @@ async def main():
     You must state how the action is performed. The action is: 
     {action} 
     """
-    refinement_llm = ChatOllama(model="llama3.1:8b", num_predict=256, temperature=0)
+    #refinement_llm = ChatOllama(model="llama3.1:8b", num_predict=256, temperature=0)
+    refinement_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
     chain_refinement = RunnableSequence(
         first=ChatPromptTemplate.from_template(query_refinement_template),
         middle=[refinement_llm],
@@ -290,6 +291,8 @@ async def main():
         interesting_techniques = mitre_techniques[tactic]['techniques']
 
         state['attack_steps'] = []
+        state['pre-conditions'] = []
+        state['post-conditions'] = []
         for action in grouped_patterns[tactic]:
             # each iteration is an attack step
             action_name = action['name']
@@ -372,7 +375,8 @@ async def main():
             
             # refine the action description using the MITRE technique as reference
             query_refinement = """
-            Given this MITRE technique: {context}.\nYou MUST state how the action: {action}, fit the given technique.
+            Given this MITRE technique: {context}.
+            You MUST state how the action: {action}, fit the given technique.
             DO NOT insert any introduction or additional information.
             DO NOT cite the documents.
             DO NOT add any markdown.
@@ -388,27 +392,47 @@ async def main():
             })
 
             # pre-conditions
-            action['pre-conditions'] = []
+            query_preconditions_retriever = """
+            Given the following context:\n
+            {context}.
+            You MUST list what are the requirements to perform the action: {action}.
+            DO NOT provide any additional information.
+            The requirements must include the environment, tools, and resources needed.
+            """.format(context=refined_description, action=action_name)
+
+            docs = ensemble_retriever.invoke(query_preconditions_retriever)
             query_preconditions = """
-            Given the following context: {context}.
+            Given the following context: 
+            {context}
 
             You MUST determine the pre-conditions for the action: {action}.
             You MUST provide a list of pre-conditions, DO NOT provide any additional information.
-            """.format(context=refined_description, action=action_name)
+            Every item in the list MUST be a passive sentence.
+            You can infer information from the context: for instance, if the action requires a specific tool, you can infer that the tool is available.
+            """.format(context=docs, action=action_name)
 
             pre_conditions = chain_precond.invoke({"context": query_preconditions})
             logging.info(f"++ Pre-conditions computed for action: {action_name}")
 
             # post-conditions
+            query_postconditions_retriever = """
+            Given the following context:\n
+            {context}.
+            You MUST list what are the consequences of the action: {action}.
+            DO NOT provide any additional information.
+            The consequences MUST be visible and technical.
+            """.format(context=refined_description, action=action_name)
+
+            docs = ensemble_retriever.invoke(query_postconditions_retriever)
             action['post-conditions'] = []
             query_postconditions = """
             Given the following context: 
             {context}
 
             Suppose all the actions are performed in the same environment and succeed.
-            You MUST determine which traces are left behind by the actions. These traces must be permanent and visible.
-            You MUST provide a list of traces, DO NOT provide any additional information.
-            """.format(context=refined_description)
+            You MUST determine which the consequences of the action. These consequences must be permanent and visible.
+            You MUST provide a list of consequences, DO NOT provide any additional information.
+            """.format(context=docs)
 
             post_conditions = chain_precond.invoke({"context": query_postconditions})
             logging.info(f"++ Post-conditions computed for action: {action_name}")
@@ -424,6 +448,9 @@ async def main():
                 "post-conditions": post_conditions,
                 "indicators": []
             }
+
+            state['pre-conditions'].extend(pre_conditions)
+            state['post-conditions'].extend(post_conditions)
 
             # add actions to the attack step
             state['attack_steps'].append(actions)
