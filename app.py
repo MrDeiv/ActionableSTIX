@@ -72,7 +72,7 @@ async def main():
     output = [] # output variable
 
     logger = logging.getLogger(__name__)
-    log_file = os.path.join(config["LOGS_DIR"], "app.log")
+    log_file = os.path.join(config["OUTPUT_DIR"], "app.log")
     logging.basicConfig(level=logging.INFO, filename=log_file, filemode="w", format="[%(asctime)s %(levelname)s] %(message)s")
     logger.info("Application started")
 
@@ -121,6 +121,9 @@ async def main():
     attack_patterns = stix_parser.extract_attack_patterns()
     malware_patterns = stix_parser.extract_malware()
     indicators_patterns = stix_parser.extract_indicators()
+
+    iocs = [x['name'] + ": " + " ".join(x['pattern']) for x in indicators_patterns if "rule" not in x['pattern']]
+    logging.info(f"Extracted {len(iocs)} IOCs from the STIX file")
 
     attack_patterns_used = stix_parser.get_attack_pattern_used()
 
@@ -271,15 +274,55 @@ async def main():
 
     # pre-conditions pipeline
     query_summary = """
-    Given the following set of actions: {context}.
-    Suppose all the actions are performed in the same environment and succeed.
-    You MUST determine which traces are left behind by the actions. These traces must be permanent and visible.
-    You MUST provide a list of traces, DO NOT provide any additional information.
+    Given the following context: 
+    
+    {context}
+
+    Suppose all the actions are performed in the same environment.
+    You MUST determine which are the requirements to perform the action: {action}.
+    You MUST provide a list of requirements, DO NOT provide any additional information.
+    The requirements must include the environment, tools, and resources needed.
     """
     summary_llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
     chain_precond = RunnableSequence(
         first=ChatPromptTemplate.from_template(query_summary),
         middle=[summary_llm],
+        last=ListParser()
+    )
+
+    # post-conditions pipeline
+    query_summary = """
+    Given the following set of actions: 
+    
+    {context}
+
+    Suppose all the actions are performed in the same environment and succeed.
+    You MUST determine which traces are left behind by the actions. These traces must be permanent and visible.
+    You MUST provide a list of traces, DO NOT provide any additional information.
+    The items in the list MUST detail technical traces, such as logs, files, or network connections.
+    """
+    summary_llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+    chain_postcond = RunnableSequence(
+        first=ChatPromptTemplate.from_template(query_summary),
+        middle=[summary_llm],
+        last=ListParser()
+    )
+
+    # indicators pipeline
+    query = """
+    Given this list of indicators of compromise:
+
+    {context}
+
+    You MUST select the indicators that are related to the action: {action}.
+    You MUST provide a numbered list of indicators, DO NOT provide any additional information.
+    If there are no indicators related to the action, you MUST return an empty list.
+    You MUST formulate the indicators in a passive sentence.
+    """
+    indicators_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
+    chain_indicators = RunnableSequence(
+        first=ChatPromptTemplate.from_template(query),
+        middle=[indicators_llm],
         last=ListParser()
     )
 
@@ -374,15 +417,19 @@ async def main():
             }
             
             # refine the action description using the MITRE technique as reference
+            context = action_technique_name + ": " + action_technique_description
             query_refinement = """
-            Given this MITRE technique: {context}.
+            Given this MITRE technique: 
+
+            {context}.
+
             You MUST state how the action: {action}, fit the given technique.
             DO NOT insert any introduction or additional information.
             DO NOT cite the documents.
             DO NOT add any markdown.
             DO NOT insert any code.
             You MUST provide only a detailed description.
-            """.format(context=action_technique_name, action=action_name)
+            """.format(context=context, action=action_name)
 
             docs = ensemble_retriever.invoke(query_refinement)
             logging.info(f"++ Refining the action: {action_name} using {len(docs)} documents:\n{docs}")
@@ -411,7 +458,7 @@ async def main():
             You can infer information from the context: for instance, if the action requires a specific tool, you can infer that the tool is available.
             """.format(context=docs, action=action_name)
 
-            pre_conditions = chain_precond.invoke({"context": query_preconditions})
+            pre_conditions = chain_precond.invoke({"context": query_preconditions, "action": action_name})
             logging.info(f"++ Pre-conditions computed for action: {action_name}")
 
             # post-conditions
@@ -434,8 +481,12 @@ async def main():
             You MUST provide a list of consequences, DO NOT provide any additional information.
             """.format(context=docs)
 
-            post_conditions = chain_precond.invoke({"context": query_postconditions})
+            post_conditions = chain_postcond.invoke({"context": query_postconditions})
             logging.info(f"++ Post-conditions computed for action: {action_name}")
+
+            # indicators
+            indicators = chain_indicators.invoke({"context": "\n".join(iocs), "action": action_name})
+            logging.info(f"++ Indicators computed for action: {action_name}. The indicators are:\n{indicators}")
 
             # action
             refined_description = remove_markdown(refined_description)
@@ -446,7 +497,7 @@ async def main():
                 "mitre_technique": technique,
                 "pre-conditions": pre_conditions,
                 "post-conditions": post_conditions,
-                "indicators": []
+                "indicators": indicators
             }
 
             state['pre-conditions'].extend(pre_conditions)
@@ -457,19 +508,8 @@ async def main():
 
         output.append(state)
 
-        # next attack step
-        """ previous_actions = ("#"*10).join([f"{action['name']} - {action['description']}" for action in state['actions']])
-        
-        logging.info(f"+ Computing pre-conditions for the next attack step using the following actions:\n{previous_actions}")
-        
-        pre_conditions = chain_precond.invoke({"context": previous_actions})
-        print("[+] Post-conditions computed") """
-
         state = {}
         state['id'] = str(uuid.uuid4())
-        """ state['pre-conditions'] = []
-        state['pre-conditions'].extend(pre_conditions)
-        state['actions'] = [] """
 
     # save output
     logging.info("Saving output")
