@@ -86,7 +86,7 @@ async def main():
     log_file = os.path.join(config["OUTPUT_DIR"], "app.log")
     logging.basicConfig(level=logging.INFO, filename=log_file, filemode="w", format="[%(asctime)s %(levelname)s] %(message)s")
     logger.info("Application started with interaction level: %s (%f)", selected_interaction_level, interaction_score)
-    console.print(f"Application started with interaction level: {selected_interaction_level} ({interaction_score})", style="bold green")
+    console.print(f"Application started with interaction level: {selected_interaction_level} (thr.: {interaction_score})", style="bold green")
 
     # load files into documents
     directory = os.path.join(config["DOCUMENTS_DIR"], "other")
@@ -280,10 +280,23 @@ async def main():
             
             logging.info(f"++ Similar techniques found:\n{action_mitre_technique_candidated}")
 
-            # evaluate human-in-the-loop requirement
+            # given the set of most similar techniques, select the most appropriate one using the QA model
+            context = "\n".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
+            query = """
+            You MUST select the most appropriate MITRE Technique for the action called: \n"""+action_name+"""\n
+            and description: \n"""+action_description+"""\n
+            You MUST fit the action with the most appropriate MITRE Technique, DO NOT add any additional information.
+            You MUST select one choice, DO NOT infer the answer.
+            Each choice is separated by a new line, DO NOT truncate the choices.
+            """.format(context=context)
+                
+            logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
+            action_technique_name = qa_llm.invoke(query, context).strip()
+            logging.info(f"++ QA suggested technique: {action_technique_name}")
 
+            # evaluate human-in-the-loop requirement
             human_in_the_loop = False
-            """for technique_1 in action_mitre_technique_candidated:
+            for technique_1 in action_mitre_technique_candidated:
                 for technique_2 in action_mitre_technique_candidated:
                     if technique_1 != technique_2:
                         # get the score for first and second technique
@@ -295,43 +308,19 @@ async def main():
                             logging.info(f"++ Human-in-the-loop required for action: {action_name} due to score difference: {score_diff}")
                             break
                 if human_in_the_loop:
-                    break """
-            
-            first_choice_score = scores[0][1]
-            first_choice = scores[0][0]
-
-            for technique in action_mitre_technique_candidated:
-                if technique != first_choice:
-                    score_diff = abs(first_choice_score - scores[action_mitre_technique_candidated.index(technique)][1])
-                    logging.info(f"++ Score difference between {first_choice} and {technique}: {score_diff}")
-                    if score_diff < interaction_score:
-                        human_in_the_loop = True
-                        logging.info(f"++ Human-in-the-loop required for action: {action_name} due to score difference: {score_diff}")
-                        break
-
+                    break
 
             if human_in_the_loop:
-                print(f"[!] Human decision required for action: {action_name}. Please, select the most appropriate MITRE Technique:")
+                console.print(f"\n[[bold red]!!![/bold red]] Human decision required for action: [yellow]{action_name}[/yellow].\nPlease, select the most appropriate MITRE Technique:")
                 for i, technique in enumerate(action_mitre_technique_candidated):
-                    print(f"{i+1}. {technique}")
+                    if technique == action_technique_name:
+                        console.print(f"[yellow]{i+1}.[/yellow] {technique.capitalize()} ([italic yellow]suggested[/italic yellow])")
+                    else:
+                        console.print(f"[yellow]{i+1}.[/yellow] {technique.capitalize()}")
                 print("")
-                selected = int(input("Select the most appropriate MITRE Technique: ")) - 1
+                selected = int(input("> Your choice: ")) - 1
                 action_technique_name = action_mitre_technique_candidated[selected]
                 logging.info(f"++ Human selected technique: {action_technique_name}")
-            else:
-                # given the set of most similar techniques, select the most appropriate one using the QA model
-                context = "\n".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
-                query = """
-                You MUST select the most appropriate MITRE Technique for the action called: \n"""+action_name+"""\n
-                and description: \n"""+action_description+"""\n
-                You MUST fit the action with the most appropriate MITRE Technique, DO NOT add any additional information.
-                You MUST select one choice, DO NOT infer the answer.
-                Each choice is separated by a new line, DO NOT truncate the choices.
-                """.format(context=context)
-                
-                logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
-                action_technique_name = qa_llm.invoke(query, context).strip()
-                logging.info(f"++ QA suggested technique: {action_technique_name}")
 
             logging.info(f"++ Selected technique: {action_technique_name}")
 
@@ -348,10 +337,9 @@ async def main():
                     logging.info(f"++ Technique found after refining: {action_technique_name}")
                 else:
                     # worst case
-                    action_technique_id = "Unknown"
-                    action_technique_description = "Unknown"
-                    print("[!] Technique not found:", action_technique_name, "in:", action_mitre_technique_candidated)
-                    logging.error(f"++ Technique not found: {action_technique_name} in {action_mitre_technique_candidated}")
+                    action_technique_id = action_mitre_technique_candidated[0]['id']
+                    action_technique_description = action_mitre_technique_candidated[0]['description']
+                    logging.error(f"++ Technique not found: {action_technique_name} in {action_mitre_technique_candidated}. Using default.")
                 
             # MITRE reference
             technique = {
@@ -457,10 +445,12 @@ async def main():
 
     # save output
     logging.info("Saving output")
+    console.print(f"Saving output to [red]{os.path.join(config["OUTPUT_DIR"], config["OUTPUT_FILE"])}[/red]")    
     with open(os.path.join(config["OUTPUT_DIR"], config["OUTPUT_FILE"]), "w") as f:
         json.dump(output, f)
 
     logger.info("Application finished")
+    console.print("Application finished!", style="bold green")
 
 
 if __name__ == "__main__":
