@@ -7,6 +7,8 @@ from nltk import word_tokenize
 from sentence_transformers import SentenceTransformer
 from bs4 import BeautifulSoup
 from markdown import markdown
+from rich import print as rprint
+from rich.console import Console
 
 from src.STIXParser import STIXParser
 from src.group_attack_patterns import group_attack_patterns
@@ -66,6 +68,7 @@ async def main():
     """
     Application Setup
     """
+    console = Console()
 
     # load config
     config = json.load(open(CONFIG_FILE))
@@ -83,6 +86,7 @@ async def main():
     log_file = os.path.join(config["OUTPUT_DIR"], "app.log")
     logging.basicConfig(level=logging.INFO, filename=log_file, filemode="w", format="[%(asctime)s %(levelname)s] %(message)s")
     logger.info("Application started with interaction level: %s (%f)", selected_interaction_level, interaction_score)
+    console.print(f"Application started with interaction level: {selected_interaction_level} ({interaction_score})", style="bold green")
 
     # load files into documents
     directory = os.path.join(config["DOCUMENTS_DIR"], "other")
@@ -95,7 +99,7 @@ async def main():
         progress.update(1)
     progress.close()
 
-    print("Documents loaded:", len(documents))
+    console.print(f"Documents loaded: {len(documents)}", style="bold green")
     logging.info(f"Documents loaded: {len(documents)}")
 
     """
@@ -143,37 +147,10 @@ async def main():
     # hashes_from_indicators = get_hashes(indicators_patterns) 
     #print(hashes_from_indicators)
 
-    ollama_llm = ChatOllama(model="llama3.1:8b", temperature=0, verbose=True)
-
-    ###################################################
-
-    query = """
-    You MUST state which software vulnerability the malware exploits.
-    If the are no vulnerabilities exploited, you MUST determine if the malware disguises itself as a legitimate software.
-    If the answer is not directly stated in the text, you MUST infer the answer.
-    
-    The context is:
-    {context}
-    """
-
-    chain_vuln = RunnableSequence(
-        first=ChatPromptTemplate.from_template(query),
-        middle=[ollama_llm],
-        last=StrOutputParser()
-    )
-
-    retriever_query = "Which software vulnerability does the malware exploit? Does the malware disguise itself as a legitimate software?"
-    docs = ensemble_retriever.invoke(retriever_query)
-    logger.info(f"Vulnerability computed using {len(docs)} documents. The documents are:\n{docs}")
-    vuln_summary = await chain_vuln.ainvoke({"context": docs})
-    vuln_summary = remove_markdown(vuln_summary)
-    print("[+] Vulnerability computed")
-
+    state = {}
     state['id'] = str(uuid.uuid4())
 
     logging.info(f"Inserted state with id: {state['id']}")
-
-    ###################################################
 
     stop_words = set(stopwords.words('english'))
 
@@ -295,6 +272,7 @@ async def main():
             # sort the scores
             scores = sorted(scores.items(), key=lambda item: item[1], reverse=True)[:config['N_TECHNIQUES']]
             logger.info(f"++ Scores: {scores}")
+
             # get the candidate techniques
             action_mitre_technique_candidated = [score[0] for score in scores]
 
@@ -302,19 +280,60 @@ async def main():
             
             logging.info(f"++ Similar techniques found:\n{action_mitre_technique_candidated}")
 
-            # given the set of most similar techniques, select the most appropriate one using the QA model
-            context = "\n".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
-            query = """
-            You MUST select the most appropriate MITRE Technique for the action called: \n"""+action_name+"""\n
-            and description: \n"""+action_description+"""\n
-            You MUST fit the action with the most appropriate MITRE Technique, DO NOT add any additional information.
-            You MUST select one choice, DO NOT infer the answer.
-            Each choice is separated by a new line, DO NOT truncate the choices.
-            """.format(context=context)
+            # evaluate human-in-the-loop requirement
+
+            human_in_the_loop = False
+            """for technique_1 in action_mitre_technique_candidated:
+                for technique_2 in action_mitre_technique_candidated:
+                    if technique_1 != technique_2:
+                        # get the score for first and second technique
+                        score_1 = [score[1] for score in scores if score[0] == technique_1][0]
+                        score_2 = [score[1] for score in scores if score[0] == technique_2][0]
+                        score_diff = abs(score_1 - score_2)
+                        if score_diff < config['INTERACTION_LEVELS'][selected_interaction_level]:
+                            human_in_the_loop = True
+                            logging.info(f"++ Human-in-the-loop required for action: {action_name} due to score difference: {score_diff}")
+                            break
+                if human_in_the_loop:
+                    break """
             
-            logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
-            action_technique_name = qa_llm.invoke(query, context).strip()
-            logging.info(f"++ QA selected technique: {action_technique_name}")
+            first_choice_score = scores[0][1]
+            first_choice = scores[0][0]
+
+            for technique in action_mitre_technique_candidated:
+                if technique != first_choice:
+                    score_diff = abs(first_choice_score - scores[action_mitre_technique_candidated.index(technique)][1])
+                    logging.info(f"++ Score difference between {first_choice} and {technique}: {score_diff}")
+                    if score_diff < interaction_score:
+                        human_in_the_loop = True
+                        logging.info(f"++ Human-in-the-loop required for action: {action_name} due to score difference: {score_diff}")
+                        break
+
+
+            if human_in_the_loop:
+                print(f"[!] Human decision required for action: {action_name}. Please, select the most appropriate MITRE Technique:")
+                for i, technique in enumerate(action_mitre_technique_candidated):
+                    print(f"{i+1}. {technique}")
+                print("")
+                selected = int(input("Select the most appropriate MITRE Technique: ")) - 1
+                action_technique_name = action_mitre_technique_candidated[selected]
+                logging.info(f"++ Human selected technique: {action_technique_name}")
+            else:
+                # given the set of most similar techniques, select the most appropriate one using the QA model
+                context = "\n".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
+                query = """
+                You MUST select the most appropriate MITRE Technique for the action called: \n"""+action_name+"""\n
+                and description: \n"""+action_description+"""\n
+                You MUST fit the action with the most appropriate MITRE Technique, DO NOT add any additional information.
+                You MUST select one choice, DO NOT infer the answer.
+                Each choice is separated by a new line, DO NOT truncate the choices.
+                """.format(context=context)
+                
+                logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
+                action_technique_name = qa_llm.invoke(query, context).strip()
+                logging.info(f"++ QA suggested technique: {action_technique_name}")
+
+            logging.info(f"++ Selected technique: {action_technique_name}")
 
             try:
                 action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']

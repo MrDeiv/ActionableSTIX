@@ -17,9 +17,10 @@
     "SIMILARITY_TECHNIQUES": 0.6,
     "N_TECHNIQUES": 5,
     "INTERACTION_LEVELS": {
-        "LOW": 0.5,
-        "MEDIUM": 0.3,
-        "HIGH": 0.1
+        "LOW": 0.05,
+        "MEDIUM": 0.02,
+        "HIGH": 0.01
     },
-    "SELECTED_INTERACTION_LEVEL": "MEDIUM"
+    "SELECTED_INTERACTION_LEVEL": "MEDIUM",
+    "DUPLICATE_THRESHOLD": 0.8
 }
