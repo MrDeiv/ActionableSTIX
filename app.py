@@ -69,12 +69,20 @@ async def main():
 
     # load config
     config = json.load(open(CONFIG_FILE))
+
+    interaction_levels = config['INTERACTION_LEVELS'].keys()
+    selected_interaction_level = config['SELECTED_INTERACTION_LEVEL']
+
+    assert selected_interaction_level in interaction_levels, f"Invalid interaction level: {selected_interaction_level}. Valid levels are: {interaction_levels}"
+    
+    interaction_score = config['INTERACTION_LEVELS'][selected_interaction_level]
+
     output = [] # output variable
 
     logger = logging.getLogger(__name__)
     log_file = os.path.join(config["OUTPUT_DIR"], "app.log")
     logging.basicConfig(level=logging.INFO, filename=log_file, filemode="w", format="[%(asctime)s %(levelname)s] %(message)s")
-    logger.info("Application started")
+    logger.info("Application started with interaction level: %s (%f)", selected_interaction_level, interaction_score)
 
     # load files into documents
     directory = os.path.join(config["DOCUMENTS_DIR"], "other")
@@ -132,83 +140,10 @@ async def main():
     grouped_patterns = group_attack_patterns(mitre_tactics, attack_patterns_used)
 
     # this are all the hashes mentioned in the malware's iocs, i.e., related files
-    hashes_from_indicators = get_hashes(indicators_patterns) 
+    # hashes_from_indicators = get_hashes(indicators_patterns) 
     #print(hashes_from_indicators)
 
-    """
-    Start computing pre-conditions for initial state
-    """
-    state = {}
-
-    query = """
-    You MUST state if the malware is capable of communition with external server.
-    The context is: {context}
-    """
-
     ollama_llm = ChatOllama(model="llama3.1:8b", temperature=0, verbose=True)
-
-    ###################################################
-    
-
-    chain_summary = RunnableSequence(
-        first=ChatPromptTemplate.from_template(query),
-        middle=[llm],
-        last=StrOutputParser()
-    )
-
-    retriever_query = "Does the malware communicate with an external server or necessitate connectivity to work?"
-    docs = ensemble_retriever.invoke(retriever_query)
-
-    logger.info(f"Connectivity computed using {len(docs)} documents. The documents are:\n{docs}")
-
-    connectivity_summary = await chain_summary.ainvoke({"context": docs})
-    connectivity_summary = remove_markdown(connectivity_summary)    
-
-    query = """
-    Given the following context: {context}
-
-    You MUST state if the malware is capable of communition with external server: write YES or NO.
-    """
-
-    chain = RunnableSequence(
-        first=ChatPromptTemplate.from_template(query),
-        middle=[ollama_llm],
-        last=BooleanOutputParser()
-    )
-
-    connectivity_out = await chain.ainvoke({"context": connectivity_summary})
-    print("[+] Connectivity computed")
-
-    ###################################################
-
-    query = """
-    You MUST state the operative system necessary to run the malware.
-    If the answer is not directly stated in the text, you MUST infer the answer.
-
-    {context}
-    """
-
-    chain_os = RunnableSequence(
-        first=ChatPromptTemplate.from_template(query),
-        middle=[ollama_llm],
-        last=StrOutputParser()
-    )
-    
-    retriever_query = "What operating system is required to run the malware?"
-    docs = ensemble_retriever.invoke(retriever_query)
-    logger.info(f"OS computed using {len(docs)} documents. The documents are:\n{docs}")
-    os_summary = await chain_os.ainvoke({"context": docs})
-    os_summary = remove_markdown(os_summary)
-
-    query = "Given the following context: {context} You MUST EXTRACT ONLY the operative system necessary to run the malware."
-    chain = RunnableSequence(
-        first=ChatPromptTemplate.from_template(query),
-        middle=[ollama_llm],
-        last=StrOutputParser()
-    )
-
-    os_output = await chain.ainvoke({"context": os_summary})
-    print("[+] OS computed")
 
     ###################################################
 
@@ -235,17 +170,6 @@ async def main():
     print("[+] Vulnerability computed")
 
     state['id'] = str(uuid.uuid4())
-    state['pre-conditions'] = {
-        "connectivity": {
-            "value": connectivity_out,
-            "summary": connectivity_summary
-        },
-        "os": {
-            "value": os_output,
-            "summary": os_summary
-        },
-        "vulnerability": vuln_summary
-    }
 
     logging.info(f"Inserted state with id: {state['id']}")
 
@@ -375,7 +299,7 @@ async def main():
             action_mitre_technique_candidated = [score[0] for score in scores]
 
             assert len(action_mitre_technique_candidated) > 0, "No similar techniques found"
-            #logging.info(f"++ Similar techniques found (in {attempts} attemps):\n{action_mitre_technique_candidated}")
+            
             logging.info(f"++ Similar techniques found:\n{action_mitre_technique_candidated}")
 
             # given the set of most similar techniques, select the most appropriate one using the QA model
