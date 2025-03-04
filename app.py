@@ -281,7 +281,8 @@ async def main():
     Suppose all the actions are performed in the same environment.
     You MUST determine which are the requirements to perform the action: {action}.
     You MUST provide a list of requirements, DO NOT provide any additional information.
-    The requirements must include the environment, tools, and resources needed.
+    The requirements must include the environment, tools, connectivity and resources needed.
+    If the requirements are not directly stated, you MUST infer the answer. If no requirements are needed, you MUST state that.
     """
     summary_llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
     chain_precond = RunnableSequence(
