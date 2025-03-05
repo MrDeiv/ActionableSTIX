@@ -120,8 +120,6 @@ async def main():
         weights=[0.4, 0.6]
     )
 
-    llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
-
     """
     STIX Parsing
     """
@@ -132,6 +130,7 @@ async def main():
     # extract the attack patterns, malware, and indicators
     attack_patterns = stix_parser.extract_attack_patterns()
     malware_patterns = stix_parser.extract_malware()
+    malware_name = malware_patterns[0]['name']
     indicators_patterns = stix_parser.extract_indicators()
 
     iocs = [x['name'] + ": " + " ".join(x['pattern']) for x in indicators_patterns if "rule" not in x['pattern']]
@@ -241,8 +240,11 @@ async def main():
         for action in grouped_patterns[tactic]:
             # each iteration is an attack step
             action_name = action['name']
+            action_name = action_name.replace(malware_name, "the malware")
+            
             logging.info(f"+ Processing action: {action_name}")
             action_description = action['description']
+            action_description = action_description.replace(malware_name, "the malware")
 
             sentence_transformer = SentenceTransformer(config['MODELS']['SENTENCE_TRANSFORMER'], token=os.getenv("HF_API_KEY"))
             
@@ -292,6 +294,11 @@ async def main():
                 
             logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
             action_technique_name = qa_llm.invoke(query, context).strip()
+
+            if "\n" in action_technique_name:
+                # fallback to the first line since the QA model returns multiple lines
+                action_technique_name = action_technique_name.split("\n")[0]
+
             logging.info(f"++ QA suggested technique: {action_technique_name}")
 
             # evaluate human-in-the-loop requirement
@@ -320,26 +327,12 @@ async def main():
                 print("")
                 selected = int(input("> Your choice: ")) - 1
                 action_technique_name = action_mitre_technique_candidated[selected]
-                logging.info(f"++ Human selected technique: {action_technique_name}")
+                logging.info(f"++ Human selected technique: {action_technique_name} (index: {selected})")
 
             logging.info(f"++ Selected technique: {action_technique_name}")
 
-            try:
-                action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
-                action_technique_description = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['description']
-            except IndexError:
-                # fallback
-                logging.warning(f"++ Technique not found: {action_technique_name} in {action_mitre_technique_candidated}. Trying to refine the answer.")
-                if '\n' in action_technique_name:
-                    action_technique_name = action_technique_name.split('\n')[0]
-                    action_technique_id = list(filter(lambda x: x['name'] in action_technique_name, interesting_techniques))[0]['id']
-                    action_technique_description = list(filter(lambda x: x['name'] in action_technique_name, interesting_techniques))[0]['description']
-                    logging.info(f"++ Technique found after refining: {action_technique_name}")
-                else:
-                    # worst case
-                    action_technique_id = action_mitre_technique_candidated[0]['id']
-                    action_technique_description = action_mitre_technique_candidated[0]['description']
-                    logging.error(f"++ Technique not found: {action_technique_name} in {action_mitre_technique_candidated}. Using default.")
+            action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
+            action_technique_description = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['description']
                 
             # MITRE reference
             technique = {
@@ -419,6 +412,42 @@ async def main():
             # indicators
             indicators = chain_indicators.invoke({"context": "\n".join(iocs), "action": action_name})
             logging.info(f"++ Indicators computed for action: {action_name}. The indicators are:\n{indicators}")
+
+            # refine pre-conditions
+            pre_conditions = [remove_markdown(pre) for pre in pre_conditions]
+            
+            for pre in pre_conditions:
+                # remove LLM typos
+                if ":" in pre and len(pre.split(":")) == 1:
+                    pre_conditions.remove(pre)
+
+            # remove similar pre-conditions
+            for pre_1 in pre_conditions:
+                for pre_2 in pre_conditions:
+                    if pre_1 != pre_2:
+                        emb_1 = sentence_transformer.encode(pre_1)
+                        emb_2 = sentence_transformer.encode(pre_2)
+                        similarity = sentence_transformer.similarity(emb_1, emb_2)
+                        if similarity > config['DUPLICATE_THRESHOLD']:
+                            pre_conditions.remove(pre_2)
+                            logger.info(f"++ Removed pre-condition: {pre_2}, due to similarity with: {pre_1} ({similarity})")
+
+            pre_conditions = list(set(pre_conditions)) # remove duplicates
+
+            # refine post-conditions
+            post_conditions = [remove_markdown(post) for post in post_conditions]
+
+            for post_1 in post_conditions:
+                for post_2 in post_conditions:
+                    if post_1 != post_2:
+                        emb_1 = sentence_transformer.encode(post_1)
+                        emb_2 = sentence_transformer.encode(post_2)
+                        similarity = sentence_transformer.similarity(emb_1, emb_2)
+                        if similarity > config['DUPLICATE_THRESHOLD']:
+                            post_conditions.remove(post_2)
+                            logger.info(f"++ Removed post-condition: {post_2}, due to similarity with: {post_1} ({similarity})")
+            
+            post_conditions = list(set(post_conditions)) # remove duplicates
 
             # action
             refined_description = remove_markdown(refined_description)

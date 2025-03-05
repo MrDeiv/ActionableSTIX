@@ -61,6 +61,16 @@ def create_pdf_from_json(malware, out, output_pdf):
     elements.append(Spacer(1, 10))
     elements.append(PageBreak())
 
+    # quick overview
+    elements.append(Paragraph(f"<b>Quick Overview</b>", styles["Heading2"]))
+    
+    for i,item in enumerate(out):
+        elements.append(Paragraph(f"<b>Milestone {i+1}</b>", styles["Normal"]))
+        for k, attack_step in enumerate(item["attack_steps"]):
+            elements.append(Paragraph(f"{k+1}. {attack_step['name']} ({attack_step["mitre_technique"]['id']})", styles["Normal"]))
+        elements.append(Spacer(1, 10))
+
+    elements.append(PageBreak())
     for i,item in enumerate(out):
         # Title
         elements.append(Paragraph(f"<b>Milestone {i+1}</b>", styles["Title"]))

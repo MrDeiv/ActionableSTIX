@@ -25,4 +25,4 @@ smolagents
 rank_bm25
 json-repair
 reportlab
-
+rich
