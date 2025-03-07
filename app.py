@@ -86,7 +86,9 @@ async def main():
     log_file = os.path.join(config["OUTPUT_DIR"], "app.log")
     logging.basicConfig(level=logging.INFO, filename=log_file, filemode="w", format="[%(asctime)s %(levelname)s] %(message)s")
     logger.info("Application started with interaction level: %s (%f)", selected_interaction_level, interaction_score)
+    logger.info("Starting time: %s", time.strftime("%Y-%m-%d %H:%M:%S"))
     console.print(f"Application started with interaction level: {selected_interaction_level} (thr.: {interaction_score})", style="bold green")
+    console.print(f"Starting time: {time.strftime('%Y-%m-%d %H:%M:%S')}", style="bold green")
 
     # load files into documents
     directory = os.path.join(config["DOCUMENTS_DIR"], "other")
@@ -202,7 +204,6 @@ async def main():
     You MUST provide a list of traces, DO NOT provide any additional information.
     The items in the list MUST detail technical traces, such as logs, files, or network connections.
     """
-    summary_llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
     chain_postcond = RunnableSequence(
         first=ChatPromptTemplate.from_template(query_summary),
         middle=[summary_llm],
@@ -225,6 +226,21 @@ async def main():
         first=ChatPromptTemplate.from_template(query),
         middle=[indicators_llm],
         last=ListParser()
+    )
+
+    # rephrase pipeline
+    rephrase_template = """
+    Given this context:
+    {context}.
+
+    You MUST rephrase it in a passive, formal, and technical way.
+    You MUST provide only the rephrased text, DO NOT provide any additional information.
+    """
+    rephrase_template_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
+    chain_rephrase = RunnableSequence(
+        first=ChatPromptTemplate.from_template(rephrase_template),
+        middle=[rephrase_template_llm],
+        last=StrOutputParser()
     )
 
     for tactic in grouped_patterns:
@@ -456,7 +472,8 @@ async def main():
 
             # action
             refined_description = remove_markdown(refined_description)
-            
+            refined_description = chain_rephrase.invoke({"context": refined_description})
+
             actions = {
                 "id": str(uuid.uuid4()),
                 "name": action_name,
@@ -478,14 +495,19 @@ async def main():
         state = {}
         state['id'] = str(uuid.uuid4())
 
+    logging.info("Created output with %d milestones", len(output))
+    console.print(f"Created output with {len(output)} milestones", style="bold green")
+
     # save output
     logging.info("Saving output")
     console.print(f"Saving output to [red]{os.path.join(config["OUTPUT_DIR"], config["OUTPUT_FILE"])}[/red]")    
     with open(os.path.join(config["OUTPUT_DIR"], config["OUTPUT_FILE"]), "w") as f:
         json.dump(output, f)
 
-    logger.info("Application finished")
-    console.print("Application finished!", style="bold green")
+    logger.info("Application finished with output saved")
+    logger.info("Ending time: %s", time.strftime("%Y-%m-%d %H:%M:%S"))
+    console.print(f"Ending time: {time.strftime('%Y-%m-%d %H:%M:%S')}", style="bold green")
+    console.print(f"Application finished with output saved", style="bold green")
 
 
 if __name__ == "__main__":
