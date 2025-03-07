@@ -252,11 +252,11 @@ async def main():
         for action in grouped_patterns[tactic]:
             # each iteration is an attack step
             action_name = action['name']
-            action_name = action_name.replace(malware_name, "the malware")
+            action_name = action_name.replace(malware_name, "the malware") # generalize the action name
             
             logging.info(f"+ Processing action: {action_name}")
             action_description = action['description']
-            action_description = action_description.replace(malware_name, "the malware")
+            action_description = action_description.replace(malware_name, "the malware") # generalize the action description
 
             sentence_transformer = SentenceTransformer(config['MODELS']['SENTENCE_TRANSFORMER'], token=os.getenv("HF_API_KEY"))
             
@@ -347,6 +347,7 @@ async def main():
                 action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
                 action_technique_description = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['description']
             except:
+                # fallback to the first technique if the selected technique is not in the list
                 action_technique_name = action_mitre_technique_candidated[0]
                 action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
                 action_technique_description = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['description']
@@ -434,7 +435,7 @@ async def main():
             pre_conditions = [remove_markdown(pre) for pre in pre_conditions]
             
             for pre in pre_conditions:
-                # remove LLM typos
+                # fix generation errors
                 if ":" in pre and len(pre.split(":")) == 1:
                     pre_conditions.remove(pre)
 
