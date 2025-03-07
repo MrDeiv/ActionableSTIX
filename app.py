@@ -64,10 +64,6 @@ nltk.download('stopwords')
 nltk.download('wordnet')
 
 async def main():
-
-    """
-    Application Setup
-    """
     console = Console()
 
     # load config
