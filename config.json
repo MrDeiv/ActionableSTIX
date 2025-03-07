@@ -1,14 +1,12 @@
 {
-    "STIX_FILE": "sample_stix/goofy-guineapig-stix.json",
+    "STIX_FILE": "sample_stix/NCSC-MAR-Small-Sieve-stix.json",
     "ATT&CK_FILE": "mitre/enterprise-attack.json",
     "DOCUMENTS_DIR": "./documents",
     "OUTPUT_DIR": "./out",
     "OUTPUT_FILE": "output.json",
     "LOGS_DIR": "./logs",
     "MODELS": {
-        "SUMMARIZATION": "facebook/bart-large-cnn",
         "QA": "deepset/roberta-base-squad2",
-        "TEXT_GENERATION": "microsoft/Phi-3.5-mini-instruct",
         "SENTENCE_TRANSFORMER": "all-MiniLM-L6-v2"
     },
     "k": 3,
@@ -21,6 +19,6 @@
         "MEDIUM": 0.003,
         "HIGH": 0.005
     },
-    "SELECTED_INTERACTION_LEVEL": "LOW",
-    "DUPLICATE_THRESHOLD": 0.8
+    "SELECTED_INTERACTION_LEVEL": "MEDIUM",
+    "DUPLICATE_THRESHOLD": 0.7
 }

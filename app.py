@@ -331,9 +331,14 @@ async def main():
 
             logging.info(f"++ Selected technique: {action_technique_name}")
 
-            action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
-            action_technique_description = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['description']
-                
+            try:
+                action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
+                action_technique_description = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['description']
+            except:
+                action_technique_name = action_mitre_technique_candidated[0]
+                action_technique_id = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['id']
+                action_technique_description = list(filter(lambda x: x['name'] == action_technique_name, interesting_techniques))[0]['description']
+
             # MITRE reference
             technique = {
                 "id": action_technique_id,
@@ -451,6 +456,7 @@ async def main():
 
             # action
             refined_description = remove_markdown(refined_description)
+            
             actions = {
                 "id": str(uuid.uuid4()),
                 "name": action_name,

@@ -12,6 +12,7 @@ import re
 import os
 import nltk
 from nltk.corpus import stopwords
+from bs4 import BeautifulSoup
 
 nltk.download('stopwords')
 nltk.download('punkt_tab')
@@ -80,6 +81,24 @@ class DocumentFactory:
         yml = CustomYMLLoader(file).load()
         chunks = RecursiveJsonSplitter().create_documents([yml], metadatas=[{"source": file}])
         return chunks
+    
+    @staticmethod
+    def from_html(file:str) -> list[Document]:
+        assert os.path.exists(file), f"File {file} not found"
+
+        # load html
+        html = open(file, encoding='utf-8').read()
+        soup = BeautifulSoup(html, 'html.parser')
+        for script in soup(["script", "style"]):
+            script.extract()
+        
+        text = soup.get_text(strip=True)
+        tokenizer = NLTKTextSplitter(
+            chunk_size=400,
+            chunk_overlap=400*0.3,
+        )
+        texts = tokenizer.split_text(text)
+        return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
     
     @staticmethod
     def from_file(file:str) -> list[Document]:
