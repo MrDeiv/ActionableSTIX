@@ -1,4 +1,5 @@
 import json, os, dotenv, time, asyncio, re, logging, warnings
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from tqdm import tqdm
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -9,6 +10,7 @@ from bs4 import BeautifulSoup
 from markdown import markdown
 from rich import print as rprint
 from rich.console import Console
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
 from src.STIXParser import STIXParser
 from src.group_attack_patterns import group_attack_patterns
@@ -126,7 +128,6 @@ async def main():
     stix_parser.parse(config['STIX_FILE'])
 
     # extract the attack patterns, malware, and indicators
-    attack_patterns = stix_parser.extract_attack_patterns()
     malware_patterns = stix_parser.extract_malware()
     malware_name = malware_patterns[0]['name']
     indicators_patterns = stix_parser.extract_indicators()
@@ -152,7 +153,6 @@ async def main():
     stop_words = set(stopwords.words('english'))
 
     mitre_techniques = json.loads(open("mitre/mitre-techniques.json").read())
-    qa_llm = QAModel(model=config['MODELS']['QA'])
 
     # refinement pipeline
     query_refinement_template = """
@@ -162,8 +162,8 @@ async def main():
     You must state how the action is performed. The action is: 
     {action} 
     """
-    #refinement_llm = ChatOllama(model="llama3.1:8b", num_predict=256, temperature=0)
-    refinement_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
+    refinement_llm = ChatOllama(model="gemma2:9b")
+    #refinement_llm = ChatGroq(model="llama-3.2-11b-vision-preview", temperature=0)
     chain_refinement = RunnableSequence(
         first=ChatPromptTemplate.from_template(query_refinement_template),
         middle=[refinement_llm],
@@ -182,7 +182,8 @@ async def main():
     The requirements must include the environment, tools, connectivity and resources needed.
     If the requirements are not directly stated, you MUST infer the answer. If no requirements are needed, you MUST state that.
     """
-    summary_llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+    #summary_llm = ChatGroq(model="llama-3.2-3b-preview", temperature=0)
+    summary_llm = ChatOllama(model="gemma2:9b", temperature=0)
     chain_precond = RunnableSequence(
         first=ChatPromptTemplate.from_template(query_summary),
         middle=[summary_llm],
@@ -217,7 +218,8 @@ async def main():
     If there are no indicators related to the action, you MUST return an empty list.
     You MUST formulate the indicators in a passive sentence.
     """
-    indicators_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
+    #indicators_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
+    indicators_llm = ChatOllama(model="gemma2:9b", temperature=0)
     chain_indicators = RunnableSequence(
         first=ChatPromptTemplate.from_template(query),
         middle=[indicators_llm],
@@ -232,10 +234,32 @@ async def main():
     You MUST rephrase it in a passive, formal, and technical way.
     You MUST provide only the rephrased text, DO NOT provide any additional information.
     """
-    rephrase_template_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
+    #rephrase_template_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
+    rephrase_template_llm = ChatOllama(model="gemma2:9b", temperature=0)
     chain_rephrase = RunnableSequence(
         first=ChatPromptTemplate.from_template(rephrase_template),
         middle=[rephrase_template_llm],
+        last=StrOutputParser()
+    )
+
+    # qa pipeline
+    qa_template = """
+    Given this list of MITRE Techniques:
+    {context}.
+
+    You MUST select the most appropriate MITRE Technique for the action called:
+    {action}.
+    With description:
+    {description}.
+    You MUST select one choice from the list, DO NOT add any additional information.
+    Each choice is separated by a new line, DO NOT truncate the choices.
+    You MUST select one choice, DO NOT infer the answer.
+    """
+    #qa_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
+    qa_llm = ChatOllama(model="gemma2:9b", temperature=0)
+    chain_qa = RunnableSequence(
+        first=ChatPromptTemplate.from_template(qa_template),
+        middle=[qa_llm],
         last=StrOutputParser()
     )
 
@@ -305,7 +329,9 @@ async def main():
             """.format(context=context)
                 
             logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
-            action_technique_name = qa_llm.invoke(query, context).strip()
+            #action_technique_name = qa_llm.invoke(query, context).strip()
+            action_technique_name = chain_qa.invoke({"context": context, "action": action_name, "description": action_description}).strip()
+            action_technique_name = remove_markdown(action_technique_name)
 
             if "\n" in action_technique_name:
                 # fallback to the first line since the QA model returns multiple lines
