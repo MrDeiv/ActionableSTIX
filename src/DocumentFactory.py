@@ -1,17 +1,13 @@
 from langchain_core.documents import Document
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import NLTKTextSplitter
-from langchain_community.document_loaders import TextLoader, UnstructuredHTMLLoader
-from langchain_text_splitters import CharacterTextSplitter, RecursiveJsonSplitter, RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveJsonSplitter
 import os
 from src.CustomCSVLoader import CustomCSVLoader
 from src.CustomJSONLoader import CustomJSONLoader
 from src.CustomYMLLoader import CustomYMLLoader
 import PyPDF2
-import re
 import os
 import nltk
-from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
 
 nltk.download('stopwords')
@@ -100,6 +96,23 @@ class DocumentFactory:
         texts = tokenizer.split_text(text)
         return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
     
+    def from_xml(file:str) -> list[Document]:
+        assert os.path.exists(file), f"File {file} not found"
+
+        # load xml
+        xml = open(file, encoding='utf-8').read()
+        soup = BeautifulSoup(xml, 'xml')
+        for script in soup(["script", "style"]):
+            script.extract()
+        
+        text = soup.get_text(strip=True)
+        tokenizer = NLTKTextSplitter(
+            chunk_size=400,
+            chunk_overlap=400*0.3,
+        )
+        texts = tokenizer.split_text(text)
+        return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
+    
     @staticmethod
     def from_file(file:str) -> list[Document]:
         """
@@ -111,7 +124,9 @@ class DocumentFactory:
             ".json": DocumentFactory.from_json,
             ".yml": DocumentFactory.from_yml,
             ".txt": DocumentFactory.from_text_file,
-            ".pdf": DocumentFactory.from_pdf
+            ".pdf": DocumentFactory.from_pdf,
+            ".html": DocumentFactory.from_html,
+            ".xml": DocumentFactory.from_xml,
         }
     
         ext = os.path.splitext(file)[-1]

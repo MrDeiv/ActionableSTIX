@@ -1,8 +1,6 @@
 import json, os, dotenv, time, asyncio, re, logging, warnings
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from tqdm import tqdm
 import nltk
-from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk import word_tokenize
 from sentence_transformers import SentenceTransformer
@@ -10,26 +8,21 @@ from bs4 import BeautifulSoup
 from markdown import markdown
 from rich import print as rprint
 from rich.console import Console
-from transformers import AutoTokenizer, AutoModelForCausalLM
 
 from src.STIXParser import STIXParser
 from src.group_attack_patterns import group_attack_patterns
 import uuid
 
 from src.DocumentFactory import DocumentFactory
-from src.QAModel import QAModel
 from src.ListParser import ListParser
 
 # LangChain
 from langchain_community.retrievers import BM25Retriever
 from langchain.retrievers import EnsembleRetriever
-from langchain_core.runnables import RunnableLambda, RunnableParallel, RunnableSequence, Runnable, RunnablePassthrough
+from langchain_core.runnables import RunnableSequence
 from langchain.prompts import ChatPromptTemplate
-from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_ollama import ChatOllama
-from langchain.output_parsers import BooleanOutputParser
 from langchain_core.output_parsers import StrOutputParser
-from langchain_groq import ChatGroq
 
 from src.stores.DocumentStore import DocumentStore
 import logging.config
@@ -446,7 +439,7 @@ async def main():
             {context}
 
             Suppose all the actions are performed in the same environment and succeed.
-            You MUST determine which the consequences of the action. These consequences must be permanent and visible.
+            You MUST determine which are the consequences of the action. These consequences must be permanent and visible.
             You MUST provide a list of consequences, DO NOT provide any additional information.
             """.format(context=docs)
 

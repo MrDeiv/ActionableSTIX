@@ -12,4 +12,4 @@ class CustomCSVLoader(BaseLoader):
     def load(self)->list[Document]:
         csv = pd.read_csv(self.file)
         rows = csv.apply(lambda x: " ".join(x), axis=1).to_list()
-        return [Document(page_content=row) for row in rows]
+        return rows
