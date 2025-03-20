@@ -1,3 +1,57 @@
 [2025-03-20 12:59:13,760 INFO] Application started with interaction level: HIGH (0.005000)
 [2025-03-20 12:59:13,760 INFO] Starting time: 2025-03-20 12:59:13
 [2025-03-20 12:59:14,232 INFO] Documents loaded: 174
+[2025-03-20 12:59:28,694 INFO] Extracted 11 IOCs from the STIX file
+[2025-03-20 12:59:28,694 INFO] Inserted state with id: 5e73183b-95b9-40d6-a7cf-2730e834a6a8
+[2025-03-20 12:59:30,018 INFO] Processing step relative to tactic: execution
+[2025-03-20 12:59:30,018 INFO] + Processing action: Command and Scripting Interpreter: Python as used by the malware
+[2025-03-20 12:59:32,753 INFO] ++ Embedding computed for: Command and Scripting Interpreter: Python as used by the malware. The vector has shape: (384,)
+[2025-03-20 12:59:32,788 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [cloud administration command]: tensor([[0.2788]])
+[2025-03-20 12:59:32,800 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter]: tensor([[0.4827]])
+[2025-03-20 12:59:32,813 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: powershell]: tensor([[0.4899]])
+[2025-03-20 12:59:32,829 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: applescript]: tensor([[0.4282]])
+[2025-03-20 12:59:32,844 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: windows command shell]: tensor([[0.4665]])
+[2025-03-20 12:59:32,858 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: unix shell]: tensor([[0.4019]])
+[2025-03-20 12:59:32,870 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: visual basic]: tensor([[0.4356]])
+[2025-03-20 12:59:32,881 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: python]: tensor([[0.6364]])
+[2025-03-20 12:59:32,893 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: javascript]: tensor([[0.4440]])
+[2025-03-20 12:59:32,906 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: network device cli]: tensor([[0.4828]])
+[2025-03-20 12:59:32,919 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: cloud api]: tensor([[0.4441]])
+[2025-03-20 12:59:32,931 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: autohotkey & autoit]: tensor([[0.4881]])
+[2025-03-20 12:59:32,942 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [command and scripting interpreter: lua]: tensor([[0.4362]])
+[2025-03-20 12:59:32,961 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [container administration command]: tensor([[0.2106]])
+[2025-03-20 12:59:32,972 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [deploy container]: tensor([[0.1582]])
+[2025-03-20 12:59:32,988 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [exploitation for client execution]: tensor([[0.3068]])
+[2025-03-20 12:59:33,000 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [inter-process communication]: tensor([[0.2188]])
+[2025-03-20 12:59:33,014 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [inter-process communication: component object model]: tensor([[0.2182]])
+[2025-03-20 12:59:33,028 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [inter-process communication: dynamic data exchange]: tensor([[0.1900]])
+[2025-03-20 12:59:33,042 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [inter-process communication: xpc services]: tensor([[0.1978]])
+[2025-03-20 12:59:33,053 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [native api]: tensor([[0.2355]])
+[2025-03-20 12:59:33,064 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [scheduled task/job]: tensor([[0.3170]])
+[2025-03-20 12:59:33,083 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [scheduled task/job: at]: tensor([[0.3835]])
+[2025-03-20 12:59:33,096 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [scheduled task/job: cron]: tensor([[0.3762]])
+[2025-03-20 12:59:33,111 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [scheduled task/job: scheduled task]: tensor([[0.3922]])
+[2025-03-20 12:59:33,122 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [scheduled task/job: systemd timers]: tensor([[0.2103]])
+[2025-03-20 12:59:33,134 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [scheduled task/job: container orchestration job]: tensor([[0.2238]])
+[2025-03-20 12:59:33,157 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [serverless execution]: tensor([[0.1886]])
+[2025-03-20 12:59:33,171 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [shared modules]: tensor([[0.3913]])
+[2025-03-20 12:59:33,186 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [software deployment tools]: tensor([[0.1480]])
+[2025-03-20 12:59:33,199 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [system services]: tensor([[0.3215]])
+[2025-03-20 12:59:33,210 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [system services: launchctl]: tensor([[0.3261]])
+[2025-03-20 12:59:33,222 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [system services: service execution]: tensor([[0.3500]])
+[2025-03-20 12:59:33,234 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [user execution]: tensor([[0.2266]])
+[2025-03-20 12:59:33,247 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [user execution: malicious link]: tensor([[0.2904]])
+[2025-03-20 12:59:33,261 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [user execution: malicious file]: tensor([[0.2860]])
+[2025-03-20 12:59:33,278 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [user execution: malicious image]: tensor([[0.2769]])
+[2025-03-20 12:59:33,294 INFO] ++ Similarity between [Command and Scripting Interpreter: Python as used by the malware] and [windows management instrumentation]: tensor([[0.3554]])
+[2025-03-20 12:59:33,295 INFO] ++ Scores: [('command and scripting interpreter: python', tensor([[0.6364]])), ('command and scripting interpreter: powershell', tensor([[0.4899]])), ('command and scripting interpreter: autohotkey & autoit', tensor([[0.4881]])), ('command and scripting interpreter: network device cli', tensor([[0.4828]])), ('command and scripting interpreter', tensor([[0.4827]]))]
+[2025-03-20 12:59:33,295 INFO] ++ Similar techniques found:
+['command and scripting interpreter: python', 'command and scripting interpreter: powershell', 'command and scripting interpreter: autohotkey & autoit', 'command and scripting interpreter: network device cli', 'command and scripting interpreter']
+[2025-03-20 12:59:33,295 INFO] ++ Querying the QA model for action Command and Scripting Interpreter: Python as used by the malware with the following context:
+command and scripting interpreter: python
+command and scripting interpreter: powershell
+command and scripting interpreter: autohotkey & autoit
+command and scripting interpreter: network device cli
+command and scripting interpreter
+[2025-03-20 12:59:38,289 INFO] ++ QA suggested technique: command and scripting interpreter: python
+[2025-03-20 12:59:38,289 INFO] ++ Human-in-the-loop required for action: Command and Scripting Interpreter: Python as used by the malware due to score difference: tensor([[0.0019]])
