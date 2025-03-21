@@ -59,6 +59,7 @@ nltk.download('stopwords')
 nltk.download('wordnet')
 
 async def main():
+    start = time.time()
     console = Console()
 
     # load config
@@ -517,7 +518,7 @@ async def main():
     # save output
     logging.info("Saving output")
     console.print(f"Saving output to [red]{os.path.join(config["OUTPUT_DIR"], config["OUTPUT_FILE"])}[/red]")    
-    with open(os.path.join(config["OUTPUT_DIR"], config["OUTPUT_FILE"]), "w") as f:
+    with open(os.path.join(config["OUTPUT_DIR"], config["OUTPUT_FILE"]+"_"+selected_interaction_level), "w") as f:
         json.dump(output, f)
 
     logger.info("Application finished with output saved")
@@ -525,6 +526,9 @@ async def main():
     console.print(f"Ending time: {time.strftime('%Y-%m-%d %H:%M:%S')}", style="bold green")
     console.print(f"Application finished with output saved", style="bold green")
 
-
+    end = time.time()
+    elapsed_minutes = (end - start) / 60
+    logging.info("Elapsed time: %.2f minutes", elapsed_minutes)
+    console.print(f"Elapsed time: {elapsed_minutes:.2f} minutes", style="bold green")
 if __name__ == "__main__":
     asyncio.run(main())
