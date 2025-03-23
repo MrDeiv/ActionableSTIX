@@ -422,7 +422,7 @@ async def main():
             """.format(context=docs, action=action_name)
 
             pre_conditions = chain_precond.invoke({"context": query_preconditions, "action": action_name})
-            logging.info(f"++ Pre-conditions computed for action: {action_name}")
+            logging.info(f"++ Pre-conditions computed for action: {action_name} using {len(docs)} documents:\n{docs}")
 
             # post-conditions
             query_postconditions_retriever = """
@@ -445,7 +445,7 @@ async def main():
             """.format(context=docs)
 
             post_conditions = chain_postcond.invoke({"context": query_postconditions})
-            logging.info(f"++ Post-conditions computed for action: {action_name}")
+            logging.info(f"++ Post-conditions computed for action: {action_name} using {len(docs)} documents:\n{docs}")
 
             # indicators
             indicators = chain_indicators.invoke({"context": "\n".join(iocs), "action": action_name})
