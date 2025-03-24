@@ -1,0 +1,82 @@
+[
+    {
+        "attack_steps": [
+            {
+                "name": "Create or Modify System Process: Windows Service as used by the malware",
+                "truth": "Goofy Guineapig maintains persistence as a Windows service."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Masquerading: Match Legitimate Name or Location as used by the malware",
+                "truth": "Goofy Guineapig masquerades as a FireFox installer and a Google updater."
+            },
+            {
+                "name": "Virtualization/Sandbox Evasion: Time Based Evasion as used by the malware",
+                "truth": "Goofy Guineapig checks the time register twice for a delay of more than 100 milliseconds and will not continue execution if more time has elapsed."
+            },
+            {
+                "name": "Virtualization/Sandbox Evasion: System Checks as used by the malware",
+                "truth": "Goofy Guineapig checks the disk size, physical memory size, and number of logical processors, and will not continue execution if any of the checks fail."
+            },
+            {
+                "name": "Virtualization/Sandbox Evasion: User Activity Based Checks as used by the malware",
+                "truth": "Goofy Guineapig checks for processes running on a system which indicate that it is being reverse engineered or debugged and will not continue execution if any of the checks fail."
+            },
+            {
+                "name": "Obfuscated Files or Information: Software Packing as used by the malware",
+                "truth": "Goofy Guineapig is UPX packed and packaged in with a legitimate NSIS installer."
+            },
+            {
+                "name": "Deobfuscate/Decode Files or Information as used by the malware",
+                "truth": "Goofy Guineapig contains stack-based strings which are obfuscated with single byte XOR or subtraction throughout the binary."
+            },
+            {
+                "name": "Hide Artifacts: Hidden Window as used by the malware",
+                "truth": "Goofy Guineapig contains the functionality to perform process hollowing on dllhost.exe, when this is performed the process is created hidden."
+            },
+            {
+                "name": "Indicator Removal on Host: File Deletion as used by the malware",
+                "truth": "Once the persistence mechanism has been installed, the malicious files are copied to the ProgramData directory and removed from the directory containing the extracted Firefox files. The final command in the temp.bat script contains a command to self-delete."
+            },
+            {
+                "name": "Hijack Execution Flow: DLL Side-Loading as used by the malware",
+                "truth": "A legitimate executable is installed by the Goofy Guineapig loader, alongside a malicious DLL which will be loaded by the legitimate executable."
+            },
+            {
+                "name": "Process Injection: Process Hollowing as used by the malware",
+                "truth": "Goofy Guineapig can perform process hollowing on the dllhost.exe binary, injecting content downloaded by the C2."
+            },
+            {
+                "name": "Signed Binary Proxy Execution: Rundll32 as used by the malware",
+                "truth": "The Goofy Guineapig persistence mechanism utilises rundll32.exe and url.dll to execute the legitimate binary which will load the malicious DLL"
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "System Information Discovery as used by the malware",
+                "truth": "Goofy Guineapig sends information about the infected machine in each C2 packet, as an obfuscated ‘Authorization’ string in the HTTP header."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Application Layer Protocol: Web Protocols as used by the malware",
+                "truth": "Goofy Guineapig uses HTTPS for its C2 communications."
+            },
+            {
+                "name": "Fallback Channels as used by the malware",
+                "truth": "Goofy Guineapig contains the functionality to communicate using UDP and the KCP protocol, or direct socket communications, dependant on an embedded configuration string."
+            },
+            {
+                "name": "Non-Standard Port as used by the malware",
+                "truth": "Goofy Guineapig communicates over the non-standard HTTPS port 4443."
+            }
+        ]
+    }
+]
