@@ -11,15 +11,15 @@
         "attack_steps": [
             {
                 "name": "Masquerading: Match Legitimate Name or Location as used by the malware",
-                "truth": "Goofy Guineapig masquerades as a FireFox installer and a Google updater."
+                "truth": "Goofy Guineapig masquerades as a FireFox installer and a Google updater. Goofy Guineapig has trojanised a legitimate FireFox NSIS installation package and is dropped alongside legitimate FireFox files."
             },
             {
                 "name": "Virtualization/Sandbox Evasion: Time Based Evasion as used by the malware",
-                "truth": "Goofy Guineapig checks the time register twice for a delay of more than 100 milliseconds and will not continue execution if more time has elapsed."
+                "truth": "On start up the Goofy Guineapig malware reads the CPU timestamp counter, saves the result, then reads the timestamp counter again immediately and saves the result. These two values are compared, and if the value is more than 100ms difference the malware will not continue execution."
             },
             {
                 "name": "Virtualization/Sandbox Evasion: System Checks as used by the malware",
-                "truth": "Goofy Guineapig checks the disk size, physical memory size, and number of logical processors, and will not continue execution if any of the checks fail."
+                "truth": "The malware implements some basic anti-sandbox / anti-virtual machine (VM) techniques. These include checking that the physical memory size of the machine exceeds 2GB and that the disk is more than 1GB in size. It also checks that the number of logical processors exceeds 2. If any of these checks fail the malware will exit. Variations on each of these sandbox detection checks were also observed during analysis of the Jolly Jellyfish malware."
             },
             {
                 "name": "Virtualization/Sandbox Evasion: User Activity Based Checks as used by the malware",
@@ -43,11 +43,11 @@
             },
             {
                 "name": "Hijack Execution Flow: DLL Side-Loading as used by the malware",
-                "truth": "A legitimate executable is installed by the Goofy Guineapig loader, alongside a malicious DLL which will be loaded by the legitimate executable."
+                "truth": "A legitimate executable is installed by the Goofy Guineapig loader, alongside a malicious DLL which will be loaded by the legitimate executable. The malicious DLL is sideloaded by the legitimate, signed, executable GoogleUpdate.exe (also dropped as part of the NSIS installer)."
             },
             {
                 "name": "Process Injection: Process Hollowing as used by the malware",
-                "truth": "Goofy Guineapig can perform process hollowing on the dllhost.exe binary, injecting content downloaded by the C2."
+                "truth": "The tasking has the option to perform process hollowing on the dllhost.exe process, allowing a payload executable to appear to run under a legitimate process path and name in process listings, injecting content downloaded by the C2"
             },
             {
                 "name": "Signed Binary Proxy Execution: Rundll32 as used by the malware",
@@ -67,7 +67,7 @@
         "attack_steps": [
             {
                 "name": "Application Layer Protocol: Web Protocols as used by the malware",
-                "truth": "Goofy Guineapig uses HTTPS for its C2 communications."
+                "truth": "C2 communications occur using HTTPS GET and POST requests."
             },
             {
                 "name": "Fallback Channels as used by the malware",

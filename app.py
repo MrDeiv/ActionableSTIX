@@ -157,7 +157,6 @@ async def main():
     {action} 
     """
     refinement_llm = ChatOllama(model="gemma2:9b")
-    #refinement_llm = ChatGroq(model="llama-3.2-11b-vision-preview", temperature=0)
     chain_refinement = RunnableSequence(
         first=ChatPromptTemplate.from_template(query_refinement_template),
         middle=[refinement_llm],
@@ -176,7 +175,6 @@ async def main():
     The requirements must include the environment, tools, connectivity and resources needed.
     If the requirements are not directly stated, you MUST infer the answer. If no requirements are needed, you MUST state that.
     """
-    #summary_llm = ChatGroq(model="llama-3.2-3b-preview", temperature=0)
     summary_llm = ChatOllama(model="gemma2:9b", temperature=0)
     chain_precond = RunnableSequence(
         first=ChatPromptTemplate.from_template(query_summary),
@@ -212,7 +210,6 @@ async def main():
     If there are no indicators related to the action, you MUST return an empty list.
     You MUST formulate the indicators in a passive sentence.
     """
-    #indicators_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
     indicators_llm = ChatOllama(model="gemma2:9b", temperature=0)
     chain_indicators = RunnableSequence(
         first=ChatPromptTemplate.from_template(query),
@@ -228,7 +225,6 @@ async def main():
     You MUST rephrase it in a passive, formal, and technical way.
     You MUST provide only the rephrased text, DO NOT provide any additional information.
     """
-    #rephrase_template_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
     rephrase_template_llm = ChatOllama(model="gemma2:9b", temperature=0)
     chain_rephrase = RunnableSequence(
         first=ChatPromptTemplate.from_template(rephrase_template),
@@ -249,7 +245,6 @@ async def main():
     Each choice is separated by a new line, DO NOT truncate the choices.
     You MUST select one choice, DO NOT infer the answer.
     """
-    #qa_llm = ChatGroq(model="gemma2-9b-it", temperature=0)
     qa_llm = ChatOllama(model="gemma2:9b", temperature=0)
     chain_qa = RunnableSequence(
         first=ChatPromptTemplate.from_template(qa_template),
@@ -518,7 +513,7 @@ async def main():
     # save output
     logging.info("Saving output")
     console.print(f"Saving output to [red]{os.path.join(config["OUTPUT_DIR"], config["OUTPUT_FILE"])}[/red]")    
-    with open(os.path.join(config["OUTPUT_DIR"], config["OUTPUT_FILE"]+"_"+selected_interaction_level), "w") as f:
+    with open(os.path.join(config["OUTPUT_DIR"], selected_interaction_level + '_' + config["OUTPUT_FILE"]), "w") as f:
         json.dump(output, f)
 
     logger.info("Application finished with output saved")

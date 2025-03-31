@@ -137,7 +137,7 @@ if __name__ == "__main__":
 
     # Load JSON data
     config = json.load(open(config_file))
-    out = json.load(open(os.path.join(config['OUTPUT_DIR'], config['OUTPUT_FILE'])))
+    out = json.load(open(os.path.join(config['OUTPUT_DIR'], "LOW_"+config['OUTPUT_FILE'])))
 
     stix_parser = STIXParser()
     stix_parser.parse(config['STIX_FILE'])

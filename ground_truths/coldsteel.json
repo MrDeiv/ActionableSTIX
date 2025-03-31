@@ -1,0 +1,74 @@
+[
+    {
+        "attack_steps": [
+            {
+                "name": "Exploit Public-Facing Application as used by the malware",
+                "truth": "COLDSTEEL is believed to have been deployed following exploitation of Log4j."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Command and Scripting Interpreter: Windows Command Shell as used by the malware",
+                "truth": "COLDSTEEL can run arbitrary commands using cmd.exe."
+            },
+            {
+                "name": "System Services: Service Execution as used by the malware",
+                "truth": "COLDSTEEL executes malicious code as a Windows service."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Create or Modify System Process: Windows Service as used by the malware",
+                "truth": "COLDSTEEL creates an autostart service to persist after a system reboot. COLDSTEEL persists as a Windows service. COLDSTEEL imitates legitimate sounding Windows service names like msupdate, this is believed to be to try and avoid drawing suspicion."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Obfuscated Files or Information: Software Packing as used by the malware",
+                "truth": "MileStone2017 variants of COLDSTEEL have been observed to be packed using Themida. Themida is a software packer designed to frustrate reverse engineering & scanning. Variants of COLDSTEEL have been observed using Themida version 3.0.5 and 3.1.1. It should be noted that Themida is used to protect executables after compilation. Themida randomises certain aspects of the packing process, applying Themida to the same executable file multiple times results in different output files each iteration. By default, Themida does not modify an executable’s compile time."
+            },
+            {
+                "name": "Modify Registry as used by the malware",
+                "truth": "COLDSTEEL modifies registry keys directly to add a description to its service."
+            },
+            {
+                "name": "Indicator Removal: File Deletion as used by the malware",
+                "truth": "COLDSTEEL has the ability to delete files from the infected machine."
+            },
+            {
+                "name": "Access Token Manipulation: Create Process with Token as used by the malware",
+                "truth": "The MileStone2016 variant of COLDSTEEL has the ability to create a process as the user named ANONYMOUS."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "System Information Discovery as used by the malware",
+                "truth": "COLDSTEEL collects a range of system information from the infected machine."
+            },
+            {
+                "name": "File and Directory Discovery as used by the malware",
+                "truth": "COLDSTEEL has commands to enumerate the filesystem."
+            },
+            {
+                "name": "Process Discovery as used by the malware",
+                "truth": "FBI20111024 variants of COLDSTEEL have the ability to collect process information."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Non-Application Layer Protocol as used by the malware",
+                "truth": "COLDSTEEL communicates over TCP sockets, using a custom message format. COLDSTEEL communicates using TCP to exfiltrate data and receive additional tasking. The port varies between samples, 443, 8843 and 8888 having been observed. It should be noted that despite being on port 443 the traffic is not HTTPS, this traffic is not encrypted."
+            }
+        ]
+    }
+]

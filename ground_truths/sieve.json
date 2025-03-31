@@ -1,0 +1,46 @@
+[
+    {
+        "attack_steps": [
+            {
+                "name": "Command and Scripting Interpreter: Python as used by the malware",
+                "truth": "Small Sieve is a PyInstaller-packed Python script."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder as used by the malware",
+                "truth": "Small Sieve is started by a registry run key. Once executed, the backdoor binary index.exe is installed in the user’s AppData/Roaming directory and is added as a Run key in the registry to enabled persistence after reboot."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Obfuscated Files or Information as used by the malware",
+                "truth": "Small Sieve uses a custom hex byte swapping encoding scheme combined with an obfuscated base64 function to protect program strings and updated Telegram credentials."
+            },
+            {
+                "name": "Execution Guardrails as used by the malware",
+                "truth": "The Small Sieve payload will only execute correctly if the word 'Platypus' is passed to it on the command line."
+            },
+            {
+                "name": "Masquerading: Match Legitimate Name or Location as used by the malware",
+                "truth": "Small Sieve uses variations of Microsoft (Microsift) and Outlook in its filenames to attempt to avoid detection during casual inspection."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Application Layer Protocol: Web Protocols as used by the malware",
+                "truth": "Small Sieve beacons and tasking are performed using the Telegram API over HTTPS."
+            },
+            {
+                "name": "Data Encoding: Non-Standard Encoding as used by the malware",
+                "truth": "Small Sieve employs a custom hex byte swapping encoding scheme to obfuscate tasking traffic."
+            }
+        ]
+    }
+]

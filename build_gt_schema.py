@@ -1,8 +1,13 @@
 import json
+import os
 
 if __name__ == "__main__":
-    ref = "out/output.json"
-    gt = "ground_truths/goofy.json"
+    ref = "out/LOW_output.json"
+    gt = "ground_truths/coldsteel.json"
+
+    if os.path.exists(gt):
+        print(f"File {gt} already exists. Skipping.")
+        exit(0)
 
     ref_data = json.load(open(ref))
     gt_data = []
