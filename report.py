@@ -76,30 +76,29 @@ def create_pdf_from_json(malware, out, output_pdf):
         elements.append(Paragraph(f"<b>Milestone {i+1}</b>", styles["Title"]))
         elements.append(Spacer(1, 10))
 
-        # Pre-Conditions (Numbered List)
-        elements.append(Paragraph("<b>Pre-Conditions:</b>", styles["Heading2"]))
-        pre_conditions_list = ListFlowable(
-            [ListItem(Paragraph(cond, styles["Normal"])) for cond in item["pre-conditions"]],
-            bulletType="bullet"  # Numbered List
-        )
-        elements.append(pre_conditions_list)
-        elements.append(Spacer(1, 10))
-
-        # Post-Conditions (Numbered List)
-        elements.append(Paragraph("<b>Post-Conditions:</b>", styles["Heading2"]))
-        post_conditions_list = ListFlowable(
-            [ListItem(Paragraph(cond, styles["Normal"])) for cond in item["post-conditions"]],
-            bulletType="bullet"  # Numbered List
-        )
-        elements.append(post_conditions_list)
-        elements.append(Spacer(1, 10))
-
         # Attack Steps
         for k, attack_step in enumerate(item["attack_steps"]):
             elements.append(Paragraph(f"<b>Attack Step {i+1}.{k+1}</b>", styles["Heading2"]))
             elements.append(Paragraph("="*50, styles["Normal"]))
             elements.append(Paragraph(f"<b>Name:</b> {attack_step['name']}", styles["Normal"]))
             elements.append(Paragraph(f"<b>Description:</b> {attack_step['description']}", styles["Normal"]))
+
+            # Pre-Conditions (Numbered List)
+            elements.append(Paragraph("<b>Pre-Conditions:</b>", styles["Heading2"]))
+            pre_conditions_list = ListFlowable(
+                [ListItem(Paragraph(cond, styles["Normal"])) for cond in attack_step["pre-conditions"]],
+                bulletType="bullet"  # Numbered List
+            )
+            elements.append(pre_conditions_list)
+            elements.append(Spacer(1, 10))
+
+            # Post-Conditions (Numbered List)
+            elements.append(Paragraph("<b>Post-Conditions:</b>", styles["Heading2"]))
+            post_conditions_list = ListFlowable(
+                [ListItem(Paragraph(cond, styles["Normal"])) for cond in attack_step["post-conditions"]],
+                bulletType="bullet"  # Numbered List
+            )
+            elements.append(post_conditions_list)
         
             # MITRE Technique
             mitre = attack_step["mitre_technique"]

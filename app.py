@@ -260,8 +260,8 @@ async def main():
         interesting_techniques = mitre_techniques[tactic]['techniques']
 
         state['attack_steps'] = []
-        state['pre-conditions'] = []
-        state['post-conditions'] = []
+        #state['pre-conditions'] = []
+        #state['post-conditions'] = []
         for action in grouped_patterns[tactic]:
             # each iteration is an attack step
             action_name = action['name']
@@ -496,8 +496,8 @@ async def main():
                 "indicators": indicators
             }
 
-            state['pre-conditions'].extend(pre_conditions)
-            state['post-conditions'].extend(post_conditions)
+            #state['pre-conditions'].extend(pre_conditions)
+            #state['post-conditions'].extend(post_conditions)
 
             # add actions to the attack step
             state['attack_steps'].append(actions)

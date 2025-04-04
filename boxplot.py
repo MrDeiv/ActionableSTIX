@@ -2,6 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import json
 
+LABEL_SIZE = 35
+TITLE_SIZE = 40
+TICK_SIZE = 25
+
 """
 Execution times
 """
@@ -28,9 +32,11 @@ for time in times:
     t.append(json.load(open(time)))
 
 plt.boxplot(t)
-plt.title('Evaluation Execution Times')
-plt.xlabel('Cases')
-plt.ylabel('Execution Time (s)')
+plt.title('Evaluation Execution Times', fontsize=TITLE_SIZE)
+plt.xlabel('Cases', fontsize=LABEL_SIZE)
+plt.ylabel('Execution Time (s)', fontsize=LABEL_SIZE)
+plt.tick_params(axis='x', labelsize=TICK_SIZE)
+plt.tick_params(axis='y', labelsize=TICK_SIZE)
 plt.show()
 
 # time per step
@@ -50,9 +56,11 @@ for i,d in enumerate(data):
 plt.boxplot(computed)
 
 # Add labels and title
-plt.title('Evaluation Execution Times per Attack Step')
-plt.xlabel('Cases')
-plt.ylabel('Execution Time (s) per Attack Step')
+plt.title('Evaluation Execution Times per Attack Step', fontsize=TITLE_SIZE)
+plt.xlabel('Cases', fontsize=LABEL_SIZE)
+plt.ylabel('Execution Time (s) per Attack Step', fontsize=LABEL_SIZE)
+plt.tick_params(axis='x', labelsize=TICK_SIZE)
+plt.tick_params(axis='y', labelsize=TICK_SIZE)
 
 # Show the plot
 plt.show()
@@ -82,9 +90,11 @@ for i, score in enumerate(s):
 plt.boxplot(f1_scores)
 
 # Add labels and title
-plt.title('Evaluation F1 Scores')
-plt.xlabel('Cases')
-plt.ylabel('F1 Score')
+plt.title('Evaluation F1 Scores', fontsize=TITLE_SIZE)
+plt.xlabel('Cases', fontsize=LABEL_SIZE)
+plt.ylabel('F1 Score', fontsize=LABEL_SIZE)
+plt.tick_params(axis='x', labelsize=TICK_SIZE)
+plt.tick_params(axis='y', labelsize=TICK_SIZE)
 
 # Show the plot
 plt.show()
