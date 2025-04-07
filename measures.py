@@ -13,6 +13,8 @@ MEASURES_SCORE = "execution_scores_coldsteel.json"
 execution_times = []
 execution_scores = []
 
+bertscore = load("bertscore")
+
 for i in range(NUM_RUNS):
     print(f"Running {SCRIPT_TO_RUN} - Iteration {i+1}/{NUM_RUNS}")
     start_time = time.time()
@@ -23,8 +25,6 @@ for i in range(NUM_RUNS):
     end_time = time.time()
     duration = end_time - start_time
     execution_times.append(duration)
-
-    bertscore = load("bertscore")
 
     ref_data = json.load(open(GENERATED_OUTPUT))
     gt_data = json.load(open(GROUND_TRUTH))

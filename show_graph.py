@@ -12,19 +12,19 @@ if __name__ == '__main__':
 
     # Add nodes and edges
     for attack_step_id, attack_step in enumerate(result):
-        net.add_node(attack_step['id'], label=str(attack_step_id+1), title="STEP "+str(attack_step_id+1), color='blue', shape='circle', size=30)
+        net.add_node(attack_step['id'], label=f"m{str(attack_step_id+1)}", title="STEP "+str(attack_step_id+1), color='blue', shape='circle', size=30)
         
         # Get previous attack step
         if attack_step_id > 0:
             prev_actions = result[attack_step_id - 1]['attack_steps']
             for action_id, action in enumerate(prev_actions):
-                net.add_node(action['id'], label=str(action_id+1), title=action['name'], color='red', shape='square', size=10)
+                net.add_node(action['id'], label=f"a{str(action_id+1)}", title=action['name'], color='red', shape='square', size=10)
                 net.add_edge(action['id'], attack_step['id'], color='black')
         else:
             net.add_edge('START', result[0]['id'], color='black')
         
         for action_id, action in enumerate(attack_step['attack_steps']):
-            net.add_node(action['id'], label=str(action_id+1), title=action['name'], color='red', shape='square', size=10)
+            net.add_node(action['id'], label=f"a{str(action_id+1)}", title=action['name'], color='red', shape='square', size=10)
             net.add_edge(attack_step['id'], action['id'], color='black')
 
     # Add END node

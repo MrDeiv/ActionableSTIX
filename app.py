@@ -37,7 +37,7 @@ logging.config.dictConfig({
     'disable_existing_loggers': True,
 })
 
-CONFIG_FILE = "./config.json"
+CONFIG_FILE = "config/config.json"
 
 def get_hashes(indicators: list[dict]) -> list[str]:
     """
@@ -146,7 +146,7 @@ async def main():
     attack_patterns_used = stix_parser.get_attack_pattern_used()
 
     # group the attack patterns
-    mitre_tactics = json.loads(open("mitre-tactics.json").read())
+    mitre_tactics = json.loads(open("mitre/mitre-tactics.json").read())
     grouped_patterns = group_attack_patterns(mitre_tactics, attack_patterns_used)
 
     # this are all the hashes mentioned in the malware's iocs, i.e., related files
