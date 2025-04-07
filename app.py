@@ -123,7 +123,21 @@ async def main():
 
     # extract the attack patterns, malware, and indicators
     malware_patterns = stix_parser.extract_malware()
-    malware_name = malware_patterns[0]['name']
+    malware_patterns.extend(stix_parser.extract_malware())
+
+    assert len(malware_patterns) > 0, "No malware found in the STIX file"
+
+    # if there are multiple malware patterns, ask the user to select one
+    if len(malware_patterns) > 1:
+        console.print("[[bold red]!!![/bold red]] Multiple Malware instances found in the STIX file. Please, select one to use", style="bold red")
+        logging.warning("Multiple Malware instances found in the STIX file. Asking user to select one.")
+        for i, malware in enumerate(malware_patterns):
+            console.print(f"[yellow]{i+1}.[/yellow] {malware['name']}")
+
+        selected = int(input("> Your choice: ")) - 1
+    
+    malware_name = malware_patterns[selected]['name']
+    logging.info(f"Selected malware: {malware_name}")
     indicators_patterns = stix_parser.extract_indicators()
 
     iocs = [x['name'] + ": " + " ".join(x['pattern']) for x in indicators_patterns if "rule" not in x['pattern']]
