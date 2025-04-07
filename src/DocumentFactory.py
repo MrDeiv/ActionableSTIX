@@ -1,45 +1,39 @@
 from langchain_core.documents import Document
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_experimental.text_splitter import SemanticChunker
 from langchain_text_splitters import NLTKTextSplitter
-from langchain_community.document_loaders import TextLoader
-from langchain_text_splitters import CharacterTextSplitter, RecursiveJsonSplitter, RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveJsonSplitter
 import os
 from src.CustomCSVLoader import CustomCSVLoader
 from src.CustomJSONLoader import CustomJSONLoader
 from src.CustomYMLLoader import CustomYMLLoader
 import PyPDF2
-import re
 import os
 import nltk
-from nltk.corpus import stopwords
+from bs4 import BeautifulSoup
 
 nltk.download('stopwords')
 nltk.download('punkt_tab')
 
 class DocumentFactory:
     @staticmethod
-    def _remove_yara_rules(text):
-        yara_pattern = r'(?s)\brule\b.*?\{.*?\n\}'
-        cleaned_text = re.sub(yara_pattern, '', text)
-        cleaned_text = re.sub(r'\n\s*\n', '\n\n', cleaned_text)
-        return cleaned_text.strip()
+    def from_text(text:str) -> list[Document]:
+        tokenizer = NLTKTextSplitter(
+            chunk_size=400,
+            chunk_overlap=400*0.3,
+        )
+        texts = tokenizer.split_text(text)
+        return [Document(page_content=doc, metadata={"source": "text"}) for doc in texts]
     
     @staticmethod
-    def _remove_stopwords(text:str) -> str:
-        stop_words = set(stopwords.words('english'))
-        words = text.split()
-        cleaned_text = " ".join([word for word in words if word.lower() not in stop_words])
-        return cleaned_text
-
-    @staticmethod
-    def from_text(file:str) -> list[Document]:
+    def from_text_file(file:str) -> list[Document]:
         assert os.path.exists(file), f"File {file} not found"
 
-        # load text
-        text_documents = TextLoader(file).load()
-        chunks = CharacterTextSplitter().split_documents(text_documents)
-        return chunks
+        text = open(file, encoding='utf-8').read()
+        tokenizer = NLTKTextSplitter(
+            chunk_size=400,
+            chunk_overlap=400*0.3,
+        )
+        texts = tokenizer.split_text(text)
+        return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
     
     @staticmethod
     def from_pdf(file:str) -> list[Document]:
@@ -52,11 +46,11 @@ class DocumentFactory:
             text += page.extract_text()
 
         tokenizer = NLTKTextSplitter(
-            chunk_size=1000,
-            chunk_overlap=200,
+            chunk_size=400,
+            chunk_overlap=400*0.3,
         )
         texts = tokenizer.split_text(text)
-        return [Document(page_content=doc) for doc in texts]
+        return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
     
     @staticmethod
     def from_json(file:str) -> list[Document]:
@@ -64,7 +58,7 @@ class DocumentFactory:
 
         # load json
         json = CustomJSONLoader(file).load()
-        chunks = RecursiveJsonSplitter().create_documents([json])
+        chunks = RecursiveJsonSplitter().create_documents([json], metadatas=[{"source": file}])
         return chunks
     
     @staticmethod
@@ -73,7 +67,7 @@ class DocumentFactory:
 
         # load csv
         csv = CustomCSVLoader(file).load()
-        return [Document(page_content=str(chunk)) for chunk in csv]
+        return [Document(page_content=str(chunk), metadata={"source": file}) for chunk in csv]
     
     @staticmethod
     def from_yml(file:str) -> list[Document]:
@@ -81,8 +75,43 @@ class DocumentFactory:
 
         # load yml
         yml = CustomYMLLoader(file).load()
-        chunks = RecursiveJsonSplitter().create_documents([yml])
+        chunks = RecursiveJsonSplitter().create_documents([yml], metadatas=[{"source": file}])
         return chunks
+    
+    @staticmethod
+    def from_html(file:str) -> list[Document]:
+        assert os.path.exists(file), f"File {file} not found"
+
+        # load html
+        html = open(file, encoding='utf-8').read()
+        soup = BeautifulSoup(html, 'html.parser')
+        for script in soup(["script", "style"]):
+            script.extract()
+        
+        text = soup.get_text(strip=True)
+        tokenizer = NLTKTextSplitter(
+            chunk_size=400,
+            chunk_overlap=400*0.3,
+        )
+        texts = tokenizer.split_text(text)
+        return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
+    
+    def from_xml(file:str) -> list[Document]:
+        assert os.path.exists(file), f"File {file} not found"
+
+        # load xml
+        xml = open(file, encoding='utf-8').read()
+        soup = BeautifulSoup(xml, 'xml')
+        for script in soup(["script", "style"]):
+            script.extract()
+        
+        text = soup.get_text(strip=True)
+        tokenizer = NLTKTextSplitter(
+            chunk_size=400,
+            chunk_overlap=400*0.3,
+        )
+        texts = tokenizer.split_text(text)
+        return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
     
     @staticmethod
     def from_file(file:str) -> list[Document]:
@@ -94,8 +123,10 @@ class DocumentFactory:
             ".csv": DocumentFactory.from_csv,
             ".json": DocumentFactory.from_json,
             ".yml": DocumentFactory.from_yml,
-            ".txt": DocumentFactory.from_text,
-            ".pdf": DocumentFactory.from_pdf
+            ".txt": DocumentFactory.from_text_file,
+            ".pdf": DocumentFactory.from_pdf,
+            ".html": DocumentFactory.from_html,
+            ".xml": DocumentFactory.from_xml,
         }
     
         ext = os.path.splitext(file)[-1]
@@ -105,6 +136,3 @@ class DocumentFactory:
         else:
             return processors[".txt"](file)
         
-    @staticmethod
-    def from_content(content:str) -> list[Document]:
-        return [Document(page_content=content)]

@@ -1,0 +1,24 @@
+{
+    "STIX_FILE": "sample_stix/NCSC-MAR-Cold-Steel-stix.json",
+    "ATT&CK_FILE": "mitre/enterprise-attack.json",
+    "DOCUMENTS_DIR": "./documents",
+    "OUTPUT_DIR": "./out",
+    "OUTPUT_FILE": "output.json",
+    "LOGS_DIR": "./logs",
+    "MODELS": {
+        "TEXT_GENERATION": "gemma2:9b",
+        "SENTENCE_TRANSFORMER": "all-MiniLM-L6-v2"
+    },
+    "k": 3,
+    "BM25_k": 5,
+    "LAMBDA": 0.8,
+    "SIMILARITY_TECHNIQUES": 0.6,
+    "N_TECHNIQUES": 5,
+    "INTERACTION_LEVELS": {
+        "LOW": 0,
+        "MEDIUM": 0.003,
+        "HIGH": 0.005
+    },
+    "SELECTED_INTERACTION_LEVEL": "LOW",
+    "DUPLICATE_THRESHOLD": 0.7
+}

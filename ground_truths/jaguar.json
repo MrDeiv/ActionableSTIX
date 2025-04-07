@@ -1,0 +1,66 @@
+[
+    {
+        "attack_steps": [
+            {
+                "name": "Exploit Public-Facing Application as used by the malware",
+                "truth": "Jaguar Tooth is deployed via an SNMP exploit which grants remote code execution and write-access to the target operating system."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Modify Authentication Process as used by the malware",
+                "truth": "Jaguar Tooth patches two authentication functions to grant access to local accounts for Telnet and physical sessions, without checking the provided password."
+            },
+            {
+                "name": "Modify System Image: Patch System Image as used by the malware",
+                "truth": "Jaguar Tooth patches the system image in memory to enable a user authentication bypass."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Remote System Discovery as used by the malware",
+                "truth": "Jaguar Tooth performs remote system discovery by utilising Cisco IOS CLI commands to obtain ARP and connected devices information."
+            },
+            {
+                "name": "File and Directory Discovery as used by the malware",
+                "truth": "Jaguar Tooth enumerates the local flash filesystem by utilising a Cisco IOS CLI command."
+            },
+            {
+                "name": "System Network Configuration Discovery as used by the malware",
+                "truth": "Jaguar Tooth utilises several Cisco IOS CLI commands to discover the system network configuration."
+            },
+            {
+                "name": "System Information Discovery as used by the malware",
+                "truth": "Jaguar Tooth discovers system information such as interfaces and software versioning by utilising several Cisco IOS CLI commands"
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Automated Collection as used by the malware",
+                "truth": "Jaguar Tooth contains a hardcoded list of Cisco IOS CLI and Tcl commands which are automatically executed and the results exfiltrated over TFTP."
+            },
+            {
+                "name": "Data from Configuration Repository: Network Device Configuration Dump as used by the malware",
+                "truth": "Jaguar Tooth utilises a Cisco IOS CLI command to dump the current device running configuration. "
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Exfiltration Over Alternative Protocol: Exfiltration Over Unencrypted Non-C2 Protocol as used by the malware",
+                "truth": "Jaguar Tooth exfiltrates collected device information over TFTP. This includes device information such as the running configuration, firmware version, directory listing of flash memory, and network information including the Address Resolution Protocol (ARP) and routing tables, interfaces and other connected routers."
+            },
+            {
+                "name": "Automated Exfiltration as used by the malware",
+                "truth": "Jaguar Tooth contains a hardcoded list of Cisco IOS CLI and Tcl commands which are automatically executed and the results exfiltrated over TFTP."
+            }
+        ]
+    }
+]

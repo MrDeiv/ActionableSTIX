@@ -3,3 +3,4 @@ documents/
 .env
 */__pycache__/
 static/
+out/.*

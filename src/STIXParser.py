@@ -28,7 +28,7 @@ class STIXParser:
         """
 
         keys = ['malware_types', 'capabilities', 'operating_system_refs', 'architecture_execution_envs', 'implementation_languages', 'x_operating_systems']
-        text += " | ".join([f"Malware {key}: {" ".join(malware[key])}" for key in keys if key in malware])
+        text += " | ".join([f"Malware {key}: {' '.join(malware[key])}" for key in keys if key in malware])
 
         return text 
     
@@ -48,3 +48,7 @@ class STIXParser:
         """
         f = getattr(self, f"_stringify_{obj['type']}", None)
         return f(obj)
+    
+    def get_attack_pattern_used(self):
+        uses_relations = [obj for obj in self.objects if obj['type'] == 'relationship' and obj['relationship_type'] == 'uses']
+        return [obj for obj in self.objects if obj['type'] == 'attack-pattern' and obj['id'] in [rel['target_ref'] for rel in uses_relations]]

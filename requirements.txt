@@ -19,3 +19,11 @@ nltk
 evaluate
 rouge_score
 bert_score
+pypdf2
+mitreattack-python
+smolagents
+rank_bm25
+json-repair
+reportlab
+rich
+pyvis

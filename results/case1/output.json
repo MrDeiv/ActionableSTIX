@@ -1,0 +1,796 @@
+[
+    {
+        "id": "acc06fad-10b3-461c-b951-f248cf163a32",
+        "attack_steps": [
+            {
+                "id": "c7c19d20-8843-42a7-bc83-0d6b3af299c9",
+                "name": "Create or Modify System Process: Windows Service as used by the malware",
+                "description": "A new Windows service is created by the malware to achieve persistence.  The malware utilizes functions from the Windows API to register a unique service on the target system. Specific parameters are configured for the service, including a display name and description designed to appear innocuous. The executable path is set to point to either the malicious Goofy Guineapig DLL or a dropper that loads it. The startup type is configured as automatic, ensuring the service initiates upon each system boot. Following registration, the newly created service is initiated, causing the execution of Goofy Guineapig's code continuously in the background.  \n\n\n",
+                "mitre_technique": {
+                    "id": "T1543.003",
+                    "name": "Create or modify system process: windows service",
+                    "description": "Adversaries may create or modify Windows services to repeatedly execute malicious payloads as part of persistence. When Windows boots up, it starts programs or applications called services that perform background system functions. Windows service configuration information, including the file path to the service's executable or recovery programs/commands, is stored in the Windows Registry."
+                },
+                "pre-conditions": [
+                    "\nThe malware has access to necessary system functions.\n",
+                    "\nThe malware has successfully executed its initial code.\n",
+                    "\nWindows operating system environment.\n",
+                    "\nAccess to system APIs for creating and modifying services.\n",
+                    "\nThe ability to write to system files.\n"
+                ],
+                "post-conditions": [
+                    "\nUPX packed executable file.\n",
+                    "\nModified Firefox installer file.\n",
+                    "\nFiles downloaded or uploaded by the malware.\n",
+                    "\nChanges in system performance and resource usage.\n",
+                    "\nUnusual process names and behavior.\n",
+                    "\nCompromised system with persistent backdoor.\n",
+                    "\nLog files containing malware activity.\n",
+                    "\nModified system registry entries.\n",
+                    "\nPotential for further malware infections.\n",
+                    "\nData exfiltration to C2 server.\n",
+                    "\nWindows service created by the malware.\n"
+                ],
+                "indicators": [
+                    "A file named \"tmp.bat\" is located in the directory \"C:\\ProgramData\\GoogleUpdate\\GoogleUpdate\"."
+                ]
+            }
+        ],
+        "pre-conditions": [
+            "\nThe malware has access to necessary system functions.\n",
+            "\nThe malware has successfully executed its initial code.\n",
+            "\nWindows operating system environment.\n",
+            "\nAccess to system APIs for creating and modifying services.\n",
+            "\nThe ability to write to system files.\n"
+        ],
+        "post-conditions": [
+            "\nUPX packed executable file.\n",
+            "\nModified Firefox installer file.\n",
+            "\nFiles downloaded or uploaded by the malware.\n",
+            "\nChanges in system performance and resource usage.\n",
+            "\nUnusual process names and behavior.\n",
+            "\nCompromised system with persistent backdoor.\n",
+            "\nLog files containing malware activity.\n",
+            "\nModified system registry entries.\n",
+            "\nPotential for further malware infections.\n",
+            "\nData exfiltration to C2 server.\n",
+            "\nWindows service created by the malware.\n"
+        ]
+    },
+    {
+        "id": "eef3914a-b0dc-4f4c-a78a-1b3283d17dff",
+        "attack_steps": [
+            {
+                "id": "3ce80a70-7c9a-4061-90f5-d5616787ed02",
+                "name": "Masquerading: Match Legitimate Name or Location as used by the malware",
+                "description": "The malware Goofy Guineapig is presented as both a Firefox installer and a Google Update component through the utilization of packaging techniques and file naming conventions that mimic legitimate software.  Malicious code is encapsulated within an NSIS installer file, commonly associated with Firefox installations, to exploit user trust in established software installers. File names are likely designed to resemble those of legitimate Firefox or Google Update components, further deceiving users and security tools during initial scans. This approach aims to circumvent detection by appearing as innocuous updates or software installations, thereby inducing users to execute the malicious code unknowingly.  \n",
+                "mitre_technique": {
+                    "id": "T1036.005",
+                    "name": "Masquerading: match legitimate name or location",
+                    "description": "Adversaries may match or approximate the name or location of legitimate files or resources when naming/placing them. This is done for the sake of evading defenses and observation. This may be done by placing an executable in a commonly trusted directory (ex: under System32) or giving it the name of a legitimate, trusted program (ex: svchost.exe). In containerized environments, this may also be done by creating a resource in a namespace that matches the naming convention of a container pod or cluster. Alternatively, a file or container image name given may be a close approximation to legitimate programs/images or something innocuous."
+                },
+                "pre-conditions": [
+                    "\nThe malware has access to a legitimate GoogleUpdate.exe executable.\n",
+                    "\nA computer system running Windows.\n",
+                    "\nThe malware has access to legitimate Firefox installation files.\n",
+                    "\nThe ability to execute files on the system.\n"
+                ],
+                "post-conditions": [
+                    "\nChild processes are spawned based on command IDs.\n",
+                    "\nTrojanized Firefox installation package files.\n",
+                    "\nUPX packed NSIS installer file.\n",
+                    "\nProcess activity logs showing Goopdate.dll loading and execution.\n",
+                    "\nFile system modifications indicating dropped files and modified locations.\n",
+                    "\nLegitimate GoogleUpdate.exe executable.\n",
+                    "\nLogs related to service creation and execution.\n",
+                    "\nA Windows service is running persistently.\n",
+                    "\nC2 communications are established using HTTPS and RC4 encryption.\n"
+                ],
+                "indicators": [
+                    "The file \"tmp.bat\" is located in the directory \"C:\\ProgramData\\GoogleUpdate\\GoogleUpdate\"."
+                ]
+            },
+            {
+                "id": "146e8e31-9138-4e62-9510-6d0c7c4b2f78",
+                "name": "Virtualization/Sandbox Evasion: Time Based Evasion as used by the malware",
+                "description": "Time Based Evasion is employed by the Goofy Guineapig malware to circumvent detection within sandboxed environments.  \n\nThe malware initiates a process wherein the current system time is retrieved using a designated system call or API. This initial timestamp is subsequently recorded. A deliberate delay, lasting at least 100 milliseconds but potentially varying, is then introduced, suspending execution. This delay aims to mimic typical program behavior and disrupt sandbox timers. Following the delay, the system time is read again.  A comparison is performed between the second timestamp and the first. If a difference exceeding 100 milliseconds is observed, it indicates normal system clock functionality and suggests a non-sandboxed environment. Conversely, if the time difference falls significantly short of 100 milliseconds, indicative of a manipulated clock, malware execution is terminated to avoid in-depth analysis within a potentially artificial environment.  \n",
+                "mitre_technique": {
+                    "id": "T1497.003",
+                    "name": "Virtualization/sandbox evasion: time based evasion",
+                    "description": "Adversaries may employ various time-based methods to detect and avoid virtualization and analysis environments. This may include enumerating time-based properties, such as uptime or the system clock, as well as the use of timers or other triggers to avoid a virtual machine environment (VME) or sandbox, specifically those that are automated or only operate for a limited amount of time."
+                },
+                "pre-conditions": [
+                    "\nThe Goofy Guineapig malware is executing.\n",
+                    "\nThe system has a functioning time register.\n",
+                    "\nThe malware is running.\n"
+                ],
+                "post-conditions": [
+                    "\nIncreased risk of further malware infections.\n",
+                    "\nModified system files or registry entries.\n",
+                    "\nLog entries indicating suspicious activity and process executions.\n",
+                    "\nPotential data exfiltration and theft.\n",
+                    "\nCompromised system with persistent backdoor access.\n",
+                    "\nNetwork connections to C2 server using HTTPS protocol.\n",
+                    "\nModified \"dllhost.exe\" process.\n",
+                    "\nUPX packed executable file (\"Goofy Guineapig loader\").\n"
+                ],
+                "indicators": [
+                    "The malware utilizes time-based evasion techniques."
+                ]
+            },
+            {
+                "id": "1f2c607c-270b-40f9-94e7-e66f4678b9c9",
+                "name": "Virtualization/Sandbox Evasion: System Checks as used by the malware",
+                "description": "System checks are conducted by the malware Goofy Guineapig to evade detection within virtualized or sandboxed environments.  \n\nThe total disk size is queried by the malware to ascertain its value. Execution is terminated if the determined size falls below a predetermined threshold, indicative of a potential virtual environment. \n\nSimilarly, the amount of physical RAM available is measured. If the measured RAM quantity falls below a suspicious threshold, execution is aborted, suggesting a limited memory allocation characteristic of virtual machines.\n\nThe malware also counts the number of logical processors (CPU cores) present on the system. An unusually low processor count, often observed in virtual machines compared to physical machines, triggers termination. \n\n\nThis multi-layered approach presents challenges for analysts attempting to execute Goofy Guineapig within controlled sandbox environments, as its detection mechanisms are specifically designed to identify such scenarios.  \n",
+                "mitre_technique": {
+                    "id": "T1497.001",
+                    "name": "Virtualization/sandbox evasion: system checks",
+                    "description": "Adversaries may employ various system checks to detect and avoid virtualization and analysis environments. This may include changing behaviors based on the results of checks for the presence of artifacts indicative of a virtual machine environment (VME) or sandbox. If the adversary detects a VME, they may alter their malware to disengage from the victim or conceal the core functions of the implant. They may also search for VME artifacts before dropping secondary or additional payloads. Adversaries may use the information learned from Virtualization/Sandbox Evasion during automated discovery to shape follow-on behaviors."
+                },
+                "pre-conditions": [
+                    "\nThe system has physical memory.\n",
+                    "\nThe system has a disk drive.\n",
+                    "\nA Windows operating system.\n",
+                    "\nThe system has multiple logical processors.\n",
+                    "\nThe malware is running.\n",
+                    "\nAccess to the system's hardware information via Windows APIs.\n"
+                ],
+                "post-conditions": [
+                    "\nNetwork communication\n",
+                    "\nTemporary files\n",
+                    "\nNew process instances\n",
+                    "\nData alteration\n",
+                    "\nModified files\n",
+                    "\nLog entries\n",
+                    "\nNetwork traffic logs\n",
+                    "\nSystem modifications\n",
+                    "\nRegistry changes\n",
+                    "\nProcess creation and execution\n"
+                ],
+                "indicators": [
+                    "The system checks for virtualization software presence."
+                ]
+            },
+            {
+                "id": "c7792c1c-54af-42a4-acf2-19aa9b78c440",
+                "name": "Virtualization/Sandbox Evasion: User Activity Based Checks as used by the malware",
+                "description": "User Activity Based Checks are employed by the \"Goofy Guineapig\" malware to evade detection within sandboxed environments or during reverse engineering procedures.  Process monitoring capabilities are utilized to identify running processes on the infected system. The malware analyzes process names and strings within those names for signatures indicative of debugging and analysis tools, such as \"dbg\", \"debug\", and \"ida\". Upon detection of any matching processes, malware execution is terminated, precluding further analysis in a controlled setting. \n\n\n",
+                "mitre_technique": {
+                    "id": "T1497.002",
+                    "name": "Virtualization/sandbox evasion: user activity based checks",
+                    "description": "Adversaries may employ various user activity checks to detect and avoid virtualization and analysis environments. This may include changing behaviors based on the results of checks for the presence of artifacts indicative of a virtual machine environment (VME) or sandbox. If the adversary detects a VME, they may alter their malware to disengage from the victim or conceal the core functions of the implant. They may also search for VME artifacts before dropping secondary or additional payloads. Adversaries may use the information learned from Virtualization/Sandbox Evasion during automated discovery to shape follow-on behaviors."
+                },
+                "pre-conditions": [
+                    "\nAccess to system information, including running processes and their names.\n",
+                    "\nA running instance of the Goofy Guineapig malware.\n",
+                    "\nThe system has processes running.\n",
+                    "\nThe malware is running.\n",
+                    "\nAccess to system time.\n"
+                ],
+                "post-conditions": [
+                    "\nHidden processes running\n",
+                    "\nCompromised system\n",
+                    "\nDNS queries for malicious domains\n",
+                    "\nLateral movement\n",
+                    "\nPersistence established\n",
+                    "\nNetwork traffic to command and control server\n",
+                    "\nAltered log files\n",
+                    "\nNew files created in various directories\n",
+                    "\nData exfiltration\n",
+                    "\nModified system registry entries\n",
+                    "\nUnusual system resource usage patterns\n"
+                ],
+                "indicators": [
+                    "The process name is \"tmp.bat\".",
+                    "The file path includes \"C:\\ProgramData\\GoogleUpdate\\GoogleUpdate\\tmp.bat\"."
+                ]
+            },
+            {
+                "id": "bb22554c-f62a-4c58-a4c5-ded3c20a4704",
+                "name": "Obfuscated Files or Information: Software Packing as used by the malware",
+                "description": "The malware's core malicious code is compressed using UPX (Ultimate Packer for eXecutibles), resulting in a reduced executable file size that impedes traditional analysis methods.  Furthermore, the UPX-packed malware is integrated within a legitimate NSIS (Nullsoft Scriptable Install System) installer designed for Firefox, thereby creating an appearance of legitimacy and potentially deceiving users into executing the malware unknowingly. \n\n\n",
+                "mitre_technique": {
+                    "id": "T1027.002",
+                    "name": "Obfuscated files or information: software packing",
+                    "description": "Adversaries may perform software packing or virtual machine software protection to conceal their code. Software packing is a method of compressing or encrypting an executable. Packing an executable changes the file signature in an attempt to avoid signature-based detection. Most decompression techniques decompress the executable code in memory. Virtual machine software protection translates an executable's original code into a special format that only a special virtual machine can run. A virtual machine is then called to run this code."
+                },
+                "pre-conditions": [
+                    "\nThe malware code exists.\n",
+                    "\nA suitable environment for compiling and executing code exists.\n",
+                    "\nUPX packing tool is available.\n"
+                ],
+                "post-conditions": [
+                    "\nModified Firefox installer\n",
+                    "\nCompromised system\n",
+                    "\nPersistence on the system\n",
+                    "\nNetwork connections to C2 server\n",
+                    "\nPotential for further malware infections\n",
+                    "\nUPX packed files\n",
+                    "\n\"Goopdate.dll\" DLL file\n",
+                    "\nLog entries related to process execution and network activity\n",
+                    "\nEncrypted data files\n",
+                    "\nData exfiltration\n",
+                    "\nModified registry settings\n",
+                    "\nUnusual system resource usage patterns\n"
+                ],
+                "indicators": [
+                    "The file \"tmp.bat\" is located in the directory \"C:\\ProgramData\\GoogleUpdate\\GoogleUpdate\".",
+                    "The file \"config.dat\" has a SHA-256 hash of \"3a1af09a0250c602569d458e79db90a45e305b76d8423b81eeeca14c69847b81c\".",
+                    "The file \"GoogUpdate\" is located in the directory \"C:\\ProgramData\\GoogleUpdate\"."
+                ]
+            },
+            {
+                "id": "450467ba-ee7d-49dc-9410-ace96d70a4f2",
+                "name": "Deobfuscate/Decode Files or Information as used by the malware",
+                "description": "The malware \"Goofy Guineapig\" employs stack-based string obfuscation coupled with simple ciphers for code deobfuscation.  Strings integral to the malware's operation are not directly embedded within the binary code but rather stored on the program's call stack, rendering them less readily apparent through conventional string analysis techniques.\n\nFurther obfuscation of these stack-based strings is achieved through the application of XOR and subtraction ciphers. Each character within these strings undergoes encryption via a single byte XOR operation utilizing a fixed key consistent throughout the entire string.  A similar approach involving subtraction, rather than bitwise operations, is also employed for character obfuscation.\n\nThe deobfuscation process appears to be contingent upon the successful completion of a specific request identified as request ID 0x15, suggesting a potential sequence of events or actions within the malware that trigger the deobfuscation phase subsequent to this initial request.\n\nRecovery of the original strings necessitates reverse engineering efforts aimed at elucidating the malware's mechanisms for accessing and processing strings from the call stack.  Identification of the XOR/subtraction keys may be accomplished through code pattern analysis or techniques such as frequency analysis to infer the key(s). Subsequent decryption of the obfuscated strings can then be performed by applying the reverse XOR or subtraction operations utilizing the identified keys.\n\nUpon successful recovery, these original strings can be subjected to analysis to determine their semantic meaning and functional roles within the malware's overall capabilities. \n\n\n",
+                "mitre_technique": {
+                    "id": "T1140",
+                    "name": "Deobfuscate/decode files or information",
+                    "description": "Adversaries may use Obfuscated Files or Information to hide artifacts of an intrusion from analysis. They may require separate mechanisms to decode or deobfuscate that information depending on how they intend to use it. Methods for doing that include built-in functionality of malware or by using utilities present on the system."
+                },
+                "pre-conditions": [
+                    "\nStack-based strings within the malware binary exist.\n",
+                    "\nThe Goofy Guineapig malware binary is present.\n",
+                    "\nCapability to perform single byte XOR and subtraction operations.\n"
+                ],
+                "post-conditions": [
+                    "\nNew processes running with suspicious names.\n",
+                    "\nUPX packed executable file.\n",
+                    "\nSystem instability and performance degradation.\n",
+                    "\nPotential for further malicious activity.\n",
+                    "\nDeleted or modified original files.\n",
+                    "\nModified system registry entries.\n",
+                    "\nCompromised system with malware installed.\n",
+                    "\nObfuscated configuration strings.\n",
+                    "\nXOR encrypted binary embedded in shellcode.\n",
+                    "\nAltered system files.\n",
+                    "\nNetwork connections to hardcoded C2 server IPs and domains.\n",
+                    "\nData exfiltration to C2 server.\n",
+                    "\nRC4 encrypted C2 communications.\n",
+                    "\nLogs containing unusual activity and requests.\n"
+                ],
+                "indicators": [
+                    "The file \"tmp.bat\" is located at \"C:\\ProgramData\\GoogleUpdate\\GoogleUpdate\".",
+                    "The malware uses the User Agent string \"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36\"."
+                ]
+            },
+            {
+                "id": "d862e41c-fa2e-404e-9dc8-82bd17a071f3",
+                "name": "Hide Artifacts: Hidden Window as used by the malware",
+                "description": "Process hollowing is employed by the malware to achieve \"Hide Artifacts\" functionality.  The dllhost.exe process is targeted for this technique.\n\nThe malware injects its malicious code into the memory space of the selected dllhost.exe process. Subsequently, the original contents of the dllhost.exe process's memory are removed or overwritten. The malware's code effectively replaces the legitimate functionality of dllhost.exe.\n\nDue to the execution of malicious code within the existing dllhost.exe process, privileges and system context are inherited. This results in:\n\nStealth is achieved as malicious activity appears to originate from the legitimate dllhost.exe process, hindering detection by security tools.\nTraditional signature-based detection methods are less effective because they rely on identifying known malware code, which is now replaced within the legitimate process.\n\nThe hollowed dllhost.exe process continues to execute the malicious code, enabling the Goofy Guineapig malware to establish persistence, communicate with its command and control (C2) server, and perform further malicious actions. \n\n\n",
+                "mitre_technique": {
+                    "id": "T1564.003",
+                    "name": "Hide artifacts: hidden window",
+                    "description": "Adversaries may use hidden windows to conceal malicious activity from the plain sight of users. In some cases, windows that would typically be displayed when an application carries out an operation can be hidden. This may be utilized by system administrators to avoid disrupting user work environments when carrying out administrative tasks."
+                },
+                "pre-conditions": [
+                    "\nThe Goofy Guineapig malware is present and active.\n",
+                    "\nSystem resources are available for the malware to manipulate windows.\n",
+                    "\nA target window exists.\n",
+                    "\nA window needs to be hidden.\n",
+                    "\nThe malware is running.\n"
+                ],
+                "post-conditions": [
+                    "\nModified system files.\n",
+                    "\nRegistry entries related to persistence mechanism.\n",
+                    "\nNew files containing malicious code.\n",
+                    "\nLog entries indicating suspicious activity.\n",
+                    "\nTraces of deleted tasking requests (0x29 and 0x64).\n",
+                    "\nPotential data exfiltration to C2 server.\n",
+                    "\nModified dllhost.exe process.\n",
+                    "exe and url.dll."
+                ],
+                "indicators": [
+                    "The process name is \"tmp.bat\".",
+                    "A file named \"config.dat\" exists."
+                ]
+            },
+            {
+                "id": "b7e05c10-a372-4519-9bb6-0d77da001824",
+                "name": "Indicator Removal on Host: File Deletion as used by the malware",
+                "description": "Indicator Removal on Host: File Deletion is executed by Goofy Guineapig malware through a series of actions. Initial execution occurs within the directory of the downloaded file. Subsequently, the malware relocates its files, and potentially other malicious payloads, to a seemingly legitimate directory on the system. Following relocation, the original copies of the malware files are deleted from the initial download directory. This tactic aims to obfuscate the malware's presence and hinder detection by security analysts or antivirus software.  \n",
+                "mitre_technique": {
+                    "id": "T1070.004",
+                    "name": "Indicator removal: file deletion",
+                    "description": "Adversaries may delete files left behind by the actions of their intrusion activity. Malware, tools, or other non-native files dropped or created on a system by an adversary (ex: Ingress Tool Transfer) may leave traces to indicate to what was done within a network and how. Removal of these files can occur during an intrusion, or as part of a post-intrusion process to minimize the adversary's footprint."
+                },
+                "pre-conditions": [
+                    "\nThe malware has successfully downloaded and extracted its files to a temporary location.\n",
+                    "\nThe malware has knowledge of the directory containing the extracted Firefox files.\n",
+                    "\nThe malware has the ability to read and write files.\n",
+                    "\nThe malware has established persistence mechanisms.\n",
+                    "\nA file system is available.\n"
+                ],
+                "post-conditions": [
+                    "\nDeleted initial download location files.\n",
+                    "\nSystem instability and performance degradation.\n",
+                    "\nModified Firefox installer file.\n",
+                    "\nCompromised system with persistent backdoor.\n",
+                    "\nAltered system processes and running services.\n",
+                    "\nRegistry modifications related to persistence.\n",
+                    "\nLog entries indicating suspicious activity.\n",
+                    "\nPotential for further malware infections.\n",
+                    "\nHidden malicious files in ProgramData directory.\n",
+                    "\nData exfiltration to C2 server.\n"
+                ],
+                "indicators": [
+                    "A file named \"tmp.bat\" was located in the directory \"C:\\ProgramData\\GoogleUpdate\\GoogleUpdate\".",
+                    "The file \"config.dat\" was deleted from the system."
+                ]
+            },
+            {
+                "id": "cf80034a-8ef0-4506-9bd7-9cc8eef28a45",
+                "name": "Hijack Execution Flow: DLL Side-Loading as used by the malware",
+                "description": "The \"Goofy Guineapig\" malware exploits DLL side-loading to hijack execution flow.  A legitimate executable is installed alongside a malicious DLL file, typically through a trojanised Firefox installer. Upon initiation of the legitimate executable, it searches for and loads plugins or extensions based on predefined criteria. The malicious DLL, disguised as a legitimate plugin or extension, is inadvertently included during this process. Consequently, the malicious DLL's code is executed within the context of the trusted legitimate program. This execution under the privileges and identity of the legitimate program grants access to system resources, enabling malicious actions and circumventing security measures designed to protect against known malware. \n\n\n",
+                "mitre_technique": {
+                    "id": "T1574.002",
+                    "name": "Hijack execution flow: dll side-loading",
+                    "description": "Adversaries may execute their own malicious payloads by side-loading DLLs. Similar to DLL Search Order Hijacking, side-loading involves hijacking which DLL a program loads. But rather than just planting the DLL within the search order of a program then waiting for the victim application to be invoked, adversaries may directly side-load their payloads by planting then invoking a legitimate application that executes their payload(s)."
+                },
+                "pre-conditions": [
+                    "\nA legitimate executable is installed.\n",
+                    "\nThe Goofy Guineapig loader is present.\n",
+                    "\nA malicious DLL exists.\n",
+                    "\nA system with a running operating system.\n",
+                    "\nThe ability to execute code.\n"
+                ],
+                "post-conditions": [
+                    "\nSystem instability and performance degradation.\n",
+                    "\nAltered registry entries related to malware execution and persistence.\n",
+                    "\nMalicious DLL (Goopdate.dll) in the system.\n",
+                    "\nUPX packed NSIS installer file.\n",
+                    "\nCompromised system with persistent backdoor access.\n",
+                    "\nNew service created for persistence.\n",
+                    "\nLogs indicating process injection and hollowing techniques.\n",
+                    "\nPotential for further malware infections.\n",
+                    "\nData exfiltration to C2 server.\n",
+                    "\nModified legitimate executable files (e.g., GoogleUpdate.exe).\n"
+                ],
+                "indicators": [
+                    "The file \"tmp.bat\" is located in the directory \"C:\\ProgramData\\GoogleUpdate\\GoogleUpdate\".",
+                    "The malware utilizes a DLL side-loading technique."
+                ]
+            },
+            {
+                "id": "5ec1f784-f717-4126-a056-18525456e058",
+                "name": "Process Injection: Process Hollowing as used by the malware",
+                "description": "Process injection via process hollowing is employed by the malware designated as \"Goofy Guineapig\" targeting the \"dllhost.exe\" binary.  \n\nThe selection of \"dllhost.exe\", a Windows process responsible for hosting dynamic-link libraries (DLLs), is a key element in this technique. Process hollowing involves the allocation of sufficient memory to completely overwrite the contents of the \"dllhost.exe\" process. Subsequently, the original code of \"dllhost.exe\" is replaced with malicious payload downloaded from a Command and Control (C2) server.\n\nThe execution flow is initiated by the hollowed-out \"dllhost.exe\", now running with the injected malicious code. This allows for the execution of commands under the guise of a legitimate process, thereby increasing the difficulty of detection. \n\nProcess hollowing is considered a powerful technique due to its ability to camouflage malicious code within a legitimate process, evade immediate suspicion from security software, and leverage existing privileges and resources of \"dllhost.exe\".  Furthermore, traditional antivirus signatures are less effective against code injected into existing processes.   \n",
+                "mitre_technique": {
+                    "id": "T1055.012",
+                    "name": "Process injection: process hollowing",
+                    "description": "Adversaries may inject malicious code into suspended and hollowed processes in order to evade process-based defenses. Process hollowing is a method of executing arbitrary code in the address space of a separate live process."
+                },
+                "pre-conditions": [
+                    "\nA running instance of Windows operating system.\n",
+                    "\nThe malware binary is present and executable.\n",
+                    "\nThe malware has downloaded the necessary payload data from the C2 server.\n",
+                    "\nA target process named dllhost.exe is running.\n",
+                    "\nNetwork connectivity to the C2 server.\n"
+                ],
+                "post-conditions": [
+                    "\nModified dllhost.exe process memory.\n",
+                    "\nCompromised system with persistent backdoor access.\n",
+                    "\nAltered registry entries for persistence.\n",
+                    "\nFiles downloaded from the C2 server.\n",
+                    "\nNetwork connections to the C2 server (HTTPS).\n",
+                    "\nTraces of deleted tasking data.\n",
+                    "\nData exfiltration to C2 server.\n",
+                    "\nLogs of system activity, including process injections and file modifications.\n",
+                    "\nPotential for further malware infections and attacks.\n",
+                    "\nUPX packed executable file (\"Goofy Guineapig loader\").\n"
+                ],
+                "indicators": [
+                    "The process name is \"tmp.bat\".",
+                    "The file path includes \"C:\\ProgramData\\GoogleUpdate\\GoogleUpdate\\tmp.bat\"."
+                ]
+            },
+            {
+                "id": "42531b23-3a0a-4e71-bb58-e39be15b0435",
+                "name": "Signed Binary Proxy Execution: Rundll32 as used by the malware",
+                "description": "Signed Binary Proxy Execution is employed by the Goofy Guineapig malware utilizing rundll32.exe and url.dll.  A legitimate binary on the system, potentially possessing elevated privileges, is identified by the malware. Rundll32.exe is leveraged to load the url.dll library. Within url.dll, malicious DLL code is injected indirectly through the exploitation of url.dll's functionality for loading and executing payloads. This technique circumvents security measures due to the legitimacy of rundll32.exe and url.dll as Windows components, potentially evading detection by security software.  The malware exploits the inherent trust users place in built-in Windows processes. \n\n\n",
+                "mitre_technique": {
+                    "id": "T1218.011",
+                    "name": "System binary proxy execution: rundll32",
+                    "description": "Adversaries may abuse rundll32.exe to proxy execution of malicious code. Using rundll32.exe, vice executing directly (i.e. Shared Modules), may avoid triggering security tools that may not monitor execution of the rundll32.exe process because of allowlists or false positives from normal operations. Rundll32.exe is commonly associated with executing DLL payloads (ex: rundll32.exe {DLLname, DLLfunction})."
+                },
+                "pre-conditions": [
+                    "\nrundll32.exe is available on the system.\n",
+                    "exe`.",
+                    "\nA Windows operating system is present.\n",
+                    "\nurl.dll is available on the system.\n",
+                    "\nAccess to the file system is available to the malware.\n"
+                ],
+                "post-conditions": [
+                    "\nUPX packed executable file.\n",
+                    "\nSystem instability and performance degradation.\n",
+                    "\nModified dllhost.exe binary.\n",
+                    "\nCompromised system with persistent backdoor.\n",
+                    "\nPotential for further malware infections.\n",
+                    "\nNew Windows service.\n",
+                    "\nData exfiltration to C2 server.\n",
+                    "\nFiles downloaded from C2 server.\n",
+                    "\nLog files containing suspicious activity.\n",
+                    "\nAltered system registry entries.\n"
+                ],
+                "indicators": [
+                    "The file \"tmp.bat\" is located at \"C:\\ProgramData\\GoogleUpdate\\GoogleUpdate\"."
+                ]
+            }
+        ],
+        "pre-conditions": [
+            "\nThe malware has access to a legitimate GoogleUpdate.exe executable.\n",
+            "\nA computer system running Windows.\n",
+            "\nThe malware has access to legitimate Firefox installation files.\n",
+            "\nThe ability to execute files on the system.\n",
+            "\nThe Goofy Guineapig malware is executing.\n",
+            "\nThe system has a functioning time register.\n",
+            "\nThe malware is running.\n",
+            "\nThe system has physical memory.\n",
+            "\nThe system has a disk drive.\n",
+            "\nA Windows operating system.\n",
+            "\nThe system has multiple logical processors.\n",
+            "\nThe malware is running.\n",
+            "\nAccess to the system's hardware information via Windows APIs.\n",
+            "\nAccess to system information, including running processes and their names.\n",
+            "\nA running instance of the Goofy Guineapig malware.\n",
+            "\nThe system has processes running.\n",
+            "\nThe malware is running.\n",
+            "\nAccess to system time.\n",
+            "\nThe malware code exists.\n",
+            "\nA suitable environment for compiling and executing code exists.\n",
+            "\nUPX packing tool is available.\n",
+            "\nStack-based strings within the malware binary exist.\n",
+            "\nThe Goofy Guineapig malware binary is present.\n",
+            "\nCapability to perform single byte XOR and subtraction operations.\n",
+            "\nThe Goofy Guineapig malware is present and active.\n",
+            "\nSystem resources are available for the malware to manipulate windows.\n",
+            "\nA target window exists.\n",
+            "\nA window needs to be hidden.\n",
+            "\nThe malware is running.\n",
+            "\nThe malware has successfully downloaded and extracted its files to a temporary location.\n",
+            "\nThe malware has knowledge of the directory containing the extracted Firefox files.\n",
+            "\nThe malware has the ability to read and write files.\n",
+            "\nThe malware has established persistence mechanisms.\n",
+            "\nA file system is available.\n",
+            "\nA legitimate executable is installed.\n",
+            "\nThe Goofy Guineapig loader is present.\n",
+            "\nA malicious DLL exists.\n",
+            "\nA system with a running operating system.\n",
+            "\nThe ability to execute code.\n",
+            "\nA running instance of Windows operating system.\n",
+            "\nThe malware binary is present and executable.\n",
+            "\nThe malware has downloaded the necessary payload data from the C2 server.\n",
+            "\nA target process named dllhost.exe is running.\n",
+            "\nNetwork connectivity to the C2 server.\n",
+            "\nrundll32.exe is available on the system.\n",
+            "exe`.",
+            "\nA Windows operating system is present.\n",
+            "\nurl.dll is available on the system.\n",
+            "\nAccess to the file system is available to the malware.\n"
+        ],
+        "post-conditions": [
+            "\nChild processes are spawned based on command IDs.\n",
+            "\nTrojanized Firefox installation package files.\n",
+            "\nUPX packed NSIS installer file.\n",
+            "\nProcess activity logs showing Goopdate.dll loading and execution.\n",
+            "\nFile system modifications indicating dropped files and modified locations.\n",
+            "\nLegitimate GoogleUpdate.exe executable.\n",
+            "\nLogs related to service creation and execution.\n",
+            "\nA Windows service is running persistently.\n",
+            "\nC2 communications are established using HTTPS and RC4 encryption.\n",
+            "\nIncreased risk of further malware infections.\n",
+            "\nModified system files or registry entries.\n",
+            "\nLog entries indicating suspicious activity and process executions.\n",
+            "\nPotential data exfiltration and theft.\n",
+            "\nCompromised system with persistent backdoor access.\n",
+            "\nNetwork connections to C2 server using HTTPS protocol.\n",
+            "\nModified \"dllhost.exe\" process.\n",
+            "\nUPX packed executable file (\"Goofy Guineapig loader\").\n",
+            "\nNetwork communication\n",
+            "\nTemporary files\n",
+            "\nNew process instances\n",
+            "\nData alteration\n",
+            "\nModified files\n",
+            "\nLog entries\n",
+            "\nNetwork traffic logs\n",
+            "\nSystem modifications\n",
+            "\nRegistry changes\n",
+            "\nProcess creation and execution\n",
+            "\nHidden processes running\n",
+            "\nCompromised system\n",
+            "\nDNS queries for malicious domains\n",
+            "\nLateral movement\n",
+            "\nPersistence established\n",
+            "\nNetwork traffic to command and control server\n",
+            "\nAltered log files\n",
+            "\nNew files created in various directories\n",
+            "\nData exfiltration\n",
+            "\nModified system registry entries\n",
+            "\nUnusual system resource usage patterns\n",
+            "\nModified Firefox installer\n",
+            "\nCompromised system\n",
+            "\nPersistence on the system\n",
+            "\nNetwork connections to C2 server\n",
+            "\nPotential for further malware infections\n",
+            "\nUPX packed files\n",
+            "\n\"Goopdate.dll\" DLL file\n",
+            "\nLog entries related to process execution and network activity\n",
+            "\nEncrypted data files\n",
+            "\nData exfiltration\n",
+            "\nModified registry settings\n",
+            "\nUnusual system resource usage patterns\n",
+            "\nNew processes running with suspicious names.\n",
+            "\nUPX packed executable file.\n",
+            "\nSystem instability and performance degradation.\n",
+            "\nPotential for further malicious activity.\n",
+            "\nDeleted or modified original files.\n",
+            "\nModified system registry entries.\n",
+            "\nCompromised system with malware installed.\n",
+            "\nObfuscated configuration strings.\n",
+            "\nXOR encrypted binary embedded in shellcode.\n",
+            "\nAltered system files.\n",
+            "\nNetwork connections to hardcoded C2 server IPs and domains.\n",
+            "\nData exfiltration to C2 server.\n",
+            "\nRC4 encrypted C2 communications.\n",
+            "\nLogs containing unusual activity and requests.\n",
+            "\nModified system files.\n",
+            "\nRegistry entries related to persistence mechanism.\n",
+            "\nNew files containing malicious code.\n",
+            "\nLog entries indicating suspicious activity.\n",
+            "\nTraces of deleted tasking requests (0x29 and 0x64).\n",
+            "\nPotential data exfiltration to C2 server.\n",
+            "\nModified dllhost.exe process.\n",
+            "exe and url.dll.",
+            "\nDeleted initial download location files.\n",
+            "\nSystem instability and performance degradation.\n",
+            "\nModified Firefox installer file.\n",
+            "\nCompromised system with persistent backdoor.\n",
+            "\nAltered system processes and running services.\n",
+            "\nRegistry modifications related to persistence.\n",
+            "\nLog entries indicating suspicious activity.\n",
+            "\nPotential for further malware infections.\n",
+            "\nHidden malicious files in ProgramData directory.\n",
+            "\nData exfiltration to C2 server.\n",
+            "\nSystem instability and performance degradation.\n",
+            "\nAltered registry entries related to malware execution and persistence.\n",
+            "\nMalicious DLL (Goopdate.dll) in the system.\n",
+            "\nUPX packed NSIS installer file.\n",
+            "\nCompromised system with persistent backdoor access.\n",
+            "\nNew service created for persistence.\n",
+            "\nLogs indicating process injection and hollowing techniques.\n",
+            "\nPotential for further malware infections.\n",
+            "\nData exfiltration to C2 server.\n",
+            "\nModified legitimate executable files (e.g., GoogleUpdate.exe).\n",
+            "\nModified dllhost.exe process memory.\n",
+            "\nCompromised system with persistent backdoor access.\n",
+            "\nAltered registry entries for persistence.\n",
+            "\nFiles downloaded from the C2 server.\n",
+            "\nNetwork connections to the C2 server (HTTPS).\n",
+            "\nTraces of deleted tasking data.\n",
+            "\nData exfiltration to C2 server.\n",
+            "\nLogs of system activity, including process injections and file modifications.\n",
+            "\nPotential for further malware infections and attacks.\n",
+            "\nUPX packed executable file (\"Goofy Guineapig loader\").\n",
+            "\nUPX packed executable file.\n",
+            "\nSystem instability and performance degradation.\n",
+            "\nModified dllhost.exe binary.\n",
+            "\nCompromised system with persistent backdoor.\n",
+            "\nPotential for further malware infections.\n",
+            "\nNew Windows service.\n",
+            "\nData exfiltration to C2 server.\n",
+            "\nFiles downloaded from C2 server.\n",
+            "\nLog files containing suspicious activity.\n",
+            "\nAltered system registry entries.\n"
+        ]
+    },
+    {
+        "id": "d8645892-86e8-4610-96e0-252df198b26a",
+        "attack_steps": [
+            {
+                "id": "b91d1056-59c8-427c-b729-38fdad51f9b1",
+                "name": "System Information Discovery as used by the malware",
+                "description": "System Information Discovery is conducted by the malware through the collection of various data points pertaining to the infected machine. These data points are subsequently obfuscated and transmitted to a Command and Control (C2) server.\n\nData points collected encompass:\n\n* Operating system caption, potentially retrieved via COM and WMI access.\n* Antivirus product display name, also likely obtained through COM and WMI.\n* Adapters information, which may be acquired using Windows APIs.\n* Host and host name identification.\n\nObfuscation techniques are employed to encode the collected information, rendering its true meaning obscure upon casual inspection. Transmission of the obfuscated system information occurs within each communication packet as part of the HTTP header, facilitating discreet data transfer to the C2 server. \n\n\n",
+                "mitre_technique": {
+                    "id": "T1082",
+                    "name": "System information discovery",
+                    "description": "An adversary may attempt to get detailed information about the operating system and hardware, including version, patches, hotfixes, service packs, and architecture. Adversaries may use the information from System Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions."
+                },
+                "pre-conditions": [
+                    "\nCOM functionality is enabled.\n",
+                    "\nAccess to the relevant Windows APIs is available.\n",
+                    "\nThe infected machine has a network connection.\n",
+                    "\nA Windows operating system is present.\n",
+                    "\nThe malware is running.\n",
+                    "\nNetwork connectivity is established.\n"
+                ],
+                "post-conditions": [
+                    "\nEvent log entries related to system changes and process creation.\n",
+                    "\nSystem instability and performance degradation.\n",
+                    "\nCompromised system with potential data exfiltration.\n",
+                    "\nModified system registry entries.\n",
+                    "\nModified system files or DLLs.\n",
+                    "\nProcess activity logs indicating execution of suspicious processes.\n",
+                    "\nPotential for further malicious activity execution.\n",
+                    "\nNew files created in various directories (e.g., malware executable, configuration files).\n",
+                    "\nNetwork traffic logs showing communication with Command and Control (C2) server using HTTPS.\n"
+                ],
+                "indicators": [
+                    "The system's operating system is Windows NT 6.1.",
+                    "The system architecture is WOW64."
+                ]
+            }
+        ],
+        "pre-conditions": [
+            "\nCOM functionality is enabled.\n",
+            "\nAccess to the relevant Windows APIs is available.\n",
+            "\nThe infected machine has a network connection.\n",
+            "\nA Windows operating system is present.\n",
+            "\nThe malware is running.\n",
+            "\nNetwork connectivity is established.\n"
+        ],
+        "post-conditions": [
+            "\nEvent log entries related to system changes and process creation.\n",
+            "\nSystem instability and performance degradation.\n",
+            "\nCompromised system with potential data exfiltration.\n",
+            "\nModified system registry entries.\n",
+            "\nModified system files or DLLs.\n",
+            "\nProcess activity logs indicating execution of suspicious processes.\n",
+            "\nPotential for further malicious activity execution.\n",
+            "\nNew files created in various directories (e.g., malware executable, configuration files).\n",
+            "\nNetwork traffic logs showing communication with Command and Control (C2) server using HTTPS.\n"
+        ]
+    },
+    {
+        "id": "aac6527e-c671-4aa0-a435-b715b0069aef",
+        "attack_steps": [
+            {
+                "id": "41ad50e5-472b-444d-a8e7-bce73b110d2a",
+                "name": "Application Layer Protocol: Web Protocols as used by the malware",
+                "description": "Command and Control (C2) communications executed by the malware are conducted via HTTPS.  Secure connections are established utilizing the HTTP protocol over a Transport Layer Security (TLS) layer, thereby ensuring encrypted data transmission between the compromised machine and the attacker's server. The specific encryption algorithm employed is not disclosed. \n\n\n",
+                "mitre_technique": {
+                    "id": "T1071.001",
+                    "name": "Application layer protocol: web protocols",
+                    "description": "Adversaries may communicate using application layer protocols associated with web traffic to avoid detection/network filtering by blending in with existing traffic. Commands to the remote system, and often the results of those commands, will be embedded within the protocol traffic between the client and server."
+                },
+                "pre-conditions": [
+                    "\nAn internet connection to reach static.tcplog.com.\n",
+                    "\nThe infected machine has a network connection.\n",
+                    "\nA system with a network connection.\n",
+                    "\nThe Goofy Guineapig malware binary contains the hardcoded configuration string.\n",
+                    "\nThe malware is running.\n"
+                ],
+                "post-conditions": [
+                    "\nLogon session enumeration data.\n",
+                    "\nModified system processes and services.\n",
+                    "\nObfuscated strings containing sensitive information within malware code.\n",
+                    "\nUnusual HTTP headers in network traffic.\n",
+                    "\nPotential for further malware infections and lateral movement.\n",
+                    "\nCompromised system with persistent backdoor access.\n",
+                    "\nData exfiltration from infected machine.\n",
+                    "\nNew files created or modified on the system (e.g., malware binaries, configuration files).\n",
+                    "\nNetwork traffic logs showing communication with C2 server using HTTPS and/or UDP.\n",
+                    "\nEvidence of deleted or modified task scheduling entries.\n",
+                    "\nModified system registry settings.\n"
+                ],
+                "indicators": [
+                    "The URL HTTPS://static.tcplog.com is accessed.",
+                    "A User Agent string indicating Chrome/54.0.2840.71 Safari/537.36 is used."
+                ]
+            },
+            {
+                "id": "32f0a30a-5a67-4a9e-96a0-c004081de2d2",
+                "name": "Fallback Channels as used by the malware",
+                "description": "Goofy Guineapig malware implements fallback communication channels through several mechanisms.  UDP communication is facilitated via the User Datagram Protocol, enabling faster but less reliable data transfer compared to TCP. The KCP (Keepalive Connection Protocol) is utilized for communication, providing a fast and reliable protocol suitable for real-time applications and unpredictable network conditions. Direct socket communications are also supported, offering flexibility in establishing connections independent of predefined protocols.  The specific communication method employed (UDP, KCP, or direct socket) is determined by an embedded configuration string within the malware, allowing attackers to dynamically select the most appropriate channel based on factors such as network conditions and target environment. \n\n\n",
+                "mitre_technique": {
+                    "id": "T1008",
+                    "name": "Fallback channels",
+                    "description": "Adversaries may use fallback or alternate communication channels if the primary channel is compromised or inaccessible in order to maintain reliable command and control and to avoid data transfer thresholds."
+                },
+                "pre-conditions": [
+                    "\nThe malware binary is loaded into memory.\n",
+                    "\nThe capability to communicate using UDP and/or KCP protocols.\n",
+                    "\nThe embedded configuration string is accessible.\n",
+                    "\nA system with a network connection.\n"
+                ],
+                "post-conditions": [
+                    "\nEncrypted communication logs\n",
+                    "\nPerformance degradation\n",
+                    "\nNetwork connections to suspicious IP addresses\n",
+                    "\nTraces of data transfer in system event logs\n",
+                    "\nSystem instability\n",
+                    "\nModified system registry entries\n",
+                    "\nModified or deleted existing log files\n",
+                    "\nUnusual process activity logs\n",
+                    "\nPotential for further malware infections\n",
+                    "\nPresence of malicious code in memory\n",
+                    "\nIndicator of Compromise (IOC) files on the system.\n",
+                    "\nNew files created in various directories\n",
+                    "\nData exfiltration\n",
+                    "\nCompromised system security\n"
+                ],
+                "indicators": [
+                    "The file tmp.bat is located in the directory C:\\ProgramData\\GoogleUpdate\\GoogleUpdate."
+                ]
+            },
+            {
+                "id": "de6078ca-0f29-46ef-91a8-2f7bf14b3700",
+                "name": "Non-Standard Port as used by the malware",
+                "description": "Communication between the Goofy Guineapig malware and its Command and Control (C2) server is established over an HTTPS port deviating from the standard 443.  Specifically, a non-standard port, 4443, is utilized for this purpose.  \n\n\n",
+                "mitre_technique": {
+                    "id": "T1571",
+                    "name": "Non-standard port",
+                    "description": "Adversaries may communicate using a protocol and port pairing that are typically not associated. For example, HTTPS over port 8088 or port 587 as opposed to the traditional port 443. Adversaries may make changes to the standard port used by a protocol to bypass filtering or muddle analysis/parsing of network data."
+                },
+                "pre-conditions": [
+                    ""
+                ],
+                "post-conditions": [
+                    "\nLog file entries indicating suspicious activity\n",
+                    "\nTraces of data transfer via HTTP(S) requests\n",
+                    "\nUnusual process activity and memory usage\n",
+                    "\nSystem instability\n",
+                    "\nCompromised system functionality\n",
+                    "\nNew files created in non-standard locations\n",
+                    "\nModified or deleted existing log files\n",
+                    "\nPotential for further malware infections\n",
+                    "\nPresence of malicious code in system processes\n",
+                    "\nData exfiltration\n",
+                    "\nNetwork connections to static[.]tcplog[.]com on port 4443\n",
+                    "\nModified system registry entries\n"
+                ],
+                "indicators": []
+            }
+        ],
+        "pre-conditions": [
+            "\nAn internet connection to reach static.tcplog.com.\n",
+            "\nThe infected machine has a network connection.\n",
+            "\nA system with a network connection.\n",
+            "\nThe Goofy Guineapig malware binary contains the hardcoded configuration string.\n",
+            "\nThe malware is running.\n",
+            "\nThe malware binary is loaded into memory.\n",
+            "\nThe capability to communicate using UDP and/or KCP protocols.\n",
+            "\nThe embedded configuration string is accessible.\n",
+            "\nA system with a network connection.\n",
+            ""
+        ],
+        "post-conditions": [
+            "\nLogon session enumeration data.\n",
+            "\nModified system processes and services.\n",
+            "\nObfuscated strings containing sensitive information within malware code.\n",
+            "\nUnusual HTTP headers in network traffic.\n",
+            "\nPotential for further malware infections and lateral movement.\n",
+            "\nCompromised system with persistent backdoor access.\n",
+            "\nData exfiltration from infected machine.\n",
+            "\nNew files created or modified on the system (e.g., malware binaries, configuration files).\n",
+            "\nNetwork traffic logs showing communication with C2 server using HTTPS and/or UDP.\n",
+            "\nEvidence of deleted or modified task scheduling entries.\n",
+            "\nModified system registry settings.\n",
+            "\nEncrypted communication logs\n",
+            "\nPerformance degradation\n",
+            "\nNetwork connections to suspicious IP addresses\n",
+            "\nTraces of data transfer in system event logs\n",
+            "\nSystem instability\n",
+            "\nModified system registry entries\n",
+            "\nModified or deleted existing log files\n",
+            "\nUnusual process activity logs\n",
+            "\nPotential for further malware infections\n",
+            "\nPresence of malicious code in memory\n",
+            "\nIndicator of Compromise (IOC) files on the system.\n",
+            "\nNew files created in various directories\n",
+            "\nData exfiltration\n",
+            "\nCompromised system security\n",
+            "\nLog file entries indicating suspicious activity\n",
+            "\nTraces of data transfer via HTTP(S) requests\n",
+            "\nUnusual process activity and memory usage\n",
+            "\nSystem instability\n",
+            "\nCompromised system functionality\n",
+            "\nNew files created in non-standard locations\n",
+            "\nModified or deleted existing log files\n",
+            "\nPotential for further malware infections\n",
+            "\nPresence of malicious code in system processes\n",
+            "\nData exfiltration\n",
+            "\nNetwork connections to static[.]tcplog[.]com on port 4443\n",
+            "\nModified system registry entries\n"
+        ]
+    }
+]

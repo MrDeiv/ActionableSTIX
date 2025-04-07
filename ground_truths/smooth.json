@@ -1,0 +1,62 @@
+[
+    {
+        "attack_steps": [
+            {
+                "name": "Supply Chain Compromise: Compromise Software Dependencies and Development Tools as used by the malware",
+                "truth": "Smooth Operator is distributed via legitimate channels as trojanised, signed and notarized 3CX software."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Compromise Client Software Binary as used by the malware",
+                "truth": "Smooth Operator runs as part of the 3CX software. The infected software package was signed by 3CX and notarized by Apple."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Deobfuscate/Decode Files or Information as used by the malware",
+                "truth": "Smooth Operator uses a custom algorithm to obfuscate data exfiltrated over the C2 channel. Smooth Operator deobfuscates data it writes to a file on disk as well as tasking responses. "
+            },
+            {
+                "name": "Indicator Removal: File Deletion as used by the malware",
+                "truth": "Smooth Operator’s second-stage deletes itself from disk immediately on execution."
+            },
+            {
+                "name": "Virtualization/Sandbox Evasion: Time Based Evasion as used by the malware",
+                "truth": ", Smooth Operator sleeps for between 7 and 20 days before beaconing. The initial beacon time is written into the file .main_storage along with the victim ID. If the 3CX process exits and starts again, Smooth Operator reads this initial beacon time from the file to which it was written, meaning the time will not reset on process restart. After the initial beacon, Smooth Operator uses a time-seeded random algorithm to generate a default beacon interval of between 1 and 2 hours. The sleep interval between beacons is freshly calculated at the start of every beacon cycle, but can be updated per cycle through tasking.  The initial beacon time is overwritten with the next beacon time in the .main_storage file at the end of every beacon cycle."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Automated Collection as used by the malware",
+                "truth": "Smooth Operator stages collect data from the victim machine to be included in a beacon or exfiltration."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Application Layer Protocol: Web Protocols as used by the malware",
+                "truth": "Smooth Operator command and control is over HTTPS."
+            },
+            {
+                "name": "Fallback Channels as used by the malware",
+                "truth": "Smooth Operator has an embedded list of 15 C2s, and one URL for the 3CX website, all obfuscated with the single-byte XOR key, 0x7A. A random C2 is picked from the list to beacon to before each beacon, so it is expected behaviour for one infected device to beacon to multiple C2 servers."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Automated Exfiltration as used by the malware",
+                "truth": "Smooth Operator exfiltrates automatically collected data, not over the existing C2 channel."
+            }
+        ]
+    }
+]
