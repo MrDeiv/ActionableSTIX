@@ -132,7 +132,7 @@ def create_pdf_from_json(malware, out, output_pdf):
     print(f"PDF report generated: {output_pdf}")
 
 if __name__ == "__main__":
-    config_file = "config.json"
+    config_file = "config/config.json"
 
     # Load JSON data
     config = json.load(open(config_file))

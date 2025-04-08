@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100vw;
+                 height: 100vh;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "yellow", "id": "START", "label": "START", "shape": "square", "size": 20}, {"color": "blue", "id": "3cf4998a-807f-4388-929b-1b9bd94b39a6", "label": "m1", "shape": "circle", "size": 30, "title": "STEP 1"}, {"color": "red", "id": "5be1b6a0-1b6e-40be-a315-4d6c100dbbbe", "label": "a1", "shape": "square", "size": 10, "title": "Create or Modify System Process: Windows Service as used by the malware"}, {"color": "blue", "id": "d6adf82e-52e8-4007-8187-d2100677d237", "label": "m2", "shape": "circle", "size": 30, "title": "STEP 2"}, {"color": "red", "id": "7c360594-b345-4c7a-9c53-847de0b4609c", "label": "a2", "shape": "square", "size": 10, "title": "Masquerading: Match Legitimate Name or Location as used by the malware"}, {"color": "red", "id": "e36590db-5321-4928-a98d-8a82d0b95b76", "label": "a3", "shape": "square", "size": 10, "title": "Virtualization/Sandbox Evasion: Time Based Evasion as used by the malware"}, {"color": "red", "id": "80f2748d-01a6-40ce-accf-d8ae49a2cd9f", "label": "a4", "shape": "square", "size": 10, "title": "Virtualization/Sandbox Evasion: System Checks as used by the malware"}, {"color": "red", "id": "9b0c8422-84f1-4a49-8c76-bca939539400", "label": "a5", "shape": "square", "size": 10, "title": "Virtualization/Sandbox Evasion: User Activity Based Checks as used by the malware"}, {"color": "red", "id": "0435d4bd-cc94-46bd-b612-5c1bb35ecf4a", "label": "a6", "shape": "square", "size": 10, "title": "Obfuscated Files or Information: Software Packing as used by the malware"}, {"color": "red", "id": "c343f505-3e0c-4f1a-8e00-2f7cef4ea87a", "label": "a7", "shape": "square", "size": 10, "title": "Deobfuscate/Decode Files or Information as used by the malware"}, {"color": "red", "id": "472302dc-e9a2-45a4-9825-1209c9f02a90", "label": "a8", "shape": "square", "size": 10, "title": "Hide Artifacts: Hidden Window as used by the malware"}, {"color": "red", "id": "1483de60-1299-4fd1-857b-56bf3229546a", "label": "a9", "shape": "square", "size": 10, "title": "Indicator Removal on Host: File Deletion as used by the malware"}, {"color": "red", "id": "3ea8f025-5c7c-4d52-bbf2-d3df516dbc35", "label": "a10", "shape": "square", "size": 10, "title": "Hijack Execution Flow: DLL Side-Loading as used by the malware"}, {"color": "red", "id": "9e4f7cfa-5b4a-4f4c-b640-66dc600be583", "label": "a11", "shape": "square", "size": 10, "title": "Process Injection: Process Hollowing as used by the malware"}, {"color": "red", "id": "32b71e54-3a2c-4150-afd1-d0b24d1a0dc4", "label": "a12", "shape": "square", "size": 10, "title": "Signed Binary Proxy Execution: Rundll32 as used by the malware"}, {"color": "blue", "id": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c", "label": "m3", "shape": "circle", "size": 30, "title": "STEP 3"}, {"color": "red", "id": "0af4963f-69f5-4a12-858c-e0bd4382b124", "label": "a13", "shape": "square", "size": 10, "title": "System Information Discovery as used by the malware"}, {"color": "blue", "id": "7dc9b0e8-b39a-4a3d-8632-05fb620f5db8", "label": "m4", "shape": "circle", "size": 30, "title": "STEP 4"}, {"color": "red", "id": "4974b940-e0d7-4b1a-8980-ad37fe04a384", "label": "a14", "shape": "square", "size": 10, "title": "Application Layer Protocol: Web Protocols as used by the malware"}, {"color": "red", "id": "56400116-e340-477b-baed-9dba5f239c54", "label": "a15", "shape": "square", "size": 10, "title": "Fallback Channels as used by the malware"}, {"color": "red", "id": "1fb90e29-4853-40fe-9ce7-db3dc859886a", "label": "a16", "shape": "square", "size": 10, "title": "Non-Standard Port as used by the malware"}, {"color": "yellow", "id": "END", "label": "END", "shape": "square", "size": 20}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "black", "from": "START", "to": "3cf4998a-807f-4388-929b-1b9bd94b39a6"}, {"arrows": "to", "color": "black", "from": "3cf4998a-807f-4388-929b-1b9bd94b39a6", "to": "5be1b6a0-1b6e-40be-a315-4d6c100dbbbe"}, {"arrows": "to", "color": "black", "from": "5be1b6a0-1b6e-40be-a315-4d6c100dbbbe", "to": "d6adf82e-52e8-4007-8187-d2100677d237"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "7c360594-b345-4c7a-9c53-847de0b4609c"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "e36590db-5321-4928-a98d-8a82d0b95b76"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "80f2748d-01a6-40ce-accf-d8ae49a2cd9f"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "9b0c8422-84f1-4a49-8c76-bca939539400"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "0435d4bd-cc94-46bd-b612-5c1bb35ecf4a"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "c343f505-3e0c-4f1a-8e00-2f7cef4ea87a"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "472302dc-e9a2-45a4-9825-1209c9f02a90"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "1483de60-1299-4fd1-857b-56bf3229546a"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "3ea8f025-5c7c-4d52-bbf2-d3df516dbc35"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "9e4f7cfa-5b4a-4f4c-b640-66dc600be583"}, {"arrows": "to", "color": "black", "from": "d6adf82e-52e8-4007-8187-d2100677d237", "to": "32b71e54-3a2c-4150-afd1-d0b24d1a0dc4"}, {"arrows": "to", "color": "black", "from": "7c360594-b345-4c7a-9c53-847de0b4609c", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "e36590db-5321-4928-a98d-8a82d0b95b76", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "80f2748d-01a6-40ce-accf-d8ae49a2cd9f", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "9b0c8422-84f1-4a49-8c76-bca939539400", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "0435d4bd-cc94-46bd-b612-5c1bb35ecf4a", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "c343f505-3e0c-4f1a-8e00-2f7cef4ea87a", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "472302dc-e9a2-45a4-9825-1209c9f02a90", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "1483de60-1299-4fd1-857b-56bf3229546a", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "3ea8f025-5c7c-4d52-bbf2-d3df516dbc35", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "9e4f7cfa-5b4a-4f4c-b640-66dc600be583", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "32b71e54-3a2c-4150-afd1-d0b24d1a0dc4", "to": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c"}, {"arrows": "to", "color": "black", "from": "49f50ef7-7f97-41c1-88b1-ea3faaeca57c", "to": "0af4963f-69f5-4a12-858c-e0bd4382b124"}, {"arrows": "to", "color": "black", "from": "0af4963f-69f5-4a12-858c-e0bd4382b124", "to": "7dc9b0e8-b39a-4a3d-8632-05fb620f5db8"}, {"arrows": "to", "color": "black", "from": "7dc9b0e8-b39a-4a3d-8632-05fb620f5db8", "to": "4974b940-e0d7-4b1a-8980-ad37fe04a384"}, {"arrows": "to", "color": "black", "from": "7dc9b0e8-b39a-4a3d-8632-05fb620f5db8", "to": "56400116-e340-477b-baed-9dba5f239c54"}, {"arrows": "to", "color": "black", "from": "7dc9b0e8-b39a-4a3d-8632-05fb620f5db8", "to": "1fb90e29-4853-40fe-9ce7-db3dc859886a"}, {"arrows": "to", "color": "black", "from": "4974b940-e0d7-4b1a-8980-ad37fe04a384", "to": "END"}, {"arrows": "to", "color": "black", "from": "56400116-e340-477b-baed-9dba5f239c54", "to": "END"}, {"arrows": "to", "color": "black", "from": "1fb90e29-4853-40fe-9ce7-db3dc859886a", "to": "END"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

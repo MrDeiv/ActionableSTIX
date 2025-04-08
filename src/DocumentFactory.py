@@ -9,16 +9,19 @@ import PyPDF2
 import os
 import nltk
 from bs4 import BeautifulSoup
+import json
 
 nltk.download('stopwords')
 nltk.download('punkt_tab')
+
+config = json.load(open("config/config.json"))
 
 class DocumentFactory:
     @staticmethod
     def from_text(text:str) -> list[Document]:
         tokenizer = NLTKTextSplitter(
-            chunk_size=400,
-            chunk_overlap=400*0.3,
+            chunk_size=config['CHUNK_SIZE'],
+            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
         )
         texts = tokenizer.split_text(text)
         return [Document(page_content=doc, metadata={"source": "text"}) for doc in texts]
@@ -29,8 +32,8 @@ class DocumentFactory:
 
         text = open(file, encoding='utf-8').read()
         tokenizer = NLTKTextSplitter(
-            chunk_size=400,
-            chunk_overlap=400*0.3,
+            chunk_size=config['CHUNK_SIZE'],
+            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
         )
         texts = tokenizer.split_text(text)
         return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
@@ -46,8 +49,8 @@ class DocumentFactory:
             text += page.extract_text()
 
         tokenizer = NLTKTextSplitter(
-            chunk_size=400,
-            chunk_overlap=400*0.3,
+            chunk_size=config['CHUNK_SIZE'],
+            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
         )
         texts = tokenizer.split_text(text)
         return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
@@ -90,8 +93,8 @@ class DocumentFactory:
         
         text = soup.get_text(strip=True)
         tokenizer = NLTKTextSplitter(
-            chunk_size=400,
-            chunk_overlap=400*0.3,
+            chunk_size=config['CHUNK_SIZE'],
+            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
         )
         texts = tokenizer.split_text(text)
         return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
@@ -107,8 +110,8 @@ class DocumentFactory:
         
         text = soup.get_text(strip=True)
         tokenizer = NLTKTextSplitter(
-            chunk_size=400,
-            chunk_overlap=400*0.3,
+            chunk_size=config['CHUNK_SIZE'],
+            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
         )
         texts = tokenizer.split_text(text)
         return [Document(page_content=doc, metadata={"source": file}) for doc in texts]

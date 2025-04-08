@@ -39,20 +39,6 @@ logging.config.dictConfig({
 
 CONFIG_FILE = "config/config.json"
 
-def get_hashes(indicators: list[dict]) -> list[str]:
-    """
-    Extracts the hashes from the indicators
-    """
-    hashes:list[str] = []
-    
-    # filter the indicators that have pattern_type = stix
-    stix_indicators = list(filter(lambda x: x['pattern_type'] == 'stix', indicators))
-    for ioc in stix_indicators:
-        if "file:hashes" in ioc['pattern']:
-            h = re.search(r'[a-f0-9]{32,}', ioc['pattern']).group()
-            hashes.append(h)
-    return hashes
-
 dotenv.load_dotenv()
 
 nltk.download('stopwords')
@@ -105,7 +91,7 @@ async def main():
     bm25_retriever.k = config['BM25_k']
 
     # Vector store
-    docstore = DocumentStore()
+    docstore = DocumentStore(k=config['k'])
     docstore.ingest(documents)
 
     # Ensemble retriever
@@ -123,11 +109,11 @@ async def main():
 
     # extract the attack patterns, malware, and indicators
     malware_patterns = stix_parser.extract_malware()
-    malware_patterns.extend(stix_parser.extract_malware())
 
     assert len(malware_patterns) > 0, "No malware found in the STIX file"
 
     # if there are multiple malware patterns, ask the user to select one
+    selected = 0
     if len(malware_patterns) > 1:
         console.print("[[bold red]!!![/bold red]] Multiple Malware instances found in the STIX file. Please, select one to use", style="bold red")
         logging.warning("Multiple Malware instances found in the STIX file. Asking user to select one.")
@@ -148,10 +134,6 @@ async def main():
     # group the attack patterns
     mitre_tactics = json.loads(open("mitre/mitre-tactics.json").read())
     grouped_patterns = group_attack_patterns(mitre_tactics, attack_patterns_used)
-
-    # this are all the hashes mentioned in the malware's iocs, i.e., related files
-    # hashes_from_indicators = get_hashes(indicators_patterns) 
-    #print(hashes_from_indicators)
 
     state = {}
     state['id'] = str(uuid.uuid4())
@@ -274,8 +256,6 @@ async def main():
         interesting_techniques = mitre_techniques[tactic]['techniques']
 
         state['attack_steps'] = []
-        #state['pre-conditions'] = []
-        #state['post-conditions'] = []
         for action in grouped_patterns[tactic]:
             # each iteration is an attack step
             action_name = action['name']
@@ -332,7 +312,7 @@ async def main():
             """.format(context=context)
                 
             logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
-            #action_technique_name = qa_llm.invoke(query, context).strip()
+
             action_technique_name = chain_qa.invoke({"context": context, "action": action_name, "description": action_description}).strip()
             action_technique_name = remove_markdown(action_technique_name)
 
@@ -509,9 +489,6 @@ async def main():
                 "post-conditions": post_conditions,
                 "indicators": indicators
             }
-
-            #state['pre-conditions'].extend(pre_conditions)
-            #state['post-conditions'].extend(post_conditions)
 
             # add actions to the attack step
             state['attack_steps'].append(actions)

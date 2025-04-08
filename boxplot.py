@@ -33,7 +33,7 @@ for time in times:
 
 plt.boxplot(t)
 plt.title('Evaluation Execution Times', fontsize=TITLE_SIZE)
-plt.xlabel('Cases', fontsize=LABEL_SIZE)
+plt.xlabel('Case #', fontsize=LABEL_SIZE)
 plt.ylabel('Execution Time (s)', fontsize=LABEL_SIZE)
 plt.tick_params(axis='x', labelsize=TICK_SIZE)
 plt.tick_params(axis='y', labelsize=TICK_SIZE)
@@ -57,7 +57,7 @@ plt.boxplot(computed)
 
 # Add labels and title
 plt.title('Evaluation Execution Times per Attack Step', fontsize=TITLE_SIZE)
-plt.xlabel('Cases', fontsize=LABEL_SIZE)
+plt.xlabel('Case #', fontsize=LABEL_SIZE)
 plt.ylabel('Execution Time (s) per Attack Step', fontsize=LABEL_SIZE)
 plt.tick_params(axis='x', labelsize=TICK_SIZE)
 plt.tick_params(axis='y', labelsize=TICK_SIZE)
@@ -91,7 +91,7 @@ plt.boxplot(f1_scores)
 
 # Add labels and title
 plt.title('Evaluation F1 Scores', fontsize=TITLE_SIZE)
-plt.xlabel('Cases', fontsize=LABEL_SIZE)
+plt.xlabel('Case #', fontsize=LABEL_SIZE)
 plt.ylabel('F1 Score', fontsize=LABEL_SIZE)
 plt.tick_params(axis='x', labelsize=TICK_SIZE)
 plt.tick_params(axis='y', labelsize=TICK_SIZE)

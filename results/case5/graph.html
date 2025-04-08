@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100vw;
+                 height: 100vh;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "yellow", "id": "START", "label": "START", "shape": "square", "size": 20}, {"color": "blue", "id": "04d65d03-5545-429a-a8c6-ef88caed6f46", "label": "m1", "shape": "circle", "size": 30, "title": "STEP 1"}, {"color": "red", "id": "c2e3ecd0-a6da-4f67-ada9-d2d344b9c758", "label": "a1", "shape": "square", "size": 10, "title": "Exploit Public-Facing Application as used by the malware"}, {"color": "blue", "id": "5af195c9-9fc0-48fa-a198-68c6db462c66", "label": "m2", "shape": "circle", "size": 30, "title": "STEP 2"}, {"color": "red", "id": "a964d3c0-b53b-4de3-9694-394e26519ec1", "label": "a2", "shape": "square", "size": 10, "title": "Command and Scripting Interpreter: Windows Command Shell as used by the malware"}, {"color": "red", "id": "65d50239-092e-497f-a9a8-1a10074ed5e7", "label": "a3", "shape": "square", "size": 10, "title": "System Services: Service Execution as used by the malware"}, {"color": "blue", "id": "7ec579f0-78c6-433b-90b7-52e8103ea925", "label": "m3", "shape": "circle", "size": 30, "title": "STEP 3"}, {"color": "red", "id": "878a4e46-6ee0-450b-bff5-895850fa6c8e", "label": "a4", "shape": "square", "size": 10, "title": "Create or Modify System Process: Windows Service as used by the malware"}, {"color": "blue", "id": "4587de83-4c59-4195-9bc4-51a3b1fb2daa", "label": "m4", "shape": "circle", "size": 30, "title": "STEP 4"}, {"color": "red", "id": "cb10da40-23b8-4bc3-a1a9-b91df8102720", "label": "a5", "shape": "square", "size": 10, "title": "Obfuscated Files or Information: Software Packing as used by the malware"}, {"color": "red", "id": "f6365e2a-64c9-4680-ae96-d76b51a21772", "label": "a6", "shape": "square", "size": 10, "title": "Modify Registry as used by the malware"}, {"color": "red", "id": "2c11f0d9-084f-4b08-8fbd-4397c57aeb3f", "label": "a7", "shape": "square", "size": 10, "title": "Indicator Removal: File Deletion as used by the malware"}, {"color": "red", "id": "c8c24140-e671-406f-886b-56456de5c827", "label": "a8", "shape": "square", "size": 10, "title": "Access Token Manipulation: Create Process with Token as used by the malware"}, {"color": "blue", "id": "6fdd923b-6546-4e7c-a7fd-45e8eb86adae", "label": "m5", "shape": "circle", "size": 30, "title": "STEP 5"}, {"color": "red", "id": "9305109c-44ef-49ad-9680-1b4bf75c378e", "label": "a9", "shape": "square", "size": 10, "title": "System Information Discovery as used by the malware"}, {"color": "red", "id": "723e7dc4-8f56-4081-b7fb-0f3b2c4c8e12", "label": "a10", "shape": "square", "size": 10, "title": "File and Directory Discovery as used by the malware"}, {"color": "red", "id": "efebb53e-9c9e-4f58-93d8-84b518258fb2", "label": "a11", "shape": "square", "size": 10, "title": "Process Discovery as used by the malware"}, {"color": "blue", "id": "32b3dffc-ce38-4487-870e-8c62a69a14cc", "label": "m6", "shape": "circle", "size": 30, "title": "STEP 6"}, {"color": "red", "id": "e4ac34af-6832-4245-88ac-269788830c3a", "label": "a12", "shape": "square", "size": 10, "title": "Non-Application Layer Protocol as used by the malware"}, {"color": "yellow", "id": "END", "label": "END", "shape": "square", "size": 20}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "black", "from": "START", "to": "04d65d03-5545-429a-a8c6-ef88caed6f46"}, {"arrows": "to", "color": "black", "from": "04d65d03-5545-429a-a8c6-ef88caed6f46", "to": "c2e3ecd0-a6da-4f67-ada9-d2d344b9c758"}, {"arrows": "to", "color": "black", "from": "c2e3ecd0-a6da-4f67-ada9-d2d344b9c758", "to": "5af195c9-9fc0-48fa-a198-68c6db462c66"}, {"arrows": "to", "color": "black", "from": "5af195c9-9fc0-48fa-a198-68c6db462c66", "to": "a964d3c0-b53b-4de3-9694-394e26519ec1"}, {"arrows": "to", "color": "black", "from": "5af195c9-9fc0-48fa-a198-68c6db462c66", "to": "65d50239-092e-497f-a9a8-1a10074ed5e7"}, {"arrows": "to", "color": "black", "from": "a964d3c0-b53b-4de3-9694-394e26519ec1", "to": "7ec579f0-78c6-433b-90b7-52e8103ea925"}, {"arrows": "to", "color": "black", "from": "65d50239-092e-497f-a9a8-1a10074ed5e7", "to": "7ec579f0-78c6-433b-90b7-52e8103ea925"}, {"arrows": "to", "color": "black", "from": "7ec579f0-78c6-433b-90b7-52e8103ea925", "to": "878a4e46-6ee0-450b-bff5-895850fa6c8e"}, {"arrows": "to", "color": "black", "from": "878a4e46-6ee0-450b-bff5-895850fa6c8e", "to": "4587de83-4c59-4195-9bc4-51a3b1fb2daa"}, {"arrows": "to", "color": "black", "from": "4587de83-4c59-4195-9bc4-51a3b1fb2daa", "to": "cb10da40-23b8-4bc3-a1a9-b91df8102720"}, {"arrows": "to", "color": "black", "from": "4587de83-4c59-4195-9bc4-51a3b1fb2daa", "to": "f6365e2a-64c9-4680-ae96-d76b51a21772"}, {"arrows": "to", "color": "black", "from": "4587de83-4c59-4195-9bc4-51a3b1fb2daa", "to": "2c11f0d9-084f-4b08-8fbd-4397c57aeb3f"}, {"arrows": "to", "color": "black", "from": "4587de83-4c59-4195-9bc4-51a3b1fb2daa", "to": "c8c24140-e671-406f-886b-56456de5c827"}, {"arrows": "to", "color": "black", "from": "cb10da40-23b8-4bc3-a1a9-b91df8102720", "to": "6fdd923b-6546-4e7c-a7fd-45e8eb86adae"}, {"arrows": "to", "color": "black", "from": "f6365e2a-64c9-4680-ae96-d76b51a21772", "to": "6fdd923b-6546-4e7c-a7fd-45e8eb86adae"}, {"arrows": "to", "color": "black", "from": "2c11f0d9-084f-4b08-8fbd-4397c57aeb3f", "to": "6fdd923b-6546-4e7c-a7fd-45e8eb86adae"}, {"arrows": "to", "color": "black", "from": "c8c24140-e671-406f-886b-56456de5c827", "to": "6fdd923b-6546-4e7c-a7fd-45e8eb86adae"}, {"arrows": "to", "color": "black", "from": "6fdd923b-6546-4e7c-a7fd-45e8eb86adae", "to": "9305109c-44ef-49ad-9680-1b4bf75c378e"}, {"arrows": "to", "color": "black", "from": "6fdd923b-6546-4e7c-a7fd-45e8eb86adae", "to": "723e7dc4-8f56-4081-b7fb-0f3b2c4c8e12"}, {"arrows": "to", "color": "black", "from": "6fdd923b-6546-4e7c-a7fd-45e8eb86adae", "to": "efebb53e-9c9e-4f58-93d8-84b518258fb2"}, {"arrows": "to", "color": "black", "from": "9305109c-44ef-49ad-9680-1b4bf75c378e", "to": "32b3dffc-ce38-4487-870e-8c62a69a14cc"}, {"arrows": "to", "color": "black", "from": "723e7dc4-8f56-4081-b7fb-0f3b2c4c8e12", "to": "32b3dffc-ce38-4487-870e-8c62a69a14cc"}, {"arrows": "to", "color": "black", "from": "efebb53e-9c9e-4f58-93d8-84b518258fb2", "to": "32b3dffc-ce38-4487-870e-8c62a69a14cc"}, {"arrows": "to", "color": "black", "from": "32b3dffc-ce38-4487-870e-8c62a69a14cc", "to": "e4ac34af-6832-4245-88ac-269788830c3a"}, {"arrows": "to", "color": "black", "from": "e4ac34af-6832-4245-88ac-269788830c3a", "to": "END"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

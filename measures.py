@@ -5,10 +5,10 @@ from evaluate import load
 
 SCRIPT_TO_RUN = "app.py"
 NUM_RUNS = 10
-GROUND_TRUTH = "ground_truths/coldsteel.json"
+GROUND_TRUTH = "ground_truths/smooth.json"
 GENERATED_OUTPUT = "out/LOW_output.json"
-MEASURES_TIME = "execution_times_coldsteel.json"
-MEASURES_SCORE = "execution_scores_coldsteel.json"
+MEASURES_TIME = "out/execution_times_smooth.json"
+MEASURES_SCORE = "out/execution_scores_smooth.json"
 
 execution_times = []
 execution_scores = []
