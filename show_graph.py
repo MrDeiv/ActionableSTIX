@@ -40,5 +40,5 @@ if __name__ == '__main__':
         net.add_edge(action['id'], 'END', color='black')
         
     # Save and display the network
-    net.show('graph.html', notebook=False)
+    net.show('out/graph.html', notebook=False)
     net.save_graph
