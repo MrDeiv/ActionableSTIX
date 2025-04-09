@@ -69,13 +69,13 @@ async def main():
     console.print(f"Starting time: {time.strftime('%Y-%m-%d %H:%M:%S')}", style="bold green")
 
     # load files into documents
-    directory = os.path.join(config["DOCUMENTS_DIR"], "other")
+    directory = config["DOCUMENTS_DIR"]
     documents = []
     n_files = len(os.listdir(directory))
 
     progress = tqdm(total=n_files, desc="Loading documents")
     for file in os.listdir(directory):
-        documents.extend(DocumentFactory.from_file(os.path.join(directory, file)))
+        documents.extend(DocumentFactory.from_file(os.path.join(directory, file))) if not file.endswith('.zip') else None
         progress.update(1)
     progress.close()
 

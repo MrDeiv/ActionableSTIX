@@ -1,5 +1,4 @@
 lib/
-documents/
 .env
 */__pycache__/
 static/
