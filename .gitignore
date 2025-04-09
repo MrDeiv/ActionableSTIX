@@ -1,5 +1,4 @@
 lib/
 .env
 */__pycache__/
-static/
-out/.*
+__pycache__/
