@@ -1,11 +1,11 @@
 import json, os
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, ListFlowable, ListItem
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, ListFlowable, ListItem, Image
 from reportlab.lib.styles import getSampleStyleSheet
 from src.STIXParser import STIXParser
 import datetime
 
-def create_pdf_from_json(malware, out, output_pdf):
+def create_pdf_from_json(malware, out, output_pdf, image_path):
     # Define PDF document
     doc = SimpleDocTemplate(output_pdf, pagesize=letter)
     styles = getSampleStyleSheet()
@@ -64,21 +64,34 @@ def create_pdf_from_json(malware, out, output_pdf):
     # quick overview
     elements.append(Paragraph(f"<b>Quick Overview</b>", styles["Heading2"]))
     
+    k = 0
     for i,item in enumerate(out):
-        elements.append(Paragraph(f"<b>Milestone {i+1}</b>", styles["Normal"]))
-        for k, attack_step in enumerate(item["attack_steps"]):
-            elements.append(Paragraph(f"{k+1}. {attack_step['name']} ({attack_step["mitre_technique"]['id']})", styles["Normal"]))
+        elements.append(Paragraph(f"<b>Milestone m{i+1}</b>", styles["Normal"]))
+        for attack_step in item["attack_steps"]:
+            elements.append(Paragraph(f"a{k+1}. {attack_step['name']} ({attack_step["mitre_technique"]['id']})", styles["Normal"]))
+            k += 1
         elements.append(Spacer(1, 10))
 
     elements.append(PageBreak())
+
+    # image
+    elements.append(Paragraph(f"<b>Attack Graph</b>", styles["Heading2"]))
+    if os.path.exists(image_path):
+        img = Image(image_path, width=600, height=300)
+        elements.append(img)
+    else:
+        elements.append(Paragraph("Attack graph image not found.", styles["Normal"]))
+    elements.append(Spacer(1, 10))
+
+    k = 0
     for i,item in enumerate(out):
         # Title
-        elements.append(Paragraph(f"<b>Milestone {i+1}</b>", styles["Title"]))
+        elements.append(Paragraph(f"<b>Milestone <i>m{i+1}</i></b>", styles["Title"]))
         elements.append(Spacer(1, 10))
 
         # Attack Steps
-        for k, attack_step in enumerate(item["attack_steps"]):
-            elements.append(Paragraph(f"<b>Attack Step {i+1}.{k+1}</b>", styles["Heading2"]))
+        for attack_step in item["attack_steps"]:
+            elements.append(Paragraph(f"<b>Attack Step <i>a{k+1}</i></b>", styles["Heading2"]))
             elements.append(Paragraph("="*50, styles["Normal"]))
             elements.append(Paragraph(f"<b>Name:</b> {attack_step['name']}", styles["Normal"]))
             elements.append(Paragraph(f"<b>Description:</b> {attack_step['description']}", styles["Normal"]))
@@ -123,6 +136,8 @@ def create_pdf_from_json(malware, out, output_pdf):
                 )
                 elements.append(indicators_list)
             elements.append(Spacer(1, 10))
+
+            k += 1
         
         # Add a page break after each item
         elements.append(PageBreak())
@@ -136,7 +151,9 @@ if __name__ == "__main__":
 
     # Load JSON data
     config = json.load(open(config_file))
-    out = json.load(open(os.path.join(config['OUTPUT_DIR'], "LOW_"+config['OUTPUT_FILE'])))
+    RESULT_PATH = 'results/case5'
+    out = json.load(open(f"{RESULT_PATH}/LOW_output.json"))
+    image_path = f"{RESULT_PATH}/coldsteel_graph_plot.png"
 
     stix_parser = STIXParser()
     stix_parser.parse(config['STIX_FILE'])
@@ -144,4 +161,4 @@ if __name__ == "__main__":
     malware_name = malware["name"]
     filename = malware_name.replace(" ", "_").lower()
 
-    create_pdf_from_json(malware, out, os.path.join(config['OUTPUT_DIR'], f"{filename}_report.pdf"))
+    create_pdf_from_json(malware, out, os.path.join(config['OUTPUT_DIR'], f"{filename}_report.pdf"), image_path)

@@ -1,5 +1,5 @@
 {
-    "STIX_FILE": "sample_stix/NCSC-MAR-Jaguar-Tooth-stix.json",
+    "STIX_FILE": "sample_stix/NCSC-MAR-Cold-Steel-stix.json",
     "DOCUMENTS_DIR": "./documents",
     "OUTPUT_DIR": "./out",
     "OUTPUT_FILE": "output.json",
