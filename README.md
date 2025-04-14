@@ -1,8 +1,7 @@
 # A Pipeline for Enriching Threat Intelligence with LLMs
 
 ## Abstract
-Effective cyber threat intelligence hinges on data collection and the ability to swiftly contextualize and act on that data. While STIX (Structured Threat Information Expression) provides a standardized format for sharing threat indicators, it often lacks the actionability analysts require. This work presents a novel pipeline that enhances STIX files through external document enrichment powered by Large Language Models (LLMs).
-The pipeline comprises two phases: 1) ingesting structured threat data and relevant additional content and 2) producing enriched outputs. LLMs extract and correlate information, generating actionable intelligence for analyst consumption. The resulting system bridges the gap between raw threat data and informed, rapid decision-making.
+Effective cyber threat intelligence hinges on data collection and the ability to swiftly contextualize and act on that data. While STIX (Structured Threat Information Expression) provides a standardized format for sharing threat indicators, it often lacks the actionability analysts require. This work presents a novel pipeline powered by Large Language Models (LLMs) that, starting from a STIX file and additional documents related to a specific cyber threat, produces a graph-based representation of such a threat, capturing the temporal evolution of the represented cyber attack. Each node in the graph corresponds to a specific attacker action and is associated with a natural-language description of such action. Thus, the pipeline produces a representation of the threat with a higher level of detail with respect to the original STIX file. The resulting system bridges the gap between raw threat data and informed, rapid decision-making.
 
 ## Pipeline Overview
 ![Pipeline Overview](docs/schema_new.jpg)
@@ -50,5 +49,20 @@ Together with the main application, we provide two additional scripts:
 
 ## Results
 In the `/results` folder we provide the fives evaluations perfomed. Each subfolder details one of them.
+- **Case 1**: Goofy Guineapig
+- **Case 2**: Smooth Operator
+- **Case 3**: Small Sieve
+- **Case 4**: Jaguar Tooth
+- **Case 5**: COLDSTEEL
 
 Into these subfolders we stored the application log, the output JSON, the PDF report and the HTML visualization and the time and F1 score measures performed using the script `measures.py`.
+
+- `app.log` contains the execution details. From it, it is possible to determine the documents used to generate the responses.
+- `execution_scores_XX.log` recorded the precision, recall and F1 score computed during the evaluations. The ground truth we used are in the folder `ground_truths`.
+- `execution_times_XX.log` stores the execution times.
+- `XX_graph_plot.png` contains the plot of the graph representing the attack.
+- `XX_report.pdf` is the automatic report generated from the application output.
+- `graph.html` contains the HTML visualization of the graph.
+- `LOW_output.json` is the main output of the pipeline, detailing the related attack. This output was generated with a LOW human-interaction level.
+
+Moreover, the STIX used as references are stored in the folder `sample_stix`.

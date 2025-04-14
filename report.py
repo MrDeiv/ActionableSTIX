@@ -151,9 +151,9 @@ if __name__ == "__main__":
 
     # Load JSON data
     config = json.load(open(config_file))
-    RESULT_PATH = 'results/case5'
+    RESULT_PATH = 'results/case2'
     out = json.load(open(f"{RESULT_PATH}/LOW_output.json"))
-    image_path = f"{RESULT_PATH}/coldsteel_graph_plot.png"
+    image_path = f"{RESULT_PATH}/smooth_graph_plot.png"
 
     stix_parser = STIXParser()
     stix_parser.parse(config['STIX_FILE'])
