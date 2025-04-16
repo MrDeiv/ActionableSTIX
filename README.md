@@ -1,4 +1,4 @@
-# A Pipeline for Enriching Threat Intelligence with LLMs
+# Creating Actionable Rich Threat Intelligent Reports Merging Structured and Narrative Information Through Large Language Models
 
 ## Abstract
 Effective cyber threat intelligence hinges on data collection and the ability to swiftly contextualize and act on that data. While STIX (Structured Threat Information Expression) provides a standardized format for sharing threat indicators, it often lacks the actionability analysts require. This work presents a novel pipeline powered by Large Language Models (LLMs) that, starting from a STIX file and additional documents related to a specific cyber threat, produces a graph-based representation of such a threat, capturing the temporal evolution of the represented cyber attack. Each node in the graph corresponds to a specific attacker action and is associated with a natural-language description of such action. Thus, the pipeline produces a representation of the threat with a higher level of detail with respect to the original STIX file. The resulting system bridges the gap between raw threat data and informed, rapid decision-making.
