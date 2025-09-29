@@ -1,0 +1,10 @@
+{
+    "model": "qwen3:4b",
+    "total": 9196,
+    "average_match_time": 11.134910614815107,
+    "average_distance": 0,
+    "correct": 7209,
+    "human_in_the_loop_calls": 1987,
+    "accuracy": 0.783927794693345,
+    "human_in_the_loop_ratio": 0.21607220530665508
+}

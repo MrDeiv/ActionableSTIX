@@ -1,0 +1,4769 @@
+[
+    {
+        "id": "0eef6df3-5f26-47cc-8905-dd922b75be9a",
+        "os": "ubuntu 22.04.2",
+        "sha256": "d41b9d38e0fc0d35906ea54304af94b0479ee70aff7c9b657f61b7de7968a191",
+        "external_id": "e8d64cd1-a261-4577-875d-e7e7830f18ac",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-30T08:18:27.758Z"
+    },
+    {
+        "id": "82605bc4-ddaf-455a-9bdf-80f504cbfe8f",
+        "os": "ubuntu 22.04.2",
+        "sha256": "44c5c6a6a6761af81aa3e4a3b0a90739943b6d8cbbf0c9cc883f7b71fce58185",
+        "external_id": "c136a7a9-5506-4b28-8d19-f4d37882b21a",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-28T02:45:27.769Z"
+    },
+    {
+        "id": "1459220e-25b2-41cd-8121-d4da807da5a9",
+        "os": "ubuntu 22.04.2",
+        "sha256": "0fbdcfd8619746322332f1b9112183e91a157552e9d4e8c9d63d638bd5197f51",
+        "external_id": "410b793a-b96f-436c-a546-5da8d69dd7c8",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-25T10:49:05.996Z"
+    },
+    {
+        "id": "58587bb2-5a4f-426c-aef9-83f21ae6916a",
+        "os": "ubuntu 22.04.2",
+        "sha256": "edf1a2f7f4394a0f2b8ede22051142a0bab4b343cf6219f012932c16436bb5cf",
+        "external_id": "9972de46-800a-4635-baa8-29024f45acdb",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-06T14:46:05.489Z"
+    },
+    {
+        "id": "617a08e9-26d7-432a-80a3-7347af13794e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ac2fc32e43b8c7375ad608797301da0660b11c3fd9c24fd763c294e1c0d2ef1b",
+        "external_id": "cacd512b-1b12-488b-bf0f-02209c99bb3f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "gafgyt",
+            "botnet",
+            "mirai"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T19:37:21.051Z"
+    },
+    {
+        "id": "9c467ffc-2d82-42ad-93a7-c8f716712116",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ef2f3d40f0f3a19e314d9637c10e5ae5fee5031753c2cd5fd97c1d8dcab9968d",
+        "external_id": "0b1ef13b-f7a8-4cd5-8495-f519228225ca",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-04T11:10:51.151Z"
+    },
+    {
+        "id": "ab3ec8ab-3f82-4f44-8c0c-d7044daca549",
+        "os": "ubuntu 22.04.2",
+        "sha256": "3da14ead00f8a9640fe6c7e68356de10324a113039e02eb5d6a9c9d07012433b",
+        "external_id": "475b1cc9-c59f-48a8-958b-86ff6cdde61c",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-30T16:21:22.396Z"
+    },
+    {
+        "id": "f905ddab-a326-4eed-ab7f-be68ca29a8ca",
+        "os": "ubuntu 22.04.2",
+        "sha256": "2e40315564d83c8629dd841739df6f73c72e90978c4e83ca5e29844d77f3d3e9",
+        "external_id": "9484f851-7385-46f2-900e-165d67987256",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-28T13:46:56.548Z"
+    },
+    {
+        "id": "503f44e6-b8b7-49eb-a477-8cfc066bef84",
+        "os": "ubuntu 22.04.2",
+        "sha256": "7064fb68cd420c3596d60f1957f2cc5e72f4413ad90e4e311eb60f63c72cd23e",
+        "external_id": "7ff3de05-5b58-435d-9424-a05f0d21c6c3",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T12:09:26.052Z"
+    },
+    {
+        "id": "37f0daeb-757e-4bd2-96a1-6d0b1517d2de",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b0c7da486499141fe85cea00d4d6b9060320594a2d669081b91942214d9316cb",
+        "external_id": "18cbff4b-669e-4c8d-b7a1-6d4a1ad2ddbb",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-25T19:43:05.936Z"
+    },
+    {
+        "id": "07b0ebbc-2220-49ec-9d90-30041707c996",
+        "os": "ubuntu 22.04.2",
+        "sha256": "801f12b3d3917e0bb6fd150871de409df02865fe3853bb0275111fd4ac6ce6e3",
+        "external_id": "ab42684c-5507-415a-9339-d6bf42a0e861",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "gafgyt",
+            "botnet",
+            "mirai"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-07T18:17:00.938Z"
+    },
+    {
+        "id": "75b74151-186a-4833-8bf5-0c5202bf25cf",
+        "os": "ubuntu 22.04.2",
+        "sha256": "3de7d82679cf78266e49b22745f80e7d933e4daa5651b8ec6b2c5181397c0c89",
+        "external_id": "b00198b6-d29b-4bca-a029-f394b8086f63",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T14:39:11.948Z"
+    },
+    {
+        "id": "c2c8ddaf-cb43-4eee-b01f-515f02060452",
+        "os": "ubuntu 22.04.2",
+        "sha256": "e09639c6d5c5ec9c1d0ceebd79ac6f7ba92a20958dacf4101fd031bcc17a5221",
+        "external_id": "8636ada8-559b-439a-928f-82a58b6be09b",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-28T19:45:36.165Z"
+    },
+    {
+        "id": "733df509-48f2-47d6-8c87-9d01b5c5a8dd",
+        "os": "ubuntu 22.04.2",
+        "sha256": "0bf9747a53df54e10d5a06ca65e3d5fa2459b45ae96c2cdb1ff5eea514fb5633",
+        "external_id": "fa9fb1e0-31af-43ca-aff1-ee6e9b524692",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "ipfs",
+            "evasion",
+            "telegram"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-02T08:20:43.973Z"
+    },
+    {
+        "id": "8b13911d-24f6-4aea-a3e1-f24b297a9182",
+        "os": "ubuntu 22.04.2",
+        "sha256": "344c0fb5f6731c77015929e311ee1d4d7f3f856790e994c1a5e0963c16b33da5",
+        "external_id": "01dcf046-c9e8-46bc-aab2-85241ad1e08d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-06T14:56:05.838Z"
+    },
+    {
+        "id": "bce328c9-98d1-49d2-a489-6c2aa0d1f6ed",
+        "os": "ubuntu 22.04.2",
+        "sha256": "2fdd038f387e34ce5bc74004c8e84ff8feb603ca5644cfe8dac82f38fb8cef5b",
+        "external_id": "7d4b2078-1e80-4dc1-bb36-dce7a5bf26f1",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "scan",
+            "ssh",
+            "sshscan"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-01T00:11:51.974Z"
+    },
+    {
+        "id": "8cc1d05a-b2a6-4079-85e3-0be4488a96a7",
+        "os": "ubuntu 22.04.2",
+        "sha256": "4a97180b3b82c2422b72faf7d80b3bc0bc2431f48776145adef57076bb19e101",
+        "external_id": "c71793bf-ebc7-490c-bad6-fe19741d328b",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-28T20:11:00.208Z"
+    },
+    {
+        "id": "36b126ff-8cc1-412c-9273-5d6e6e9a7840",
+        "os": "ubuntu 22.04.2",
+        "sha256": "f6522d966f90e82143c04b05cbfccdf664329401f33960f5c97b0666bf8a3b07",
+        "external_id": "fe96f8f5-f0bd-40a7-a9ed-3ddda69e49cf",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T22:23:04.478Z"
+    },
+    {
+        "id": "25160be5-b81b-4b43-983b-ce2dad798830",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1cc63672ca14b40d2e0b71101b92e503842c72563f3430038a85407c1a5ded4a",
+        "external_id": "8ca4edbe-347f-47d2-addf-32092b56aaf6",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-28T19:40:29.854Z"
+    },
+    {
+        "id": "c8c3eaf0-cad2-4423-9ff1-a8f82093c5ae",
+        "os": "ubuntu 22.04.2",
+        "sha256": "40f8c27c93af8161dddb89831873875aaf2c872dd78b30c9f9a119ff4f8ed445",
+        "external_id": "205ebcf1-6971-4161-8644-60e877d3295e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "gafgyt",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T11:11:09.285Z"
+    },
+    {
+        "id": "02c617c7-1f06-4ea5-824b-547510871135",
+        "os": "ubuntu 22.04.2",
+        "sha256": "0137bab2a9f912055b8efd7c11cb3701ca369aff6d3da5580821fa5868bd5b5d",
+        "external_id": "5eb1e549-ba2e-4a0c-ad13-f1343afad15c",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-29T14:06:11.833Z"
+    },
+    {
+        "id": "c447e742-092f-47c3-b48c-51957aa116e7",
+        "os": "ubuntu 22.04.2",
+        "sha256": "9049f8f294b7651847737eaf67266d41595d164395cd205c22024e6c758b9a5a",
+        "external_id": "43534aa8-b8ab-4bca-89b8-59479c1dc273",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-01T02:21:27.379Z"
+    },
+    {
+        "id": "c3b649a9-b2eb-4f63-b868-3115dd907716",
+        "os": "ubuntu 22.04.2",
+        "sha256": "368f0747e418ba15be24e701289a710db9fe55deb201de0e12d4fd701f96d90a",
+        "external_id": "77ca794e-a02f-40b3-862d-04fbf51a4e7b",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-06T20:04:11.863Z"
+    },
+    {
+        "id": "358f61f2-444f-4dea-83fd-3e543ac11ef1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "6dfd8e590798b4b93b29b279ceb119358d8e3c8499d5962d6e46c8f6cfa3f9ea",
+        "external_id": "d114c61d-682c-480e-a6bd-8c1a9bc52622",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T14:27:26.638Z"
+    },
+    {
+        "id": "1f9a0fc3-0574-4fa1-9411-16b59afbe72c",
+        "os": "ubuntu 22.04.2",
+        "sha256": "841602fbf51f7a2144ce70510107eb88dead9a77c215490f6f3cbf7c4905a867",
+        "external_id": "cac20eb4-1b58-4103-b6f1-b1a82b0f5614",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-03T07:05:11.435Z"
+    },
+    {
+        "id": "88a8b6e7-4e74-48b1-af1c-1148038ade72",
+        "os": "ubuntu 22.04.2",
+        "sha256": "89bb7019bbee41f712c0e3c4a1ab215123eadb86dca3fbdf3041056208be1b78",
+        "external_id": "8e1afdb7-b5da-4f24-b556-8decb521fa40",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-30T15:17:09.613Z"
+    },
+    {
+        "id": "d5e0ec00-25f1-4399-8761-f90aa05906e1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "21b8e31681f401bdcbdc6cd07187fb4b49f701a74663ef6159d4dba46eb35b46",
+        "external_id": "eafd2344-0fd3-4ad5-a62d-b84a67172cec",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-25T14:22:41.781Z"
+    },
+    {
+        "id": "68383354-49ba-459d-81ab-e29727f6e4fb",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1541a4d5d3b4671e3706ea5a34732b01c281a126ed77f19c5e73aa050eeaae35",
+        "external_id": "faaec310-774b-4192-a4b1-97dcce4b7660",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-30T03:04:51.547Z"
+    },
+    {
+        "id": "8b6aca14-993b-4ab6-a085-b3ac2ce1d7ba",
+        "os": "ubuntu 22.04.2",
+        "sha256": "a5ae0089e28535d7e0b23db321477a077bd019238584dde6cfedf1f7f1874b5a",
+        "external_id": "936862cd-243d-48a5-a9f7-a4fc0ebf5b55",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T03:02:22.895Z"
+    },
+    {
+        "id": "3510af1a-60cd-435e-83cb-8f9c1673df36",
+        "os": "ubuntu 22.04.2",
+        "sha256": "4f8aaa645645af033af16c82cc37fdc8cdb9c0e6501a660b1a3020ffbaef063a",
+        "external_id": "f67e3323-9ed9-403e-83b4-8beab0147ae1",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-29T01:44:32.887Z"
+    },
+    {
+        "id": "bf51c612-f323-4aa0-91b4-f56f88ee6abb",
+        "os": "ubuntu 22.04.2",
+        "sha256": "0a5f85bc344e0115cb4b56e65eacec4cbe5491a62f2cb546552dd1503204de39",
+        "external_id": "8658eae2-0192-46c2-a5ed-0428e06ddad2",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "ngioweb"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-04T15:20:05.090Z"
+    },
+    {
+        "id": "daa713ed-598f-4ddb-b412-82667cef7d98",
+        "os": "ubuntu 22.04.2",
+        "sha256": "62e80f11486269adfc4d714cd4e384a29e954bb441d2abf466c0d8303a98491b",
+        "external_id": "ae105dfb-2d5b-4e18-821d-c31f16987b9e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "gafgyt",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T11:12:52.708Z"
+    },
+    {
+        "id": "5d70a1b9-9e33-48bd-924e-2aa8985f8277",
+        "os": "ubuntu 22.04.2",
+        "sha256": "504a5221a3ce925c4e545c982d08c7b06451e165225802e936b1efe15d11f85d",
+        "external_id": "0854b13e-fbcb-407e-8518-f9500e9a66ee",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-30T14:46:04.033Z"
+    },
+    {
+        "id": "184e3825-af8c-4f84-8a95-05dda70fb8a3",
+        "os": "ubuntu 22.04.2",
+        "sha256": "31f9596d2ae95c364621b98801178e18886f2dbb49f9792417247edf81fd20ed",
+        "external_id": "c5dbfea0-dd9e-43e4-a7c7-31d0ce9bbc9f",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T00:53:41.310Z"
+    },
+    {
+        "id": "fcd1fdf7-0551-47be-8db6-5282db393552",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b805dd0fb87ed91a72e71faedbc6ff84022f2c802c0bf7b03e9ce658336f7245",
+        "external_id": "25135205-6b5c-481e-b838-3368767602cc",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-01T15:21:17.558Z"
+    },
+    {
+        "id": "c12c4535-9b2a-4c7f-8d78-94ff97c17d27",
+        "os": "ubuntu 22.04.2",
+        "sha256": "abe43fc3f2252fd946486639dcbd366137c310325d1bb72227fd70c3225eed60",
+        "external_id": "e8ce0119-e587-4ece-ae5d-e0e90378735b",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T06:47:33.743Z"
+    },
+    {
+        "id": "acebd2d3-239d-439c-88f7-f4b4a1e91b9b",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1309c1d8b2ccae3a24ecd268698c3bbdd8f68e644f45a8c9479273801caa5050",
+        "external_id": "aee57269-90a8-4fa1-bdfd-2534817ef339",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-06T07:53:00.851Z"
+    },
+    {
+        "id": "50610752-5391-4b93-904f-c7cb1a186c1d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "205f6f57dbc95d8466b90f40df762c5d5bd180824db9bf40f0b5d80cce21077b",
+        "external_id": "57825b39-82e4-4a62-a3b4-e82b6ca1012c",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "gafgyt",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T12:28:28.579Z"
+    },
+    {
+        "id": "b2281f88-0cde-43c6-b537-5a38161423cc",
+        "os": "ubuntu 22.04.2",
+        "sha256": "d1d0e20e7d9cee1dd87bb869c4fee6ecff607b983781bac99394e0b0b1426156",
+        "external_id": "61df4768-cc75-426e-b0d1-a2f2a7fa401a",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T22:35:11.957Z"
+    },
+    {
+        "id": "bbdd8ac3-cd6f-4dfc-a0e3-fe40d26f11a1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "29e7b5c9aa6893741a44089739a8089b113b7605c75890c82e4fd593f8d88663",
+        "external_id": "af72eceb-b30c-4d65-9044-88a7a674381e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-02T02:38:55.253Z"
+    },
+    {
+        "id": "d1ff5808-08b2-4502-acb0-4085e4c208fb",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1854710ddd861ec9c91f4fc0848eebca948c9ab56686a4fc0e63eed977573689",
+        "external_id": "988b7f48-978f-4e3b-97cc-de0cc3174891",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-29T00:21:14.723Z"
+    },
+    {
+        "id": "b9094d3d-8758-4cd3-a80b-c7cfe2c6563d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "4e5af978243edb6979f89a49e0b97cc9c6ab19970ac8a1e534373e25e03b5121",
+        "external_id": "63029ee3-9909-41c5-a3d8-7a4df7128d31",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-29T00:21:59.532Z"
+    },
+    {
+        "id": "18584a0a-7b82-4f53-98e5-0367426c20e9",
+        "os": "ubuntu 22.04.2",
+        "sha256": "073a6462b9915e06a24991e24caff37b2fbee057b6be7c328fd1e92cb09d286d",
+        "external_id": "a4e3dd2b-88b7-426f-b04d-49da71444c55",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T06:17:40.608Z"
+    },
+    {
+        "id": "aaeafa0e-ca75-4c95-a431-025166eb7090",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b8f1d30e963bf2c8a8d18c194293e2f93e9e371065748bd218dc2892558321f8",
+        "external_id": "45e91c79-06c4-4f27-bc49-170ab494240a",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T22:36:42.348Z"
+    },
+    {
+        "id": "8ff3fe29-300c-405d-8997-f82799d2bab9",
+        "os": "ubuntu 22.04.2",
+        "sha256": "27de8072106c132104eed0735d33b4c04dbfefe2b6735c85ec5c838e9927b6bd",
+        "external_id": "d94302b9-877c-40c4-a08f-a026f867a74f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:05:16.573Z"
+    },
+    {
+        "id": "1fbfc54d-0d57-4418-88bf-1a77f2a2f65e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "82e952f1972e02febd1d0262b960afba4cba42e81a432c6339b8c42c528fda5e",
+        "external_id": "e3375db8-3b64-4dfc-bcfe-b47b62021f31",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T02:17:52.500Z"
+    },
+    {
+        "id": "3cb9b3fd-dfe9-464f-bcdf-d635566213d2",
+        "os": "ubuntu 22.04.2",
+        "sha256": "67dddbd19be876917b24be8e47860a4de858a9606fec67f37a62f096316aa7f0",
+        "external_id": "019ae925-e2ad-4f82-99fd-e3fffbaaf55c",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-04T21:26:42.366Z"
+    },
+    {
+        "id": "dc9523a3-6227-4b79-824e-d56da8454622",
+        "os": "ubuntu 22.04.2",
+        "sha256": "83bd1b91d77172255a3d3fb5f436cb14511c289723f587cd25f5289587c71869",
+        "external_id": "ce08bcb6-e60e-4331-8f84-23d51a5105fc",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-30T07:45:26.823Z"
+    },
+    {
+        "id": "b36299ca-dba9-437a-87ff-984a326c92a2",
+        "os": "ubuntu 22.04.2",
+        "sha256": "46c5aae68575e31c6634f06152c558c8d53a33be65a9a8269a938528c9d98296",
+        "external_id": "e27ca259-4003-48b8-bfe3-ebdb894138c5",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "botnet",
+            "mirai"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-04T03:34:20.131Z"
+    },
+    {
+        "id": "5526e048-c36a-4bbb-9ec0-d7241a8b3f83",
+        "os": "ubuntu 22.04.2",
+        "sha256": "5d36d21e774fef7795e2a90f40ea8b78d7103b1666ecd141dc31ac1a0c14fa61",
+        "external_id": "0c963aca-892e-47c9-b36d-b6fe71884866",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "xorddos",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-04T09:38:58.195Z"
+    },
+    {
+        "id": "37e6d80e-191b-4182-a697-9d8499441e1d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1fc69316fae15620e509b2078068fad9ea32caf7e957514bef66bb0f43b27058",
+        "external_id": "a926746b-9eaf-4dfc-acf4-f682eef78987",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "kinsing",
+            "backdoor"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-29T09:09:50.532Z"
+    },
+    {
+        "id": "f01cc947-da7f-48ef-8d7b-8e2613179d7a",
+        "os": "ubuntu 22.04.2",
+        "sha256": "dae77bd022653ed9244437ce130890e4bddedfd7ec0c1e6652eb819ed6922af7",
+        "external_id": "ff36d2a8-f4c6-47c3-bf6e-bd2615b53f83",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T03:22:35.988Z"
+    },
+    {
+        "id": "18bf544b-66e8-46e7-a255-37f0fbd11428",
+        "os": "ubuntu 22.04.2",
+        "sha256": "a8ea897d1133e04f033a8adf4a67b0107006395a01a49df2232584a31b3b3d41",
+        "external_id": "eb57f575-d810-4db9-a31d-310da5bf5c9e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-25T19:50:22.835Z"
+    },
+    {
+        "id": "2e4298d5-8c11-4a90-b413-c90c4b321851",
+        "os": "ubuntu 22.04.2",
+        "sha256": "c478a7b7eb25ee6d4b027b40272a9d040ea541e729c8c43bbfd65e55ebd2698f",
+        "external_id": "72efd6ed-de37-435c-af44-62b0bceccb0c",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-08T16:17:29.444Z"
+    },
+    {
+        "id": "98065c55-27cf-4e8e-a217-61b77d620000",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1b8f1890be034ecee7e0068d6dca5a433cc2b97ae8635383807a3f0110b109af",
+        "external_id": "0b412944-69f0-44ca-9ea1-487991a4de73",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-29T11:27:09.137Z"
+    },
+    {
+        "id": "4ebff74b-b81d-4b92-a8de-3a384ff525c8",
+        "os": "ubuntu 22.04.2",
+        "sha256": "f1256bd41406deb47646f0698f00ae27ecad5161ff642621e90e8db4f59c6f87",
+        "external_id": "3ccb7f59-a0a3-4185-b9a2-26821e48e905",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-05T16:12:57.310Z"
+    },
+    {
+        "id": "234f900b-b95a-46f5-8456-774b419ef131",
+        "os": "ubuntu 22.04.2",
+        "sha256": "8e3fb15692a5b48720814b131f7fff9e6b7057364123c7cb7e78ca2e27fec989",
+        "external_id": "87db119e-8ed4-4189-a7b1-8a92299a61c0",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-26T15:38:59.258Z"
+    },
+    {
+        "id": "ea0d5d43-ea97-409d-8ea6-018c36d58007",
+        "os": "ubuntu 22.04.2",
+        "sha256": "6346041aaf4142d21b8ab94abd4a5199262dde636c783c612cdf40c265bcd247",
+        "external_id": "4f16fb86-7bf8-4707-86f3-1c25477d9403",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-06T18:44:14.475Z"
+    },
+    {
+        "id": "ed2fab8f-5c6f-4fe4-be32-33a525828b34",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b533f1605d698bc2ab443b6d268a9580147b0afc28ddbcd9a77921aa08409873",
+        "external_id": "2e012215-7b8e-4a85-821c-15ea77a4eee4",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "kinsing",
+            "backdoor"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-29T06:23:34.240Z"
+    },
+    {
+        "id": "587d8e3d-3ba3-4589-9f72-cf0d770bb22f",
+        "os": "ubuntu 22.04.2",
+        "sha256": "5346963af7d2b40779c76241ce7bf3a659146414b2ad9fb5728f907e4864b62d",
+        "external_id": "598a246e-c0d1-41bb-bd70-72455aa88157",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "kinsing",
+            "backdoor"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-29T08:39:04.218Z"
+    },
+    {
+        "id": "b3372cf3-9017-49cf-9e6f-5f3dc05e56c6",
+        "os": "ubuntu 22.04.2",
+        "sha256": "64d537e833fa4f8f79bc7fe82c5ffbf531c1ccdb78cb8c1dc145659cac7dbcb2",
+        "external_id": "b1c26d22-9545-49f2-aa0e-2e7436263c5f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-27T04:34:00.659Z"
+    },
+    {
+        "id": "8c96ce96-e39e-4c5b-89b9-82989a2d12b6",
+        "os": "ubuntu 22.04.2",
+        "sha256": "2a1f78beab16448fade199dfa07571716581100d3b9dc64cfa3173317e750805",
+        "external_id": "6e6f961d-74f7-4604-8a10-2f6ab8e267e6",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T14:07:52.096Z"
+    },
+    {
+        "id": "7d0a794c-0c14-4760-af22-965551dcb7ed",
+        "os": "ubuntu 22.04.2",
+        "sha256": "25b5277f58c9a1085268ab58738d571cbc8b54e4793a179caec25cf202761a05",
+        "external_id": "47ec7f04-40e0-4779-ab72-fa0f8ba6bc34",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "ransomware",
+            "blackmatter"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-03T01:04:59.477Z"
+    },
+    {
+        "id": "cbdd7d24-2cf3-4d8e-aa1e-2661e38ae85e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b334b61ba1b5c4f6727e7981e92bd5d37f7e3bbe47f7bfb1a305ab405a545f94",
+        "external_id": "cde1083a-9e5c-4e58-b958-1b2b6f4503ab",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "ddos",
+            "gafgyt",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-29T15:34:14.247Z"
+    },
+    {
+        "id": "0593084c-7bf6-4b9f-88ae-5d6d78d79eb4",
+        "os": "ubuntu 22.04.2",
+        "sha256": "5e4be8a07898cce1a898bf2d89f4530a33b8affdc0be03795165954348c377f7",
+        "external_id": "842571ea-5a7e-424b-ba61-e5775f91c167",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-28T07:47:21.222Z"
+    },
+    {
+        "id": "44e486f7-275a-4b08-979f-19792baad730",
+        "os": "ubuntu 22.04.2",
+        "sha256": "5de09bf25d2c734155c502b9e98959defcc5dc81e14ce252e13527922626b363",
+        "external_id": "93ffe358-b6d7-4d42-9945-bb3fbe96197b",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-01T03:10:14.116Z"
+    },
+    {
+        "id": "6ab915d9-0cb6-4291-8960-e85653eb3968",
+        "os": "ubuntu 22.04.2",
+        "sha256": "776d108a5622433a142a7622b6be4e06cf7fe3ee6c1b0be5b556c8ee5b435f89",
+        "external_id": "387a9ef5-9436-412b-83a0-b0e415d33152",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-01T10:14:31.775Z"
+    },
+    {
+        "id": "ac807552-d658-4574-ae16-0eabbacaf6a5",
+        "os": "ubuntu 22.04.2",
+        "sha256": "4a28077ee2980ea9ba26d81c066b7790271f37c209e2fdf4ccfbf1582d228bb0",
+        "external_id": "89da3117-17d8-4088-8b31-12f5fa826426",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T16:35:00.142Z"
+    },
+    {
+        "id": "905ff4d1-1647-44df-ad2e-18cb12f2cedc",
+        "os": "ubuntu 22.04.2",
+        "sha256": "45e712ff186cd0f9fd8856a9b3b26486732dd6974bfacb8eef93eba1fb75f2c3",
+        "external_id": "ee4a4fb7-f0b5-4132-82dc-9620a5280763",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-28T05:43:24.116Z"
+    },
+    {
+        "id": "f5132f94-5b3d-462b-99c8-dbf25cb980ce",
+        "os": "ubuntu 22.04.2",
+        "sha256": "2f2ca7eaeaef1353e0806506d3b9e87ea6636a4033135f358924787ddb6922f7",
+        "external_id": "2f6b2681-dce8-4552-8f81-4a463000729d",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-05T15:26:23.096Z"
+    },
+    {
+        "id": "87edc33c-8b7b-497f-9e20-8e2fb7b76539",
+        "os": "ubuntu 22.04.2",
+        "sha256": "7a5c0a4af2ab0350a08a20b0f9595f36ef9c4887e6f8ed3a8e17c2ccfc97f469",
+        "external_id": "c93c0fa1-d5a9-40a5-829a-a0457425e8d4",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-02T17:42:48.130Z"
+    },
+    {
+        "id": "3cd2283f-39c3-4d47-8262-05761f8eb123",
+        "os": "ubuntu 22.04.2",
+        "sha256": "35ff8f0b308b7dc90c6b2fbae04d42ecd7eaac26c0e95bb394d3321ac1fb82b3",
+        "external_id": "d28fee2b-d3d1-498e-957a-19fc51420994",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-29T15:34:35.532Z"
+    },
+    {
+        "id": "ad885774-d43e-4704-a156-bc0cdd51a3eb",
+        "os": "ubuntu 22.04.2",
+        "sha256": "713cab56206c5b0efd3b7cc1eec4c3c60523990926b35195301be870208a72b8",
+        "external_id": "3e506ff3-2219-471d-8e1e-e44ced1ec32f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-08T16:32:59.934Z"
+    },
+    {
+        "id": "e1a965e6-f84f-4589-aabb-2bfc2a5b336a",
+        "os": "ubuntu 22.04.2",
+        "sha256": "4ab29d16443a3d8ee67a31dea13563e05f66148f6294ca308bfcca979d9032a5",
+        "external_id": "92b5d0da-ae76-4e28-9e02-059e4ed39422",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "gafgyt",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-07T14:15:53.683Z"
+    },
+    {
+        "id": "4cc6410d-7e4f-4f94-8d70-96245e6280bc",
+        "os": "ubuntu 22.04.2",
+        "sha256": "670706088886cc1c48083754869914eaf659e5a4cbc137a3fbc5ef90c4f1e2b0",
+        "external_id": "eebd10ec-4490-40d0-8af5-4f98bc38f6d5",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-02T15:10:15.298Z"
+    },
+    {
+        "id": "e5a8bf7a-4024-4c48-9ff2-4a12c02fdd1a",
+        "os": "ubuntu 22.04.2",
+        "sha256": "e4bc28f31128d7165f2ddb77403a4e0a3e39033446f296d0f71ac765f3d634ce",
+        "external_id": "352a598a-9176-4f6b-abcd-7a18051ccaf5",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-25T10:57:06.420Z"
+    },
+    {
+        "id": "eacb0810-a60f-4118-9bc1-3d5877a9835c",
+        "os": "ubuntu 22.04.2",
+        "sha256": "d613741424ba16913706a17e3c3c9d4fc5e538f531e522618416cc58374f4849",
+        "external_id": "a1f5e2e9-9564-4c92-b15d-ae41fcfd85a5",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-30T20:48:40.823Z"
+    },
+    {
+        "id": "78d83f24-f0fd-40c1-a24c-cd87db860677",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b6320b3664fbbab0bb014a025d902285f2e08ff01fdf762f8a6aefe4ece55146",
+        "external_id": "d032ddb6-7d36-4dbb-8c48-16e870c24973",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-06T02:57:50.401Z"
+    },
+    {
+        "id": "607ff178-99fc-4209-a58d-a366dc99e16e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "a00dc283ae9ab98c7362ccb748bf9ab99d7ae0a670f4d7a4628eb2b5610a545b",
+        "external_id": "deedefe8-9287-4458-97f4-dd4117e7ae07",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "gafgyt"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-06T19:54:11.240Z"
+    },
+    {
+        "id": "65491f2e-5892-48f5-b5f9-b463e126222f",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1b3677e64b21354ba011f5f36f34e00d454f925aa03f6f62fabd691a8259e3ff",
+        "external_id": "93beb15c-451d-4532-9442-0584d55d4ff2",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T07:40:16.833Z"
+    },
+    {
+        "id": "5abdee2d-0346-4743-b9a6-6807d624d134",
+        "os": "ubuntu 22.04.2",
+        "sha256": "bab14e801865b97cf64905703a411e1353cb654b1aad86b911c63790ce943566",
+        "external_id": "1a3ef9c7-6b0a-42fb-a617-20b0e287c8ce",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-29T00:22:01.723Z"
+    },
+    {
+        "id": "2f93bc91-25f9-44cc-a2cb-d3c6dadb4b10",
+        "os": "ubuntu 22.04.2",
+        "sha256": "0aa41cf33ff6b8019f6dacb394087ba0af71f42367ba19fd67e777825e89d724",
+        "external_id": "96b2c155-0942-4d1e-8f4a-4a2d70d1e592",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-03T20:10:49.412Z"
+    },
+    {
+        "id": "98d358da-0bc9-4877-8b14-0c9b1b45afe1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b78e2e1a49c735165223b45ce837455ab8375e88fd32f4fa150b7b24f41f0d10",
+        "external_id": "dd12ad3d-59a6-4762-90f5-f431b6c109f4",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-04T15:34:18.085Z"
+    },
+    {
+        "id": "ecc9191f-250b-4e09-8a88-b1ac6076eae8",
+        "os": "ubuntu 22.04.2",
+        "sha256": "099566adc0dc438bb805ed2faa109595b2a9ecad0ba25c76ce8ef02febf3b27a",
+        "external_id": "01a30dce-6eb3-4a84-ac87-a42fd3138a97",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "connectback",
+            "backdoor"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-29T21:24:36.053Z"
+    },
+    {
+        "id": "fe49ae88-2237-4e1f-a4d0-8f42bb37b66e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "d6ef3e777c4e11446e9d701876a0461d40af5c37f15328fde776aeadf53bebc7",
+        "external_id": "d7ad10fe-eefa-47d5-a7fe-f09d013fd3e4",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-30T15:47:07.807Z"
+    },
+    {
+        "id": "65051bd6-18da-4492-a1e4-697d890101c0",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b1bb5cacab0c1361f7b37febaee5abbd7566634825666dd0c8e98a63039a86c8",
+        "external_id": "531cb0b4-312b-482f-9c66-ebf1768354c6",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-28T14:53:27.489Z"
+    },
+    {
+        "id": "25b53cb0-bf19-43f4-84fa-e99b9c42968d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "d37a2ec6e3b6e8d0cd645511e4618297bb3efa232a7d9a5e6ee14b09907ab51d",
+        "external_id": "baef8a03-1677-43ef-9391-8ab7745be0dc",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "gafgyt"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-04T09:16:55.896Z"
+    },
+    {
+        "id": "0abfb458-c449-4d5b-8e30-25e3f300e47d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "37014423d96b41dddc06d365098ac6f21f4cfeaccce1f1f629bc38afd5452cf0",
+        "external_id": "39d81f5a-aae4-4564-b4b6-6b8327485f32",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-28T15:44:04.385Z"
+    },
+    {
+        "id": "c13aebe7-ca49-4c88-bcf2-bfa642ddf0ca",
+        "os": "ubuntu 22.04.2",
+        "sha256": "19cf28afd0609788c767e0c80afd7f12c9cd3666c8dbca7a53e23ad95746a860",
+        "external_id": "3be0637b-b62a-46c9-a5bf-e1aafcc1ed23",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T03:14:15.435Z"
+    },
+    {
+        "id": "5326aedf-192f-45fb-aea6-3257fcba2b86",
+        "os": "ubuntu 22.04.2",
+        "sha256": "cf8db17a95a0b353d24929e248bf248aef051a63932970c2408d77ea7e325dc5",
+        "external_id": "217d05aa-2462-45cf-b3bd-f3b043fab5b8",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-03T20:46:27.793Z"
+    },
+    {
+        "id": "d60fe929-9abd-48f9-b181-71f8a05d4f12",
+        "os": "ubuntu 22.04.2",
+        "sha256": "e710c87762d857d5a8e289ef0c549d74ed87e37b126f414d3b6e218338756aac",
+        "external_id": "5d0eda7e-d83f-4762-a421-69da5fa5cc8c",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-05T19:11:53.410Z"
+    },
+    {
+        "id": "6767fa9d-a47d-4302-b201-f07cbba192b7",
+        "os": "ubuntu 22.04.2",
+        "sha256": "a522c0f5daf1741ff6c5e0ed7fcc2f7b4c820992cecf710090ca7eb48ba6d2de",
+        "external_id": "f472eb28-fe85-4e00-8d02-31572d1cb0a7",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-04T02:29:25.021Z"
+    },
+    {
+        "id": "f58c2ed8-3846-41ed-8450-32635cd68e1d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "c38da0f585ee24761a692867df735412432331e4bbd67a59fbb58fb5b5aacae6",
+        "external_id": "2db3c4b9-aa21-4bce-9cf0-497bc54c44bc",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "miner",
+            "scan",
+            "ssh",
+            "sshscan",
+            "telnet",
+            "telnetscan",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T20:41:44.669Z"
+    },
+    {
+        "id": "12914c5c-0aa7-4534-9f42-8b81aff3cc96",
+        "os": "ubuntu 22.04.2",
+        "sha256": "de1ae5c2e0e84e5980958cece405fbbae77e5bf26117857fcc0beae1e567c7f5",
+        "external_id": "8d56d406-aa83-4f6f-aa5c-f935dfa62a6b",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "scan",
+            "ssh",
+            "sshscan"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T10:14:48.432Z"
+    },
+    {
+        "id": "17b85e54-24bc-4fe4-9051-72829507062e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1b3042a56be29e7a787fb9d76b59dfcf0baa2d5ffb4723bc457165cae8696540",
+        "external_id": "27b83c94-21fb-4863-b286-8be9c9e007e1",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-04T15:37:19.954Z"
+    },
+    {
+        "id": "4dea6ffc-e2f9-403e-b547-ca4aee778975",
+        "os": "ubuntu 22.04.2",
+        "sha256": "4e60730e2dfb530a3fec553cc1dd8b48d43f67965029f6086d8fc8428dd7dc02",
+        "external_id": "19792a8a-527d-4650-9e7c-f8fe31307152",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-07T20:59:51.826Z"
+    },
+    {
+        "id": "982f723d-3428-4d80-8238-7f3d6a140485",
+        "os": "ubuntu 22.04.2",
+        "sha256": "411d8b845a55759225dc1cbdff949861dd75bb0784382fa619e34220388801f9",
+        "external_id": "1dcde7a4-90b2-444f-b471-aeee187c554b",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet",
+            "moobot"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-26T05:36:01.632Z"
+    },
+    {
+        "id": "512d8b48-e081-4750-ad68-2a619fcf4de1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ec47d6109a7d687f50c33b1fb710dcb89f3be97f5b7c147996f5b47cefabf6c9",
+        "external_id": "92381338-fb2d-4648-baed-e1809f86894e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T05:49:11.485Z"
+    },
+    {
+        "id": "da9f0d31-452f-4018-82b5-c5c5c5e17ca1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "488fb96c1cfbe1e381b31b123dbf495714834711c6a997a5200f73e8d51fc2a7",
+        "external_id": "9f184484-5bce-4d7d-9de7-fdae53a3ee00",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T22:29:44.672Z"
+    },
+    {
+        "id": "5e111361-a8a1-4d69-8d62-58ea2e4bedb1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "9c8349f99a9a70ce3fef279800f589e711e98d0564976814d402315a025f385e",
+        "external_id": "0be29047-f2cc-466d-91d6-0ef0d12763dc",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "mirai",
+            "botnet",
+            "exploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-07T14:24:39.857Z"
+    },
+    {
+        "id": "25066c72-1afd-4961-afb8-f796c5c9dfb3",
+        "os": "ubuntu 22.04.2",
+        "sha256": "83d827923ba28f18928588ea2554e06e7f530aad2f3313197d2949eb8e50b6c4",
+        "external_id": "54510dee-0c55-4c1f-9ffd-8b3de8dcbf2d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T12:49:04.692Z"
+    },
+    {
+        "id": "d1d2ac4c-8e8d-4562-b6ec-2efeb52124e5",
+        "os": "ubuntu 22.04.2",
+        "sha256": "59bd3cdd3de3e5a6841850b1d23d0581fb67eed887ba805f3ab85110058588b0",
+        "external_id": "51a13c01-8f2d-4588-b6d2-5b77fc7f53dd",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-31T18:59:28.341Z"
+    },
+    {
+        "id": "59bd5779-33a4-4f7e-ab5e-c1ecc6b93454",
+        "os": "debian 12.2",
+        "sha256": "1abf00e9dea291e235df2e5c85a8fa07e8acba093203b0c7dac6f8cd236ce12e",
+        "external_id": "31630862-a4c3-4a07-88db-3760a9fbada6",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T21:45:55.242Z"
+    },
+    {
+        "id": "d5b891aa-1480-466d-b868-fb4b0574a91d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "c69488c53d98bfc0501c10d991f1923494ee2f71daa3f800d0137d45a3bda246",
+        "external_id": "92ecbbe1-5517-4a89-9f48-609fb2432990",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-06-27T04:02:03.683Z"
+    },
+    {
+        "id": "cae6fdbc-9c40-4fb4-9c83-8ddac65f75c3",
+        "os": "ubuntu 22.04.2",
+        "sha256": "beb3fa1be73b0c6ddf0f94bc331d6b95b610b5d84c34a8b44b71cecd9a5346a8",
+        "external_id": "28b332b9-3175-4925-8373-2f204273161e",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T08:56:34.769Z"
+    },
+    {
+        "id": "bb12c8b2-ba08-4ed6-89d5-e13bac924529",
+        "os": "ubuntu 22.04.2",
+        "sha256": "d2c3cf5c81d014e81b3eb04f639cb5d35ebf89afa7d7f37d84b62d7d851b9da5",
+        "external_id": "3e53dc6b-d35b-4980-805d-a2ccf6482f71",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T12:16:59.405Z"
+    },
+    {
+        "id": "54a934cc-e2f0-4783-9025-6906dec81ea9",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ec006172eda4e5e17adb06e4911878038c31f57d1ca4839e83f8eb3e5d6f0f6d",
+        "external_id": "36ea01ce-caa0-4432-b109-b8f906d983b4",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T21:32:27.152Z"
+    },
+    {
+        "id": "aa2cc8a6-b51a-45c9-8ed2-6fc86cf6ff3d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "615131b12e5b91a27981055185ba5191c637a407b7005772882b1159a41facfb",
+        "external_id": "41afc410-10f5-4899-94fe-37d258a8ab05",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T21:45:55.706Z"
+    },
+    {
+        "id": "0579779c-5b1d-485c-80a5-d9ab8d8c0007",
+        "os": "ubuntu 22.04.2",
+        "sha256": "7eea84c98036ba9ae43258eff3ffd2bf05b98dc53f59266e40ccd715502b5f04",
+        "external_id": "93f3c7f3-807d-4471-a2af-4b91254e9bdb",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T04:08:29.714Z"
+    },
+    {
+        "id": "27ee8b26-95da-4239-b144-33aabf9c8066",
+        "os": "ubuntu 22.04.2",
+        "sha256": "84493a74e74b6e09553481b11a13bd1c352c37dd577b4064d50b87d89fd978e0",
+        "external_id": "5986d869-bce2-4dd6-a519-cf283be307c6",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "github"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T12:03:59.637Z"
+    },
+    {
+        "id": "37b43a80-dc61-4482-9324-6a801aa4ce00",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ac1400745c4d85cd0609c69c5ddc93fce78ffedbe0cbeb810ffb365f5c18159d",
+        "external_id": "2fbf961c-c1cd-4270-9c6f-830a0fe6b453",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T06:49:25.983Z"
+    },
+    {
+        "id": "a41800d0-9648-4f13-8594-df273fbb9f76",
+        "os": "ubuntu 22.04.2",
+        "sha256": "3f9d018177bf57c4cfd64a6ce268323cce022c76b5ea65f018dd5fec24bb4947",
+        "external_id": "c940f0bb-0f44-4167-b44a-4380cf026129",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T20:33:17.432Z"
+    },
+    {
+        "id": "f5deca65-3493-447e-9359-caf06dff6611",
+        "os": "ubuntu 22.04.2",
+        "sha256": "2ffcd61666367b24ffc5a86dc6735e7543185ee60b18fe00b379a7381392a285",
+        "external_id": "a0131573-df69-425d-a7b1-4924e075673a",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-31T19:23:35.246Z"
+    },
+    {
+        "id": "a51e0f0d-f421-42ad-903e-1422a4da4124",
+        "os": "ubuntu 22.04.2",
+        "sha256": "127b36e8bd06a835959dc2c7d1e221085c654ffaed907ecc4dda7f9b74251a3c",
+        "external_id": "1bffe29a-8396-4a89-aa7c-fdf1a531d169",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T08:56:34.111Z"
+    },
+    {
+        "id": "367c9346-58e9-406c-844f-fff53c976fd0",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ab1ba4bb02fdf491a74e4ed28cdf3cabb522cef34a3ded9495b876d3d24de160",
+        "external_id": "ed81c122-fcbe-4a13-bbe1-971c45d12381",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T06:44:47.044Z"
+    },
+    {
+        "id": "88058153-414d-4e53-bca3-cdec100e1465",
+        "os": "ubuntu 22.04.2",
+        "sha256": "de6195840fcd3a12f3cb76375ec476c39173c280ba4f49dad92a12f8b0356f3b",
+        "external_id": "3d1130bf-0fab-40ae-8059-0c073f2d22f4",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T21:50:13.387Z"
+    },
+    {
+        "id": "d438a2e1-e5f3-4275-8d5c-5ba9ecd44f4b",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ee35195d5397b3b0f14ba5e098b79aa11499d65aa0085ec044b0b11e62a07907",
+        "external_id": "b06cf664-53a5-4d14-aa9a-8bd42d3efb43",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-31T18:29:22.274Z"
+    },
+    {
+        "id": "6f625714-fb79-4fb8-bac9-4ec62c45f841",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1d2299b881ba8ea1206551f0108c69e326bcb454238f6ac82bb692ced20057ee",
+        "external_id": "38169739-921f-4e04-8add-0c0ee96bc704",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T20:34:28.414Z"
+    },
+    {
+        "id": "0afa1a1c-b448-4e80-bcc9-2831eb460884",
+        "os": "ubuntu 22.04.2",
+        "sha256": "54f85a864ecdff54088acf741a5a369d8d6a9124f41126264fac83bb00de3e89",
+        "external_id": "e43da3aa-f990-4242-b79c-bfac5680019e",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T21:00:55.270Z"
+    },
+    {
+        "id": "8566ef33-307d-400f-b2e4-e85cba50ca30",
+        "os": "ubuntu 22.04.2",
+        "sha256": "eeb3d9c50bc6b026d192a5b85f4511c295ad12016a56a7c80bc281d82ece5b56",
+        "external_id": "bc86cfbf-cd32-407d-8fc9-f73e49e68cfd",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T08:53:19.072Z"
+    },
+    {
+        "id": "80a61b2f-7a92-4121-9fc1-0a0c289b84c9",
+        "os": "ubuntu 22.04.2",
+        "sha256": "3cc28651ffaed3ca79708b31c9b4f57c9b79f74b4fb64e68e99fad31c11dfed3",
+        "external_id": "d0db4c3c-06a0-40e0-95ad-86db177bb10c",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-12T12:01:17.292Z"
+    },
+    {
+        "id": "e9977c84-6b33-4896-b8ec-00e7b6155dd0",
+        "os": "ubuntu 22.04.2",
+        "sha256": "5b5ee32fa7dbf9675da57b033481162053d47a0d9fd22bf30f62e7d937de21fb",
+        "external_id": "34b795af-d5a3-4459-aa30-eaa3ee49e1d3",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T21:56:58.547Z"
+    },
+    {
+        "id": "2769d8b2-1ff3-45cf-9ab7-c6f8ada0e82a",
+        "os": "ubuntu 22.04.2",
+        "sha256": "3f6c4d342272831d97c688c26eb45b3e38f64d0f42dbc6ed86f44de90a4b486e",
+        "external_id": "1e0e2a2c-47a0-4c0a-bf50-193468bd9011",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T08:55:34.400Z"
+    },
+    {
+        "id": "780ffd3f-726d-4060-bedc-dd1883df9ff8",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1f7d32687096f0adb702651149a1d6e4dd9a4634335c80ff613e2f18600663a5",
+        "external_id": "5b6da67c-9ecd-410c-a7e2-2068cfb87e78",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-31T19:25:21.847Z"
+    },
+    {
+        "id": "247925da-6d0f-452f-8464-55125704078d",
+        "os": "debian 12.2",
+        "sha256": "387f7443a45b866a3a282a57ccaf3d75af89764bc69527e8f9226e26f99415d6",
+        "external_id": "3df68ce1-41c2-4c13-b1a6-f2dc96bd19eb",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T21:50:55.487Z"
+    },
+    {
+        "id": "d89e7870-102b-4d96-879b-5801ee02001c",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1cf8b37cce93627ef27979123a9e11b5805e2cfcbc2a8a5e867b767b0b44eae5",
+        "external_id": "dd68b761-0091-4e22-994a-a362ea26f6b7",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-31T21:58:46.748Z"
+    },
+    {
+        "id": "40a87c7c-e676-468c-bdc3-23bf6043b4bf",
+        "os": "ubuntu 22.04.2",
+        "sha256": "f8764da64acbc3ec5b784f0acf3f5335dfa056ab4370214afccd695260582497",
+        "external_id": "72d7bfe3-41ac-4eef-9c0d-cc8fa43f8bd1",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-08T18:28:15.932Z"
+    },
+    {
+        "id": "c61a566f-46bf-4b2d-abe4-a4065787a53c",
+        "os": "ubuntu 22.04.2",
+        "sha256": "dc96bb5b54c063b8276a17b6566b78e8f7fac713df7dc685cee0ef3f6ce7e3f2",
+        "external_id": "680f7bea-f1c7-46d3-99b8-0a70e69ae2c9",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T07:00:32.614Z"
+    },
+    {
+        "id": "9b3a7660-fd1d-4923-a69b-f7587a587a20",
+        "os": "ubuntu 22.04.2",
+        "sha256": "a4dadc932b3adf891833ce2f2561963a3e0f6260294b95e484daa7f90ad73816",
+        "external_id": "5d4cfd44-7323-4384-a014-6ea3d72f86e3",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T02:31:14.137Z"
+    },
+    {
+        "id": "6893dc42-cf23-426e-83bd-4ceeb468a15f",
+        "os": "debian 12.2",
+        "sha256": "b2f8cc00141613c62438a827169f3ea74887e7c5cd8b8dc082965fbb44444ceb",
+        "external_id": "d5ce1a48-9298-4390-8ca3-bb961ac2e1a9",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T08:50:49.649Z"
+    },
+    {
+        "id": "b424ddbd-5a9a-452a-870a-31de50a72af0",
+        "os": "ubuntu 22.04.2",
+        "sha256": "7aa6b00b690611ccd0c8a3d2271d1169978ea4ca119ad7868215aabac7e9e999",
+        "external_id": "ddff4751-5ea5-4714-bcdd-dca9b3b292d0",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T08:40:17.924Z"
+    },
+    {
+        "id": "c8633524-00da-456c-bb7c-1b60c329cc88",
+        "os": "ubuntu 22.04.2",
+        "sha256": "6c7cfc2aadf44b45923f694e3e9028ceefa025cea6b0d76976e766dd86819d19",
+        "external_id": "c83a02e0-2053-47c8-82f5-ae473c7d4f59",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T19:36:04.235Z"
+    },
+    {
+        "id": "61d5a1fb-a2b4-4846-a7ab-6f13a645d10f",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1260cc1f07987f194a0a5617035494fc02a6813692a241b716986b82d01d9f26",
+        "external_id": "2a9939f5-e4d6-4c61-9eb2-a5e6dec59a87",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T05:47:13.627Z"
+    },
+    {
+        "id": "17d85a27-6512-42f7-96a1-2a29ecd9088d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "d5469367796a868bbd0c967da0e145fa8d4b5a2a726ee83001694dad53577903",
+        "external_id": "3ecbfe48-abb5-458b-8952-7c11de0e66cc",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T20:52:04.631Z"
+    },
+    {
+        "id": "f8576a96-3645-41d0-a1ac-f0cb77d0a9e8",
+        "os": "ubuntu 22.04.2",
+        "sha256": "6f477436e246cf3f9c36ef6e3d18f3961a76548e3b161c7c770f35cf1dcacca5",
+        "external_id": "ebdca69c-8f8b-4302-bc87-21638f6eaa32",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T05:05:20.305Z"
+    },
+    {
+        "id": "1a44eec4-24fe-46d1-b1d5-14779eeb018d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "8fa0244d674470fc75c0569fbadbbe431ad8a060987e004e9ca2014119b0e559",
+        "external_id": "8873732e-2862-4f80-a8df-c26494961415",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T20:45:15.382Z"
+    },
+    {
+        "id": "6a320728-ee07-4e9d-87c8-74878d10874a",
+        "os": "ubuntu 22.04.2",
+        "sha256": "25272b5d54e026c97b73814e3fa011fcb37d274c9759df9d36c8a8d345c2c6be",
+        "external_id": "90316ea1-24ec-4b5d-9be2-99e5277ef8a3",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T05:38:54.523Z"
+    },
+    {
+        "id": "d5c62f40-3363-4782-b7f2-96063461a475",
+        "os": "ubuntu 22.04.2",
+        "sha256": "f699b7786f1847d31be6db43f67eaca73219faafba1fc304b62cda968300ae89",
+        "external_id": "88c06fff-9ab1-41f0-b6dd-23dec4622fa8",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T07:04:27.370Z"
+    },
+    {
+        "id": "8bc7a47c-4e95-4eca-8b91-6a65f85eb46c",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "cdb9eb7989d98eb3c2cc3c1e3bd2d60713d460403731b1e2648bd8c46a98bffc",
+        "external_id": "72b6952f-d0de-4c16-a2d6-594c407c7fb7",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:56:34.511Z"
+    },
+    {
+        "id": "26a09747-ff41-4999-909d-58826fb6a66c",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ea4324146d0832e1a4fca1eeaa3c81d5b45bfbbac9e476f558de9bb81d1223fb",
+        "external_id": "5431c5a5-fa2f-48b9-88e8-f8ba04bdf530",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-31T19:25:22.303Z"
+    },
+    {
+        "id": "40be2e23-6d88-4594-b69e-10225393e664",
+        "os": "ubuntu 22.04.2",
+        "sha256": "2e5bfd9d8be7d0ba667b44ff7b4cf6ea865a88d4f03cac057a2b82ba0f80ca4f",
+        "external_id": "5fec888e-3cb7-4b1a-988c-88c505a164f5",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T05:39:27.962Z"
+    },
+    {
+        "id": "82aaa113-2f58-4609-a848-4b75537ba94e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "802a45ed8a0b080d6e7bf281272d0731bdbc412d547f2c80cfa3d5230f53c11c",
+        "external_id": "4ea1d709-d525-4952-b8fe-73aac0f2971f",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T09:12:26.939Z"
+    },
+    {
+        "id": "4e6d4e2e-15bd-47f9-8c95-7d2b68dd5b1e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "4cdd6e66223bb9d6beffae258305ec3447b5b193889da4a500ae18b030b037cc",
+        "external_id": "fe23514b-9cc1-4a94-8698-8d7e8ccad696",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T21:25:26.755Z"
+    },
+    {
+        "id": "f7cabe6d-2dc8-4a59-8be1-4937c1ec6aa2",
+        "os": "ubuntu 22.04.2",
+        "sha256": "9f195334e6849e382a20e80cbabb85eb8cc6a7e700f166bfcf901780a08b1e9c",
+        "external_id": "2e552b3c-4bb5-4245-9c83-fec416cadf34",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T10:02:13.556Z"
+    },
+    {
+        "id": "19fcf214-6199-4c3b-9587-311df0ff3092",
+        "os": "ubuntu 22.04.2",
+        "sha256": "fd7cadbbc029a045c90ccca63cd2745fa6a924d7415f71df83c457a83627ae16",
+        "external_id": "31992468-aef5-4a26-bc42-e17c776bd09b",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T07:32:03.656Z"
+    },
+    {
+        "id": "07816b88-0185-4cef-9706-fde4f683db69",
+        "os": "ubuntu 22.04.2",
+        "sha256": "8f7e391db42a5f7eb40399c291c64da0fc7166307c0e6f93f470f26f47e4619f",
+        "external_id": "9fe3ebf7-2467-4905-b4a2-f8968ed79561",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T12:41:42.754Z"
+    },
+    {
+        "id": "c94a5b4b-60e0-4900-bdf4-3df09af25bb9",
+        "os": "ubuntu 22.04.2",
+        "sha256": "dea2366d470f2fccfbf68bd10eea4a549cb3e4d1db46d094435667c4d5980a1e",
+        "external_id": "0aa32400-ed8a-4ff6-aba9-c62df1a6e038",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-08T21:46:19.146Z"
+    },
+    {
+        "id": "ccb07d57-9e26-4bbe-a8c5-b6d808379a68",
+        "os": "ubuntu 22.04.2",
+        "sha256": "1915756c1591be5b2e7f2e60314f207698cf31d3338bd070c49ca2ca639ffcca",
+        "external_id": "6ec3de6c-13f4-44de-a2c1-a1a6e63c6410",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T21:58:32.364Z"
+    },
+    {
+        "id": "0dabc285-3bc0-4e83-bf50-ff37e4a6f827",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b1e66fbbecc927b07a45ef6c8b83d05080192efac9092ecc4d5d3ffa4a8baca5",
+        "external_id": "7e1a3122-6faf-4fa1-b02c-2b3f26726cd7",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "macros",
+            "macros-on-open",
+            "generated-doc"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-08T20:27:19.183Z"
+    },
+    {
+        "id": "2f214a8c-077a-41cc-afb4-2dbfcd52ffab",
+        "os": "ubuntu 22.04.2",
+        "sha256": "d8e118f64cc24d7baf39f1678f98931d6600a2380da8b1559d9e9f58b34ee516",
+        "external_id": "943dc2f3-ea3a-40dc-9185-e509f9a5f202",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-12T06:56:58.443Z"
+    },
+    {
+        "id": "053622ca-33c1-46f9-b2c7-40c29c64c369",
+        "os": "ubuntu 22.04.2",
+        "sha256": "2701217d448b5a60d10dc8223abfd3328cd0d3c6c83ebcbe600c2106bd12db6d",
+        "external_id": "510e19f3-8a76-4e90-b979-fb97e97f58fa",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-19T10:14:54.193Z"
+    },
+    {
+        "id": "d42c6f0f-5dea-41aa-8e92-ae2699ed27b8",
+        "os": "ubuntu 22.04.2",
+        "sha256": "395dbd37333c82425561475052c858887039f52e5fc13911f04518bd9fe1eefa",
+        "external_id": "deadb615-50e9-4a79-9279-4e61287ea106",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-25T20:40:25.824Z"
+    },
+    {
+        "id": "c5b535a5-a4ae-47c4-9b37-4b758c377ab1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "83784fdc02b84c3a6f8537433bc00eaa0c8917a7dcbae50bf1633220acf6e1f4",
+        "external_id": "c8af3f23-fce1-460c-a6e4-ff37609ad8a0",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-13T02:47:42.478Z"
+    },
+    {
+        "id": "b1b3ba6f-9151-47b1-81d4-255138250861",
+        "os": "ubuntu 22.04.2",
+        "sha256": "18f39156d6d52b85b9c4dfb5802eeb01a9b3c8db35aae0e0a1764ba0bcf116be",
+        "external_id": "43927909-1d10-4b0b-a313-430eae43a428",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-23T01:17:54.558Z"
+    },
+    {
+        "id": "c9153953-550b-4d7a-95ae-aaa766dc58d4",
+        "os": "ubuntu 22.04.2",
+        "sha256": "fe5dc32c5355c4ddd2918c7d9454ace3b8bd459ab3c910a823dafb961ba8783f",
+        "external_id": "41005ceb-3dfc-4d9f-a18f-0bd143136720",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-28T14:39:02.129Z"
+    },
+    {
+        "id": "13e17619-493b-4b73-a160-11513a6a3a05",
+        "os": "ubuntu 22.04.2",
+        "sha256": "9da66eac03689d36c3b0d66ea83662aa0931456d4826b3408343459af1d1864b",
+        "external_id": "4e8c5a2f-7578-47da-a933-62186b02a08c",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-08T12:19:56.295Z"
+    },
+    {
+        "id": "4a2b13d4-0686-4449-9fb2-277a5b65fbdf",
+        "os": "ubuntu 22.04.2",
+        "sha256": "7de17094d2db5ba2330b090f77ced2569f75d3f5902f763c46a87af9b12e623c",
+        "external_id": "79aff1dd-fc6f-463f-a310-a24e57971a57",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-16T18:45:16.928Z"
+    },
+    {
+        "id": "ee5e5c1b-02e6-4e91-9e6d-5892a12222b0",
+        "os": "ubuntu 22.04.2",
+        "sha256": "0ac9208f37e95f351f73a562ec26521d86e99480a2a3a19b44b9951e9a16879e",
+        "external_id": "b8c3b0cc-8254-4a6d-a57d-a4757b5211f4",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-07T15:12:26.869Z"
+    },
+    {
+        "id": "b5d545b4-8b0f-4d42-bdf9-7e3b4dfe5e0f",
+        "os": "ubuntu 22.04.2",
+        "sha256": "f384edcc7b1837c62741d0cc1263a142ee8bacec9ecd6679aae82a8d3b0def97",
+        "external_id": "159d2244-b074-40a8-9a2e-7ee21c2e434e",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-24T07:22:05.328Z"
+    },
+    {
+        "id": "b37da88f-821d-427d-a06b-577bdcf64ad7",
+        "os": "ubuntu 22.04.2",
+        "sha256": "305bc3bb83cc49c90b227861f5ecde0e890cebde30c06b29ed10eb2638c09ab7",
+        "external_id": "ea33ed06-1c38-4770-beb4-cd1712724f4d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-30T21:32:40.790Z"
+    },
+    {
+        "id": "6e82de38-4c59-4e38-ad35-cef5e882d2a1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "7c306d2211c35bc33ee04c956227b453f6b6de4a74cf28a9b8b7c440ec1a92d2",
+        "external_id": "60c0fd0f-3167-40a0-8cc5-e9e1f6e2e605",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-16T20:28:20.775Z"
+    },
+    {
+        "id": "0b1ed316-d867-4423-a466-18042916a534",
+        "os": "ubuntu 22.04.2",
+        "sha256": "3234413e3dbda8548f9583a37d0eb018634c4997981d24faa759c6a073b5d83d",
+        "external_id": "d12fe09c-c288-4706-9612-51f9a5415801",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-16T15:06:09.161Z"
+    },
+    {
+        "id": "485f1c75-3a15-411c-b623-f9a0b4b6399d",
+        "os": "ubuntu 22.04.2",
+        "sha256": "7b000b0f11180d269a7ade12d9bb843021981e163b168c716b52a67a470a79e9",
+        "external_id": "8ca5e890-46b1-4f45-bb87-0b579ca3b5fb",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-13T06:22:24.343Z"
+    },
+    {
+        "id": "f5e6acff-82bb-42cd-b2af-3db23ca1e591",
+        "os": "ubuntu 22.04.2",
+        "sha256": "6a9e52d2c7653f720f9de4546f2d9ad9dbe4d88ca886dcf19b992f0980a56420",
+        "external_id": "635ec783-751f-4b6f-88ed-067f119f8a9b",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "ftp",
+            "ssh"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-07T07:58:00.644Z"
+    },
+    {
+        "id": "3a3ab8ab-8959-4c7c-a810-05c458ed9596",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ac4cc5f067fd8c80d18c80bdb1991a3c793d8cf8be26277de59d26b7d0875434",
+        "external_id": "10edfbac-90df-48af-9615-d87303a999de",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-20T14:53:36.453Z"
+    },
+    {
+        "id": "adbfd75e-d9b2-4af7-9bb2-f20d6d91ebc3",
+        "os": "ubuntu 22.04.2",
+        "sha256": "472e6587986e00662877e3ca7360621b7d85852734f2a8932d41a629556655e3",
+        "external_id": "e0190aa4-0fff-46a0-a148-66dc0c88c3d1",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-16T21:03:51.007Z"
+    },
+    {
+        "id": "7aa1124c-df8b-44a3-8b2a-6a7e202c1f6e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "2cdd7d3940244ca48f87288c792cae598d09d119deeedf366b31f558bd63973d",
+        "external_id": "0e973a06-b0d8-4dab-9d1f-50ddc6057e74",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-20T19:12:44.960Z"
+    },
+    {
+        "id": "9c884571-e1e4-4af5-af7b-f59b8d110764",
+        "os": "ubuntu 22.04.2",
+        "sha256": "2a6b67a4b14c48b80459b537970c6401d423bb0589c09646eac53e31fb6628b9",
+        "external_id": "8d95359f-7e50-4e03-95d6-e300cbc94631",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T06:47:46.173Z"
+    },
+    {
+        "id": "44691903-3f25-4b51-84f7-39a0aebf8b5b",
+        "os": "ubuntu 22.04.2",
+        "sha256": "96f6279ece2846f8ed7f31e7b7e965f52454051f90f336c931412b7f5f06f839",
+        "external_id": "842d1dd4-68ae-4477-9e7e-5b550d249b09",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-05T13:32:59.697Z"
+    },
+    {
+        "id": "e5a2f059-db4a-43f5-b429-32d577630512",
+        "os": "ubuntu 22.04.2",
+        "sha256": "e89cdc3b81383b85bacc61423f441df29e1af232c028a343fa1d7700c5447aee",
+        "external_id": "e68d074b-6dab-48ce-95bf-44b7ece2bfb6",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-25T15:02:49.226Z"
+    },
+    {
+        "id": "a952de3f-dd3c-4548-b108-177e3e5dfda3",
+        "os": "ubuntu 22.04.2",
+        "sha256": "6273dcda8fde81e1c028934df7b2ad72176fa12e93aa6d61c409cfb240624b46",
+        "external_id": "e0d84ff7-ccab-4ba9-bbf0-bd9edbbbc3a4",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T06:39:45.389Z"
+    },
+    {
+        "id": "0ce3588b-ad60-4bbf-9677-76c91c4f536b",
+        "os": "ubuntu 22.04.2",
+        "sha256": "51bd2abe8e2937f0139810e3720f0d72c41083fe663ab4fec5738dfb23c70b3f",
+        "external_id": "67aa4fdc-991c-40aa-8693-689e321be20e",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-17T05:21:16.511Z"
+    },
+    {
+        "id": "ba38fe43-d026-4c72-a0cd-e629032aef20",
+        "os": "ubuntu 22.04.2",
+        "sha256": "a7594d0c8f653465301de6e85212af8cfb5520847c631708161a25dc1db60faa",
+        "external_id": "6d465632-2296-4127-8756-60d5bf076bdd",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-25T07:08:25.139Z"
+    },
+    {
+        "id": "70adc6ad-3880-4a34-ad8d-e4169ff36142",
+        "os": "ubuntu 22.04.2",
+        "sha256": "9ae55dfd87f707b0af3376c476a74173da36736e84f8579e2516c36064110b48",
+        "external_id": "492558b9-dc07-48ea-875a-9f35f74e0105",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-25T10:24:05.185Z"
+    },
+    {
+        "id": "b8d37bda-593b-43b9-a996-e3998c37053f",
+        "os": "ubuntu 22.04.2",
+        "sha256": "32da1c48f73a0259dcd9b633eb3e7f6b7c15418b6946db4da84a9a77efce6fce",
+        "external_id": "c599c00b-81da-42b1-924e-0baf5388dadb",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-18T18:32:36.523Z"
+    },
+    {
+        "id": "c2b3991f-3fbc-4949-874c-e2323af2b0b0",
+        "os": "ubuntu 22.04.2",
+        "sha256": "ccd39ebe13b8ac03b8d3f6e340bc36e18004b5d63f53e91241bc44b3a8d9a1e7",
+        "external_id": "ce61d9f9-867d-437d-9ec1-7fc8653f01ed",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-30T20:07:39.906Z"
+    },
+    {
+        "id": "8cae0ea3-250d-4156-9dfa-5ec666d4d4a8",
+        "os": "ubuntu 22.04.2",
+        "sha256": "6c7a70dfdf491911c6128df8951173a1d4aad8ee19891857b747d5aa21378a37",
+        "external_id": "f2327f6c-3193-4452-a91a-dade972c888f",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-17T05:31:41.615Z"
+    },
+    {
+        "id": "9a3b8e18-5cbe-4a4a-842a-035c599ce309",
+        "os": "ubuntu 22.04.2",
+        "sha256": "8361db6e38cf91f48cc64e34f0d83c0bfc28bdcd48e56c2a3bb272221f8e9edb",
+        "external_id": "7d771eaa-b55a-4f88-a893-3bc79888bc43",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-07T07:04:31.022Z"
+    },
+    {
+        "id": "07973f39-c0ea-43f2-9eef-5443878ca5ab",
+        "os": "ubuntu 22.04.2",
+        "sha256": "109bf4091d2a0192f99f95163e9cda6c39b9f92761806f1fe1fd1c7a13522fae",
+        "external_id": "3ffc5a8d-7d6b-4f5c-80f7-38ca514df9d5",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-25T14:20:44.685Z"
+    },
+    {
+        "id": "2a3ad299-6cc6-4cf0-a4e5-7a296695c531",
+        "os": "ubuntu 22.04.2",
+        "sha256": "58df1b78b7071472eb49aeb1791d480f164f705af78d2a98eaa5f40e7d0c64e3",
+        "external_id": "fd025277-d244-42de-bf23-5df72443baae",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-17T10:16:45.173Z"
+    },
+    {
+        "id": "de9b0412-1e11-446a-aa44-f15ccb5b2d57",
+        "os": "ubuntu 22.04.2",
+        "sha256": "4b081ffde5b62b5a0373768ae7fea8c1e8b06fb22ea762b83378c9fc92072ff0",
+        "external_id": "1d7340d4-f86f-466b-910c-64d4329bc940",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-20T19:24:47.692Z"
+    },
+    {
+        "id": "d4b632d4-b35c-458b-9b2b-5aff804591dc",
+        "os": "ubuntu 22.04.2",
+        "sha256": "f3898f25512ee0586aea147851996234240d413a16b363bb3f9a7e55bb1cd36c",
+        "external_id": "4b441ca8-fa5d-486d-9416-6d9d9be5c8dc",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-23T02:56:32.333Z"
+    },
+    {
+        "id": "cdc3bc23-d0a9-4b80-8461-094daae6a312",
+        "os": "ubuntu 22.04.2",
+        "sha256": "6ff0bd22d38f7b9acda37365438aa8f2d21c156bf21f35e4a2bc285415f86a4a",
+        "external_id": "c847f15a-3f7d-42b1-9c57-b547c3ece698",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T15:01:56.809Z"
+    },
+    {
+        "id": "d4ffa2a8-7c4e-446e-80b0-21537a82f7c2",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b9f56537308fb196e75ef30759de7be5111220d17ec44deb798d64d12477b261",
+        "external_id": "2b91309c-e899-47f0-92ec-ccd07b264315",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-20T16:45:46.476Z"
+    },
+    {
+        "id": "c61e76e1-8bad-46d9-9ad5-76928fd8d218",
+        "os": "ubuntu 22.04.2",
+        "sha256": "465d13f750863dfaa70719b6df13788b7dfce8c4ce063930619f8193eac70069",
+        "external_id": "0e0591dc-987b-4ed8-b21b-8e2250f518f8",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-07T20:06:02.924Z"
+    },
+    {
+        "id": "4e66e084-c423-412e-b6ae-6c6729928fad",
+        "os": "ubuntu 22.04.2",
+        "sha256": "edd5b2ffae2c6b94add9d7f1a06edbcba9f7126a01792e5449a0a1428f999c22",
+        "external_id": "ea2e3788-d94c-4c98-9a53-86a8027d15cd",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-20T08:16:09.971Z"
+    },
+    {
+        "id": "045a4aea-fa6f-4b0d-8dd3-2f3392feef65",
+        "os": "ubuntu 22.04.2",
+        "sha256": "7ed457df5ff80dc819f1803834fd052400dd7c9faedf8c1f1bdb8d25dd668dab",
+        "external_id": "197a01ac-3f8e-4133-9f7a-7b0ea368aea0",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "amazon-ses"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-14T21:46:55.786Z"
+    },
+    {
+        "id": "44edab8b-e610-428a-b995-273705042e97",
+        "os": "ubuntu 22.04.2",
+        "sha256": "65347f920e1212aa75d56f0996513e3e85db91bdee4163d2c38e6c531bc7e080",
+        "external_id": "5c648998-dc87-46fc-8419-5c261d475bd3",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T15:32:57.651Z"
+    },
+    {
+        "id": "4d0c8c3c-8210-437e-a995-f5c14b8a919b",
+        "os": "ubuntu 22.04.2",
+        "sha256": "860c041889f9ac7dcae81a086edca2bdaee97a7f93d979a3445cd6b96654625e",
+        "external_id": "4ff30cb4-252b-47e1-8c31-8bda519265d7",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "evasion",
+            "github"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-24T13:37:25.910Z"
+    },
+    {
+        "id": "c0a21083-205e-493b-86dd-488e0d53c62a",
+        "os": "ubuntu 22.04.2",
+        "sha256": "10560fa8f785c9a32375a2c1a6088fc0d59aa4d7ebd0720b4cd9b2e2dd89661b",
+        "external_id": "dac20524-4b81-44d8-9e72-d3d06c5ea3e1",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-28T07:50:55.916Z"
+    },
+    {
+        "id": "8fe1fdc6-e71c-4cb9-b3a7-abc0e87d914e",
+        "os": "ubuntu 22.04.2",
+        "sha256": "51b2e694c79e31180dea345c4254d5849293e5730bcf4f21b3f3f5d51e26cad0",
+        "external_id": "ab63eecb-f37d-4a57-9482-ced11f358fc6",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-24T07:47:30.234Z"
+    },
+    {
+        "id": "ba26c2d4-2421-4a66-adc7-bae92556b3a1",
+        "os": "ubuntu 22.04.2",
+        "sha256": "3de717f4c634e90764267770860d6a744005b7f7a45716b1fc15c7619ecb4699",
+        "external_id": "c9dfe1db-7b52-4643-9024-a8f61f6c013e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "github",
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-24T14:43:41.306Z"
+    },
+    {
+        "id": "1499af5e-4a0b-4b7c-8de3-48568628ea81",
+        "os": "ubuntu 22.04.2",
+        "sha256": "424a8cdb68ab245835640b86d9a1d49a990a5aa99556b060883eb962e8ece010",
+        "external_id": "02d1379f-3b21-4640-b828-4a57ade755d5",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-16T21:29:57.626Z"
+    },
+    {
+        "id": "b6c5df92-a640-429d-83f8-27f79b435808",
+        "os": "ubuntu 22.04.2",
+        "sha256": "5a5aa52a6e5bd95a59e6637079826dfc02d62c968d4d7410044e0cf4eba54bc5",
+        "external_id": "28e4c05a-1ef3-4adf-bee7-daf591f404c2",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-16T20:27:16.870Z"
+    },
+    {
+        "id": "072a7f98-b311-4e22-95b7-91ec303ad7ce",
+        "os": "ubuntu 22.04.2",
+        "sha256": "0e330a5202fd8dc8e02588ecf2c5e22ae774469eec98089ac111206d0fea2b7f",
+        "external_id": "7a63b689-4ee5-428d-8fd0-5599ce708b5d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-19T13:04:40.994Z"
+    },
+    {
+        "id": "4c500e98-285d-4ff2-a0b2-b79f94b9f5e9",
+        "os": "ubuntu 22.04.2",
+        "sha256": "a7525355ae1c635e87fbfc7e792fb6718a108136b854c3ea717d95ef04aaa5b7",
+        "external_id": "061754d2-b80e-43d8-a95a-bc43b6d6e7a1",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-17T09:57:07.001Z"
+    },
+    {
+        "id": "9da4cf69-fbdb-4c1a-bb1f-a2f8608ae53b",
+        "os": "ubuntu 22.04.2",
+        "sha256": "b9ae409f08eee3895bf4493aa700928b7892e1f5a74a8ac6696760a3521a418d",
+        "external_id": "f4d432d2-89a4-4c42-8ac1-8f8e964116b3",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-11T12:06:10.704Z"
+    },
+    {
+        "id": "b3e5c44a-5702-4e5b-bf4b-1dba30b72f91",
+        "os": "ubuntu 22.04.2",
+        "sha256": "5dc27cfdcc3959e051b6073fe0a58753e45d1069d0ee96339484ca48a21aee45",
+        "external_id": "396c5af6-9e11-4763-805f-ba85c24fb043",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "mirai",
+            "botnet"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-24T20:33:18.044Z"
+    },
+    {
+        "id": "9e4f0ba4-c016-411e-998e-74f1c6be528b",
+        "os": "ubuntu 22.04.2",
+        "sha256": "a34279a92a28c1ace83b73595546db55a82f63c0322ad95e8820df5581c3c95f",
+        "external_id": "1eb92572-675a-4b3a-932f-629faa3bda94",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-15T19:32:47.139Z"
+    },
+    {
+        "id": "bd7eda48-5822-4c37-95f9-21f5f0d79b88",
+        "os": "ubuntu 22.04.2",
+        "sha256": "fc37b421e6730a5ebf381eb27e19ec7c82a2effdee57d976249c7104388093d5",
+        "external_id": "4b67fdfd-cb1f-47a8-897e-7a15a313ab58",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T15:25:24.361Z"
+    },
+    {
+        "id": "1fdf81ae-aed4-4e2b-accb-9d3b143d30b2",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "408c802f1c8b3952edb7d400f370e5538354acf58ffe5e34218e29cf63509aa0",
+        "external_id": "96ebc83b-db1d-4dc3-8f81-6db26f863082",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:21:46.363Z"
+    },
+    {
+        "id": "9c23fd54-972e-4ac7-8bb1-2c66326f815f",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "2f4393aa41b9d011ac790be811806c320c07a8f9c25fa399424a12854765eaf3",
+        "external_id": "504c6368-6abb-469b-be64-d9d0ee8758e8",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:12:28.443Z"
+    },
+    {
+        "id": "3c264322-6c66-4465-a5f2-d4845a424435",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "d663872e1fb90c1c6b3619c47a3e39cc6d24f305d4fa1580e98b95e5a0bdeded",
+        "external_id": "c79f1ca7-6084-42c3-8ae3-001dd033a0b5",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:42:07.889Z"
+    },
+    {
+        "id": "1cf9196a-74a3-4f83-bc34-ee6ccf6b0dbf",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "919dce75d586717d25c0b17c864507b8d192cc0c595dde8983e103705a0b1f8c",
+        "external_id": "9ca784a1-2841-445d-b24d-c701ae6000a4",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "qrcode"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:10:20.046Z"
+    },
+    {
+        "id": "d5c7cfb2-2ff3-4590-8fbe-04b0fd144712",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "5c584003f195be24a94bbff5925557557c73ceb6424a412e9a2fd7c96d6b3317",
+        "external_id": "f64b4174-5606-4ea4-a7f4-b4bf8a1a19ce",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "ip-check",
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:57:17.327Z"
+    },
+    {
+        "id": "52e1f6fa-21f8-4bee-ba7b-72d4de768b50",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "541f8016c540c9f196e7dcb5b93612451c4bb0cc342236b06666c035d13abddb",
+        "external_id": "1048f8a1-49f9-4c8d-a8d6-745ca5735495",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-31T21:58:59.810Z"
+    },
+    {
+        "id": "501087d0-c505-46b1-951c-8f28842a9e88",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "2dfa93ac149ba2b68f2530ac7cba0edd91a8831bf1c5c67ba655ddc3004057dd",
+        "external_id": "f54e23fe-e1e1-48d0-af85-875dfe83d3db",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:43:13.170Z"
+    },
+    {
+        "id": "64cb1e2d-65d8-4410-ab81-28bfebff0dc0",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "93ed34546b2634653413a29bbf665e0a9e6c0ee132b57603427ca401fe8bf2a7",
+        "external_id": "392e53dd-56e1-41be-97d7-22105cdd0b61",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:30:34.393Z"
+    },
+    {
+        "id": "02fb2a37-d963-4886-877d-74a906269e0e",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7d97367f61d05d6f5844d479a395a5ef5e1187248b5b21cec64cb020b77750bd",
+        "external_id": "6f402227-5be6-410d-b1fa-e3367fca5262",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "attachments",
+            "attc-arch",
+            "qrcode",
+            "arch-doc"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:23:13.606Z"
+    },
+    {
+        "id": "4fbbc7a6-deae-4e81-9391-a62a4cc97e44",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "1869627578fb05004c412856241b67fbae9b07c4d597676c8da72f596400134c",
+        "external_id": "68b68b69-f332-41ed-8963-2e0550d683a5",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "sharepoint",
+            "possible-phishing",
+            "phishing",
+            "websocket"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:18:54.212Z"
+    },
+    {
+        "id": "309f968f-025a-4a4a-88e1-18a436bc2bb7",
+        "os": "windows 7 professional service pack 1 (build: 7601, 32 bit)",
+        "sha256": "09d8cfd933537693ee31df4221fdbfbe529ee3f900968e259574b093cf59b097",
+        "external_id": "f842ca78-068d-4676-97aa-c392720e3f53",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "arch-exec"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:30:33.280Z"
+    },
+    {
+        "id": "0331ae47-63b4-4644-af70-090adeac07dc",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "56738db067728b4c283750b9103dfb32840a3f5c17bc2cba7f18341c4ff8e1f7",
+        "external_id": "52dd3765-d42e-47f4-b77b-7846a68f7394",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "lcryx",
+            "ransomware",
+            "arch-scr",
+            "anti-evasion",
+            "miner",
+            "lcryptorx",
+            "loader",
+            "qrcode",
+            "xmrig"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:10:02.504Z"
+    },
+    {
+        "id": "bb32592a-90a0-4053-8102-113e4ca45bf9",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "f3619e08d1210d4c55218061f206d743768a6152f22dcba3535a689b9cdc3b6f",
+        "external_id": "82394d2c-5068-43f1-9745-f31061adc48a",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "susp-attachments",
+            "attachments",
+            "attc-eml"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:59:52.109Z"
+    },
+    {
+        "id": "c3a0ed14-3b41-44fb-adc0-2dbbb3d51f18",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "47d63885003e94cf8ed49ed195f22a30e1cc16d83f405c9f49110660d064fc93",
+        "external_id": "49acadae-9174-423f-80a0-ac59c8562b72",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "attachments",
+            "attc-pdf",
+            "qrcode",
+            "phishing",
+            "phish-url"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:48:06.957Z"
+    },
+    {
+        "id": "fac92630-5c57-4f81-87b2-053da4724ff6",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "416198abc5bc105ff007db1fe5dab37e8e0359b73e314621ed475af728dca972",
+        "external_id": "2e29c002-667a-4d4d-bb94-6cb36ca19097",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "xor-url",
+            "generic"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:58:54.592Z"
+    },
+    {
+        "id": "f247f3e5-287b-4555-8f11-ea0e1859d4fb",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "178a82a932cfa92801d457a61bd0b00b8e4c5a7a8f0874770900ecbc7f59dac4",
+        "external_id": "dfc35201-dac3-4faf-a1fb-722e6b6108c2",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T13:18:54.159Z"
+    },
+    {
+        "id": "7a8f6fec-cd10-4abd-90e1-f5131c29c11f",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "301b374353a2abee09f035b695ccc9972500dd3a848e29be19114eeaa661f902",
+        "external_id": "59b93b29-f02e-411c-a5f6-541d5ef78eed",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "netreactor",
+            "darkcloud"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:19:53.201Z"
+    },
+    {
+        "id": "307a6412-cbaa-4135-8467-5bcd48caa0f8",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "83ac498173842eaf5cf87aa416fa9b78dd5af0bb1eaddc88a5502dacb2ac6af8",
+        "external_id": "92a9e882-7790-4eb1-b5d9-bfbc6e0faf64",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "fingerprinting",
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:31:19.669Z"
+    },
+    {
+        "id": "1a6b007c-8671-4bf6-9451-376efafd1df5",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "2ebacae3050041d53e3550f0afbe6ebca60b22b85a200b92c702468ff223cf8a",
+        "external_id": "81ea46af-5747-4432-8989-e93999158b2a",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "jigsaw",
+            "ransomware",
+            "confuser"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:02:05.696Z"
+    },
+    {
+        "id": "be510362-bdcc-49fa-8d9b-1afdb73d2a81",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "5390e11554a40149449ed22ab228a61396711728948a1827a03b7e1c31fad9e7",
+        "external_id": "90f83a12-95b3-4db5-b549-53098e2477df",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "phish-url"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:29:34.150Z"
+    },
+    {
+        "id": "95f9d57b-e7b7-4e2d-a304-e44fa127ddb3",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "d838907c7e2f7bfd9172d4f0e18e233af90c793a611f5b7b83bdefa23af7a2c5",
+        "external_id": "f9daae8a-bdba-4708-9761-dae146d56f6c",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "possible-phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:50:35.743Z"
+    },
+    {
+        "id": "a99f06a6-5beb-4d0b-9705-205a0361bc4e",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "e3fa3b62657c07b178d25b5661aab30e3276097b61a3a0231bd3f57a29388d9b",
+        "external_id": "2df9f25b-962d-4ab6-8fc4-d679d62e118d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:03:48.690Z"
+    },
+    {
+        "id": "41fa95c5-5368-43c1-b70a-e6b2757ab9d5",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "d9261458f57e7348090e79885d331126b3bc5fad5219d384a43526252bacccd0",
+        "external_id": "87040bd1-16b9-45a7-8fa8-54c0e77acb0f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "github",
+            "tycoon",
+            "storm1747"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:19:41.513Z"
+    },
+    {
+        "id": "1f029fd7-1e6b-4ca1-b20a-435e6213e28c",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "662d1cbf363bd3950850f4a4cb52b88a4457667c4121c148a84debda03beda11",
+        "external_id": "30835ead-0e59-4217-b921-a13b4461cb81",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto-startup",
+            "python"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:16:14.053Z"
+    },
+    {
+        "id": "5abfd673-e3b2-4575-b59c-7f3bd4f12648",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "a7dde0953bc1c0459fc17b54597a78f194588021a6978d5cd170cc7e2d020018",
+        "external_id": "d0d5d69b-6c1b-43bb-bb3e-14dcaec9bf7d",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "payload",
+            "discord",
+            "m0yv"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:55:48.779Z"
+    },
+    {
+        "id": "5830a315-c3a0-43df-ab2a-dc220caa4d63",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "95add70b5bb581497c61d6d1cb55c1f2109371645a9e1b152b6557efd95bff57",
+        "external_id": "e0d4a9c4-c414-4c99-b16a-77bae0b449f4",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:29:24.387Z"
+    },
+    {
+        "id": "fad69198-bc10-4dee-97d3-5b9e81000f90",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "45b77194ddaa81e8d0555b6d9e151fb3acc9164d8e9651accce2f5ccd794288f",
+        "external_id": "15af2d19-8c9a-4196-9537-166b52f6802e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "susp-lnk",
+            "arch-exec"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:32:01.870Z"
+    },
+    {
+        "id": "527f12cc-6284-4224-a2c1-d413a13ff981",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "78f993a1e01ed21cdfcc1334937e4f49affb474a7988b00de25589e4c2c9bf5e",
+        "external_id": "72509966-6454-484e-b009-54612bb20160",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "scan",
+            "smbscan",
+            "yero",
+            "worm",
+            "upx"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:34:14.917Z"
+    },
+    {
+        "id": "1c1022cc-c223-4b9e-8592-9a295edc3584",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "622d031c790eaff4a51acc35b1765bfee72abb97652cdc328d1e2fa3b2d300fb",
+        "external_id": "431bd527-3c84-499d-a47f-4aafe0a174f4",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "svcstealer",
+            "stealer",
+            "arch-doc",
+            "inno",
+            "installer",
+            "delphi",
+            "golang"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:52:56.656Z"
+    },
+    {
+        "id": "e74d11d1-a8dd-4b6a-95eb-5b6a7487a917",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "493a2a25eb518eaa575ed9b48353bc4f88e8654dccef388d7bc0825f70231695",
+        "external_id": "7df79b13-d360-41a3-9f42-a16517527245",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "arch-exec"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:38:42.274Z"
+    },
+    {
+        "id": "fac83454-bb8e-4a67-ad60-e2103b51a0c9",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "a391ab3a00e29a8b9c26930f21b9036bc7b0c21aba0d20814853b073999ea6df",
+        "external_id": "bc4d2612-1dcc-494d-b3d0-d859d308919f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "sharepoint",
+            "possible-phishing",
+            "websocket"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:04:57.075Z"
+    },
+    {
+        "id": "04175bc4-8019-446d-ab5d-52a7c31b04a9",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "a558cfe6d47ccb1374d13ab6235c3fa744f9ffd186486715c587d6e2640a4881",
+        "external_id": "00f95679-7c09-4e6a-b8de-091e4e20c81f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:55:12.887Z"
+    },
+    {
+        "id": "8b072d08-2c23-480e-baa6-30644ed84d7b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "0876b8e18ea67a7eae04ad8b463cbd927009505a91887817901135ea5df58701",
+        "external_id": "f19a971c-ec3a-4052-9f03-755e7f2c5d97",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "obfuscated-js",
+            "phishing-ml"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:53:26.652Z"
+    },
+    {
+        "id": "3cf3c7ee-84e3-40ea-804c-f03459706c10",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "c122a12f7f98131fb1072b6045a3421ccc982de99823d10d7ba289a87200e58d",
+        "external_id": "8c1384d4-6d97-4a5f-9fec-4d8541d5a472",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:05:11.031Z"
+    },
+    {
+        "id": "af15fba9-ab3b-4e42-838c-e61bb8c01ee2",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7d55453606700041e1fdfdd4d5748267b4e9a895b74b4b702fea834856f4d9d0",
+        "external_id": "b348faac-b085-427d-a714-b1bf41752e7e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "spf-fail",
+            "phishing",
+            "phish-url"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:11:58.708Z"
+    },
+    {
+        "id": "e98aa925-9b22-408d-b219-75b3750d27be",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "33f890d1b8ba3a519c8dd8dd6a41eacf445978d83dde982e196e589133fba807",
+        "external_id": "04678965-e4b5-45d8-9672-49cba833b705",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:25:02.165Z"
+    },
+    {
+        "id": "9050f0d3-6c48-4ab0-adac-3aab139895fc",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "0e7b0f1d4b9d742b0bbe282882137c9960e343c95e72818d8689de56d6474234",
+        "external_id": "1e249cf2-fb20-4f77-9068-bc9dfc92afeb",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "possible-phishing",
+            "phishing",
+            "github",
+            "tycoon",
+            "storm1747"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:37:29.504Z"
+    },
+    {
+        "id": "af79eb4a-ebea-4e86-8537-32bfb3904e43",
+        "os": "windows 7 professional service pack 1 (build: 7601, 32 bit)",
+        "sha256": "1018a48da7840ac11b45aa702211ed30c5e2305738d514183557e00af612301a",
+        "external_id": "3d657564-a908-47b9-a878-a15ec632553c",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "metasploit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:29:38.211Z"
+    },
+    {
+        "id": "1846c5b0-6983-49bb-b3c0-a86b76465001",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "dde171c6957cbc467fe0769ad6e208fcff70ee0d2c12ecfd4bd215b58eb039d1",
+        "external_id": "13317f1a-bae8-47b6-8992-4ba220f115da",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:47:01.600Z"
+    },
+    {
+        "id": "bb5d368f-24e3-4d6e-9d29-2d4b4917e376",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "f20d90ec98c0eacbc11ae18ad1c9afb4566635ac44d59f8648e1fb05b3525756",
+        "external_id": "70a1ecb3-4eb6-4459-b168-895bf844f9d7",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "obfuscated-js"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:54:16.929Z"
+    },
+    {
+        "id": "62ff8988-7f5a-49f0-bfb5-e78b2215addc",
+        "os": "windows 7 professional service pack 1 (build: 7601, 64 bit)",
+        "sha256": "3977ab33801d21aec9682af5cc598f11b6fd98dbdf926508fa25a2ac4c5bbcc8",
+        "external_id": "21d85653-1a35-424c-9a79-493f46165b17",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:09:57.606Z"
+    },
+    {
+        "id": "bb42160d-2a4b-4ba7-ab2a-68b0f675c892",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "c5674316a42b825f7f4fb05341cd44e49c79a25b6e142310c5408776900f3585",
+        "external_id": "9e9e0efc-7bb0-4578-b8d7-04381d80e474",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "attachments",
+            "attc-unc",
+            "phishing",
+            "phish-url",
+            "qrcode"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:53:49.376Z"
+    },
+    {
+        "id": "5a442541-e74f-44a4-86b4-2187fddad8fa",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "108caaefee143035730545840cc83690073e1e29a4f7d96f485b4450e88a9f22",
+        "external_id": "b0be9a43-907b-4d03-8b9a-c1bf83fb58fb",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-06-30T20:21:48.509Z"
+    },
+    {
+        "id": "836ad5fe-167a-464e-9b1b-69c70bbd8bbd",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "b3228fdbcfcb3e4082fbad328381fffe252a16645e1ee8df12a87412f9638a36",
+        "external_id": "956ed6f9-ba78-4490-82de-f8d7187dcb11",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "telegram",
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:30:28.849Z"
+    },
+    {
+        "id": "98fd3eb5-ef12-4e93-9f39-588f18e8d64d",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "5730d02b22a2c6f0403b73bbd5b7e3603703606a089b86a3cc604d609734d29c",
+        "external_id": "965ed063-2a88-405f-864a-6371fa7ec6d5",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "generated-doc",
+            "macros",
+            "macros-on-open"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:15:43.917Z"
+    },
+    {
+        "id": "e9c96f67-fac1-4387-bf70-863f962b292e",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "489b8fc85c8929ba5a7929d61e066155ec79cb9419e0ee617892b5ec2703bd4d",
+        "external_id": "20b085f2-1b35-4689-aba3-4bc36b80c26a",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto-reg",
+            "autoit",
+            "rat",
+            "njrat",
+            "bladabindi"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:20:17.161Z"
+    },
+    {
+        "id": "e5f35556-7ee5-49d7-8d6e-72cec7ff63eb",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "170a0f7bc83cb08fb59ee59dc47d55ad9c632d49cee96778d3655809f6269781",
+        "external_id": "492cc201-fb07-40b7-9f30-150daa328560",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:06:37.633Z"
+    },
+    {
+        "id": "005bcb3d-06f8-4507-bb19-213cc93a9997",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "dec874ccac96f6ffaeae31dcf44f4d86d86f1dc2d272298abebd39a8b0129195",
+        "external_id": "2e536754-459b-4e16-8e58-51db3a6cb337",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:56:37.296Z"
+    },
+    {
+        "id": "e98682da-4598-4118-9125-77c4f01b38cf",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "65e32bab818a2dd3cce1d09f69bdb81ffebe413de118c48f479133b073df3a81",
+        "external_id": "cf8e366b-af20-4ad6-87ca-1e91dbab5ec3",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "susp-attachments",
+            "spf-fail",
+            "dkim-fail",
+            "attachments",
+            "attc-unc"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-31T20:45:08.728Z"
+    },
+    {
+        "id": "5d44de71-a698-43e2-b068-3c2481d30da5",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "755d1b117c035e71462b479bcd0bff15cca3ce911ed0cae228768647812eb2fb",
+        "external_id": "ccf9ada1-a6ee-495e-967d-eb62a0879113",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "unknown",
+        "analysis_date": "2025-08-27T21:40:29.777Z"
+    },
+    {
+        "id": "dacf08f5-6d90-4f9d-a1ae-acbdbe45e235",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "30dbb83604b4a968b84c4522acaf9d9b91151dbe2b3a5657bd1c7617706a431f",
+        "external_id": "8d3589a5-a066-4be5-b442-638198583f43",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:20:52.341Z"
+    },
+    {
+        "id": "37be184a-cf92-4c5d-ab60-aa039c21f516",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "bb93738800be63a302b2b76374986c18e7a4d43e780e19c656c84dbebfb6e763",
+        "external_id": "0e315894-cd8b-4451-987c-33df10d7671f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "sharepoint"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:08:12.613Z"
+    },
+    {
+        "id": "0443310c-75d0-4ced-adec-cf46d471b304",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "10204ea6647347239e2de95a60b0c61824a345f5ba2df1ba50c91e984f3c0f68",
+        "external_id": "4bae9176-3c0a-4718-bb2c-6517821811c1",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto-reg"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:38:47.939Z"
+    },
+    {
+        "id": "7f74dd16-98a0-46ca-bd7e-8cef65dcc0dc",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "aed2fe890cac6dd0c5956d2dc288d7db2bb753687e728f93fb6ae6cf44c8101b",
+        "external_id": "1a908737-1b31-4b78-9192-198c5c7347a2",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:25:28.266Z"
+    },
+    {
+        "id": "134bae89-fd4b-4f8d-9c09-0e2f6dd4577b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "77b127b910b9015f0421d5f2cff60bfb3d3ce3d14df33aa3c325b7cdad98af1d",
+        "external_id": "f87f3da1-0670-4c43-a314-756d60c96a42",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "susp-attachments",
+            "attachments",
+            "attc-unc",
+            "phishing",
+            "github",
+            "tycoon",
+            "storm1747"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:10:03.913Z"
+    },
+    {
+        "id": "6b69858f-89ac-4146-ad58-54e54230f0fd",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "f76497e0bcf55f65c060fb0e69de8f6d03fc029c892e8894954f0429911e95f3",
+        "external_id": "191ccf00-5839-4d34-8706-588ce7c1350c",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "susp-clipboard",
+            "clickfix"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:31:08.794Z"
+    },
+    {
+        "id": "ad8da7be-b30e-40ec-af57-0ca96898e221",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "4235291d2550101662634e652d374689402a4485c9d60110ebd4d53d3a0ba26e",
+        "external_id": "8d067ef3-496e-49df-be50-5182641a23e8",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto-reg",
+            "latrodectus",
+            "advancedinstaller"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:53:24.203Z"
+    },
+    {
+        "id": "74e42e53-6561-4c0e-a243-0a0eef6882c6",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "e41f051c0c12bd837cbae999b0b3295b2a144a854b2e0d55ec458be1e960db52",
+        "external_id": "a7e0ef29-3ab7-4f23-b38e-2902bedf42ff",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:31:54.062Z"
+    },
+    {
+        "id": "54d0c639-f6b3-485a-90aa-ff06f0b04e11",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "58ec79c0e36977c1261186096528475111c54dbeac01b8b478c9a8be5eefd39f",
+        "external_id": "e7611a0a-2179-4785-96a7-0d5e1a0c5382",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "attachments",
+            "attc-eml",
+            "susp-attachments",
+            "attc-arch"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T13:09:54.548Z"
+    },
+    {
+        "id": "12683ff5-6b39-40e8-8897-8c729905c6dc",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "eec3a0d2c98f95f047cda15f3b02e28cacaa2913c2ce5412b7b42da1fcf1eb15",
+        "external_id": "ed83d301-2e89-4699-8a89-e3dfaf3b8d68",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "stealer",
+            "evasion",
+            "agenttesla"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:18:22.587Z"
+    },
+    {
+        "id": "5765aa29-9bee-44f2-a95b-eb421526c22b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "8a089b6536b7166e5e7294a42b5bedfe6cfea59275d5a910d47355de1570a65c",
+        "external_id": "bab752d6-65f4-4ac9-a818-885208c9c6d4",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "websocket",
+            "fingerprinting",
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:26:36.366Z"
+    },
+    {
+        "id": "bc4fe80a-1d93-4e17-bfc9-5ee6b3b4f4bc",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "5783d2fe7b9208c99038151d8ef02659e3e6d734953e04c2aab0129cc036501c",
+        "external_id": "6c4cef66-3d76-4225-a907-7bfd6a8243e3",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "autoit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:30:46.595Z"
+    },
+    {
+        "id": "228ce5ae-147d-4153-8913-25725d165421",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "13e4efbb2b210c76aba59b0e4c0e0a4cc41f0de35ab0c29cb2ba9fd5ab13d971",
+        "external_id": "0914cd91-0090-4ab1-b5aa-0fef79a70f33",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "attachments",
+            "attc-unc",
+            "susp-attachments",
+            "arch-exec"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:17:14.461Z"
+    },
+    {
+        "id": "bf772ce3-a956-403d-9973-86ca3d00431a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "6772276b0dbab5fda3843249f9d79273c4f9adb611a2824e85477c0158f9aae1",
+        "external_id": "cd8d1d61-4c54-4566-8dc8-a44e43d40c72",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "t9000",
+            "backdoor"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-23T20:18:37.918Z"
+    },
+    {
+        "id": "f48e3b8d-b9ba-47ac-98b8-113004e7acb0",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "791f8cb44eec3014f39248af11be2782c4350b47c961ff94a5c70018f913fb4c",
+        "external_id": "43083f94-1000-4b00-999c-b759c75aed80",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "generic"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:42:22.462Z"
+    },
+    {
+        "id": "049d27cb-1e73-4ba6-ac86-b7982fc095bb",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "09d47c9b8d3ebda1109ea5eb040ca3f6987a72411e2d2a097d64e7125efa17b2",
+        "external_id": "2714979e-b8dd-43b2-8434-455d896a6898",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "lumma",
+            "stealer",
+            "telegram"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:42:00.023Z"
+    },
+    {
+        "id": "e60a7edb-66a0-47ce-a90c-d314ddd9a04c",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "9792883669fb5ba103dd39c9be1b18cf14c3c9add1998d53c36ab597bce19cdc",
+        "external_id": "6478bdb8-6e30-4486-af37-0de2b9393768",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "github",
+            "tycoon"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:39:28.096Z"
+    },
+    {
+        "id": "56408cd0-db1d-40b1-9e92-02a6bcecca37",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "fae661d7164a232774f3ef6b13636c5a0b1ea890fe9689e526b6114bb1678f32",
+        "external_id": "f2bdc467-7a28-4949-905d-21c6721971e5",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "tycoon",
+            "github"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:17:49.850Z"
+    },
+    {
+        "id": "f072f899-97e4-41de-b08e-cefe53792e3b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "e014336c4a12c75a6046ec3a969366bf5538b9a7461da2d96e99d9553b5c8d91",
+        "external_id": "110813d4-59ca-4ee4-bfac-e7bba3db25de",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:22:43.869Z"
+    },
+    {
+        "id": "83079169-8296-46f7-92b4-a963ce490b69",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "fa35cdd6cc9bb2995a15c57aaf0f1574eb0bff74c3129da1b2ea844950cda2f3",
+        "external_id": "ac62b8bb-99c7-46a0-ad78-58050974d318",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:38:03.750Z"
+    },
+    {
+        "id": "1b2d593d-16d9-4cb4-8a38-e72e2b9531be",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "1b3409f8ea5abc5f30431b90d8724c2e973fbf1f7729eaefe262a51c8688f04f",
+        "external_id": "0fc3cf22-4fb5-4cf1-9590-69805eaf3599",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "ipfs",
+            "logokit",
+            "possible-phishing",
+            "phishing-ml"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:38:19.195Z"
+    },
+    {
+        "id": "89b4a953-8170-4a40-b22d-516d03fa8c62",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "c93c535e36ce9ed6b272f2c9c08a4e23d0efd1ce543fbd3da72daf482641ccbf",
+        "external_id": "31a8a7b7-ac0b-4f4f-ae2f-0d6d821e78b7",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "websocket"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:21:26.070Z"
+    },
+    {
+        "id": "1242c10f-43e0-457c-96b3-6d239066ca9f",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "41f4fe7b1a906238e345bab829a535a17d469a855f4ed1924b78fbd2c4a8514d",
+        "external_id": "5bc3edfa-cf86-48ef-9f36-750c221ad659",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "tycoon",
+            "storm1747"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:32:54.805Z"
+    },
+    {
+        "id": "cc9d14e3-d6c1-4502-9fdc-5791feb76fc1",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "02c301f6388741e6bea8adeaec41f3f147b58537e7c0ab88cfbac4c10385ccf0",
+        "external_id": "c8e4e895-28c0-4849-8e66-7e4098a3caf6",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "opera",
+            "tool"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:24:32.548Z"
+    },
+    {
+        "id": "7c1eee20-4b60-4c1d-8473-063d75b5e3ec",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "c6867e591ed8d14c719a34c1dbe95af9a7b6ef47bd022f41ebd62561866b392c",
+        "external_id": "9ad7cc64-f3e2-4c6b-b0f2-c6534a82ab94",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "arch-doc"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T13:18:08.875Z"
+    },
+    {
+        "id": "834861dd-c4b9-44d4-b943-915965a7deed",
+        "os": "windows 7 professional service pack 1 (build: 7601, 32 bit)",
+        "sha256": "350327454f481a54e0357ecda4ded38b04fd1b9c36505b7fb0ad55f1c8e54a7b",
+        "external_id": "6a44f8ac-3b04-49cf-804d-b9a37ff5295d",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "evasion"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-31T20:02:58.098Z"
+    },
+    {
+        "id": "fc25bd8c-60ee-452a-9b17-91a03aeb458b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "92a46447deddcfa3c1a35f32b3c9a637a838f65120d4c1d64b9f5e419ead98a3",
+        "external_id": "d5eef7c0-dcae-4df3-ac35-5d8f3b5ac54a",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "stealer",
+            "trojan",
+            "pony",
+            "fareit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:28:22.838Z"
+    },
+    {
+        "id": "96c38437-9b48-4468-bc45-5b68f8ca0a6b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7ccbb328c344f2550fc48f76726c0a15e5639ecde8f63b7cca89f0ca7a96f4ee",
+        "external_id": "ed91f9c2-bc6f-4d5e-91f2-b329f5bf49f6",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto",
+            "sality",
+            "backdoor",
+            "upx"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:40:07.770Z"
+    },
+    {
+        "id": "4aa479a3-7787-4900-839e-90972b99fc63",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "e6b78e4c13f03e56ccfd8934625313913e9d6f95bf6d08f3e076d6516545dfa1",
+        "external_id": "8a651d64-87a2-439f-866d-c2cb3bc40aea",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "python",
+            "possible-phishing",
+            "loader",
+            "github",
+            "remcos",
+            "rat",
+            "auto",
+            "generic",
+            "pastebin",
+            "lumma",
+            "stealer",
+            "evasion",
+            "screenconnect",
+            "rmm-tool",
+            "nanocore",
+            "redline",
+            "neshta",
+            "snake",
+            "keylogger",
+            "dcrat",
+            "koiloader",
+            "phorpiex",
+            "miner",
+            "amadey",
+            "botnet",
+            "sality",
+            "purelogs",
+            "purecrypter",
+            "formbook",
+            "asyncrat",
+            "remote",
+            "masslogger",
+            "aurotunstealer",
+            "phantom",
+            "pyinstaller",
+            "telegram",
+            "stealerium",
+            "coinminer",
+            "stealc",
+            "clipper",
+            "diamotrix",
+            "ransomware",
+            "sage",
+            "aurotun"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:45:31.882Z"
+    },
+    {
+        "id": "bb4d8037-0708-4cbb-9be5-15920a36c70d",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "5734411d8f2f8d4f54f88c08d9af9814ed0c4ef6e5b1f2175b28ad007d70fdb9",
+        "external_id": "27c9ab05-fe5c-4509-9a50-c423ecae781f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "ransomware",
+            "cryptolocker"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:45:02.193Z"
+    },
+    {
+        "id": "68d866df-4758-413a-a118-a504489f0d3a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "550f4837ae8ee80f3e88915a159abca62ddc3a3d876acdb5d7b3b6f400517d98",
+        "external_id": "795c3a45-eba9-49c3-9c26-e08eedb8da80",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "susp-clipboard"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T20:23:08.068Z"
+    },
+    {
+        "id": "6d0a1a98-05bd-49c1-b8a4-89e8a29837bc",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "4eb28f185917a46f65245670ffa12747ac36225b91c89cc3835687607b7c62ed",
+        "external_id": "2739ef18-7dd1-43fc-9e36-09c8d8009dc9",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "obfuscated-js",
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T20:23:06.160Z"
+    },
+    {
+        "id": "74f1292e-7ad1-4e99-9556-658495c632f1",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "e75b6de85fd22f5bfea812eb51be38987dee6fd08e4d20784f4a565d989add7b",
+        "external_id": "3fa8d75e-55a3-4681-999d-b79110db2349",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:46:13.808Z"
+    },
+    {
+        "id": "c2e657c4-1097-49a8-a49c-69e7321698de",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7bcd5e744eaf0e1698aae1dc42bd00e5a58376489034fb3a3bcf593dfce94c7a",
+        "external_id": "1184a92a-1fdd-4df8-968e-7b2d53be5f28",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:29:42.650Z"
+    },
+    {
+        "id": "9fdb5dca-b633-4e06-a987-dfb4d9e02160",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "01b02b2b309d778ffe752b246d151fb984d09bc2e28753b68f218b7cc19a5cb6",
+        "external_id": "c2ef7eb4-c7e3-4e02-b274-aeed5fa05cda",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:24:59.669Z"
+    },
+    {
+        "id": "905b7499-25a7-4ad7-95fd-ceefc9a043f4",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "6705098d5e2a9b0cd145e75726698faef881252c2888ebf8a3dc47884a779b05",
+        "external_id": "3dff47ca-8cc9-48c0-ab37-48562575ec7c",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "auto-startup",
+            "autoit"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:16:32.328Z"
+    },
+    {
+        "id": "98fa4f5f-4932-496a-a65e-45379156b42e",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "22ac0163302e0556f95e2351ff159d0c98c0a8abd055694c1802bcff5f8226fe",
+        "external_id": "4fabdc15-3015-4dd8-b77d-d48dd2bede4e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:56:07.393Z"
+    },
+    {
+        "id": "a434cb43-4268-4449-802a-6f7f6fdcb897",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "fc71a3076d4ad19ddf4496b3f6b321f32b326e3831e86d449e5f3edc355e8abd",
+        "external_id": "c4502f1f-8b5b-4f0f-ad9b-b4bac63c59bb",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "webdav",
+            "loader"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:27:20.665Z"
+    },
+    {
+        "id": "cc2ce247-e111-43ed-89cd-5531bcca6a5b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "309783845448c0e5f672b64ef78d5547f157bc46934062787a7ac82b1fabe6eb",
+        "external_id": "3068cbdf-d330-4733-8d00-8c59aa0f61a3",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "sharepoint",
+            "possible-phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:36:05.547Z"
+    },
+    {
+        "id": "3f883d74-3d70-4cd2-b1cb-46548277e614",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "e75d65c57f966443569e22185f015f8c493e7dbd434da7a5324ec1ddc424ae2a",
+        "external_id": "48e713d0-2db0-4b19-9d55-07367516c83c",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "possible-phishing",
+            "phishing",
+            "gabagool",
+            "obfuscated-js",
+            "phishing-ml"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:09:55.713Z"
+    },
+    {
+        "id": "106ff304-ad11-4313-bf94-ddeeceabb929",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "b10a5d8ff8dac1a1ec14e44c1f7d2cd66cdeebe96d3a037721cc6acda12aa098",
+        "external_id": "0cea9cdd-026c-4c93-9bca-638be4b055d6",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "arch-exec",
+            "stealer",
+            "evasion",
+            "ultravnc",
+            "rmm-tool",
+            "agenttesla",
+            "netreactor"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:23:58.986Z"
+    },
+    {
+        "id": "44ee6411-bf04-438f-9cc0-5e51783cf045",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "79a129647225e5f93875dfffe23ca61060feef0c2e9aa1cf31b8b16cd8e30ac4",
+        "external_id": "874594b3-1510-440a-ac76-0cb124a067f6",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "lumma",
+            "stealer"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:10:43.051Z"
+    },
+    {
+        "id": "ee88c6d0-0db9-41df-a534-36e163726751",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "6d161c6a97e67d3220cd461aafba4c1bb7f42c1628602175f9fb3329124f0918",
+        "external_id": "1a6e8bd2-e5fa-4aae-9f61-70d889939685",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-27T21:38:09.357Z"
+    },
+    {
+        "id": "66d3c7e1-53f4-462c-ba66-3f893145e12c",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "8993184beb6149f9665a759da0fdfb36a37a15d16ecd1089f7c249773107e318",
+        "external_id": "50e4387a-a89a-45c6-9c0f-bec7bc62d36e",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "obfuscated-js"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-31T21:36:49.636Z"
+    },
+    {
+        "id": "dac6eb87-1a3b-47a0-bee3-828e69593332",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7b289a1931281b36644df06c34a0687f1731b8c0c0ded487a79952764b35d856",
+        "external_id": "cc49aeb9-4097-4a4e-a878-73a6bc03e7c1",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing",
+            "evilproxy",
+            "possible-phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:32:23.275Z"
+    },
+    {
+        "id": "f959cffd-cb0a-41cb-b167-b9e1a10ccf33",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "64c8bf3a63ec005fb3f5d9f251a23c7229eaa7cf7482d102c966bb1e0466a66d",
+        "external_id": "d056abdf-476f-4922-8e6e-ace40b65bd2b",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "fingerprinting",
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T13:25:31.223Z"
+    },
+    {
+        "id": "c0e6b8d0-3913-4bb2-90e6-f44f094c2d53",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "533484cfbc56858748d0431aa2a0df9e0ac7fdc56f8bc9285086fd43f8f5ffe7",
+        "external_id": "fbe8dc27-d2b4-4ece-bf25-b807bf55940b",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "uac",
+            "blankgrabber",
+            "evasion",
+            "stealer",
+            "screenshot",
+            "discord",
+            "pyinstaller",
+            "susp-powershell",
+            "ims-api",
+            "generic",
+            "discordgrabber",
+            "umbralstealer"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:59:38.885Z"
+    },
+    {
+        "id": "ff90a403-da73-4ba9-811c-e861dc6fbf38",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "74dc4b14223894a3fc40cce3513c22518b0793b958474e82ad2741fd70fa2a2f",
+        "external_id": "98e83353-0e4f-4b8d-b397-3b7a1494e412",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "socgholish"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:33:34.521Z"
+    },
+    {
+        "id": "aec8ba9e-e578-4b65-b54a-b8a498cb4d4a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "8914e028c3359f18cb3b5297bc4af0bbbeebd8230c99c74d158752e69eea75b5",
+        "external_id": "14ef3086-530a-425c-88a7-e00f376b35c2",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "websocket",
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-27T21:58:36.529Z"
+    },
+    {
+        "id": "19570a28-bc01-4376-bf7b-b099bc5444f8",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "24d48784737c3eb8b0cc5563c368483deff7cafc3cb8e3d627b6b5fbcffbdcbf",
+        "external_id": "f0a0e658-ed66-4984-91dc-5118b10d5714",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:50:20.945Z"
+    },
+    {
+        "id": "bd45310c-73c8-4072-8c49-051a8f14d727",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "4704d806324213a17543604ec65e8e0237cfbdd5c214058a795defee924b2745",
+        "external_id": "a8027d1a-9642-4aa0-8d1e-031fbd5df83e",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "unknown",
+        "analysis_date": "2025-07-31T21:59:41.685Z"
+    },
+    {
+        "id": "c1bd9462-cce8-4a3b-bf6f-928d1a5f25b5",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "c89e737a61d7154a3f9a7797fe018cd09568f587d0a99bb1aefee666f1f56e53",
+        "external_id": "c4d94f83-6e99-4c69-b07b-b660a0818238",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "benign",
+        "analysis_date": "2025-07-16T21:51:26.602Z"
+    },
+    {
+        "id": "9a10f674-60cb-4beb-938f-dec6ab10916a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "56bbcfb4603606654511c1a0e41c20dacc023560bcc48081de9655c60e1581eb",
+        "external_id": "315e9184-431a-49e7-94a7-4b0c0f5220e6",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "unknown",
+        "analysis_date": "2025-07-16T21:52:32.481Z"
+    },
+    {
+        "id": "f39d88c0-c8c2-4aa4-9941-21887f8b1ebc",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "88957302b5ae822213f3142a74ecb1ef5a784858f270ee02d46ab59390103cea",
+        "external_id": "f18de3b0-e59b-4fae-9653-ea0e3a81e31d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:26:05.456Z"
+    },
+    {
+        "id": "99674e7d-fa1d-4985-ab73-4744d346e815",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "aa95ef18b8c4d1318552c0d5329c8f1ac8efe256efb2a360109f9275d5796699",
+        "external_id": "46fd74e6-2eef-4a41-8c80-5c57183ddda9",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "unknown",
+        "analysis_date": "2025-06-30T21:59:33.048Z"
+    },
+    {
+        "id": "ad6d31fd-611d-4d39-bc6c-e679f8f7e3e7",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "5c780cf6821f21bda1ff7fe2428bb862d8554b7a45c64c7ce47fa9607fd9a1ae",
+        "external_id": "9bbd8281-db86-48f3-98f5-d4511b8df748",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:39:01.810Z"
+    },
+    {
+        "id": "7cbf6066-f71b-4323-b33e-634b7f71c426",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "3ca1e1be9a7b3014bf9ef4acd944a2a5083ef29280563e234863bfc73de432ab",
+        "external_id": "c117e2e9-e065-443c-84f5-6c37f8b71e28",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "websocket"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:43:13.447Z"
+    },
+    {
+        "id": "bfd4b314-8707-4027-8f12-c9f6de0c0769",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "2b40622e210b90fb4f514a178f478bca13ec77056b67995a502320f4dc8a1db9",
+        "external_id": "a47fe079-5b4e-4a77-b59d-b72aa68d6165",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "fingerprinting"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:30:50.760Z"
+    },
+    {
+        "id": "8fa2a0f4-5d98-4e17-9226-0bd918e202e2",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "a039ff99213040c4b55b0276b989b9cf4055442db69d8c7704c12f324ad8e954",
+        "external_id": "b4b6311a-fba5-44a3-b3a3-b922989e1328",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "benign",
+        "analysis_date": "2025-09-09T08:27:01.391Z"
+    },
+    {
+        "id": "21743f1a-e4e7-418b-85ab-01700b38d2de",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7ab6620652a938032abe4758ca21bde58d31db33aa909c3e018db3587c4e4e4e",
+        "external_id": "fc4fba7c-edc1-4003-999c-0fc060e16d4a",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:28:00.256Z"
+    },
+    {
+        "id": "c5bd7448-4465-4809-a87a-f5488d8ff011",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "95b3e970608a7ac2f3ea6afcf27838e8bae2d6578ac7e60a5d606255ed4bfdcc",
+        "external_id": "521e7c7e-f126-4360-8161-71c2f30dc846",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T21:45:44.952Z"
+    },
+    {
+        "id": "46354008-af0c-4581-be2b-5c59bfa4e8c6",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "ffabb1d180e208c558d2e3d2c208927e5196ad9dfb9d87b789c7b090b8426d7c",
+        "external_id": "8814828a-efc5-4ab1-ab85-0cbfaf290cd8",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:05:09.051Z"
+    },
+    {
+        "id": "8990bfac-64f1-45e6-a59e-4f3e160beaa4",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "013942198ee7e7183653f1be78052a691df71a314775911cabd6920183eb9ea6",
+        "external_id": "38462093-a10c-47e4-87b8-83b920ddf8a5",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:46:03.284Z"
+    },
+    {
+        "id": "9709f56d-97a8-47bd-8046-22059d4f2633",
+        "os": "windows 7 professional service pack 1 (build: 7601, 32 bit)",
+        "sha256": "36e3e44d711dcbd9bd9625154add4c18ec2871dba9ee6638401367b41e266304",
+        "external_id": "c8eec29d-dbd4-4c54-801d-342fc8601ffc",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "benign",
+        "analysis_date": "2025-06-30T21:45:33.727Z"
+    },
+    {
+        "id": "9629d40d-263e-4f3a-af31-d906379793d2",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "30ec98651842cb75be2f47d44e42c105343f50c9b728dbd41fc5ab5d39b0d744",
+        "external_id": "393daf53-265d-447c-acdf-c560105bb30d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:01:27.931Z"
+    },
+    {
+        "id": "388def1b-8771-4637-b6ed-4ca863bb3a2e",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7ff4069cc2c7effe0efbeabed841efd19c5ef050f9862d052c57c835de6d24e5",
+        "external_id": "3f2cb9bf-51c7-4c96-84ba-2a54c76ec301",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:28:11.846Z"
+    },
+    {
+        "id": "928a4643-28a0-4543-8a18-dd19e558e232",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "f2b5ad46f421f458f5f5871c16663e7e70089b0a2275c2c7c27d18910c6116af",
+        "external_id": "5ab50781-59f0-4634-bec5-5bb414421d7d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:31:38.927Z"
+    },
+    {
+        "id": "79748ab6-feff-49b6-924e-dadfe7104b8a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "e9b4f8650245dd73e23f453259599fb3dd5067ab45097cfd92b9029bd7b98d3c",
+        "external_id": "278bf8b4-8731-4f9e-a48f-0d1467a94456",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:31:03.528Z"
+    },
+    {
+        "id": "8f302dc0-b98f-4f2a-a685-3ca22d9743cd",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "d1457a339c68e487b5fbc093b65a1a4e61159592c6acfb05d3c2a48ee81d8c36",
+        "external_id": "11a68b63-be6f-4793-b985-30dbe50d5db7",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "unknown",
+        "analysis_date": "2025-08-31T21:50:30.176Z"
+    },
+    {
+        "id": "238537b2-3a65-44be-9421-f6ee1c1be4c1",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "c55e19b8c043e6e3d05bc59b9b21f193d03f61abc30e497c43888cd7b0f4e413",
+        "external_id": "cd531e60-0610-4daa-98f8-756b113aa53f",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:39:13.475Z"
+    },
+    {
+        "id": "f4c015ed-d71e-4365-8c28-abf3064eb681",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "601f8c9892c9841d2e54fe5cd18025b9cf77e39e577a828f2b564a23b46b8618",
+        "external_id": "65d5095f-e1f4-4dcf-8e78-b9e67061fb36",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:30:22.389Z"
+    },
+    {
+        "id": "ec88df41-78f6-435f-a852-0c2112abf4c3",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "faed7dc1346c4c623164e7c8c1b72a8c1e265ce0651f49aa0ee78e7c3cd78790",
+        "external_id": "78509847-9343-48d0-b85f-d2f8cf3591cc",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "unknown",
+        "analysis_date": "2025-07-16T21:54:16.177Z"
+    },
+    {
+        "id": "ddd3b1e7-4018-4eba-8b27-83c3c407ceff",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "64c8d50e5ed559dcd2cd9def8901f30c95379b5be3003219673923ce13eb02ef",
+        "external_id": "2fc78dfb-59d9-474c-8323-f3d92038f1f2",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:25:54.690Z"
+    },
+    {
+        "id": "b085f3f9-14a9-4f78-9788-8b7f1eb84131",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "509601e005e04ab24eff6caa1c5923debac5a028ff90eeadc750852035b21e1e",
+        "external_id": "7f1c1b70-4e88-4f68-aa66-9854ca3d3d58",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:41:09.147Z"
+    },
+    {
+        "id": "dec6dab5-808a-4d86-b1c3-3efcc546f9a9",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "03e0fe5c0de2d8a06591d6e5117ee0ee12248b4a77936622de611768cfd9b456",
+        "external_id": "224c3a8a-2fa9-4e9a-affb-b502d66c46d8",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "unknown",
+        "analysis_date": "2025-08-31T20:08:46.513Z"
+    },
+    {
+        "id": "23539d75-4f62-4af7-b910-1b032534b49a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "fd4e2324a00d4848321fb1180a1558b6221127541f9ab3c752eae9a31687af0c",
+        "external_id": "67737f1e-f73b-43eb-a642-ee46b9886535",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:27:49.817Z"
+    },
+    {
+        "id": "f09b96be-8f24-43de-845f-14d7b75644ad",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "5be724a1b7ce68790bba477787d04175f5448bdb3f556c5e013b4edaac3b4d64",
+        "external_id": "1d9a7318-f144-4147-a11e-8ddccd051328",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "unknown",
+        "analysis_date": "2025-09-09T08:28:07.321Z"
+    },
+    {
+        "id": "1bdcaa38-8a7b-4a7d-8fb9-95899aa7a94a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "9af9bb31a15273363dd2be5aa1b19a55a825371738c6ecb6d392cea142c401ac",
+        "external_id": "f0a56403-3b84-45ac-bff3-238c42953107",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:51:05.925Z"
+    },
+    {
+        "id": "b90b4e97-f26e-470b-857f-bf46f528de4b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "b31098474c986787799eef226608d1b3292fd5241329c22ea367721e61caff6e",
+        "external_id": "85faa340-5279-4e6e-8aba-015417aed30d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "benign",
+        "analysis_date": "2025-06-30T21:51:49.514Z"
+    },
+    {
+        "id": "38ae649b-e463-4c41-97d0-cdc481c4c519",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "1f2a0f94ff894f95b9b1dec15a12d8a01d706419952a59caef5f8f4e12f0b28b",
+        "external_id": "3fe93f60-e898-4ae8-a0cb-1797d3233dfe",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "benign",
+        "analysis_date": "2025-09-09T08:26:58.522Z"
+    },
+    {
+        "id": "bc6e9a0d-2620-4894-81fe-54aaef4bd7e8",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "1d7b8c4358baa297a37f8e6e27896bf6b2b15c8e85909572fea8e38e95cca46c",
+        "external_id": "3ccf3069-67a4-4eba-b58e-0ae751ef2f08",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:46:39.156Z"
+    },
+    {
+        "id": "19dc3d13-979f-43ba-abf3-cce7d2d3935a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "ad5a83967c77507d7e5ca06a6b734f244bc362ed0839a613e07857c462723cf5",
+        "external_id": "fa0a7e8c-d851-4f4d-a92f-6754987ff56d",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "websocket"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:25:45.806Z"
+    },
+    {
+        "id": "ace0c504-d0e7-4ecb-901b-5c241b5461ee",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "c48a7a1e8c0ac3f3c2ebdfe93485aa1021ed4d9e6512cd82b614263e37bec44b",
+        "external_id": "c0fcefcf-6559-4475-b74e-11d26c7a9bff",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:32:37.411Z"
+    },
+    {
+        "id": "8b2ab6ef-2f64-4a02-a094-19ee1dd3ec0b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "2b18c16f3f489b31bc06d8b168b2f7460b0923c4b5569ee57ddab47c6cefe738",
+        "external_id": "f7ccc3a2-01c8-472b-85f9-8bd2d5876239",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-16T21:59:40.338Z"
+    },
+    {
+        "id": "f64828e5-41eb-4af7-a997-e49bbe6f0f5a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "a8522a1a0a0ccfc2750b413f38e8352a9951f5b233888b45cd4c4a6ecc89710d",
+        "external_id": "6ae423a1-6e74-4fcd-be4f-056c05afeb94",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "unknown",
+        "analysis_date": "2025-07-16T21:59:26.287Z"
+    },
+    {
+        "id": "58f46914-29bb-40bb-83b9-919fa54a32b4",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "78f1c6f79eab4f2d3b80231c6fd701d473e98951687ce24e3431fb38e9edc279",
+        "external_id": "7d758aa0-e868-4d20-a60c-7fb850b454a9",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "benign",
+        "analysis_date": "2025-09-09T08:33:10.895Z"
+    },
+    {
+        "id": "ffe6eb97-1c88-481a-b5d7-4d46079916a7",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "db8e5534d20b7f0dbdd5e46f44a31aef1ad1ad842a3fbdd1347e651324a63cc0",
+        "external_id": "d028bca8-bc5e-472f-adfe-ea7949765f20",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:56:33.011Z"
+    },
+    {
+        "id": "94a73305-c2fd-420c-b1c3-5a8a4a0e4686",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "78b44b6444f30d35ce8a83e6bc550a2a4d01e4867365312fce90cece0980185a",
+        "external_id": "4e28f224-fe81-44a7-a3e2-6b1edc6be3fc",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:23:44.495Z"
+    },
+    {
+        "id": "af5b679b-c149-4e25-be98-8e85d72d2a75",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "9e6e6ab5dcb26403e246ad6f8022ed7ec87466bcd176e4ed4381b7aac86198c9",
+        "external_id": "cedb4952-8626-43e1-bce8-fc14c51bb3a2",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "qrcode"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:28:34.957Z"
+    },
+    {
+        "id": "1cd44ec9-4f54-4f89-8b84-d0672566fb4a",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "f885bc1d64d786d3893c8de2ca94f37c20f9024fdf9624e0bd23971c302ebb6d",
+        "external_id": "15d14f9a-11bc-48c1-a601-f7f3d279d3b2",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:59:53.586Z"
+    },
+    {
+        "id": "3148d5a9-c8a7-40d2-9f70-87dd3c657744",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "b99aeb4f78214cad25672b8cba4084327127673dc5f8f140f3bf73d95c660eec",
+        "external_id": "9789930a-dee1-4373-93f1-5d4eaa933ea1",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "unknown",
+        "analysis_date": "2025-07-16T21:52:07.323Z"
+    },
+    {
+        "id": "014372c7-a02d-42c4-85aa-1b091a772d92",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "5f62fe122f81eb308a72c53af14f66324dd7a57def081cfb628a35ade91158e0",
+        "external_id": "aa56c715-ee41-46b0-9cff-e53ec2baac17",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:43:40.429Z"
+    },
+    {
+        "id": "a3be4cbf-20bf-4fd2-b621-8a19a3288fd4",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "ffb0213caaad0789a6fc445433bee516c3dc08b66f0af91bc7a105221f2fbc4f",
+        "external_id": "929db502-6689-4e27-a398-92a418cbe553",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:37:31.863Z"
+    },
+    {
+        "id": "da5403a6-9d19-4003-ade0-9c9e1c4eb357",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "706a60be6eecad1ab4a47f629f9450a0d581aedfd70bf588d1fe9bfb57111e35",
+        "external_id": "125a7787-1d79-4020-a017-ce2fa1d29c4c",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:28:36.231Z"
+    },
+    {
+        "id": "c168c756-eb24-4abd-8eba-753c4b6f47a1",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "9351251bae69a3a16e949f6018b07429276464949c6a1e2339269a8409a395b6",
+        "external_id": "e13f7659-4050-4de8-be32-d284dc8acf20",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:38:14.444Z"
+    },
+    {
+        "id": "4ce62843-c110-4063-b4a4-9a4bc7cb180c",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "e31fbf87d9a7b23ff1e39678fa04a9b227b55e32197cdb02346c325c9aabe705",
+        "external_id": "4fd16a35-487e-452b-97c3-a644ac43cbef",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T21:59:53.316Z"
+    },
+    {
+        "id": "6b2feeeb-2328-4820-8ef4-7da6515253ff",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "481764b7dc278c159ae38bc13cd9459d1dce7f06819dd032f1c64910eb3d2101",
+        "external_id": "feb5a96d-e148-496e-b43d-a6d44b41615f",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T08:40:06.067Z"
+    },
+    {
+        "id": "8e782c47-eab6-4b63-bc33-2732a8dc3e9d",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "06bdb78dba6bc73f11bb2baa282808b55c37b8a47fc551b6ccfad2b74e660085",
+        "external_id": "d6dc9a2c-5cf0-4e47-afb0-a752c78d7b56",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-16T21:54:16.477Z"
+    },
+    {
+        "id": "bde4cc4a-f781-4a59-b0aa-9304c641a774",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "f7752044da208f38bde5a168ad4901e5fc2cced86429b237690bf1128e7e603c",
+        "external_id": "db6a2522-aa44-4d82-87b5-164cca57b1aa",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "benign",
+        "analysis_date": "2025-06-30T21:58:52.812Z"
+    },
+    {
+        "id": "8c46a0d9-b9e4-4eb2-b5d2-4419e91482a3",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "2ec2e38911afe8d366f98891172a19a9dd5dc5257a7834cacaf51699a5129cf5",
+        "external_id": "5c4b1cd6-fad2-4d6f-a235-c339ba410562",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T20:59:16.050Z"
+    },
+    {
+        "id": "2d8fb42d-b2b2-40ed-9e0d-8ae6d4010726",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "4cae0c57f3820cf5ab95c0a52282f1f1d850e473d9a98a031633767dd237cc70",
+        "external_id": "7c08c79e-96ba-421d-8e8f-fa5706d568ad",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T00:30:43.742Z"
+    },
+    {
+        "id": "f5224494-4e4e-4b97-9428-5fdb93ba5586",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "675f8b6caca93bf57c262dcab11c9f9e723b7233c4740d70a7b0222baf987cc8",
+        "external_id": "0169b631-feff-46c5-9ca0-5b7aebda76b9",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "ip-check",
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T19:30:51.616Z"
+    },
+    {
+        "id": "463f68f3-3ee6-4383-aa52-ffcb0bbe7be8",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "ee954dfb733194bc34b1cb8d14b219d0ccaafc510b193f5187ce7f1971cbe5d2",
+        "external_id": "716c067c-2b40-4e80-a8b1-053e2f3258a8",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T12:24:12.137Z"
+    },
+    {
+        "id": "80ecf21e-e0d1-4316-a509-bd65275d91ad",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "4224a8181f3ca2d2d08c309e97aac4a1de7f70bdeb2bcf761f81f7cb5b788963",
+        "external_id": "29aa2cac-5cc8-4971-855e-0c4f658958ff",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "websocket"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T22:19:41.388Z"
+    },
+    {
+        "id": "6e8badd5-2d74-42f3-9086-053d14d9486b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "f014199577814487980007ef8f329e4ccbbc798d11585a754aff56c49419a8d4",
+        "external_id": "4e963fb4-bfc5-480c-9690-d2a57d3c7a46",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "benign",
+        "analysis_date": "2025-06-30T21:58:35.574Z"
+    },
+    {
+        "id": "23b39ca4-a6f5-44cd-bb45-ffa1b9e0ca5f",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "58c68a08e2979e30a174d26c171f90c1dd8019cb2011ff5a07fa9fecf3586e55",
+        "external_id": "1df3cc5e-a283-4eb0-a8f9-72368232787c",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "arch-doc"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-08T21:07:15.705Z"
+    },
+    {
+        "id": "f3263dd0-efdd-47a2-884a-1692b195d0cb",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "f24c35dbe5385047009f7d3cf970f2fadc56083fcef85519998e218d0bbc49b8",
+        "external_id": "9df1f721-718a-4972-869e-bea148acb11d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T00:49:45.812Z"
+    },
+    {
+        "id": "a29bf77a-d468-4c81-b21d-7dacab69912b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "99249f8a6e06b8a49fcd819a36329cc215c10e4dbc7421e1b5689ee63ba4f620",
+        "external_id": "a359201c-c2d5-46fe-8913-ea3d5f4d9559",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "fingerprinting"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T01:03:09.490Z"
+    },
+    {
+        "id": "864820a7-6704-411c-b2d5-e0a739432819",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "d67e35c638d6151ce8539a4e5bef893430e3067ee1fdf07c234740d405829c93",
+        "external_id": "7b68f6f5-be8e-4b0c-9ec9-bc1716c5a8f7",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "discord",
+            "fingerprinting",
+            "fileshare"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T22:59:09.491Z"
+    },
+    {
+        "id": "5ab3b470-f1cc-45f5-9e8f-1b51eb1c9bc9",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "02090aea4f148fbaf82bf7ea645d2821e414c11b9c528884af52881c90568f0e",
+        "external_id": "2149c12c-8381-441e-a6f2-a8b8872da41d",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "dkim-fail"
+        ],
+        "verdict": "benign",
+        "analysis_date": "2025-06-30T21:46:53.648Z"
+    },
+    {
+        "id": "04815b68-27e2-479f-ae97-26271603b6b6",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7b0c3bf91e757e69da3f6b1effd715ff82cafa094520a338006b70d9b8b03ce6",
+        "external_id": "c1826c77-8550-486b-9bab-1f42faa1730f",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "qrcode"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T12:31:54.283Z"
+    },
+    {
+        "id": "936e8673-9b3a-4975-aad0-e48e7f7bd7da",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "847aacf6161b6a383e80c1cda14412d808c7adccdb5b111546f81aebdbe8b891",
+        "external_id": "da3408cb-f02f-404c-b789-69b5770cfd68",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:48:53.362Z"
+    },
+    {
+        "id": "5d44efc9-7dc6-46b6-84d3-4aa579f7cd34",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "d865ccdc04800b4d13960ea2d159642a3f87f089ae1bac38250e1a372de47426",
+        "external_id": "6f0dde7d-ec0f-443e-a0aa-8c1fa2855d89",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "payload",
+            "discord"
+        ],
+        "verdict": "benign",
+        "analysis_date": "2025-07-23T20:59:00.582Z"
+    },
+    {
+        "id": "c92d72e9-6d8c-4b1a-96b8-4be3076567d5",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "c4b4b75df75e52a96b7c81737c10bba79b1314b2df51777fe8b793c715e948cf",
+        "external_id": "52b285ae-eaaf-4abf-8599-98e8f6f76bae",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "sharepoint",
+            "possible-phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T12:35:33.267Z"
+    },
+    {
+        "id": "ed343d76-5179-4a4c-a948-92e7aecb36f5",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "1e754f4d2d6f906190cd23088e7a30368bc5a76f1e607387e9782edaeb39c3c4",
+        "external_id": "0447e2a9-02f5-4ce1-bde3-5ee0f8e8b4d0",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T01:24:48.866Z"
+    },
+    {
+        "id": "0a35c61c-fb7e-4bb6-84ef-e23feec1ccb9",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "1f735da354dfb5364ea88eb39c1d3a70f6288f74b7c0c218b2b4fff849ba23e2",
+        "external_id": "b00cba4f-b963-4df8-a280-31579f104005",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T21:15:17.418Z"
+    },
+    {
+        "id": "b98183a7-a2a0-4b4a-9786-febfc00f245d",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7ddff8c52db76e7cf5f533fb4c6cabdf5a74dc99fb82f2a8226c9e635eb99f69",
+        "external_id": "c14da0b2-d50e-48d9-87e2-b605d4543891",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T23:38:07.949Z"
+    },
+    {
+        "id": "94e43848-2402-403b-8fbc-27a915b12a56",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "ca4afbfcf78f7f0220cfa16bf930b2af385e2c1bfe427583a22059816f8b3533",
+        "external_id": "45c2c7e9-dd99-469a-b1ca-d43d45503ba7",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T23:36:09.102Z"
+    },
+    {
+        "id": "f171e90b-626c-4e9d-8e89-4834dcc1c232",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "87a53ecd15c44bd04a85137348807f1821ebda48bfc97fb05daa1059fdf9e269",
+        "external_id": "235081f5-3a23-4f5c-8602-bdc31dbf370d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T00:13:16.752Z"
+    },
+    {
+        "id": "6797c1a8-7901-41c5-bb32-d176b8514db5",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "94e7ca119d196cc2977c5c90e284117753e6b452b7e769a4fac23af619fdb7de",
+        "external_id": "a45f2d46-c603-45c3-8bc9-4ca14af0f6d5",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T20:08:49.137Z"
+    },
+    {
+        "id": "0c7b18ad-1827-4bc2-99b7-d5f3e4122535",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "6d509350c2c6d62d0b159547d483d3f54212b957f4baa5d75e7ed4f688f4caf9",
+        "external_id": "d71069a8-d919-4523-9734-deabc98f9833",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:59:22.730Z"
+    },
+    {
+        "id": "8bc59466-70f2-451d-bde6-e7a05454985e",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "99905dcfc5f237cd4f1f04e208c9fe303544d6f9753a70e11bcd6d8a7d4415e8",
+        "external_id": "e5c3fd21-7484-467c-b051-1f623b337fc7",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T12:36:26.625Z"
+    },
+    {
+        "id": "7a67fa20-3151-4cde-b00e-025c53a8dd10",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "943441564fdff4a58977e405323e1422b4b2ae149c53cf9675ef1d78cb4643cd",
+        "external_id": "189d6528-dda4-4d38-9872-ec0654579da2",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "ip-check",
+            "evasion"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T19:16:41.819Z"
+    },
+    {
+        "id": "7329e68e-78e5-4309-b080-27aeee10d67f",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "eb32b6948479b58ffdd6e7b0f75161497af183691abf4d58485388b7036dd7b2",
+        "external_id": "6bf5419c-b47d-4a7f-8828-043c08ec8c7c",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T21:15:55.681Z"
+    },
+    {
+        "id": "4ff0ae1d-b455-4991-98c3-507102821314",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "12351b0b70eb9c6c8b2c0f63c1e78c6f8a391e30476edc257284c3f4a9c5c3b1",
+        "external_id": "422116e0-67e4-457a-94a3-1fcb7c0fc967",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "arch-exec"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-08T20:51:36.675Z"
+    },
+    {
+        "id": "791f681b-82c6-4a41-8b8b-4b0b7c16f098",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "d90076efed4df25aecfe1a22958aa8ca4da93807a1b173fc84617d906f3b57b5",
+        "external_id": "277f746b-5705-46bd-958a-11b659de2528",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T21:54:55.004Z"
+    },
+    {
+        "id": "9ec216df-46c1-4e79-9740-720c078fa3e4",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "a779eafbb38f03e9f46328c7aa0dd712a6676f42568b0a5cae98346f9b8e0c0b",
+        "external_id": "9e43fa87-92a1-4a57-92b9-0281b9dbe9b3",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T12:33:58.572Z"
+    },
+    {
+        "id": "8be5faea-748f-4b72-9780-8f0d4abcd1ee",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "da3ff5af32755815422b488197911c8a4eddd59bc43400e051ffdee09d23a9cb",
+        "external_id": "c3e596a0-565d-42a7-82ce-95f9027c0972",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T20:54:25.697Z"
+    },
+    {
+        "id": "8f89f2a0-bdb3-47ce-a331-27bc06ec78bd",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "746a260ce4b6d8786737fabc85a751c458f55ea0f6465477cf86f4968e748089",
+        "external_id": "c8450e6c-776a-4a4a-8048-af0cc8263916",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T12:21:40.267Z"
+    },
+    {
+        "id": "6404d872-1660-44b4-be4a-33237fdf588c",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "bea7c5cf7b6a39eb80ff819c459698bfc7d0145a4fdd363b80793dd3ad6df919",
+        "external_id": "5a2e6694-912c-4ab9-a569-d5360ace1285",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T21:22:13.553Z"
+    },
+    {
+        "id": "0816842d-d7fb-42ca-874e-8e676a952e6f",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "a0e627bcbf49dbdd6a8bcefe850cf5f2a9818a97d3a3587942aefe808f4ec71b",
+        "external_id": "27f96183-7755-4b02-b110-a06e74635afc",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "dkim-fail"
+        ],
+        "verdict": "unknown",
+        "analysis_date": "2025-06-30T21:42:45.657Z"
+    },
+    {
+        "id": "1c33c8fd-41e5-4058-b9ef-477f4226cb3b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "fedb6edef2411e9dbd4a99dd7ec76b4f1cbf37923126bf496c4f89e3a78b8a22",
+        "external_id": "da7e1749-f22b-459e-8506-e2c9ace80e18",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T12:38:48.637Z"
+    },
+    {
+        "id": "7df3323e-d7e5-4759-af95-ca8fa07a45af",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "9e4e0436b20699bca39bb6a2f765159c10c65c4e7bc150e5121b562adf0f3f00",
+        "external_id": "c40c7fc0-35ef-4d6a-90ce-19f3898ffa28",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "confuser"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-08-31T20:48:40.385Z"
+    },
+    {
+        "id": "4803b37c-63c3-4734-a3da-01407e34ffe5",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "03c8edd5568e7ba19b6549ad97e2ee7546ea8a4afd383dabf4584bb0b1623c11",
+        "external_id": "65ded95f-fa8e-4a20-abef-6276c24457f8",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "possible-phishing",
+            "sharepoint"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T12:38:10.950Z"
+    },
+    {
+        "id": "ac5d3444-1894-4182-bc89-23241c345e13",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "4a29897dd391053ae9fc4e3010c1e1fe0fd42744e44708720d0ddc31212bca02",
+        "external_id": "7c2876a7-d493-4224-a856-f50e318ca837",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "possible-phishing"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T21:24:46.143Z"
+    },
+    {
+        "id": "b0ae9213-6230-4578-9bc8-51169f0a5f43",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "8c58ce0158cbb8d5c4257e2e9e03f2747da1f3c665a3f53788f8bf647ab10226",
+        "external_id": "e8f98d58-884b-4c73-9c9f-505825ee0213",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "susp-attachments",
+            "attachments",
+            "attc-unc"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-23T21:33:52.075Z"
+    },
+    {
+        "id": "1f76d580-a034-4225-9a42-027822b65126",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "bc4e14a6ea70738baec0ee7aac6f505b209103d6be39729f18b7a64f266522e0",
+        "external_id": "29bcb29b-55e4-4605-9360-334233678656",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "obfuscated-js"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T21:56:56.599Z"
+    },
+    {
+        "id": "0d180c8f-3ecb-4b57-a059-a7eb325a96fe",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "705f9bbb58a4bf699b14bd4d2637261e6da6753ed18ee0a0b52bdbf7dc914325",
+        "external_id": "f3c93257-1aae-4a73-9110-4683e2b3e303",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "websocket"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T20:34:22.982Z"
+    },
+    {
+        "id": "fd16a934-35eb-4231-b8df-8d260e9ab549",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "f2aaaffbc9851520f7e62dd52e45a9b7b5810b5678869aadc7438f4e23466c63",
+        "external_id": "143310a1-beb5-4d31-a7f6-688b21ca168f",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-06-30T21:15:30.381Z"
+    },
+    {
+        "id": "1dc07fae-c8e8-4f40-bc1d-a49ecaefdb4b",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "d0e67720e0869e9bd6406bb67148dabb6213ca45576eabd38c6d1797a495f295",
+        "external_id": "a83f94d5-3949-4951-89d8-5a8a6e0575ad",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T21:11:38.326Z"
+    },
+    {
+        "id": "971cf499-8c73-4bcb-a7e6-232e57bac597",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "199ca4962a48ee4eba28ae451a23110d14a3fcff73dbdf017011ca4ae83fecbb",
+        "external_id": "92437419-c739-4f21-9f0b-9ad7531be0c2",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-07-23T21:58:58.384Z"
+    },
+    {
+        "id": "15d92eb5-db07-4fd3-bf3b-ea125fe32124",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "56e8e2a64f78f4cbe8f6eae055a13479c8eb4708c7211a7d442da804d4b78135",
+        "external_id": "0e2e571d-20d0-4248-8471-d4e1207906c0",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "websocket"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T21:38:49.848Z"
+    },
+    {
+        "id": "4bad64ad-bd05-451b-a1cf-f39e8586c85e",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "37deea36c981561dc461c5285eeb2d1f05d754da9f2e7be072eddbfc5b36eda8",
+        "external_id": "63fe87c4-1f38-44e5-b1e3-3b0a7edc234d",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T20:28:25.520Z"
+    },
+    {
+        "id": "c6e75540-6eba-4e27-88a1-750ea1d9c254",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "018f1f4fbef0d72223f23851806b13529bba0eca9a8588724ab22b8b2a424177",
+        "external_id": "7765c7b1-c536-4ea7-8ae9-f7d25a0349aa",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-09T12:10:56.137Z"
+    },
+    {
+        "id": "d0150ffc-371c-4808-a048-1b30ca17ab09",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "c28b4bd277da8c973a15a1bf4b7a613163168d9cb225aa632a95e0d91e9fd53b",
+        "external_id": "a75bae92-c99b-49be-94ae-7a5af442a9f5",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "golang",
+            "loader"
+        ],
+        "verdict": "malicious",
+        "analysis_date": "2025-08-31T19:01:13.574Z"
+    },
+    {
+        "id": "60fb1c15-6e88-474e-af6e-9d7737b0ccae",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "b8b99d74a06e2756a9a551747e83cbf0510e1fd73c642376c7d35c44a0670123",
+        "external_id": "d8d536d5-8860-4b44-91a5-6e66ce92c1ea",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "attachments",
+            "attc-arch",
+            "arch-doc"
+        ],
+        "verdict": "unknown",
+        "analysis_date": "2025-07-23T21:47:10.312Z"
+    },
+    {
+        "id": "371b6e69-f362-47a0-87ba-4608d34770b1",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "25801d159cbce244eda2056a118ae04691a8e372b3f092c8c38c01f5d00fd73f",
+        "external_id": "8ec53b93-1d3f-42c5-97af-ad472f956acb",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T22:02:29.624Z"
+    },
+    {
+        "id": "3bbe2683-3673-4701-99b8-b64a43514a6e",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "435ccfa628a2c3c330d7f9b62e6f47c651e1b720041cad9076645c92be8d8278",
+        "external_id": "194161b6-41fe-419d-bf7a-848043e780a7",
+        "external_src": "ANY.RUN",
+        "labels": [],
+        "verdict": "malicious",
+        "analysis_date": "2025-09-08T20:39:06.468Z"
+    },
+    {
+        "id": "1eea5386-d637-4157-9dee-cc449c6f6267",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "7d5e80e92ae7181f16d1a0b5713962df1552cc57e4266e0bc9c433d429ef3b50",
+        "external_id": "9a94540b-5062-42da-8742-ba3a153b4c54",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "attachments",
+            "attc-unc",
+            "susp-attachments"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-07-23T20:51:00.712Z"
+    },
+    {
+        "id": "55ccefbc-9fed-4002-9060-68a01495a5b0",
+        "os": "windows 10 professional (build: 19044, 64 bit)",
+        "sha256": "967b5f075b2e11f3a38c7558b185fc67d89f44a480ee5ef5a6c3fa0fd403335d",
+        "external_id": "5affc9f4-eff0-48d2-93f5-9cd5b0ba4894",
+        "external_src": "ANY.RUN",
+        "labels": [
+            "possible-phishing",
+            "phish-url"
+        ],
+        "verdict": "suspicious",
+        "analysis_date": "2025-09-09T13:39:29.610Z"
+    }
+]

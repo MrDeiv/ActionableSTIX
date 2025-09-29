@@ -1,0 +1,32 @@
+[
+    {
+        "model": "qwen3:8b",
+        "total": 9196,
+        "average_match_time": 4.414031956391835,
+        "average_distance": 0,
+        "correct": 7209,
+        "human_in_the_loop_calls": 1987,
+        "accuracy": 0.783927794693345,
+        "human_in_the_loop_ratio": 0.21607220530665508
+    },
+    {
+        "model": "qwen3:14b",
+        "total": 9196,
+        "average_match_time": 23.461108993970605,
+        "average_distance": 0,
+        "correct": 7209,
+        "human_in_the_loop_calls": 1987,
+        "accuracy": 0.783927794693345,
+        "human_in_the_loop_ratio": 0.21607220530665508
+    },
+    {
+        "model": "llama3.1:8b",
+        "total": 9196,
+        "average_match_time": 0.5682462961739071,
+        "average_distance": 1.1109785202863962,
+        "correct": 6371,
+        "human_in_the_loop_calls": 1987,
+        "accuracy": 0.6928012179208352,
+        "human_in_the_loop_ratio": 0.21607220530665508
+    }
+]

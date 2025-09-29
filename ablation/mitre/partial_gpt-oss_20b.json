@@ -1,0 +1,10 @@
+{
+    "model": "gpt-oss:20b",
+    "total": 9196,
+    "average_match_time": 3.182072099912369,
+    "average_distance": 1.0,
+    "correct": 7187,
+    "human_in_the_loop_calls": 1987,
+    "accuracy": 0.7815354501957372,
+    "human_in_the_loop_ratio": 0.21607220530665508
+}

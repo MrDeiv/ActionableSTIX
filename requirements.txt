@@ -27,3 +27,5 @@ json-repair
 reportlab
 rich
 pyvis
+networkx
+sentence_transformers

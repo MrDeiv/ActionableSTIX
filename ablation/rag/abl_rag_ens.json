@@ -1,0 +1,42 @@
+[
+    {
+        "weights": [
+            0.2,
+            0.8
+        ],
+        "non_llm_context_precision_with_reference": 0.4304192834158774,
+        "non_llm_context_recall": 0.7721073044602457
+    },
+    {
+        "weights": [
+            0.4,
+            0.6
+        ],
+        "non_llm_context_precision_with_reference": 0.4125697990236286,
+        "non_llm_context_recall": 0.7721073044602457
+    },
+    {
+        "weights": [
+            0.5,
+            0.5
+        ],
+        "non_llm_context_precision_with_reference": 0.5049417798024206,
+        "non_llm_context_recall": 0.7721073044602457
+    },
+    {
+        "weights": [
+            0.6,
+            0.4
+        ],
+        "non_llm_context_precision_with_reference": 0.455282666440729,
+        "non_llm_context_recall": 0.7721073044602457
+    },
+    {
+        "weights": [
+            0.8,
+            0.2
+        ],
+        "non_llm_context_precision_with_reference": 0.5028145312797752,
+        "non_llm_context_recall": 0.7721073044602457
+    }
+]

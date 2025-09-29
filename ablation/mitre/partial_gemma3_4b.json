@@ -1,0 +1,10 @@
+{
+    "model": "gemma3:4b",
+    "total": 9196,
+    "average_match_time": 1.8585963171946065,
+    "average_distance": 1.0073637702503682,
+    "correct": 6530,
+    "human_in_the_loop_calls": 1987,
+    "accuracy": 0.710091344062636,
+    "human_in_the_loop_ratio": 0.21607220530665508
+}

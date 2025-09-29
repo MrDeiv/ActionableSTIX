@@ -6,7 +6,7 @@ class STIXParser:
         self.objects = None
     
     def parse(self, filename: str):
-        content = open(filename).read()
+        content = open(filename, encoding='utf-8').read()
         data = parse(content, allow_custom=True)
         self.objects = data['objects']
 
