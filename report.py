@@ -125,7 +125,7 @@ def create_pdf_from_json(malware, out, output_pdf, image_path):
             elements.append(Paragraph(f"<b>More info:</b> {url}", styles["Normal"]))
 
             # Indicators
-            indicators = attack_step["indicators"]
+            """ indicators = attack_step["indicators"]
             elements.append(Paragraph("<b>Indicators</b>", styles["Heading3"]))
             if len(indicators) == 0:
                 elements.append(Paragraph("No indicators found.", styles["Normal"]))
@@ -134,7 +134,7 @@ def create_pdf_from_json(malware, out, output_pdf, image_path):
                     [ListItem(Paragraph(indicator, styles["Normal"])) for indicator in indicators],
                     bulletType="bullet"  # Bullet List
                 )
-                elements.append(indicators_list)
+                elements.append(indicators_list) """
             elements.append(Spacer(1, 10))
 
             k += 1
@@ -151,9 +151,9 @@ if __name__ == "__main__":
 
     # Load JSON data
     config = json.load(open(config_file))
-    RESULT_PATH = 'results/case2'
+    RESULT_PATH = 'results/case8'
     out = json.load(open(f"{RESULT_PATH}/LOW_output.json"))
-    image_path = f"{RESULT_PATH}/smooth_graph_plot.png"
+    image_path = f"{RESULT_PATH}/authentic_graph_plot.png"
 
     stix_parser = STIXParser()
     stix_parser.parse(config['STIX_FILE'])

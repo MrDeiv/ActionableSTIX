@@ -5,10 +5,10 @@ from evaluate import load
 
 SCRIPT_TO_RUN = "app.py"
 NUM_RUNS = 10
-GROUND_TRUTH = "ground_truths/jaguar.json"
-GENERATED_OUTPUT = "out/LOW_output.json"
-MEASURES_TIME = "out/execution_times_jaguar.json"
-MEASURES_SCORE = "out/execution_scores_jaguar.json"
+GROUND_TRUTH = "ground_truths/authentic.json"
+GENERATED_OUTPUT = "results/case8/LOW_output.json"
+MEASURES_TIME = "results/case8/execution_times_authentic.json"
+MEASURES_SCORE = "results/case8/execution_scores_authentic.json"
 
 execution_times = []
 execution_scores = []

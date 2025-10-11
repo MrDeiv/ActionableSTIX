@@ -25,6 +25,7 @@ from langchain_ollama import ChatOllama
 from langchain_core.output_parsers import StrOutputParser
 
 from src.stores.DocumentStore import DocumentStore
+from langchain_core.documents import Document
 import logging.config
 
 def remove_markdown(text: str) -> str:
@@ -69,7 +70,7 @@ async def main():
     console.print(f"Starting time: {time.strftime('%Y-%m-%d %H:%M:%S')}", style="bold green")
 
     # load files into documents
-    directory = config["DOCUMENTS_DIR"]
+    directory = config["DOCUMENTS_DIR"]+"/other"
     documents = []
     n_files = len(os.listdir(directory))
 
@@ -97,7 +98,7 @@ async def main():
     # Ensemble retriever
     ensemble_retriever = EnsembleRetriever(
         retrievers=[bm25_retriever, docstore.retriever],
-        weights=[0.4, 0.6]
+        weights=[0.5, 0.5]
     )
 
     """
@@ -152,7 +153,7 @@ async def main():
     You must state how the action is performed. The action is: 
     {action} 
     """
-    refinement_llm = ChatOllama(model="gemma2:9b")
+    refinement_llm = ChatOllama(model=config['MODELS']['TEXT_GENERATION'], temperature=0)
     chain_refinement = RunnableSequence(
         first=ChatPromptTemplate.from_template(query_refinement_template),
         middle=[refinement_llm],
@@ -171,7 +172,7 @@ async def main():
     The requirements must include the environment, tools, connectivity and resources needed.
     If the requirements are not directly stated, you MUST infer the answer. If no requirements are needed, you MUST state that.
     """
-    summary_llm = ChatOllama(model="gemma2:9b", temperature=0)
+    summary_llm = ChatOllama(model=config['MODELS']['TEXT_GENERATION'], temperature=0)
     chain_precond = RunnableSequence(
         first=ChatPromptTemplate.from_template(query_summary),
         middle=[summary_llm],
@@ -206,12 +207,12 @@ async def main():
     If there are no indicators related to the action, you MUST return an empty list.
     You MUST formulate the indicators in a passive sentence.
     """
-    indicators_llm = ChatOllama(model="gemma2:9b", temperature=0)
+    """ indicators_llm = ChatOllama(model=config['MODELS']['TEXT_GENERATION'], temperature=0)
     chain_indicators = RunnableSequence(
         first=ChatPromptTemplate.from_template(query),
         middle=[indicators_llm],
         last=ListParser()
-    )
+    ) """
 
     # rephrase pipeline
     rephrase_template = """
@@ -221,7 +222,7 @@ async def main():
     You MUST rephrase it in a passive, formal, and technical way.
     You MUST provide only the rephrased text, DO NOT provide any additional information.
     """
-    rephrase_template_llm = ChatOllama(model="gemma2:9b", temperature=0)
+    rephrase_template_llm = ChatOllama(model=config['MODELS']['TEXT_GENERATION'], temperature=0)
     chain_rephrase = RunnableSequence(
         first=ChatPromptTemplate.from_template(rephrase_template),
         middle=[rephrase_template_llm],
@@ -241,7 +242,7 @@ async def main():
     Each choice is separated by a new line, DO NOT truncate the choices.
     You MUST select one choice, DO NOT infer the answer.
     """
-    qa_llm = ChatOllama(model="gemma2:9b", temperature=0)
+    qa_llm = ChatOllama(model=config['MODELS']['MITRE_MATCH'], temperature=0)
     chain_qa = RunnableSequence(
         first=ChatPromptTemplate.from_template(qa_template),
         middle=[qa_llm],
@@ -303,13 +304,6 @@ async def main():
 
             # given the set of most similar techniques, select the most appropriate one using the QA model
             context = "\n".join(action_mitre_technique_candidated) if action_mitre_technique_candidated else "Not provided"
-            query = """
-            You MUST select the most appropriate MITRE Technique for the action called: \n"""+action_name+"""\n
-            and description: \n"""+action_description+"""\n
-            You MUST fit the action with the most appropriate MITRE Technique, DO NOT add any additional information.
-            You MUST select one choice, DO NOT infer the answer.
-            Each choice is separated by a new line, DO NOT truncate the choices.
-            """.format(context=context)
                 
             logging.info(f"++ Querying the QA model for action {action_name} with the following context:\n{context}")
 
@@ -437,8 +431,8 @@ async def main():
             logging.info(f"++ Post-conditions computed for action: {action_name} using {len(docs)} documents:\n{docs}")
 
             # indicators
-            indicators = chain_indicators.invoke({"context": "\n".join(iocs), "action": action_name})
-            logging.info(f"++ Indicators computed for action: {action_name}. The indicators are:\n{indicators}")
+            #indicators = chain_indicators.invoke({"context": "\n".join(iocs), "action": action_name})
+            #logging.info(f"++ Indicators computed for action: {action_name}. The indicators are:\n{indicators}")
 
             # refine pre-conditions
             pre_conditions = [remove_markdown(pre) for pre in pre_conditions]
@@ -487,7 +481,7 @@ async def main():
                 "mitre_technique": technique,
                 "pre-conditions": pre_conditions,
                 "post-conditions": post_conditions,
-                "indicators": indicators
+                #"indicators": indicators
             }
 
             # add actions to the attack step
@@ -516,5 +510,6 @@ async def main():
     elapsed_minutes = (end - start) / 60
     logging.info("Elapsed time: %.2f minutes", elapsed_minutes)
     console.print(f"Elapsed time: {elapsed_minutes:.2f} minutes", style="bold green")
+
 if __name__ == "__main__":
     asyncio.run(main())

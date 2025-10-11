@@ -1,0 +1,74 @@
+[
+    {
+        "attack_steps": [
+            {
+                "name": "Command and Scripting Interpreter: Unix Shell as used by the malware",
+                "truth": "Pygmy Goat forks a new /bin/sh process using code copied from The Linux Programming Interface2 , passing data to/from the socket to/from the shell child process. Pygmy Goat forks a new /bin/csh process, and otherwise operates in the same manner as the System Shell command including the command packets and control flow, with the sole exception of the Command byte being 0x04 instead of 0x03; as such, example packets have not been included."
+            },
+            {
+                "name": "Scheduled Task/Job: Cron as used by the malware",
+                "truth": "Pygmy Goat can create arbitrary cron tasks using crontab. Pygmy Goat forks a new execution of crontab using the statically compiled embedded BusyBox instance, otherwise operating similarly to the previous two commands. This provides the actor with an interactive instance of crontab, enabling them to create scheduled tasks on the victim device to execute when the actor isn’t actively interacting with the system."
+            },
+            {
+                "name": "Inter-Process Communication as used by the malware",
+                "truth": "Pygmy Goat uses Unix sockets for interprocess communication between parent and forked child processes"
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Hijack Execution Flow: Dynamic Linker Hijacking as used by the malware",
+                "truth": "Pygmy Goat uses the LD_PRELOAD environment variable to inject into sshd"
+            },
+            {
+                "name": "Boot or Logon Initialization Scripts as used by the malware",
+                "truth": "Pygmy Goat expects to have been loaded into the /bin/sshd process using the LD_PRELOAD environment variable, as evident by a hooked accept function, and immediate unset of the LD_PRELOAD environment variable when the binary is loaded. This suggests that the actor achieves persistence on the victim device through setting the LD_PRELOAD environment on boot"
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Network Sniffing as used by the malware",
+                "truth": "Pygmy Goat can use libpcap to sniff network traffic according to a BPF filter and exfiltrate it to the C2. Pygmy Goat uses the libpcap library to start capturing traffic on the specified interface according to the specified filter string until a subsequent command is sent to tell it to stop."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Archive Collected Data: Archive via Library as used by the malware",
+                "truth": "Pygmy Goat compresses its C2 communications with . Data sent over the C2 TLS channel in either direction consists of a command byte, an identifier byte, a subcommand byte, and a two-byte big-endian length, followed by an optional LZO1X compressed data section"
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Traffic Signaling: Port Knocking as used by the malware",
+                "truth": "Pygmy Goat listens on an ICMP raw socket for encrypted packets containing magic bytes and the C2 address to connect back to. On receiving an ICMP packet of any type, Pygmy Goat will attempt to decrypt the first 0x10 bytes in the ICMP Data section with a hardcoded IV and key. Once decrypted, the first four bytes are compared to a magic byte sequence to ensure the data is in fact a C2 control packet and not a legitimate ICMP packet. The next four bytes are treated as a big-endian IPv4 address, followed by two bytes of a big-endian TCP port number, with the remainder of the data being ignored."
+            },
+            {
+                "name": "Data Obfuscation: Protocol Impersonation as used by the malware",
+                "truth": "Pygmy Goat responds to an SSH connection that sends magic bytes with a fake SSH handshake. Pygmy Goat continues to perform a fake SSH handshake with hardcoded data. After the fake SSH handshake is complete, Pygmy Goat continues to establish a legitimate TLS handshake over the fake SSH TCP connection, following the same path as with the ICMP connect-back."
+            },
+            {
+                "name": "Encrypted Channel: Asymmetric Cryptography as used by the malware",
+                "truth": "Pygmy Goat encrypts C2 communications with TLS. On receiving an ICMP packet of any type, Pygmy Goat will attempt to decrypt the first 0x10 bytes in the ICMP Data section with a hardcoded IV and key, using AES-256-CBC with null padding"
+            },
+            {
+                "name": "Protocol Tunneling as used by the malware",
+                "truth": "Pygmy Goat can create a reverse SOCKS5 proxy server to tunnel traffic through it. All raw data sent through the locally listening port is tunnelled directly through to Pygmy Goat, which behaves as a SOCKS5 server, enabling the actor to send SOCKS traffic from their local end, through the firewall device and beyond. The C2 server performs the Pygmy Goat handshake, followed by a task: to establish a reverse SOCKS5 EarthWorm connection with the IP and port inside the task data. After establishing the reverse tunnel, a SOCKS5 client can connect into the EarthWorm server on a newly opened port to send tunnelled data which will ultimately come out of the victim’s network interface. "
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Exfiltration Over C2 Channel as used by the malware",
+                "truth": "Pygmy Goat exfiltrates its result data over its C2 channel"
+            }
+        ]
+    }
+]

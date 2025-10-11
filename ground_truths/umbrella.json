@@ -1,0 +1,70 @@
+[
+    {
+        "attack_steps": [
+            {
+                "name": "Command and Scripting Interpreter: Unix Shell as used by the malware",
+                "truth": "UMBRELLA STAND contains functionality to receive and run Shell commands. This command would likely be called multiple times per execution to ensure all output data is collected and cleared."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Boot or Logon Autostart Execution: Kernel Modules and Extensions as used by the malware",
+                "truth": "UMBRELLA STAND has functionality to modify reboot to achieve persistence. UMBRELLA STAND identifies and overwrites the reboot function of the Fortinet operating system. When the hooked function is called, the UMBRELLA STAND loading binary (cizs) is executed. It is possible that this binary is injected into the init process (PID 1) and that process is responsible for rebooting the device, though this has not been confirmed"
+            },
+            {
+                "name": "Hijack Execution Flow: Dynamic Linker Hijacking as used by the malware",
+                "truth": "UMBRELLA STAND has functionality to load via ldpreload. The presence of the string /data2/.ztls/libguic.so in /etc/ld.so.preload suggests that persistence is achieved through using ldpreload to load libguic.so into a new process, this then loads the other components."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Deobfuscate/Decode Files or Information as used by the malware",
+                "truth": "UMBRELLA STAND contains AES-encrypted strings. UMBRELLA STAND makes use of AES encrypted stack strings. This is done by the actor to hinder detection and analysis. The C2 IP is obfuscated in a similar way but the obfuscated string is not stored on the stack. It is possible that this is to allow the IP to be patched in post compilation without having to rebuild the binary"
+            },
+            {
+                "name": "Process Injection as used by the malware",
+                "truth": "UMBRELLA STAND uses tooling to perform process injection. dskz is a tool used to inject shared objects into a specified process. This will inject SYSV664564856 into the process with a process id (pid) of 1. This is the init process. A file with the name SYSV664564856 was not recovered from the device but it is possible that this is the same file referred to as reboot_hooker."
+            },
+            {
+                "name": "Indicator Removal: File Deletion as used by the malware",
+                "truth": "UMBRELLA STAND binaries had been deleted from the device."
+            },
+            {
+                "name": "Hide Artifacts: Process Argument Spoofing as used by the malware",
+                "truth": "UMBRELLA STAND modifies it’s process name. blghtd overwrites the name of the executable present on its command line with a hardcoded actor string /bin/httpsd. This means that in process listings the process name does not matchup with the executable in use. Any difference in length between executable name and the fake string, is filled with null bytes. This is more noticeable if a command line argument is also present, as shown below. "
+            },
+            {
+                "name": "Hide Artifacts: Hidden Files and Directories as used by the malware",
+                "truth": "UMBRELLA STAND and associated tooling use hidden directories. UMBRELLA STAND and associated tooling make use of the hidden folder /data2/.ztls/. This is likely to reduce the chances of being noticed on the device."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Process Discovery as used by the malware",
+                "truth": "UMBRELLA STAND performs process discovery to check that its main process is still executing."
+            },
+            {
+                "name": "Network Service Discovery as used by the malware",
+                "truth": "UMBRELLA STAND was in use with nbtscan which can list NetBIOS computer names."
+            },
+            {
+                "name": "Network Sniffing as used by the malware",
+                "truth": "UMBRELLA STAND was in use with tcpdump which can be, and was, used to perform packet captures"
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Data Obfuscation: Protocol Impersonation as used by the malware",
+                "truth": "UMBRELLA STAND uses fake TLS on port 443 for communications with the C2 server."
+            }
+        ]
+    }
+]

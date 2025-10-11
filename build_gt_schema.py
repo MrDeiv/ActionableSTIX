@@ -2,8 +2,8 @@ import json
 import os
 
 if __name__ == "__main__":
-    ref = "out/LOW_output.json"
-    gt = "ground_truths/coldsteel.json"
+    ref = "results/case8/LOW_output.json"
+    gt = "ground_truths/authentic.json"
 
     if os.path.exists(gt):
         print(f"File {gt} already exists. Skipping.")

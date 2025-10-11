@@ -10,20 +10,21 @@ import os
 import nltk
 from bs4 import BeautifulSoup
 import json
+from chunking_evaluation.chunking import ClusterSemanticChunker
+from chromadb.utils import embedding_functions
 
 nltk.download('stopwords')
 nltk.download('punkt_tab')
 
 config = json.load(open("config/config.json"))
 
+default_ef = embedding_functions.DefaultEmbeddingFunction()
+chunker = ClusterSemanticChunker(default_ef, max_chunk_size=config['CHUNK_SIZE'])
+
 class DocumentFactory:
     @staticmethod
     def from_text(text:str) -> list[Document]:
-        tokenizer = NLTKTextSplitter(
-            chunk_size=config['CHUNK_SIZE'],
-            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
-        )
-        texts = tokenizer.split_text(text)
+        texts = chunker.split_text(text)
         return [Document(page_content=doc, metadata={"source": "text"}) for doc in texts]
     
     @staticmethod
@@ -31,11 +32,7 @@ class DocumentFactory:
         assert os.path.exists(file), f"File {file} not found"
 
         text = open(file, encoding='utf-8').read()
-        tokenizer = NLTKTextSplitter(
-            chunk_size=config['CHUNK_SIZE'],
-            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
-        )
-        texts = tokenizer.split_text(text)
+        texts = chunker.split_text(text)
         return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
     
     @staticmethod
@@ -48,11 +45,7 @@ class DocumentFactory:
         for page in reader.pages:
             text += page.extract_text()
 
-        tokenizer = NLTKTextSplitter(
-            chunk_size=config['CHUNK_SIZE'],
-            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
-        )
-        texts = tokenizer.split_text(text)
+        texts = chunker.split_text(text)
         return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
     
     @staticmethod
@@ -92,11 +85,7 @@ class DocumentFactory:
             script.extract()
         
         text = soup.get_text(strip=True)
-        tokenizer = NLTKTextSplitter(
-            chunk_size=config['CHUNK_SIZE'],
-            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
-        )
-        texts = tokenizer.split_text(text)
+        texts = chunker.split_text(text)
         return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
     
     def from_xml(file:str) -> list[Document]:
@@ -109,11 +98,7 @@ class DocumentFactory:
             script.extract()
         
         text = soup.get_text(strip=True)
-        tokenizer = NLTKTextSplitter(
-            chunk_size=config['CHUNK_SIZE'],
-            chunk_overlap=config['CHUNK_SIZE']*config['CHUNK_OVERLAP'],
-        )
-        texts = tokenizer.split_text(text)
+        texts = chunker.split_text(text)
         return [Document(page_content=doc, metadata={"source": file}) for doc in texts]
     
     @staticmethod
