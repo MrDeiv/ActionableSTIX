@@ -1,7 +1,7 @@
 {
-    "STIX_FILE": "sample_stix/ncsc-mar-damascened-peacock-stix.json",
-    "DOCUMENTS_DIR": "documents/damascened",
-    "OUTPUT_DIR": "results/case9",
+    "STIX_FILE": "sample_stix/NCSC-MAR-Cheeky-Chipmunk-stix.json",
+    "DOCUMENTS_DIR": "documents/chipmunk",
+    "OUTPUT_DIR": "results/case10",
     "OUTPUT_FILE": "output.json",
     "MODELS": {
         "TEXT_GENERATION": "gemma2:9b",

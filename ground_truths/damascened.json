@@ -1,0 +1,58 @@
+[
+    {
+        "attack_steps": [
+            {
+                "name": "Gather Victim Identity Information as used by the malware",
+                "truth": "DAMASCENED PEACOCK checks whether the victim host is 32-bit or 64-bit to determine the appropriate next stage to download. The initial bytes 0xFFFF are hardcoded and the payload requested is either set to get_update_manager64 or get_update_manager32 based on a check the malware does on whether the victim host is a 32-bit or 64-bit installation of Windows."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Phishing: Spearphishing Link as used by the malware",
+                "truth": "DAMASCENED PEACOCK is executed by a first stage that is delivered via a link in an email. The initial campaign consisted of two emails with a journalistic theme attempting to represent a news organisation. The second campaign followed a financial theme, directing targets to a commercial file share. The infection chain used multiple redirects to evade detection in both campaigns. Links were only live for three days, matching the adversary's deadlines in the spear-phishing emails to increase urgency. Targets were sent a link in a spear-phishing email which ultimately redirects to download a signed first stage hosted on temp[.]sh. The malware (Doc_03.10.24.298133.exe) has a filename and icon which indicates it is a PDF."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "User Execution: Malicious File as used by the malware",
+                "truth": "DAMASCENED PEACOCK is executed by a first stage which is reliant upon the user running the file. A signed first stage executable, written in Rust, with a name and icon to indicate it is a PDF file, is downloaded and run by the victim."
+            },
+            {
+                "name": "Inter-Process Communication: Component Object Model as used by the malware",
+                "truth": "DAMASCENED PEACOCK achieves execution for the 3rd stage it downloads by COM Hijacking explorer.exe. DAMASCENED PEACOCK uses a COM Hijack to persist and gain execution for a payload it downloads (the third stage), by replacing the entry in the below registry key which is loaded by explorer.exe. If DAMASCENED PEACOCK cannot open the above registry key, then it will exit and cease further execution. To trigger the COM Hijack, DAMASCENED PEACOCK terminates the explorer.exe process (via a call to TerminateProcess). It does this by iterating processes and looking for the first one which has an executable image name of explorer.exe."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Deobfuscate/Decode Files or Information as used by the malware",
+                "truth": "DAMASCENED PEACOCK XOR encodes configuration strings used throughout. DAMASCENED PEACOCK uses an XOR based inline string obfuscation algorithm, with multiple variations observed throughout the code. Configuration strings used in the malware are obfuscated and loaded onto the stack to be deobfuscated. The obfuscated strings are longer than their deobfuscated form i.e. there are redundant bytes on the end of the obfuscated strings which are never deobfuscated. A length parameter is used to ensure only the correct number of bytes from the start of the string are deobfuscated. For each obfuscated string there are 4 seed values used. Two remain constant, and two are updated throughout the algorithm. The algorithm uses the seed values and arithmetic to generate 2-byte XOR keys which are then applied to the obfuscated string."
+            },
+            {
+                "name": "Obfuscated Files or Information: Dynamic API Resolution as used by the malware",
+                "truth": "DAMASCENED PEACOCK uses an API hashing algorithm combined with Dynamic Resolution of Win32 APIs to obfuscate functionality. DAMASCENED PEACOCK dynamically resolves required Win32 functions using API hashes, meaning the function names aren’t present in the binary. To resolve its required functions, DAMASCENED PEACOCK parses the Thread Environment Block (TEB), then the Process Environment Block (PEB) to retrieve the base address of kernel32.dll in memory. It then locates and iterates its export table to match the required symbols. The API hashing algorithm is long and appears to be unique, implementing multiple rotate right (ror) operations, additions and multiplications as well as using fixed constants"
+            },
+            {
+                "name": "Subvert Trust Controls: Code Signing as used by the malware",
+                "truth": "The first stage of the malware is signed, meaning DAMASCENED PEACOCK executes within a signed, malicious process. DAMASCENED PEACOCK executes within the process space of the first stage downloader, which is code signed. It then executes the next stage within the explorer.exe process via a COM Hijack. Other previously reported variants were also code signed, indicating the actor has ready access to code signing certificates."
+            },
+            {
+                "name": "Masquerading as used by the malware",
+                "truth": "The first stage of DAMASCENED PEACOCK is an executable with an icon and filename indicating it is a PDF."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Application Layer Protocol: Web Protocols as used by the malware",
+                "truth": "DAMASCENED PEACOCK communicates with the command and control server over HTTP. DAMASCENED PEACOCK is proxy aware and uses the WinHTTP APIs to communicate with its C2 server over HTTP, on port 8080. This version is configured to beacon to the domain apimonger[.]com."
+            }
+        ]
+    }
+]

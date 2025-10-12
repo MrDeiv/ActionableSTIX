@@ -1,0 +1,74 @@
+[
+    {
+        "attack_steps": [
+            {
+                "name": "Command and Scripting Interpreter: PowerShell as used by the malware",
+                "truth": "Open-source PowerShell runner code is embedded in the Cheeky Chipmunk RPC server and used to invoke commands stored in the registry. The Cheeky Chipmunk loader consists of a PowerShell script containing a second embedded PowerShell script, which in turn contains the Cheeky Chipmunk RPC server binary. It requires PowerShell to be executed with Administrator privileges to run successfully and uses obfuscated variable names to mask the behaviour of the script. The malware contains an embedded .NET binary, containing PowerShellRunner code, which is open-source and allows PowerShell scripts to be executed without running powershell.exe. When the RPC server starts up, Cheeky Chipmunk checks that the process “explorer.exe” is running. Assuming this is found, COM is used to load the embedded PowerShellRunner binary and run a command which will Base64-decode and execute the values stored in the registry locations"
+            },
+            {
+                "name": "Command and Scripting Interpreter: Windows Command Shell as used by the malware",
+                "truth": "The Cheeky Chipmunk RPC server can be sent Windows shell commands by the RPC client. The RPC server can be tasked to upload files and download files as well as to execute shell commands. The ‘execute’ command sends the specified command line to the RPC server. The RPC server prepends the command line with cmd /c and runs it as a child process. It creates a temporary file in the ‘%temp%’ directory or, if that fails, in the current working directory, with the FILE_FLAG_WRITE_THROUGH flag set. The child process’ stdout and stderr output is written to this file."
+            },
+            {
+                "name": "Inter-Process Communication: Component Object Model as used by the malware",
+                "truth": "The Cheeky Chipmunk RPC server uses COM to call embedded PowerShell runner code. COM is used to load the embedded PowerShellRunner binary and run a command which will Base64-decode and execute the values stored in the registry locations. "
+            },
+            {
+                "name": "Windows Management Instrumentation as used by the malware",
+                "truth": "Cheeky Chipmunk implements an RPC server to receive tasking. The RPC connection is set up using named pipes, for which numerous names have been observed across multiple versions of Cheeky Chipmunk. Cheeky Chipmunk consists of a loader and an RPC server which receives C2 from a separate RPC client. Cheeky Chipmunk gains persistence on the victim machine by adding itself as a Windows service, whereas the RPC client is a standalone executable binary which tasks the RPC server based on command line arguments. Other RPC clients have also been observed. The RPC server can be tasked to upload files and download files as well as to execute shell commands. The RPC server is registered with the RPC_IF_ALLOW_CALLBACKS_WITH_NO_AUTH flag set. Communications occur via Remote Procedure Call (RPC) using a named pipe. Multiple named pipes have been observed in use by different versions of Cheeky Chipmunk"
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Create or Modify System Process: Windows Service as used by the malware",
+                "truth": "Cheeky Chipmunk maintains persistence by adding a new Windows service (pnrssp) for the RPC server component."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Deobfuscate/Decode Files or Information as used by the malware",
+                "truth": "The Cheeky Chipmunk loader uses builtin and open-source PowerShell libraries to Base64-decode, 3DES-decrypt, and GZIP-decompress the RPC server. The encryption key is derived using the built-in PowerShell function Cryptography.PasswordDeriveBytes with a hash name of sha1, using the key SMQ0763eeg and Initialisation Vector (IV) NVAO8351dihi. After Base64-decoding, this key is used with the IV YDJFFTLPESPKMGUS to decrypt the embedded script, which is then GZIP decompressed using the open-source PowerShell function [MemoryZipper]::UnZip. Once decoded, the embedded PowerShell script contains a Base64-encoded Cheeky Chipmunk RPC server x64 binary. This is decoded and written to C:\\Windows\\security\\database\\securlsa.chk. Windows API functions are dynamically resolved by looking up the function name in the relevant module export tables. These function names, and the associated module names, are XOR-encoded with 0x55 to prevent static detection. The loader script contains an embedded Base64-encoded .NET binary for Antimalware Scan Interface (AMSI) detection. If AMSI is detected, then Cheeky Chipmunk uses an avoidance technique, where the .NET binary loads amsi.dll and finds AmsiScanBuffer, then overwrites it with either x86 or x64 shellcode to return 0x01, causing all scripts to pass the AMSI check. This will stop the malware installation being detected and potentially blocked by AMSI."
+            },
+            {
+                "name": "Indicator Removal on Host: File Deletion as used by the malware",
+                "truth": "The Cheeky Chipmunk loader is deleted from disk once the RPC server is running. The loader script forcibly removes itself, so the initial mstcf.ps1 script will no longer be present on disk once it has loaded the RPC server and created the Windows service. "
+            },
+            {
+                "name": "Indicator Removal on Host: File Deletion as used by the malware",
+                "truth": "Cheeky Chipmunk deletes the log file containing details of its RPC server’s execution, following exfiltration."
+            },
+            {
+                "name": "Masquerading: Match Legitimate Name or Location as used by the malware",
+                "truth": "Cheeky Chipmunk masquerades as a legitimate Windows service path (netsvcs) to maintain persistence. "
+            },
+            {
+                "name": "Masquerading: Match Legitimate Name or Location as used by the malware",
+                "truth": "The Cheeky Chipmunk log file (NTuser.log) is named similarly to a legitimate Windows log file (NTuser.dat.log). The service is added to an existing service group, allowing it to blend with normal operating system behaviour. The log and service names are also named similarly to Windows files in an attempt to appear legitimate: NTuser.dat.log is a legitimate file, NTuser.log is a Cheeky Chipmunk file, the Peer Name Resolution Protocol is a legitimate service, the Peer Name Resolution Provider is the Cheeky Chipmunk service"
+            },
+            {
+                "name": "Masquerading: Match Legitimate Name or Location as used by the malware",
+                "truth": "The Cheeky Chipmunk service (Peer Name Resolution Provider) is named similarly to a legitimate Windows service (Peer Name Resolution Protocol)."
+            },
+            {
+                "name": "Obfuscated Files or Information as used by the malware",
+                "truth": "Cheeky Chipmunk’s import names are obfuscated by XORing with 0x55. Windows API functions are dynamically resolved by looking up the function name in the relevant module export tables. Cheeky Chipmunk implements many defence evasion techniques, including single-byte XORencoding of imported function names with 0x55, which has been previously observed in regular use by Turla."
+            },
+            {
+                "name": "Impair Defenses: Disable or Modify Tools as used by the malware",
+                "truth": "Cheeky Chipmunk implements an AMSI bypass technique. The loader script contains an embedded Base64-encoded .NET binary for Antimalware Scan Interface (AMSI) detection. If AMSI is detected, then Cheeky Chipmunk uses an avoidance technique, where the .NET binary loads amsi.dll and finds AmsiScanBuffer, then overwrites it with either x86 or x64 shellcode to return 0x01, causing all scripts to pass the AMSI check. This will stop the malware installation being detected and potentially blocked by AMSI."
+            }
+        ]
+    },
+    {
+        "attack_steps": [
+            {
+                "name": "Data from Local System as used by the malware",
+                "truth": "Cheeky Chipmunk can be tasked to collect files."
+            }
+        ]
+    }
+]

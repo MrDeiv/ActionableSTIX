@@ -5,10 +5,10 @@ from evaluate import load
 
 SCRIPT_TO_RUN = "app.py"
 NUM_RUNS = 10
-GROUND_TRUTH = "ground_truths/authentic.json"
-GENERATED_OUTPUT = "results/case8/LOW_output.json"
-MEASURES_TIME = "results/case8/execution_times_authentic.json"
-MEASURES_SCORE = "results/case8/execution_scores_authentic.json"
+GROUND_TRUTH = "ground_truths/chipmunk.json"
+GENERATED_OUTPUT = "results/case10/LOW_output.json"
+MEASURES_TIME = "results/case10/execution_times_chipmunk.json"
+MEASURES_SCORE = "results/case10/execution_scores_chipmunk.json"
 
 execution_times = []
 execution_scores = []
@@ -27,7 +27,7 @@ for i in range(NUM_RUNS):
     execution_times.append(duration)
 
     ref_data = json.load(open(GENERATED_OUTPUT))
-    gt_data = json.load(open(GROUND_TRUTH))
+    gt_data = json.load(open(GROUND_TRUTH, encoding='utf-8'))
 
     scores = []
     references = []
