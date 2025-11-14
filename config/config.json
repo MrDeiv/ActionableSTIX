@@ -1,7 +1,7 @@
 {
-    "STIX_FILE": "sample_stix/NCSC-MAR-Cheeky-Chipmunk-stix.json",
-    "DOCUMENTS_DIR": "documents/chipmunk",
-    "OUTPUT_DIR": "results/case10",
+    "STIX_FILE": "sample_stix/NCSC-MAR-goofy-guineapig-stix.json",
+    "DOCUMENTS_DIR": "documents/goofy",
+    "OUTPUT_DIR": "out",
     "OUTPUT_FILE": "output.json",
     "MODELS": {
         "TEXT_GENERATION": "gemma2:9b",
@@ -18,6 +18,6 @@
         "MEDIUM": 0.003,
         "HIGH": 0.005
     },
-    "SELECTED_INTERACTION_LEVEL": "LOW",
+    "SELECTED_INTERACTION_LEVEL": "HIGH",
     "DUPLICATE_THRESHOLD": 0.7
 }

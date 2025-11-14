@@ -16,6 +16,11 @@ outs = [
     "results/case3/LOW_output.json",
     "results/case4/LOW_output.json",
     "results/case5/LOW_output.json",
+    "results/case6/LOW_output.json",
+    "results/case7/LOW_output.json",
+    "results/case8/LOW_output.json",
+    "results/case9/LOW_output.json",
+    "results/case10/LOW_output.json",
 ]
 
 times = [
@@ -24,6 +29,11 @@ times = [
     "results/case3/execution_times_sieve.json",
     "results/case4/execution_times_jaguar.json",
     "results/case5/execution_times_coldsteel.json",
+    "results/case6/execution_times_umbrella.json",
+    "results/case7/execution_times_pygmy.json",
+    "results/case8/execution_times_authentic.json",
+    "results/case9/execution_times_damascened.json",
+    "results/case10/execution_times_chipmunk.json",
 ]
 
 # total time per experiment
@@ -75,6 +85,11 @@ scores = [
     "results/case3/execution_scores_sieve.json",
     "results/case4/execution_scores_jaguar.json",
     "results/case5/execution_scores_coldsteel.json",
+    "results/case6/execution_scores_umbrella.json",
+    "results/case7/execution_scores_pygmy.json",
+    "results/case8/execution_scores_authentic.json",
+    "results/case9/execution_scores_damascened.json",
+    "results/case10/execution_scores_chipmunk.json",
 ]
 
 s = []

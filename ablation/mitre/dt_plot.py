@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import json
+import numpy as np
 
 # --- your style settings ---
 mpl.rcParams.update({
@@ -24,25 +25,49 @@ mpl.rcParams.update({
 
 # --- Verdict distribution ---
 
-data = json.load(open("ablation/mitre/dt_stats.json"))
+data = json.load(open("ablation/mitre/results/dt_stats.json"))
 
 labels = ["Malicious", "Benign", "Suspicious", "Unknown"]
 sizes = [data["verdict_malicious"], data["verdict_benign"], data["verdict_suspicious"], data["verdict_unknown"]]
 
 # --- create pie chart ---
 fig, ax = plt.subplots()
-wedges, texts, autotexts = ax.pie(
+wedges, texts = ax.pie(
     sizes,
-    labels=labels,
-    autopct="%1.1f%%",
+    #labels=labels,
+    #autopct="%1.1f%%",
     startangle=90,
     counterclock=False,
     colors=["#b43f3f", "#227dd8", "#ff8000", "#6f6f6f"],
 )
 
+# --- Draw connectors + labels manually ---
+# compute the angle of each wedge's center
+for i, wedge in enumerate(wedges):
+    angle = (wedge.theta2 + wedge.theta1) / 2
+    x = np.cos(np.deg2rad(angle))
+    y = np.sin(np.deg2rad(angle))
+
+    # line endpoint (just outside the wedge)
+    line_x = 1.1 * x
+    line_y = 1.1 * y
+    # label position (further outside)
+    label_x = 1.3 * x
+    label_y = 1.3 * y
+
+    # draw the connector
+    ax.plot([x*0.8, line_x, label_x], [y*0.8, line_y, label_y], color='gray', lw=1)
+
+    # place the label (aligned left/right)
+    alignment = 'left' if x > 0 else 'right'
+    percentages = sizes[i] / sum(sizes) * 100
+    # include percentage in label
+    ax.text(label_x, label_y, f"{labels[i]} ({percentages:.1f}%)",
+            ha=alignment, va='center', fontsize=10)
+
 # style labels & percentages
 plt.setp(texts, size=10, weight="normal")
-plt.setp(autotexts, size=9, weight="bold", color="white")
+#plt.setp(autotexts, size=9, weight="bold", color="white")
 
 ax.set_title("Any.Run Verdict Distribution, 400 Samples", fontsize=12, pad=20)
 ax.axis("equal")  # keep circle shape
@@ -51,6 +76,8 @@ plt.show()
 plt.savefig("ablation/mitre/dt_pie_chart.png", bbox_inches="tight")  # save as raster for quick preview
 plt.savefig("ablation/mitre/dt_pie_chart.pdf", bbox_inches="tight", facecolor="white")  # save as vector for publication
 plt.close()
+
+exit()
 
 # --- OS distribution ---
 labels = ["Windows", "Linux", "Unknown"]
