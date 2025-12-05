@@ -47,6 +47,7 @@ plt.xlabel('Case #', fontsize=LABEL_SIZE)
 plt.ylabel('Execution Time (s)', fontsize=LABEL_SIZE)
 plt.tick_params(axis='x', labelsize=TICK_SIZE)
 plt.tick_params(axis='y', labelsize=TICK_SIZE)
+plt.grid(True)
 plt.show()
 
 # time per step
@@ -73,6 +74,7 @@ plt.tick_params(axis='x', labelsize=TICK_SIZE)
 plt.tick_params(axis='y', labelsize=TICK_SIZE)
 
 # Show the plot
+plt.grid(True)
 plt.show()
 
 """
@@ -110,6 +112,7 @@ plt.xlabel('Case #', fontsize=LABEL_SIZE)
 plt.ylabel('F1 Score', fontsize=LABEL_SIZE)
 plt.tick_params(axis='x', labelsize=TICK_SIZE)
 plt.tick_params(axis='y', labelsize=TICK_SIZE)
+plt.grid(True)
 
 # Show the plot
 plt.show()
