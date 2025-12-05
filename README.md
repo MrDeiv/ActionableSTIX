@@ -76,6 +76,6 @@ Moreover, the STIX used as references are stored in the folder `sample_stix`. In
 
 ## Evaluation of the Chunking strategy, the MITRE matching capabilities of the LLMs, and the RAG hyperparameters
 We performed different evaluations both to determine the best chunking strategy, the MITRE matching capabilities of the LLMs, and the RAG hyperparameters. The scripts used and the results are available in the `evaluation`. In particular:
-- the folder `chunking` contains an example of the chunking strategy implementation as described by  Smith and Troynikov (. https://research.trychroma.com/evaluating-chunking)
+- the folder `chunking` contains an example of the chunking strategy implementation as described by  Smith and Troynikov (https://research.trychroma.com/evaluating-chunking)
 - the folder `mitre` contains the evaluation of the matching capabilities of the LLMs
 - the folder `rag` contains the evaluations to determine the best RAG hyperparameters
