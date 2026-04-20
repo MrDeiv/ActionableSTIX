@@ -2,6 +2,7 @@
 
 ## Abstract
 Modern cybersecurity operations rely on Cyber Threat Intelligence (CTI) collected from heterogeneous sources, including semi-structured threat representations, Indicators of Compromise (IoCs), and narrative technical reports. However, these artifacts are often insufficient in isolation to reconstruct how an attack unfolds, under which conditions each step is feasible, and which traces it leaves behind. In practice, analysts must manually correlate partial evidence scattered across multiple and only partially structured sources, delaying the design of effective prevention, detection, and response actions.
+
 To address this gap, we propose an automated pipeline that derives an actionable representation of a cyberattack from heterogeneous CTI sources. The pipeline combines a Retrieval-Augmented Generation (RAG) architecture, used to retrieve step-relevant evidence from dispersed documents, with a locally deployable Small Language Model (SLM), used to consolidate such evidence and infer missing operational details. Starting from a semi-structured threat representation and auxiliary CTI documents, the pipeline produces an enriched Attack Graph that captures the step-wise evolution of the attack and annotates each step with an enriched description, explicit pre-conditions, and explicit post-conditions. This
 representation supports prevention by exposing execution requirements, detection by highlighting observable traces, and response by clarifying
 the temporal progression of the attack.
