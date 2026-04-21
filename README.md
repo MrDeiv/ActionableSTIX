@@ -1,4 +1,4 @@
-# Merging Narrative and Structured Information Through LLMs for Actionable Rich Threat Representation
+# Merging Cyber Threat Intelligence Through Retrieval-Augmented Generation and Small Language Models for Rich Threat Representation
 
 ## Abstract
 Modern cybersecurity operations rely on Cyber Threat Intelligence (CTI) collected from heterogeneous sources, including semi-structured threat representations, Indicators of Compromise (IoCs), and narrative technical reports. However, these artifacts are often insufficient in isolation to reconstruct how an attack unfolds, under which conditions each step is feasible, and which traces it leaves behind. In practice, analysts must manually correlate partial evidence scattered across multiple and only partially structured sources, delaying the design of effective prevention, detection, and response actions. 
